@@ -104,6 +104,15 @@
         echo "Failed to created record - " . $stadium . "<br>";
     }
 
+    $city = "Brighton & Hove";
+    $stadium = "Brighton & Hove Community Stadium";
+
+    if (mysqli_stmt_execute($insertStatement)) {
+        echo "New record " . $stadium . " created successfully" . "<br>";
+    } else {
+        echo "Failed to created record - " . $stadium . "<br>";
+    }
+
     mysqli_close();
 
 ?>
