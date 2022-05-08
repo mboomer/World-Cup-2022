@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Knockout Stage</title>
+        
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="css/styles-knockout.css">
+        
+        <script src="https://kit.fontawesome.com/130d5316ba.js" crossorigin="anonymous"></script>
+        
+    </head>
+    
+    <body>
+        
+        <main id="container">
+            
+            <header>
+                <h1>World Cup 2022 Predictions</h1>
+<!--                <img id="team-header-img" src="img/teams/team-header.png" alt="World Cup Team Flags">-->
+            </header>
+            
+            <nav class="options">
+                 <a href="https://zenva.com" target="_blank" class="options-link">Home</a>
+                 <a href="https://academy.zenva.com/product-category/english/appdevelopment/" target="_blank" class="options-link">Build Apps</a>
+                 <a href="https://academy.zenva.com/product-category/english/game-development/?zva_src=zenva-homepage-game" target="_blank" class="options-link">Build Games</a>
+                 <a href="https://academy.zenva.com/product-category/english/web-development/?zva_src=zenva-homepage-web" target="_blank" class="options-link">Build Websites</a>
+            </nav>
+
+            <div id="KNOCKOUT-STAGE">
+
+                <section id="QF">
+                    <div id="QuarterFinal">
+                        
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th colspan="7">QUARTER FINALS</th>
+                                </tr>
+                                <tr>
+                                    <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th>AWAY</th>
+                                </tr>
+                            </thead>
+                          <tbody>
+                            <tr>
+                                <td class="pos">1</td> <td class="home">Turkey</td> <td class="rank">6</td> 
+                                <td><input type="number" min="0" placeholder="0"></td> 
+                                <td><input type="number" min="0" placeholder="0"></td>
+                                <td class="rank">7</td> <td class="away">Italy</td>
+                            </tr>
+                            <tr>
+                                <td class="pos">2</td> <td class="home">Wales</td> <td class="rank">14</td> 
+                                <td><input type="number" min="0" placeholder="0"></td> 
+                                <td><input type="number" placeholder="0"></td>
+                                <td class="rank">9</td> <td class="away">Switzerland</td>
+                            </tr>
+                            <tr>
+                                <td class="pos">14</td> <td class="home">Turkey</td> <td class="rank">6</td>
+                                <td><input type="number" min="0" placeholder="0"></td> 
+                                <td><input type="number" min="0" placeholder="0"></td>                                
+                                <td class="rank">14</td> <td class="away">Wales</td>
+                            </tr>
+                            <tr>
+                                <td class="pos">15</td> <td class="home">Italy</td> <td class="rank">7</td> 
+                                <td><input type="number" min="0" placeholder="0"></td> 
+                                <td><input type="number" min="0" placeholder="0"></td>
+                                <td class="rank">9</td> <td class="away">Switzerland</td>
+                            </tr>
+                          </tbody>
+                        </table>        
+                    </div>
+                </section> <!-- End of QF -->
+        
+                <section id="SF">
+                    <div id="SemiFinal">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th colspan="7">SEMI FINALS</th>
+                                </tr>
+                                <tr>
+                                    <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th>AWAY</th>
+                                </tr>
+                            </thead>
+                          <tbody>
+                            <tr>
+                                <td class="pos">1</td> <td class="home">Denmark</td> <td class="rank">6</td> 
+                                <td><input type="number" placeholder="0"></td> 
+                                <td><input type="number" placeholder="0"></td>
+                                <td class="rank">7</td> <td class="away">Finland</td>
+                            </tr>
+                            <tr>
+                                <td class="pos">2</td> <td class="home">Belgium</td> <td class="rank">14</td> 
+                                <td><input type="number" placeholder="0"></td> 
+                                <td><input type="number" placeholder="0"></td>
+                                <td class="rank">9</td> <td class="away">Russia</td>
+                            </tr>
+                          </tbody>
+                        </table>        
+                    </div>
+
+                </section> <!-- End of Semi Final -->
+
+                <section id="FL">
+                    <div id="Final">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th colspan="7">FINAL</th>
+                                </tr>
+                                <tr>
+                                    <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th>AWAY</th>
+                                </tr>
+                            </thead>
+                          <tbody>
+                            <tr>
+                                <td class="pos">1</td> <td class="home">Denmark</td> <td class="rank">6</td> 
+                                <td><input type="number" placeholder="0"></td> 
+                                <td><input type="number" placeholder="0"></td>
+                                <td class="rank">7</td> <td class="away">Finland</td>
+                            </tr>
+                          </tbody>
+                        </table>        
+                    </div>
+
+                </section> <!-- End of Final -->
+
+            </div> <!-- end of GROUPS -->
+        
+            <footer id="social-media">
+                <ul>
+                    <li><a href='#' target='_blank'><i class='fab fa-facebook-square'></i></a></li>
+                    <li><a href='#' target='_blank'><i class='fab fa-twitter-square'></i></a></li>
+                    <li><a href='#' target='_blank'><i class='fab fa-youtube-square'></i></a></li>
+                    <li><a href='#' target='_blank'><i class='fab fa-instagram-square'></i></a></li>
+                </ul>
+                <p>&copy; <script>document.write(new Date().getFullYear());</script> World Cup 2022 Predictor</p>
+                <p>All Rights Reserved &mdash; Designed by Mark Boomer</p>
+            </footer>
+            
+        </main>
+    
+    </body>
+
+</html>
