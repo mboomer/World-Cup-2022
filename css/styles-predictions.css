@@ -1,0 +1,399 @@
+*{                                  /* Override browsers default CSS rules  */
+    margin:0;
+    padding:0;
+    box-sizing: content-box;
+}
+
+body {
+     font-family: 'Open Sans', sans-serif;
+     background-color: #131633;
+     color: #34495e;
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: white;
+    text-shadow: 2px 2px #22638E;
+}
+/* ******************************************************************************************   */
+/*                                          TABS                                                */
+/* ******************************************************************************************   */
+
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        margin: 2px;
+    }
+
+    /* Style the buttons that are used to open the tab content */
+    .tab button {
+      background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 10px 8px;
+      transition: 0.3s;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+        background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+/*
+        flex-flow: row wrap;
+        justify-content: space-around;  
+        background: #5f9fff;
+        margin:5px 2px 15px 2px;
+        padding: 5px 5px;
+        border: 1px solid #ccc;
+        border-top: none;
+*/
+    }
+
+/* 
+----------------------------------------------------------------------------------
+Each section has a GRID-AREA named after the section ID
+----------------------------------------------------------------------------------
+*/
+
+header {
+    grid-area: header;
+    background-color: lightgrey;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+} 
+
+nav {
+    grid-area: nav;
+}
+
+#tabs {
+    grid-area: tabs;
+}
+
+#tournment {
+    grid-area: tournment;
+}
+
+#GROUPS {
+    grid-area: GROUPS;
+    
+    background-color: white;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+    
+        #team-header {
+            grid-area: team-header;
+            background-color: white;
+        }
+
+        #GroupA {
+            width: 50%;
+            grid-area: GroupA;
+            background-color: skyblue;
+        }
+
+        #TableA {
+            width: 50%;
+            grid-area: TableA;
+            background-color: aliceblue;
+        }
+
+        #GroupB {
+            width: 50%;
+            grid-area: GroupB;
+            background-color: skyblue;
+        }
+
+        #TableB {
+            width: 50%;
+            grid-area: TableB;
+            background-color: aliceblue;
+        }
+
+        #GroupC {
+            width: 50%;
+            grid-area: GroupC;
+            background-color: skyblue;
+        }
+
+        #TableC {
+            width: 50%;
+            grid-area: TableC;
+            background-color: aliceblue;
+        }
+
+        #GroupD {
+            width: 50%;
+            grid-area: GroupD;
+            background-color: skyblue;
+        }
+
+        #TableD {
+            width: 50%;
+            grid-area: TableD;
+            background-color: aliceblue;
+        }
+
+#KNOCKOUT-STAGE {
+    
+    grid-area: KNOCKOUT-STAGE;
+    
+    background-color: white;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    }
+    
+        #QuarterFinal {
+            grid-area: QuarterFinal;
+            background-color: skyblue;
+        }
+
+        #SemiFinal {
+            grid-area: SemiFinal;
+            background-color: skyblue;
+        }
+
+        #Final {
+            grid-area: Final;
+            background-color: skyblue;
+        }
+
+footer {
+    grid-area: footer;
+
+    display: flex;                                  /* display UL, P & P elements vertically and center them */
+    flex-direction: column;
+    align-items: center;
+
+    background: linear-gradient(to bottom, #284e7a, #000 100%);
+    color: white;
+}
+
+/* ******************************************************************************************   */
+/*                                          IMAGES                                              */
+/* ******************************************************************************************   */
+img {
+}
+
+/* ******************************************************************************************   */
+/*                                          TABLES                                              */
+/* ******************************************************************************************   */
+
+.greenheader {
+    background-color: green;
+    color: white;
+}
+
+.blueheader {
+    background-color: navy;
+    color: white;
+}
+
+tbody {
+    background-color: white;
+    color: black;
+}
+
+table {
+    font-size: 0.75em;
+    width: 95%;
+    padding: 2px;
+    text-align: center;    
+    border: 1px dotted black;
+    margin: auto auto;
+}
+
+th, td {
+    border-right: 1px dotted black;
+    border-bottom: 1px dotted black;
+}
+
+.pos {
+    width: 10%;
+    background-color: gainsboro;
+}
+
+.home {
+    width: 25%;
+    padding-right: 5px;
+    text-align: right;
+}
+
+.rank {
+    width: 10%;
+    background-color: aliceblue;
+}
+
+.away {
+    width: 25%;
+    padding-left: 5px;
+    text-align: left;
+}
+
+.team {
+    width: 20%;
+    padding-left: 5px;
+    text-align: left;
+}
+
+.cols {
+    width: 7%;
+}
+/* ******************************************************************************************   */
+
+/* ******************************************************************************************   */
+/*                                          NAV SECTION                                         */
+/* ******************************************************************************************   */
+
+.options {    
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+    
+    background-color: white;
+    padding: 10px;
+}
+
+.options-link {
+    text-decoration: none;
+    font-size: 0.9em;
+    color: #3498db;
+}
+
+.options-link:hover {
+    color: darkgreen;
+    text-decoration: underline;
+}
+
+/* ******************************************************************************************   */
+/*                                          FOOTER SECTION                                      */
+/* ******************************************************************************************   */
+
+footer p {
+    text-transform: uppercase;          /* change text in para tags to uppercase */
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);       /* add a transparent overlay of white - 0.6 = 60% opacity */
+    margin-bottom: 10px;
+}
+
+footer ul {
+    display: flex;                      /* display child items of parent element, ie the ul, into a row */
+    flex-direction: row;
+    list-style: none;
+    margin-bottom: 5px;
+}
+
+footer ul li {
+    margin: 0 20px;                     /* spreads out the line items containing the social media icons */
+}
+
+footer ul li a {
+    font-size: 36px;                    /* makes the icons bigger and ensure the cursor is always the pointer */
+    cursor: pointer;
+    color: white;
+}
+
+/* ******************************************************************************************   */
+/*                                          FORM FIELDS                                         */
+/* ******************************************************************************************   */
+
+
+input {
+    width: 85%;
+    color: darkblue;
+    background-color: aliceblue;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+/* ---------------------------------- END OF DEFAULT MEDIA RULE FOR 576 --------------------------------------------------------- */
+
+
+/* ******************************************************************************************   */
+/*                       MEDIA RULES 1200px 992ox 768px 552px                                   */
+/* ******************************************************************************************   */
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 1200px or higher                              */
+/* ******************************************************************************************   */
+
+@media screen and (min-width:1200px){                   
+    
+    main {
+        width: 95%;
+ 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 10vh 5vh auto auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+  
+    #container {
+        grid-template-areas:
+            "header"
+            "nav"
+            "tabs"
+            "tournment"
+            "footer";
+    }
+ 
+    #GROUPS {
+        width: 90%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+
+        grid-template-areas:
+            "SectionA"
+            "SectionB"
+            "SectionC"
+            "SectionD"
+    }
+    
+        #SectionA, #SectionB, #SectionC, #SectionD {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+    #KNOCKOUT-STAGE {
+        width: 90%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+
+        grid-template-areas:
+            "QF"
+            "SF"
+            "FL"
+    }
+
+    #QF, #SF, #FL {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }

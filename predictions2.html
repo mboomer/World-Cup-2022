@@ -28,316 +28,425 @@
                  <a href="https://academy.zenva.com/product-category/english/game-development/?zva_src=zenva-homepage-game" target="_blank" class="options-link">Build Games</a>
                  <a href="https://academy.zenva.com/product-category/english/web-development/?zva_src=zenva-homepage-web" target="_blank" class="options-link">Build Websites</a>
             </nav>
+            
+            <!-- Tab links -->
+            <div id="tabs" class="tab">
+              <button id="group-stages" name="GROUPS" class="tablinks active">Group Stage</button>
+              <button id="knockout-stage" name="KNOCKOUT-STAGE" class="tablinks ">Knockout Stage</button>
+            </div>
 
-            <div id="GROUPS">
+            <section id="tournment">
+                <div id="GROUPS" class="tabcontent">
 
-                <section id="SectionA">
-                    <div id="GroupA">
-                        <table>
-                            <thead>
+                    <section id="SectionA">
+                        <div id="GroupA">
+                            <table>
+                                <thead class="greenheader">
+                                    <tr>
+                                        <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th>AWAY</th>
+                                    </tr>
+                                </thead>
+                              <tbody>
                                 <tr>
-                                    <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th>AWAY</th>
-                                </tr>
-                            </thead>
-                          <tbody>
-                            <tr>
-                                <td class="pos">1</td> <td class="home">Turkey</td> <td class="rank">6</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">7</td> <td class="away">Italy</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">2</td> <td class="home">Wales</td> <td class="rank">14</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">9</td> <td class="away">Switzerland</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">14</td> <td class="home">Turkey</td> <td class="rank">6</td>
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>                                
-                                <td class="rank">14</td> <td class="away">Wales</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">15</td> <td class="home">Italy</td> <td class="rank">7</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">9</td> <td class="away">Switzerland</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">26</td> <td class="home">Italy</td> <td class="rank">7</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">14</td> <td class="away">Wales</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">25</td> <td class="home">Switzerland</td> <td class="rank">9</td> <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">6</td> <td class="away">Turkey</td>
-                            </tr>
-                          </tbody>
-                        </table>        
-                    </div>
-                    <div id="TableA">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th colspan="10">GROUP A</th>
+                                    <td class="pos">1</td> <td class="home">Turkey</td> <td class="rank">6</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">7</td> <td class="away">Italy</td>
                                 </tr>
                                 <tr>
-                                    <th>Pos</th> <th>Team</th> <th>P</th> <th>W</th> <th>D</th> <th>L</th> <th>F</th> <th>A</th> <th>GD</th> <th>Pts</th>
+                                    <td class="pos">2</td> <td class="home">Wales</td> <td class="rank">14</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">9</td> <td class="away">Switzerland</td>
                                 </tr>
-                            </thead>
-                          <tbody>
-                            <tr>
-                              <td class="pos">1</td> <td class="team">Italy</td> <td class="cols">3</td> <td class="cols">3</td> <td class="cols">0</td> <td>0</td> <td class="cols">7</td> <td class="cols">2</td> <td class="cols">5</td> <td class="cols">9</td>
-                            </tr>
-                            <tr>
-                              <td class="pos">2</td> <td class="team">Switzerland</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">1</td> <td>1</td> <td class="cols">3</td> <td class="cols">3</td> <td class="cols">0</td> <td class="cols">4</td>
-                            </tr>
-                            <tr>
-                              <td class="pos">3</td> <td class="team">Turkey</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">1</td> <td class="cols">1</td> <td class="cols">2</td> <td class="cols">3</td> <td class="cols">-1</td> <td class="cols">4</td>
-                            </tr>
-                            <tr>
-                              <td class="pos">4</td> <td class="team">Wales</td> <td class="cols">3</td> <td class="cols">0</td> <td>0</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">5</td> <td class="cols">-4</td> <td class="cols">0</td>
-                            </tr>
-                          </tbody>
-                        </table>        
-                    </div>
-                </section> <!-- End of Section A -->
-        
-                <section id="SectionB">
-                    <div id="GroupB">
-                        <table>
-                            <thead>
                                 <tr>
-                                    <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th>AWAY</th>
+                                    <td class="pos">14</td> <td class="home">Turkey</td> <td class="rank">6</td>
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>                                
+                                    <td class="rank">14</td> <td class="away">Wales</td>
                                 </tr>
-                            </thead>
-                          <tbody>
-                            <tr>
-                                <td class="pos">1</td> <td class="home">Denmark</td> <td class="rank">6</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">7</td> <td class="away">Finland</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">2</td> <td class="home">Belgium</td> <td class="rank">14</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">9</td> <td class="away">Russia</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">14</td> <td class="home">Finland</td> <td class="rank">6</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">14</td> <td class="away">Russia</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">15</td> <td class="home">Denmark</td> <td class="rank">7</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">9</td> <td class="away">Belgium</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">26</td> <td class="home">Finland</td> <td class="rank">7</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">14</td> <td class="away">Belgium</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">25</td> <td class="home">Russia</td> <td class="rank">9</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">6</td> <td class="away">Denmark</td>
-                            </tr>
-                          </tbody>
-                        </table>        
-                    </div>
+                                <tr>
+                                    <td class="pos">15</td> <td class="home">Italy</td> <td class="rank">7</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">9</td> <td class="away">Switzerland</td>
+                                </tr>
+                                <tr>
+                                    <td class="pos">26</td> <td class="home">Italy</td> <td class="rank">7</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">14</td> <td class="away">Wales</td>
+                                </tr>
+                                <tr>
+                                    <td class="pos">25</td> <td class="home">Switzerland</td> <td class="rank">9</td> <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">6</td> <td class="away">Turkey</td>
+                                </tr>
+                              </tbody>
+                            </table>        
+                        </div>
+                        <div id="TableA">
+                            <table>
+                                <thead class="blueheader">
+                                    <tr>
+                                        <th colspan="10">GROUP A</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Pos</th> <th>Team</th> <th>P</th> <th>W</th> <th>D</th> <th>L</th> <th>F</th> <th>A</th> <th>GD</th> <th>Pts</th>
+                                    </tr>
+                                </thead>
+                              <tbody>
+                                <tr>
+                                  <td class="pos">1</td> <td class="team">Italy</td> <td class="cols">3</td> <td class="cols">3</td> <td class="cols">0</td> <td>0</td> <td class="cols">7</td> <td class="cols">2</td> <td class="cols">5</td> <td class="cols">9</td>
+                                </tr>
+                                <tr>
+                                  <td class="pos">2</td> <td class="team">Switzerland</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">1</td> <td>1</td> <td class="cols">3</td> <td class="cols">3</td> <td class="cols">0</td> <td class="cols">4</td>
+                                </tr>
+                                <tr>
+                                  <td class="pos">3</td> <td class="team">Turkey</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">1</td> <td class="cols">1</td> <td class="cols">2</td> <td class="cols">3</td> <td class="cols">-1</td> <td class="cols">4</td>
+                                </tr>
+                                <tr>
+                                  <td class="pos">4</td> <td class="team">Wales</td> <td class="cols">3</td> <td class="cols">0</td> <td>0</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">5</td> <td class="cols">-4</td> <td class="cols">0</td>
+                                </tr>
+                              </tbody>
+                            </table>        
+                        </div>
+                    </section> <!-- End of Section A -->
 
-                    <div id="TableB">
-                        <table>
-                            <thead>
+                    <section id="SectionB">
+                        <div id="GroupB">
+                            <table>
+                                <thead class="greenheader">
+                                    <tr>
+                                        <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th>AWAY</th>
+                                    </tr>
+                                </thead>
+                              <tbody>
                                 <tr>
-                                    <th colspan="10">GROUP B</th>
+                                    <td class="pos">1</td> <td class="home">Denmark</td> <td class="rank">6</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">7</td> <td class="away">Finland</td>
                                 </tr>
                                 <tr>
-                                    <th>Pos</th> <th>Team</th> <th>P</th> <th>W</th> <th>D</th> <th>L</th> <th>F</th> <th>A</th> <th>GD</th> <th>Pts</th>
+                                    <td class="pos">2</td> <td class="home">Belgium</td> <td class="rank">14</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">9</td> <td class="away">Russia</td>
                                 </tr>
-                            </thead>
-                          <tbody>
-                            <tr>
-                              <td class="pos">1</td> <td class="team">Denmark</td> <td class="cols">3</td> <td class="cols">3</td> <td class="cols">0</td> <td>0</td> <td class="cols">7</td> <td class="cols">2</td> <td class="cols">5</td> <td class="cols">9</td>
-                            </tr>
-                            <tr>
-                              <td class="pos">2</td> <td class="team">Belgium</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">1</td> <td>1</td> <td class="cols">3</td> <td class="cols">3</td> <td class="cols">0</td> <td class="cols">4</td>
-                            </tr>
-                            <tr>
-                              <td class="pos">3</td> <td class="team">Finland</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">1</td> <td class="cols">1</td> <td class="cols">2</td> <td class="cols">3</td> <td class="cols">-1</td> <td class="cols">4</td>
-                            </tr>
-                            <tr>
-                              <td class="pos">4</td> <td class="team">Russia</td> <td class="cols">3</td> <td class="cols">0</td> <td>0</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">5</td> <td class="cols">-4</td> <td class="cols">0</td>
-                            </tr>
-                          </tbody>
-                        </table>        
-                    </div>
-                </section> <!-- End of Section B -->
+                                <tr>
+                                    <td class="pos">14</td> <td class="home">Finland</td> <td class="rank">6</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">14</td> <td class="away">Russia</td>
+                                </tr>
+                                <tr>
+                                    <td class="pos">15</td> <td class="home">Denmark</td> <td class="rank">7</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">9</td> <td class="away">Belgium</td>
+                                </tr>
+                                <tr>
+                                    <td class="pos">26</td> <td class="home">Finland</td> <td class="rank">7</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">14</td> <td class="away">Belgium</td>
+                                </tr>
+                                <tr>
+                                    <td class="pos">25</td> <td class="home">Russia</td> <td class="rank">9</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">6</td> <td class="away">Denmark</td>
+                                </tr>
+                              </tbody>
+                            </table>        
+                        </div>
 
-                <section id="SectionC">
-                    <div id="GroupC">
-                        <table>
-                            <thead>
+                        <div id="TableB">
+                            <table>
+                                <thead class="blueheader">
+                                    <tr>
+                                        <th colspan="10">GROUP B</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Pos</th> <th>Team</th> <th>P</th> <th>W</th> <th>D</th> <th>L</th> <th>F</th> <th>A</th> <th>GD</th> <th>Pts</th>
+                                    </tr>
+                                </thead>
+                              <tbody>
                                 <tr>
-                                    <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th>AWAY</th>
+                                  <td class="pos">1</td> <td class="team">Denmark</td> <td class="cols">3</td> <td class="cols">3</td> <td class="cols">0</td> <td>0</td> <td class="cols">7</td> <td class="cols">2</td> <td class="cols">5</td> <td class="cols">9</td>
                                 </tr>
-                            </thead>
-                          <tbody>
-                            <tr>
-                                <td class="pos">1</td> <td class="home">Denmark</td> <td class="rank">6</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">7</td> <td class="away">Finland</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">2</td> <td class="home">Belgium</td> <td class="rank">14</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">9</td> <td class="away">Russia</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">14</td> <td class="home">Finland</td> <td class="rank">6</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">14</td> <td class="away">Russia</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">15</td> <td class="home">Denmark</td> <td class="rank">7</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">9</td> <td class="away">Belgium</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">26</td> <td class="home">Finland</td> <td class="rank">7</td> <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">14</td> <td class="away">Belgium</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">25</td> <td class="home">Russia</td> <td class="rank">9</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">6</td> <td class="away">Denmark</td>
-                            </tr>
-                          </tbody>
-                        </table>        
-                    </div>
+                                <tr>
+                                  <td class="pos">2</td> <td class="team">Belgium</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">1</td> <td>1</td> <td class="cols">3</td> <td class="cols">3</td> <td class="cols">0</td> <td class="cols">4</td>
+                                </tr>
+                                <tr>
+                                  <td class="pos">3</td> <td class="team">Finland</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">1</td> <td class="cols">1</td> <td class="cols">2</td> <td class="cols">3</td> <td class="cols">-1</td> <td class="cols">4</td>
+                                </tr>
+                                <tr>
+                                  <td class="pos">4</td> <td class="team">Russia</td> <td class="cols">3</td> <td class="cols">0</td> <td>0</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">5</td> <td class="cols">-4</td> <td class="cols">0</td>
+                                </tr>
+                              </tbody>
+                            </table>        
+                        </div>
+                    </section> <!-- End of Section B -->
 
-                    <div id="TableC">
-                        <table>
-                            <thead>
+                    <section id="SectionC">
+                        <div id="GroupC">
+                            <table>
+                                <thead class="greenheader">
+                                    <tr>
+                                        <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th>AWAY</th>
+                                    </tr>
+                                </thead>
+                              <tbody>
                                 <tr>
-                                    <th colspan="10">GROUP B</th>
+                                    <td class="pos">1</td> <td class="home">Denmark</td> <td class="rank">6</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">7</td> <td class="away">Finland</td>
                                 </tr>
                                 <tr>
-                                    <th>Pos</th> <th>Team</th> <th>P</th> <th>W</th> <th>D</th> <th>L</th> <th>F</th> <th>A</th> <th>GD</th> <th>Pts</th>
+                                    <td class="pos">2</td> <td class="home">Belgium</td> <td class="rank">14</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">9</td> <td class="away">Russia</td>
                                 </tr>
-                            </thead>
-                          <tbody>
-                            <tr>
-                              <td class="pos">1</td> <td class="team">Denmark</td> <td class="cols">3</td> <td class="cols">3</td> <td class="cols">0</td> <td>0</td> <td class="cols">7</td> <td class="cols">2</td> <td class="cols">5</td> <td class="cols">9</td>
-                            </tr>
-                            <tr>
-                              <td class="pos">2</td> <td class="team">Belgium</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">1</td> <td>1</td> <td class="cols">3</td> <td class="cols">3</td> <td class="cols">0</td> <td class="cols">4</td>
-                            </tr>
-                            <tr>
-                              <td class="pos">3</td> <td class="team">Finland</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">1</td> <td class="cols">1</td> <td class="cols">2</td> <td class="cols">3</td> <td class="cols">-1</td> <td class="cols">4</td>
-                            </tr>
-                            <tr>
-                              <td class="pos">4</td> <td class="team">Russia</td> <td class="cols">3</td> <td class="cols">0</td> <td>0</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">5</td> <td class="cols">-4</td> <td class="cols">0</td>
-                            </tr>
-                          </tbody>
-                        </table>        
-                    </div>
-                </section> <!-- End of Section C -->
+                                <tr>
+                                    <td class="pos">14</td> <td class="home">Finland</td> <td class="rank">6</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">14</td> <td class="away">Russia</td>
+                                </tr>
+                                <tr>
+                                    <td class="pos">15</td> <td class="home">Denmark</td> <td class="rank">7</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">9</td> <td class="away">Belgium</td>
+                                </tr>
+                                <tr>
+                                    <td class="pos">26</td> <td class="home">Finland</td> <td class="rank">7</td> <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">14</td> <td class="away">Belgium</td>
+                                </tr>
+                                <tr>
+                                    <td class="pos">25</td> <td class="home">Russia</td> <td class="rank">9</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">6</td> <td class="away">Denmark</td>
+                                </tr>
+                              </tbody>
+                            </table>        
+                        </div>
 
-                <section id="SectionD">
-                    <div id="GroupD">
-                        <table>
-                            <thead>
+                        <div id="TableC">
+                            <table>
+                                <thead class="blueheader">
+                                    <tr>
+                                        <th colspan="10">GROUP B</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Pos</th> <th>Team</th> <th>P</th> <th>W</th> <th>D</th> <th>L</th> <th>F</th> <th>A</th> <th>GD</th> <th>Pts</th>
+                                    </tr>
+                                </thead>
+                              <tbody>
                                 <tr>
-                                    <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th>AWAY</th>
+                                  <td class="pos">1</td> <td class="team">Denmark</td> <td class="cols">3</td> <td class="cols">3</td> <td class="cols">0</td> <td>0</td> <td class="cols">7</td> <td class="cols">2</td> <td class="cols">5</td> <td class="cols">9</td>
                                 </tr>
-                            </thead>
-                          <tbody>
-                            <tr>
-                                <td class="pos">1</td> <td class="home">Denmark</td> <td class="rank">6</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">7</td> <td class="away">Finland</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">2</td> <td class="home">Belgium</td> <td class="rank">14</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">9</td> <td class="away">Russia</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">14</td> <td class="home">Finland</td> <td class="rank">6</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">14</td> <td class="away">Russia</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">15</td> <td class="home">Denmark</td> <td class="rank">7</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">9</td> <td class="away">Belgium</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">26</td> <td class="home">Finland</td> <td class="rank">7</td>
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">14</td> <td class="away">Belgium</td>
-                            </tr>
-                            <tr>
-                                <td class="pos">25</td> <td class="home">Russia</td> <td class="rank">9</td> 
-                                <td><input type="number"  min="0"placeholder="0"></td> 
-                                <td><input type="number"  min="0"placeholder="0"></td>
-                                <td class="rank">6</td> <td class="away">Denmark</td>
-                            </tr>
-                          </tbody>
-                        </table>        
-                    </div>
+                                <tr>
+                                  <td class="pos">2</td> <td class="team">Belgium</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">1</td> <td>1</td> <td class="cols">3</td> <td class="cols">3</td> <td class="cols">0</td> <td class="cols">4</td>
+                                </tr>
+                                <tr>
+                                  <td class="pos">3</td> <td class="team">Finland</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">1</td> <td class="cols">1</td> <td class="cols">2</td> <td class="cols">3</td> <td class="cols">-1</td> <td class="cols">4</td>
+                                </tr>
+                                <tr>
+                                  <td class="pos">4</td> <td class="team">Russia</td> <td class="cols">3</td> <td class="cols">0</td> <td>0</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">5</td> <td class="cols">-4</td> <td class="cols">0</td>
+                                </tr>
+                              </tbody>
+                            </table>        
+                        </div>
+                    </section> <!-- End of Section C -->
 
-                    <div id="TableD">
-                        <table>
-                            <thead>
+                    <section id="SectionD">
+                        <div id="GroupD">
+                            <table>
+                                <thead class="greenheader">
+                                    <tr>
+                                        <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th>AWAY</th>
+                                    </tr>
+                                </thead>
+                              <tbody>
                                 <tr>
-                                    <th colspan="10">GROUP D</th>
+                                    <td class="pos">1</td> <td class="home">Denmark</td> <td class="rank">6</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">7</td> <td class="away">Finland</td>
                                 </tr>
                                 <tr>
-                                    <th>Pos</th> <th>Team</th> <th>P</th> <th>W</th> <th>D</th> <th>L</th> <th>F</th> <th>A</th> <th>GD</th> <th>Pts</th>
+                                    <td class="pos">2</td> <td class="home">Belgium</td> <td class="rank">14</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">9</td> <td class="away">Russia</td>
                                 </tr>
-                            </thead>
-                          <tbody>
-                            <tr>
-                              <td class="pos">1</td> <td class="team">Denmark</td> <td class="cols">3</td> <td class="cols">3</td> <td class="cols">0</td> <td>0</td> <td class="cols">7</td> <td class="cols">2</td> <td class="cols">5</td> <td class="cols">9</td>
-                            </tr>
-                            <tr>
-                              <td class="pos">2</td> <td class="team">Belgium</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">1</td> <td>1</td> <td class="cols">3</td> <td class="cols">3</td> <td class="cols">0</td> <td class="cols">4</td>
-                            </tr>
-                            <tr>
-                              <td class="pos">3</td> <td class="team">Finland</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">1</td> <td class="cols">1</td> <td class="cols">2</td> <td class="cols">3</td> <td class="cols">-1</td> <td class="cols">4</td>
-                            </tr>
-                            <tr>
-                              <td class="pos">4</td> <td class="team">Russia</td> <td class="cols">3</td> <td class="cols">0</td> <td>0</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">5</td> <td class="cols">-4</td> <td class="cols">0</td>
-                            </tr>
-                          </tbody>
-                        </table>        
-                    </div>
-                </section> <!-- End of Section D -->
+                                <tr>
+                                    <td class="pos">14</td> <td class="home">Finland</td> <td class="rank">6</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">14</td> <td class="away">Russia</td>
+                                </tr>
+                                <tr>
+                                    <td class="pos">15</td> <td class="home">Denmark</td> <td class="rank">7</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">9</td> <td class="away">Belgium</td>
+                                </tr>
+                                <tr>
+                                    <td class="pos">26</td> <td class="home">Finland</td> <td class="rank">7</td>
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">14</td> <td class="away">Belgium</td>
+                                </tr>
+                                <tr>
+                                    <td class="pos">25</td> <td class="home">Russia</td> <td class="rank">9</td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td> 
+                                    <td><input type="number"  min="0"placeholder="0"></td>
+                                    <td class="rank">6</td> <td class="away">Denmark</td>
+                                </tr>
+                              </tbody>
+                            </table>        
+                        </div>
 
-            </div> <!-- end of GROUPS -->
-        
+                        <div id="TableD">
+                            <table>
+                                <thead class="blueheader">
+                                    <tr>
+                                        <th colspan="10">GROUP D</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Pos</th> <th>Team</th> <th>P</th> <th>W</th> <th>D</th> <th>L</th> <th>F</th> <th>A</th> <th>GD</th> <th>Pts</th>
+                                    </tr>
+                                </thead>
+                              <tbody>
+                                <tr>
+                                  <td class="pos">1</td> <td class="team">Denmark</td> <td class="cols">3</td> <td class="cols">3</td> <td class="cols">0</td> <td>0</td> <td class="cols">7</td> <td class="cols">2</td> <td class="cols">5</td> <td class="cols">9</td>
+                                </tr>
+                                <tr>
+                                  <td class="pos">2</td> <td class="team">Belgium</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">1</td> <td>1</td> <td class="cols">3</td> <td class="cols">3</td> <td class="cols">0</td> <td class="cols">4</td>
+                                </tr>
+                                <tr>
+                                  <td class="pos">3</td> <td class="team">Finland</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">1</td> <td class="cols">1</td> <td class="cols">2</td> <td class="cols">3</td> <td class="cols">-1</td> <td class="cols">4</td>
+                                </tr>
+                                <tr>
+                                  <td class="pos">4</td> <td class="team">Russia</td> <td class="cols">3</td> <td class="cols">0</td> <td>0</td> <td class="cols">3</td> <td class="cols">1</td> <td class="cols">5</td> <td class="cols">-4</td> <td class="cols">0</td>
+                                </tr>
+                              </tbody>
+                            </table>        
+                        </div>
+                    </section> <!-- End of Section D -->
+
+                </div> <!-- end of GROUPS -->
+
+                <div id="KNOCKOUT-STAGE" class="tabcontent">
+
+                    <section id="QF">
+                        <div id="QuarterFinal">
+
+                            <table>
+                                <thead class="blueheader">
+                                    <tr>
+                                        <th colspan="7">QUARTER FINALS</th>
+                                    </tr>
+                                    <tr>
+                                        <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th>AWAY</th>
+                                    </tr>
+                                </thead>
+                              <tbody>
+                                <tr>
+                                    <td class="pos">1</td> <td class="home">Turkey</td> <td class="rank">6</td> 
+                                    <td><input type="number" min="0" placeholder="0"></td> 
+                                    <td><input type="number" min="0" placeholder="0"></td>
+                                    <td class="rank">7</td> <td class="away">Italy</td>
+                                </tr>
+                                <tr>
+                                    <td class="pos">2</td> <td class="home">Wales</td> <td class="rank">14</td> 
+                                    <td><input type="number" min="0" placeholder="0"></td> 
+                                    <td><input type="number" placeholder="0"></td>
+                                    <td class="rank">9</td> <td class="away">Switzerland</td>
+                                </tr>
+                                <tr>
+                                    <td class="pos">14</td> <td class="home">Turkey</td> <td class="rank">6</td>
+                                    <td><input type="number" min="0" placeholder="0"></td> 
+                                    <td><input type="number" min="0" placeholder="0"></td>                                
+                                    <td class="rank">14</td> <td class="away">Wales</td>
+                                </tr>
+                                <tr>
+                                    <td class="pos">15</td> <td class="home">Italy</td> <td class="rank">7</td> 
+                                    <td><input type="number" min="0" placeholder="0"></td> 
+                                    <td><input type="number" min="0" placeholder="0"></td>
+                                    <td class="rank">9</td> <td class="away">Switzerland</td>
+                                </tr>
+                              </tbody>
+                            </table>        
+                        </div>
+                    </section> <!-- End of QF -->
+
+                    <section id="SF">
+                        <div id="SemiFinal">
+                            <table>
+                                <thead class="blueheader">
+                                    <tr>
+                                        <th colspan="7">SEMI FINALS</th>
+                                    </tr>
+                                    <tr>
+                                        <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th>AWAY</th>
+                                    </tr>
+                                </thead>
+                              <tbody>
+                                <tr>
+                                    <td class="pos">1</td> <td class="home">Denmark</td> <td class="rank">6</td> 
+                                    <td><input type="number" placeholder="0"></td> 
+                                    <td><input type="number" placeholder="0"></td>
+                                    <td class="rank">7</td> <td class="away">Finland</td>
+                                </tr>
+                                <tr>
+                                    <td class="pos">2</td> <td class="home">Belgium</td> <td class="rank">14</td> 
+                                    <td><input type="number" placeholder="0"></td> 
+                                    <td><input type="number" placeholder="0"></td>
+                                    <td class="rank">9</td> <td class="away">Russia</td>
+                                </tr>
+                              </tbody>
+                            </table>        
+                        </div>
+
+                    </section> <!-- End of Semi Final -->
+
+                    <section id="FL">
+                        <div id="Final">
+                            <table>
+                                <thead class="blueheader">
+                                    <tr>
+                                        <th colspan="7">FINAL</th>
+                                    </tr>
+                                    <tr>
+                                        <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th>AWAY</th>
+                                    </tr>
+                                </thead>
+                              <tbody>
+                                <tr>
+                                    <td class="pos">1</td> <td class="home">Denmark</td> <td class="rank">6</td> 
+                                    <td><input type="number" placeholder="0"></td> 
+                                    <td><input type="number" placeholder="0"></td>
+                                    <td class="rank">7</td> <td class="away">Finland</td>
+                                </tr>
+                              </tbody>
+                            </table>        
+                        </div>
+
+                    </section> <!-- End of Final -->
+
+                </div> <!-- end of KNOCKOUT STAGES -->
+
+            </section> <!-- end of Tournment -->
+                        
             <footer id="social-media">
                 <ul>
                     <li><a href='#' target='_blank'><i class='fab fa-facebook-square'></i></a></li>
@@ -351,6 +460,56 @@
             
         </main>
     
+        <script type="text/javascript" >
+
+            // Change the display of the content tab from none to flex to display content
+            // Hide the Knockout stage 
+            document.getElementById("KNOCKOUT-STAGE").style.display = "none";
+
+            // add CLICK event listener for the DOM
+            document.addEventListener('click', function (event) {
+
+                // event listeners for the tab links
+                if (event.target.matches('.tablinks')) {
+                    displayStage(event, event.target.name);
+
+                    console.log(event.target.className)
+                    event.target.className += " active";
+                }
+            }, false);
+
+            // Display the content of the selected tab and highlight the tab
+            function displayStage(evt, tabname) {
+
+                // Declare all variables
+                var i, tabcontent, tablinks;
+
+                // Get all elements with class="tabcontent" and hide them
+                tabcontent = document.getElementsByClassName("tabcontent");                
+            
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+
+                // Get all elements with class="tablinks" and remove the class "active"
+                tablinks = document.getElementsByClassName("tablinks");
+                                
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                
+                // Show the selected tab content and add an "active" class to the button that selected the tab
+                if (tabname == "GROUPS") {
+                    document.getElementById(tabname).style.display = "grid";
+                }
+                else {
+                    document.getElementById(tabname).style.display = "flex";
+                }
+            }
+
+        </script>
+
     </body>
 
+    
 </html>
