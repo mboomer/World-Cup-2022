@@ -32,7 +32,7 @@
 
     $venueid = 1;                   // Old Trafford
     $hometeamid = 1;                // England
-    $awayteamid = 1;                // Austria
+    $awayteamid = 3;                // Austria
     $dateplayed = "2022/07/06";
     $timeplayed = "20:00";
     $homescore = NULL;
