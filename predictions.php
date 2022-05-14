@@ -142,14 +142,13 @@
                                         . "  ORDER BY \n"
                                         . "  	Team ASC \n";
 
+                                    $rowno = 0;     // Initialise row counter to identify league position
+
                                     $result = $conn->query($qry);
 
                                     if ($result->num_rows == 0) {
                                         echo "<div>NO RESULTS RETURNED FOR TEAMS QUERY</div>";
                                     } else {
-                                    //     // echo "<section id='" . $sectionname . "'>";
-                                    //     // echo "  <div id='" . $groupname . "'>";
-
                                         echo "  <div id='" . $tablename . "'>"; 
                                         echo "      <table>";
                                         echo "          <thead class='blueheader'>";
@@ -162,13 +161,17 @@
                                         echo "          </thead>";
                                         echo "          <tbody>";
 
+                                        $rowno = 1;         
+
                                         while ($row = $result->fetch_assoc()) {
                                         
                                             echo "          <tr>";
-                                            echo "              <td class='pos'>1</td><td class='team'>" . $row['Team'] . "</td><td class='cols'>0</td> <td class='cols'>0</td>";
-                                            echo "              <td class='cols'>0</td><td class='cols'>0</td><td class='cols'>0</td> <td class='cols'>0</td> <td class='cols'>0</td>";
-                                            echo "              <td class='cols'>0</td>";
+                                            echo "              <td class='pos'>" . $rowno . "</td><td id=" . $tablename . "-pos" . $rowno . " class='team'>" . $row['Team'] . "</td>";
+                                            echo "              <td class='cols'>0</td> <td class='cols'>0</td><td class='cols'>0</td><td class='cols'>0</td><td class='cols'>0</td>";
+                                            echo "              <td class='cols'>0</td> <td class='cols'>0</td><td class='cols'>0</td>";
                                             echo "          </tr>";
+
+                                            $rowno = $rowno + 1;    // increment row counter
                                         }
                                         echo "          </tbody>";
                                         echo "      </table>";
@@ -204,28 +207,28 @@
                                 </thead>
                               <tbody>
                                 <tr>
-                                    <td class='pos'>1</td> <td class="home">Turkey</td> <td class="rank">6</td> 
+                                    <td class='pos'>1</td> <td id="winnerA" class='home'>Turkey</td> <td class='rank'>6</td> 
                                     <td><input type="number" min="0" placeholder="0"></td> 
                                     <td><input type="number" min="0" placeholder="0"></td>
-                                    <td class="rank">7</td> <td class="away">Italy</td>
+                                    <td class="rank">7</td> <td id="runnerupB" class="away">Italy</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>2</td> <td class="home">Wales</td> <td class="rank">14</td> 
+                                    <td class='pos'>2</td> <td id="winnerB" class="home">Wales</td> <td class="rank">14</td> 
                                     <td><input type="number" min="0" placeholder="0"></td> 
                                     <td><input type="number" placeholder="0"></td>
-                                    <td class="rank">9</td> <td class="away">Switzerland</td>
+                                    <td class="rank">9</td> <td id="runnerupA" class="away">Switzerland</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>14</td> <td class="home">Turkey</td> <td class="rank">6</td>
+                                    <td class='pos'>14</td> <td id="winnerC" class="home">Turkey</td> <td class="rank">6</td>
                                     <td><input type="number" min="0" placeholder="0"></td> 
                                     <td><input type="number" min="0" placeholder="0"></td>                                
-                                    <td class="rank">14</td> <td class="away">Wales</td>
+                                    <td class="rank">14</td> <td id="runnerupD" class="away">Wales</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>15</td> <td class="home">Italy</td> <td class="rank">7</td> 
+                                    <td class='pos'>15</td> <td id="winnerD" class="home">Italy</td> <td class="rank">7</td> 
                                     <td><input type="number" min="0" placeholder="0"></td> 
                                     <td><input type="number" min="0" placeholder="0"></td>
-                                    <td class="rank">9</td> <td class="away">Switzerland</td>
+                                    <td class="rank">9</td> <td id="runnerupC" class="away">Switzerland</td>
                                 </tr>
                               </tbody>
                             </table>        
@@ -309,6 +312,32 @@
             // Hide the Knockout stage 
             document.getElementById("KNOCKOUT-STAGE").style.display = "none";
 
+            // winner and runnerup teams in each of the group tables
+            let winnergroupA    = document.getElementById("TableA-pos1").innerHTML;
+            let runnerupgroupA  = document.getElementById("TableA-pos2").innerHTML;
+            let winnergroupB    = document.getElementById("TableB-pos1").innerHTML;
+            let runnerupgroupB  = document.getElementById("TableB-pos2").innerHTML;
+            let winnergroupC    = document.getElementById("TableC-pos1").innerHTML;
+            let runnerupgroupC  = document.getElementById("TableC-pos2").innerHTML;
+            let winnergroupD    = document.getElementById("TableD-pos1").innerHTML;
+            let runnerupgroupD  = document.getElementById("TableD-pos2").innerHTML;
+
+            // Quarter Final 1
+            document.getElementById("winnerA").innerHTML = winnergroupA;
+            document.getElementById("runnerupB").innerHTML = runnerupgroupB;
+
+            // Quarter Final 2
+            document.getElementById("winnerB").innerHTML = winnergroupB;
+            document.getElementById("runnerupA").innerHTML = runnerupgroupA;
+
+            // Quarter Final 3
+            document.getElementById("winnerC").innerHTML = winnergroupC;
+            document.getElementById("runnerupD").innerHTML = runnerupgroupD;
+
+            // Quarter Final 4
+            document.getElementById("winnerD").innerHTML = winnergroupD;
+            document.getElementById("runnerupC").innerHTML = runnerupgroupC;
+
             // add CLICK event listener for the DOM
             document.addEventListener('click', function (event) {
 
@@ -316,9 +345,17 @@
                 if (event.target.matches('.tablinks')) {
                     displayStage(event, event.target.name);
 
-                    console.log(event.target.className)
                     event.target.className += " active";
                 }
+
+                // event listeners for the tab links
+                if (event.target.matches('#knockout-stage')) {
+
+                    console.log("Knockout Stage clicked");
+
+                }
+
+
             }, false);
 
             // Display the content of the selected tab and highlight the tab
