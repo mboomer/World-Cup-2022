@@ -122,9 +122,9 @@
 
                                                 echo "  <tr>";
                                                 echo "      <td class='pos'>" . $fixno . "</td> <td class='home'>" . $hometeam . "</td> <td class='rank'>" . $homerank . "</td> ";
-                                                echo "      <td><input type='number' min='0' placeholder='0'></td>";
-                                                echo "      <td><input type='number' min='0' placeholder='0'></td>";
-                                                echo "      <td class='rank'>" . $awayrank . "</td> <td class='away'>" . $awayteam . "</td>";
+                                                echo "      <td><input class='score' data-table='" . $tablename . "' type='number' min='0' placeholder='0'></td>";
+                                                echo "      <td><input class='score' data-table='" . $tablename . "' type='number' min='0' placeholder='0'></td>";
+                                                echo "      <td class='rank'>" . $awayrank . "</td> <td class='away score'>" . $awayteam . "</td>";
                                                 echo "  </tr>";
                                     }
 
@@ -207,25 +207,25 @@
                                 </thead>
                               <tbody>
                                 <tr>
-                                    <td class='pos'>1</td> <td id="winnerA" class='home'>Turkey</td> <td class='rank'>6</td> 
+                                    <td class='pos'>25</td> <td id="winnerA" class='home'>Turkey</td> <td class='rank'>6</td> 
                                     <td><input type="number" min="0" placeholder="0"></td> 
                                     <td><input type="number" min="0" placeholder="0"></td>
                                     <td class="rank">7</td> <td id="runnerupB" class="away">Italy</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>2</td> <td id="winnerB" class="home">Wales</td> <td class="rank">14</td> 
+                                    <td class='pos'>26</td> <td id="winnerB" class="home">Wales</td> <td class="rank">14</td> 
                                     <td><input type="number" min="0" placeholder="0"></td> 
                                     <td><input type="number" placeholder="0"></td>
                                     <td class="rank">9</td> <td id="runnerupA" class="away">Switzerland</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>14</td> <td id="winnerC" class="home">Turkey</td> <td class="rank">6</td>
+                                    <td class='pos'>27</td> <td id="winnerC" class="home">Turkey</td> <td class="rank">6</td>
                                     <td><input type="number" min="0" placeholder="0"></td> 
                                     <td><input type="number" min="0" placeholder="0"></td>                                
                                     <td class="rank">14</td> <td id="runnerupD" class="away">Wales</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>15</td> <td id="winnerD" class="home">Italy</td> <td class="rank">7</td> 
+                                    <td class='pos'>28</td> <td id="winnerD" class="home">Italy</td> <td class="rank">7</td> 
                                     <td><input type="number" min="0" placeholder="0"></td> 
                                     <td><input type="number" min="0" placeholder="0"></td>
                                     <td class="rank">9</td> <td id="runnerupC" class="away">Switzerland</td>
@@ -248,13 +248,13 @@
                                 </thead>
                               <tbody>
                                 <tr>
-                                    <td class='pos'>1</td> <td class="home">Denmark</td> <td class="rank">6</td> 
+                                    <td class='pos'>29</td> <td class="home">Denmark</td> <td class="rank">6</td> 
                                     <td><input type="number" placeholder="0"></td> 
                                     <td><input type="number" placeholder="0"></td>
                                     <td class="rank">7</td> <td class="away">Finland</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>2</td> <td class="home">Belgium</td> <td class="rank">14</td> 
+                                    <td class='pos'>30</td> <td class="home">Belgium</td> <td class="rank">14</td> 
                                     <td><input type="number" placeholder="0"></td> 
                                     <td><input type="number" placeholder="0"></td>
                                     <td class="rank">9</td> <td class="away">Russia</td>
@@ -278,7 +278,7 @@
                                 </thead>
                               <tbody>
                                 <tr>
-                                    <td class='pos'>1</td> <td class="home">Denmark</td> <td class="rank">6</td> 
+                                    <td class='pos'>31</td> <td class="home">Denmark</td> <td class="rank">6</td> 
                                     <td><input type="number" placeholder="0"></td> 
                                     <td><input type="number" placeholder="0"></td>
                                     <td class="rank">7</td> <td class="away">Finland</td>
@@ -312,6 +312,8 @@
             // Hide the Knockout stage 
             document.getElementById("KNOCKOUT-STAGE").style.display = "none";
 
+            scores = document.querySelectorAll('.score');
+
             // winner and runnerup teams in each of the group tables
             let winnergroupA    = document.getElementById("TableA-pos1").innerHTML;
             let runnerupgroupA  = document.getElementById("TableA-pos2").innerHTML;
@@ -338,7 +340,9 @@
             document.getElementById("winnerD").innerHTML = winnergroupD;
             document.getElementById("runnerupC").innerHTML = runnerupgroupC;
 
+            // ==================================================================
             // add CLICK event listener for the DOM
+            // ==================================================================
             document.addEventListener('click', function (event) {
 
                 // event listeners for the tab links
@@ -355,8 +359,31 @@
 
                 }
 
+            }, false);   // end of CLICK event listener
 
-            }, false);
+            // ==================================================================
+            // add CHANGE event listener for the INPUT fields
+            // ==================================================================
+            document.addEventListener('change', function (event) {
+
+                // event listeners for the tab links
+                if (event.target.matches('.score')) {
+
+                    console.log(event.target);
+
+                    if (event.target.matches('[data-table="TableA"]')) {
+                        console.log('Update Table A based on changes to the changes to the scores in Group A');
+                    } else if (event.target.matches('[data-table="TableB"]')) {
+                        console.log('Update Table B based on changes to the changes to the scores in Group B');
+                    } else if (event.target.matches('[data-table="TableC"]')) {
+                        console.log('Update Table C based on changes to the changes to the scores in Group C');
+                    } else if (event.target.matches('[data-table="TableD"]')) {
+                        console.log('Update Table D based on changes to the changes to the scores in Group D');
+                    }  
+                
+                }
+
+            }, false);   // end of CHANGE event listener
 
             // Display the content of the selected tab and highlight the tab
             function displayStage(evt, tabname) {
@@ -391,5 +418,4 @@
 
     </body>
 
-    
 </html>
