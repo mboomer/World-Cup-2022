@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="stylesheet" href="../css/styles-predictions.css">
+
+        <title>Objects</title>
+                
+    </head>
+    
+    <body>
+
+        <div>Objects</div>
+        
+        <div id="TableA">      
+            <table>          
+                <thead class="blueheader">
+                    <tr>
+                        <th colspan="10">Group A</th>
+                    </tr>
+                    <tr>
+                        <th>Pos</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>Pts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="pos">1</td><td id="TableA-pos1" class="team">Austria</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                    <tr>
+                        <td class="pos">2</td><td id="TableA-pos2" class="team">England</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                    <tr>
+                        <td class="pos">3</td><td id="TableA-pos3" class="team">Northern Ireland</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                    <tr>
+                        <td class="pos">4</td><td id="TableA-pos4" class="team">Norway</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                </tbody>      
+            </table>
+        </div>
+        
+        <script>
+            
+            // https://atomizedobjects.com/blog/javascript/how-to-sort-an-array-of-objects-by-property-value-in-javascript/
+            // return -1 arrayItemA before arrayItemB
+            // return  0 not sorted as same value
+            // return  1 arrayItemA after arrayItemB
+
+            function compPts(a, b) {
+
+                if (a.Points > b.Points) {return -1} 
+
+                if (a.Points < b.Points) {return 1}
+
+                return 0
+            }
+            
+            function compGD (a, b) {
+
+                if (a.GoalDiff > b.GoalDiff) {return -1}
+
+                if (a.GoalDiff < b.GoalDiff) {return 1}
+
+                return 0
+            }
+            
+            function compGF (a, b) {
+
+                if (a.For > b.For) {return -1}
+
+                if (a.For < b.For) {return 1}
+
+                return 0
+            }
+            
+            function leaguePosition (teamA, teamB) {
+                
+                // Sort by points
+                const position = compPts(teamA, teamB)
+                
+                if (position !== 0) {
+                    return position;
+                }
+
+                // at this point we have 2 teams with equal points - so compare goal difference                
+                const GD = compGD(teamA, teamB)
+                
+                if (GD !== 0) {
+                    return GD;
+                }
+
+                // at this point we will be looking at 2 teams with equal points and equal goal difference - so compare goals scored for
+                return compGF(teamA, teamB);
+                
+            }
+
+            const Teams = [
+                {Team : "Slovakia", Played : 3, Won : 0, Drawn: 0, Lost : 3, For : 3, Against : 1, GoalDiff : -4, Points : 0},
+                {Team : "Poland",   Played : 3, Won : 2, Drawn: 1, Lost : 1, For : 0, Against : 7, GoalDiff : 2,  Points : 7},
+                {Team : "Sweden",   Played : 3, Won : 1, Drawn: 0, Lost : 1, For : 2, Against : 4, GoalDiff : -1, Points : 3},
+                {Team : "Spain",    Played : 3, Won : 2, Drawn: 1, Lost : 0, For : 0, Against : 6, GoalDiff : 3,  Points : 7}
+            ]
+            
+            // console.log(Teams[2]);
+            // console.log(Teams[3].Team);
+            // console.log(Teams[1].Points);
+            
+            console.log(Teams.sort(leaguePosition));
+            
+            let newTableA = `<table>          
+                <thead class="blueheader">
+                    <tr>
+                        <th colspan="10">Group A</th>
+                    </tr>
+                    <tr>
+                        <th>Pos</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>Pts</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+            
+            Teams.forEach(function (team, index) {
+	           
+                newTableA += `<tr>
+                        <td class='pos'>  ${index+1}  </td><td id='TableA-pos3' class='team'> ${team.Team} </td><td class='cols'> ${team.Played} </td>
+                        <td class='cols'> ${team.Won} </td><td class='cols'> ${team.Drawn} </td><td class='cols'> ${team.Lost} </td>
+                        <td class='cols'> ${team.For} </td><td class='cols'> ${team.Against} </td><td class='cols'> ${team.GoalDiff} </td>
+                        <td class='cols'> ${team.Points} </td>
+                    </tr>`;
+
+            });
+
+            newTableA += `</tbody></table>`;
+    
+//                    <tr>
+//                        <td class="pos">3</td><td id="TableA-pos3" class="team">Northern Ireland</td>
+//                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+//                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+//                    </tr>
+//                    <tr>
+//                        <td class="pos">2</td><td id="TableA-pos2" class="team">England</td>
+//                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+//                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+//                    </tr>
+//                    <tr>
+//                        <td class="pos">4</td><td id="TableA-pos4" class="team">Norway</td>
+//                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+//                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+//                    </tr>
+//                    <tr>
+//                        <td class="pos">1</td><td id="TableA-pos1" class="team">Austria</td>
+//                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+//                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+//                    </tr>
+            
+            let tableA = document.getElementById("TableA");
+            
+            tableA.innerHTML = newTableA;
+            
+            Teams.forEach(function (team, index) {
+	           
+                console.log(index, "-", team.Team); // Team name
+
+            });
+            
+            
+            
+        </script>
+    
+    </body>
+
+<!--
+Objects
+
+collection of properties
+    property is an association between a name (or key) and a value. 
+    property's value can be a function
+        in which case the property is known as a method
+        
+Access properties
+    objectName.propertyName
+    
+
+const myCar = {
+  make: 'Ford',
+  model: 'Mustang',
+  year: 1969
+};
+
+myCar.make
+myCar.year
+
+myCar['year'] = 1970;
+
+-->
+</html>
