@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="https://www.freecodecamp.org/news/javascript-array-of-objects-tutorial-how-to-create-update-and-loop-through-objects-using-js-array-methods/">
+        
+        <link rel="stylesheet" href="../css/styles-predictions.css">
+
+        <title>Create Array Of Objects From Group Results</title>
+                
+    </head>
+    
+    <body>
+
+        <section id="SectionA">  
+            <div id="GroupA">      
+                <table>          
+                    <thead class="greenheader">              
+                        <tr>                  
+                            <th>No</th><th>HOME</th><th>Rk</th><th colspan="2">SCORE</th><th>Rk</th><th>AWAY</th>              
+                        </tr>          
+                    </thead>          
+                    <tbody>  
+                        <tr>      
+                            <td class="pos">1</td> 
+                            <td class="home">England</td> 
+                            <td class="rank">6</td>       
+                            <td><input class="homescore" data-table="TableA" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableA" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">16</td> 
+                            <td class="away">Austria</td>  
+                        </tr>  
+                        <tr>      
+                            <td class="pos">2</td> <td class="home">Norway</td> <td class="rank">7</td>       
+                            <td><input class="homescore" data-table="TableA" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableA" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">14</td> <td class="away">Northern Ireland</td>  
+                        </tr>  
+                        <tr>      
+                            <td class="pos">9</td> <td class="home">Austria</td> <td class="rank">16</td>       
+                            <td><input class="homescore" data-table="TableA" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableA" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">14</td> <td class="away">Northern Ireland</td>  
+                        </tr>  
+                        <tr>      
+                            <td class="pos">10</td> <td class="home">England</td> <td class="rank">6</td>       
+                            <td><input class="homescore" data-table="TableA" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableA" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">7</td> <td class="away">Norway</td>  
+                        </tr>  
+                        <tr>      
+                            <td class="pos">17</td> <td class="home">Northern Ireland</td> <td class="rank">14</td>       
+                            <td><input class="homescore" data-table="TableA" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableA" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">6</td> <td class="away">England</td>  
+                        </tr>  
+                        <tr>      
+                            <td class="pos">18</td> <td class="home">Austria</td> <td class="rank">16</td>       
+                            <td><input class="homescore" data-table="TableA" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableA" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">7</td> <td class="away">Norway</td>  
+                        </tr>          
+                    </tbody>      
+                </table>  
+            </div>  <!-- end of group div -->  
+            
+        </section>        
+
+        <script>
+
+            // ==================================================================
+            // add CHANGE event listener for the INPUT fields
+            // ==================================================================
+            document.addEventListener('change', function (event) {
+                
+                // get the teams and the scores
+                homeTeams  = document.querySelectorAll('.home');            
+                homeScores = document.querySelectorAll('.homescore');
+                awayScores = document.querySelectorAll('.awayscore');
+                awayTeams  = document.querySelectorAll('.away');
+                
+                // console.log(homeScores[1].value);
+
+                // initialise the Teams Array and team object
+                let teams = [];
+                let team = {};
+                
+                // Create the array of objects that will be used to create the league table
+                for (let f = 0; f < homeTeams.length; f++) {
+                    
+                    // check if home exists in array - if not add object for the team to the array
+                    let found = teams.find(t => t.Team == homeTeams[f].textContent);
+                    
+                    if (found === undefined ) {                        
+                        team = {Team : homeTeams[f].textContent, Played : 0, Won : 0, Drawn: 0, Lost : 0, For : 0, Against : 0, GoalDiff : 0, Points : 0};
+                        teams.push(team);                        
+                    };
+                };
+
+                // const Teams = [
+                //    {Team : "England",          Played : 1, Won : 1, Drawn: 0, Lost : 0, For : 2, Against : 1, GoalDiff : 1,  Points : 3},
+                //    {Team : "Norway",           Played : 1, Won : 0, Drawn: 0, Lost : 0, For : 0, Against : 0, GoalDiff : 0,  Points : 0},
+                //    {Team : "Austria",          Played : 1, Won : 0, Drawn: 0, Lost : 1, For : 1, Against : 2, GoalDiff : -1, Points : 0},
+                //    {Team : "Northern Ireland", Played : 1, Won : 0, Drawn: 0, Lost : 0, For : 0, Against : 0, GoalDiff : 0,  Points : 0}
+                // ]
+                
+                // Update the object properties for each result
+
+                //England	  2 1  Austria
+                //Norway	  1 2  N Ireland
+                //Austria	  2 1  N Ireland
+                //England	  1 2  Norway
+                //N Ireland   2 1  England
+                //Austria	  1 2  Norway
+
+                for (let f = 0; f < homeTeams.length; f++) {
+
+                    let home = teams.findIndex(t => t.Team == homeTeams[f].textContent);                    
+                    let away = teams.findIndex(t => t.Team == awayTeams[f].textContent);                    
+
+                    teams[home].Played++;
+                    teams[away].Played++;
+                
+                    if (homeScores[f].value > awayScores[f].value) {
+                        teams[home].Won++;
+                        teams[away].Lost++;
+                    } else if (homeScores[f].value < awayScores[f].value) {
+                        teams[away].Won++;
+                        teams[home].Lost++;
+                    } else {
+                        teams[away].Drawn++;
+                        teams[home].Drawn++;
+                    };
+
+                    // console.log(f + " Home Score : " + homeScores[f].value + " Away Score : " + awayScores[f].value);
+                    
+                    // have to convert to Number - for some reason .For and .Against are being treated as strings
+                    teams[home].For      = Number(teams[home].For) + Number(homeScores[f].value);
+                    teams[home].Against  = Number(teams[home].Against) + Number(awayScores[f].value);
+                    teams[home].GoalDiff = teams[home].For - teams[home].Against;
+                    teams[home].Points   = ((teams[home].Won * 3) + (teams[home].Drawn * 1));
+
+                    teams[away].For      = Number(teams[away].For) + Number(awayScores[f].value);
+                    teams[away].Against  = Number(teams[away].Against) + Number(homeScores[f].value);                    
+                    teams[away].GoalDiff = teams[away].For - teams[away].Against;
+                    teams[away].Points   = ((teams[away].Won * 3) + (teams[away].Drawn * 1));
+
+                };
+                
+                console.log(teams);
+                    
+                // event listeners for the tab links
+//                if (event.target.matches('.score')) {
+//
+                    // console.log(event.target.value);
+
+//                    if (event.target.matches('[data-table="TableA"]')) {
+//                        console.log('Update Table A based on changes to the changes to the scores in Group A');
+//                    } else if (event.target.matches('[data-table="TableB"]')) {
+//                        console.log('Update Table B based on changes to the changes to the scores in Group B');
+//                    } else if (event.target.matches('[data-table="TableC"]')) {
+//                        console.log('Update Table C based on changes to the changes to the scores in Group C');
+//                    } else if (event.target.matches('[data-table="TableD"]')) {
+//                        console.log('Update Table D based on changes to the changes to the scores in Group D');
+//                    }  
+//                
+//                }
+
+            }, false);   // end of CHANGE event listener
+                        
+        </script>
+    
+    </body>
+
+</html>
