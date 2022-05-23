@@ -8,7 +8,7 @@
         
         <link rel="stylesheet" href="../css/styles-predictions.css">
 
-        <title>Create Array Of Objects From Group Results</title>
+        <title>Single Group Predictions With League Table</title>
                 
     </head>
     
@@ -16,7 +16,8 @@
 
         <section id="SectionA">  
             <div id="GroupA">      
-                <table>          
+                <table>     
+                    
                     <thead class="greenheader">              
                         <tr>                  
                             <th>No</th><th>HOME</th><th>Rk</th><th colspan="2">SCORE</th><th>Rk</th><th>AWAY</th>              
@@ -63,13 +64,97 @@
                             <td class="rank">7</td> <td class="away">Norway</td>  
                         </tr>          
                     </tbody>      
-                </table>  
-            </div>  <!-- end of group div -->  
+                </table> <!-- end of TableA -->
+                
+            </div>  <!-- end of groupA div -->
+            
+            <div id="TableA">      
+            <table>          
+                <thead class="blueheader">
+                    <tr>
+                        <th colspan="10">Group A</th>
+                    </tr>
+                    <tr>
+                        <th>Pos</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>Pts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="pos">1</td><td id="TableA-pos1" class="team">Austria</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                    <tr>
+                        <td class="pos">2</td><td id="TableA-pos2" class="team">England</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                    <tr>
+                        <td class="pos">3</td><td id="TableA-pos3" class="team">Northern Ireland</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                    <tr>
+                        <td class="pos">4</td><td id="TableA-pos4" class="team">Norway</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                </tbody>      
+            </table>
+        </div>
             
         </section>        
 
         <script>
 
+            // **********************************************************************************************************
+            // https://atomizedobjects.com/blog/javascript/how-to-sort-an-array-of-objects-by-property-value-in-javascript/
+            // return -1 arrayItemA before arrayItemB
+            // return  0 not sorted as same value
+            // return  1 arrayItemA after arrayItemB
+            // **********************************************************************************************************
+            //      Functions to sort the league table
+            // **********************************************************************************************************
+
+            function compPts(a, b) {
+
+                if (a.Points > b.Points) {return -1}; 
+                if (a.Points < b.Points) {return 1};
+                return 0;
+            };
+            
+            function compGD (a, b) {
+                
+                if (a.GoalDiff > b.GoalDiff) {return -1};
+                if (a.GoalDiff < b.GoalDiff) {return 1};
+                return 0;
+            };
+            
+            function compGF (a, b) {
+
+                if (a.For > b.For) {return -1};
+                if (a.For < b.For) {return 1};
+                return 0;
+            };
+            
+            function leaguePosition (teamA, teamB) {
+                
+                // Sort by points
+                const position = compPts(teamA, teamB)
+                
+                if (position !== 0) { return position; };
+
+                // at this point we have 2 teams with equal points - so compare goal difference                
+                const GD = compGD(teamA, teamB);
+                
+                if (GD !== 0) {return GD;};
+
+                // at this point we will be looking at 2 teams with equal points and equal goal difference - so compare goals scored for
+                return compGF(teamA, teamB);
+                
+            };
+            
+            
 //                // event listeners for the tab links
 //                if (event.target.matches('.score')) {
 //
@@ -166,7 +251,48 @@
 
                 };
                 
+                // sort the array of Team objects by points, goal diff, goals for
+                teams.sort(leaguePosition);
+                
+                // outpout the sorted array
                 console.log(teams);
+
+                // Create the new table based on the sorted array
+                let newTableA = `<table>          
+                    <thead class="blueheader">
+                        <tr>
+                            <th colspan="10">Group A</th>
+                        </tr>
+                        <tr>
+                            <th>Pos</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>Pts</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+
+                teams.forEach(function (team, index) {
+
+                    newTableA += `<tr>
+                            <td class='pos'>  ${index+1}  </td><td id='TableA-pos3' class='team'> ${team.Team} </td><td class='cols'> ${team.Played} </td>
+                            <td class='cols'> ${team.Won} </td><td class='cols'> ${team.Drawn} </td><td class='cols'> ${team.Lost} </td>
+                            <td class='cols'> ${team.For} </td><td class='cols'> ${team.Against} </td><td class='cols'> ${team.GoalDiff} </td>
+                            <td class='cols'> ${team.Points} </td>
+                        </tr>`;
+
+                });
+
+                newTableA += `</tbody></table>`;
+
+                // get the ID of the existing TableA
+                let tableA = document.getElementById("TableA");
+
+                // Swap the contents for the new sorted table
+                tableA.innerHTML = newTableA;
+
+//                Teams.forEach(function (team, index) {
+//
+//                    console.log(index, "-", team.Team); // Team name
+//
+//                });
 
             }, false);   // end of CHANGE event listener
                         
