@@ -25,13 +25,10 @@
                     </thead>          
                     <tbody>  
                         <tr>      
-                            <td class="pos">1</td> 
-                            <td class="home">England</td> 
-                            <td class="rank">6</td>       
+                            <td class="pos">1</td><td class="home">England</td><td class="rank">6</td>       
                             <td><input class="homescore" data-table="TableA" type="number" value=0 min="0" placeholder="0"></td>      
                             <td><input class="awayscore" data-table="TableA" type="number" value=0 min="0" placeholder="0"></td>      
-                            <td class="rank">16</td> 
-                            <td class="away">Austria</td>  
+                            <td class="rank">16</td><td class="away">Austria</td>  
                         </tr>  
                         <tr>      
                             <td class="pos">2</td> <td class="home">Norway</td> <td class="rank">7</td>       
@@ -101,9 +98,273 @@
                     </tr>
                 </tbody>      
             </table>
-        </div>
+        </div>              <!-- end of league table A -->
             
-        </section>        
+        </section>         <!-- end of Section A -->
+
+        <section id="SectionB">  
+            <div id="GroupB">      
+                <table>     
+                    
+                    <thead class="greenheader">              
+                        <tr>                  
+                            <th>No</th><th>HOME</th><th>Rk</th><th colspan="2">SCORE</th><th>Rk</th><th>AWAY</th>              
+                        </tr>          
+                    </thead>          
+                    <tbody>  
+                        <tr>      
+                            <td class="pos">2</td> <td class="home">Spain</td> <td class="rank">7</td>       
+                            <td><input class="homescore" data-table="TableB" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableB" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">14</td> <td class="away">Finland</td>  
+                        </tr>  
+                        <tr>      
+                            <td class="pos">9</td> <td class="home">Germany</td> <td class="rank">16</td>       
+                            <td><input class="homescore" data-table="TableB" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableB" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">14</td> <td class="away">Denmark</td>  
+                        </tr>  
+                        <tr>      
+                            <td class="pos">10</td> <td class="home">Denmark</td> <td class="rank">6</td>       
+                            <td><input class="homescore" data-table="TableB" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableB" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">7</td> <td class="away">Finland</td>  
+                        </tr>  
+                        <tr>      
+                            <td class="pos">17</td> <td class="home">Germany</td> <td class="rank">14</td>       
+                            <td><input class="homescore" data-table="TableB" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableB" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">6</td> <td class="away">Spain</td>  
+                        </tr>  
+                        <tr>      
+                            <td class="pos">18</td> <td class="home">Finland</td> <td class="rank">16</td>       
+                            <td><input class="homescore" data-table="TableB" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableB" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">7</td> <td class="away">Germany</td>  
+                        </tr>          
+                        <tr>      
+                            <td class="pos">18</td> <td class="home">Spain</td> <td class="rank">16</td>       
+                            <td><input class="homescore" data-table="TableB" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableB" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">7</td> <td class="away">Denmark</td>  
+                        </tr>          
+                    </tbody>      
+                </table> <!-- end of TableB -->
+                
+            </div>  <!-- end of groupB div -->
+            
+            <div id="TableB">      
+            <table>          
+                <thead class="blueheader">
+                    <tr>
+                        <th colspan="10">Group B</th>
+                    </tr>
+                    <tr>
+                        <th>Pos</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>Pts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="pos">1</td><td id="TableB-pos1" class="team">Denmark</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                    <tr>
+                        <td class="pos">2</td><td id="TableB-pos2" class="team">Finland</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                    <tr>
+                        <td class="pos">3</td><td id="TableB-pos3" class="team">Germany</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                    <tr>
+                        <td class="pos">4</td><td id="TableB-pos4" class="team">Spain</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                </tbody>      
+            </table>
+        </div>              <!-- end of league table B -->
+            
+        </section>         <!-- end of Section B -->
+
+        <section id="SectionC">  
+            <div id="GroupC">      
+                <table>     
+                    
+                    <thead class="greenheader">              
+                        <tr>                  
+                            <th>No</th><th>HOME</th><th>Rk</th><th colspan="2">SCORE</th><th>Rk</th><th>AWAY</th>              
+                        </tr>          
+                    </thead>          
+                    <tbody>  
+                        <tr>      
+                            <td class="pos">2</td> <td class="home">Russia</td> <td class="rank">7</td>       
+                            <td><input class="homescore" data-table="TableC" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableC" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">14</td> <td class="away">Switzerland</td>  
+                        </tr>  
+                        <tr>      
+                            <td class="pos">9</td> <td class="home">Netherlands</td> <td class="rank">16</td>       
+                            <td><input class="homescore" data-table="TableC" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableC" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">14</td> <td class="away">Sweden</td>  
+                        </tr>  
+                        <tr>      
+                            <td class="pos">10</td> <td class="home">Sweden</td> <td class="rank">6</td>       
+                            <td><input class="homescore" data-table="TableC" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableC" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">7</td> <td class="away">Switzerland</td>  
+                        </tr>  
+                        <tr>      
+                            <td class="pos">17</td> <td class="home">Netherlands</td> <td class="rank">14</td>       
+                            <td><input class="homescore" data-table="TableC" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableC" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">6</td> <td class="away">Russia</td>  
+                        </tr>  
+                        <tr>      
+                            <td class="pos">18</td> <td class="home">Switzerland</td> <td class="rank">16</td>       
+                            <td><input class="homescore" data-table="TableC" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableC" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">7</td> <td class="away">Netherlands</td>  
+                        </tr>          
+                        <tr>      
+                            <td class="pos">18</td> <td class="home">Sweden</td> <td class="rank">16</td>       
+                            <td><input class="homescore" data-table="TableC" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableC" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">7</td> <td class="away">Russia</td>  
+                        </tr>          
+                    </tbody>      
+                </table> <!-- end of TableC -->
+                
+            </div>  <!-- end of group C div -->
+            
+            <div id="TableC">      
+            <table>          
+                <thead class="blueheader">
+                    <tr>
+                        <th colspan="10">Group C</th>
+                    </tr>
+                    <tr>
+                        <th>Pos</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>Pts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="pos">1</td><td id="TableC-pos1" class="team">Netherlands</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                    <tr>
+                        <td class="pos">2</td><td id="TableC-pos2" class="team">Russia</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                    <tr>
+                        <td class="pos">3</td><td id="TableC-pos3" class="team">Sweden</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                    <tr>
+                        <td class="pos">4</td><td id="TableC-pos4" class="team">Switzerland</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                </tbody>      
+            </table>
+        </div>              <!-- end of league table C -->
+            
+        </section>         <!-- end of Section C -->
+
+        <section id="SectionD">  
+            <div id="GroupD">      
+                <table>     
+                    
+                    <thead class="greenheader">              
+                        <tr>                  
+                            <th>No</th><th>HOME</th><th>Rk</th><th colspan="2">SCORE</th><th>Rk</th><th>AWAY</th>              
+                        </tr>          
+                    </thead>          
+                    <tbody>  
+                        <tr>      
+                            <td class="pos">2</td> <td class="home">Belgium</td> <td class="rank">7</td>       
+                            <td><input class="homescore" data-table="TableD" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableD" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">14</td> <td class="away">Iceland</td>  
+                        </tr>  
+                        <tr>      
+                            <td class="pos">9</td> <td class="home">France</td> <td class="rank">16</td>       
+                            <td><input class="homescore" data-table="TableD" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableD" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">14</td> <td class="away">Italy</td>  
+                        </tr>  
+                        <tr>      
+                            <td class="pos">10</td> <td class="home">Italy</td> <td class="rank">6</td>       
+                            <td><input class="homescore" data-table="TableD" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableD" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">7</td> <td class="away">Iceland</td>  
+                        </tr>  
+                        <tr>      
+                            <td class="pos">17</td> <td class="home">France</td> <td class="rank">14</td>       
+                            <td><input class="homescore" data-table="TableD" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableD" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">6</td> <td class="away">Belgium</td>  
+                        </tr>  
+                        <tr>      
+                            <td class="pos">18</td> <td class="home">Iceland</td> <td class="rank">16</td>       
+                            <td><input class="homescore" data-table="TableD" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableD" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">7</td> <td class="away">France</td>  
+                        </tr>          
+                        <tr>      
+                            <td class="pos">18</td> <td class="home">Italy</td> <td class="rank">16</td>       
+                            <td><input class="homescore" data-table="TableD" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td><input class="awayscore" data-table="TableD" type="number" value=0 min="0" placeholder="0"></td>      
+                            <td class="rank">7</td> <td class="away">Belgium</td>  
+                        </tr>          
+                    </tbody>      
+                </table> <!-- end of TableD -->
+                
+            </div>  <!-- end of groupD div -->
+            
+            <div id="TableD">      
+            <table>          
+                <thead class="blueheader">
+                    <tr>
+                        <th colspan="10">Group D</th>
+                    </tr>
+                    <tr>
+                        <th>Pos</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>Pts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="pos">1</td><td id="TableD-pos1" class="team">Belgium</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                    <tr>
+                        <td class="pos">2</td><td id="TableD-pos2" class="team">France</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                    <tr>
+                        <td class="pos">3</td><td id="TableD-pos3" class="team">Iceland</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                    <tr>
+                        <td class="pos">4</td><td id="TableD-pos4" class="team">Italy</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td><td class="cols">0</td><td class="cols">0</td>
+                        <td class="cols">0</td> <td class="cols">0</td><td class="cols">0</td>
+                    </tr>
+                </tbody>      
+            </table>
+        </div>              <!-- end of league table D -->
+            
+        </section>         <!-- end of Section D -->
 
         <script>
 
@@ -172,16 +433,99 @@
 //                
 //                }
             
+            
+            // ==================================================================
+            // define currentTable outside of the CHANGE event listener 
+            // necessary as if its defined inside CHANGE event listener the scope
+            // doesnt allow it to be accessed outside the CHANGE event listener
+            // ==================================================================
+            let currentTable;
+            let currentTableName;
+            
             // ==================================================================
             // add CHANGE event listener for the INPUT fields
             // ==================================================================
             document.addEventListener('change', function (event) {
                 
+                if (event.target.matches('[data-table="TableA"]')) {
+
+                    console.log('Update Table A based on changes to the changes to the scores in Group A');
+                    
+                    let SectA = document.querySelector('#SectionA');
+                    
+                    // console.log(SectA);
+                    
+                    // get the teams and the scores for SectionA
+                    homeTeams  = SectA.querySelectorAll('.home');            
+                    homeScores = SectA.querySelectorAll('.homescore');
+                    awayScores = SectA.querySelectorAll('.awayscore');
+                    awayTeams  = SectA.querySelectorAll('.away');
+                    
+                    // get the ID of the table to update
+                    currentTable = document.getElementById("TableA");
+                    currentTableName = "Table A";
+                    
+                } else if (event.target.matches('[data-table="TableB"]')) {
+
+                    console.log('Update Table B based on changes to the changes to the scores in Group B');
+
+                    let SectB = document.querySelector('#SectionB');
+                    
+                    // console.log(SectB);
+                    
+                    // get the teams and the scores for SectionB
+                    homeTeams  = SectB.querySelectorAll('.home');            
+                    homeScores = SectB.querySelectorAll('.homescore');
+                    awayScores = SectB.querySelectorAll('.awayscore');
+                    awayTeams  = SectB.querySelectorAll('.away');
+
+                    // get the ID of the table to update
+                    currentTable = document.getElementById("TableB");
+                    currentTableName = "Table B";
+
+                } else if (event.target.matches('[data-table="TableC"]')) {
+
+                    console.log('Update Table C based on changes to the changes to the scores in Group C');
+
+                    SectC = document.querySelector('#SectionC');
+                    
+                    // console.log(SectC);
+                    
+                    // get the teams and the scores for SectionC
+                    homeTeams  = SectC.querySelectorAll('.home');            
+                    homeScores = SectC.querySelectorAll('.homescore');
+                    awayScores = SectC.querySelectorAll('.awayscore');
+                    awayTeams  = SectC.querySelectorAll('.away');
+
+                    // get the ID of the table to update
+                    currentTable = document.getElementById("TableC");
+                    currentTableName = "Table C";
+
+                } else if (event.target.matches('[data-table="TableD"]')) {
+                    
+                    console.log('Update Table D based on changes to the changes to the scores in Group D');
+
+                    SectD = document.querySelector('#SectionD');
+                    
+                    // console.log(SectD);
+                    
+                    // get the teams and the scores for SectionD
+                    homeTeams  = SectD.querySelectorAll('.home');            
+                    homeScores = SectD.querySelectorAll('.homescore');
+                    awayScores = SectD.querySelectorAll('.awayscore');
+                    awayTeams  = SectD.querySelectorAll('.away');
+
+                    // get the ID of the table to update
+                    currentTable = document.getElementById("TableD");
+                    currentTableName = "Table D";
+
+                };  
+                
                 // get the teams and the scores
-                homeTeams  = document.querySelectorAll('.home');            
-                homeScores = document.querySelectorAll('.homescore');
-                awayScores = document.querySelectorAll('.awayscore');
-                awayTeams  = document.querySelectorAll('.away');
+                //homeTeams  = document.querySelectorAll('.home');            
+                //homeScores = document.querySelectorAll('.homescore');
+                //awayScores = document.querySelectorAll('.awayscore');
+                //awayTeams  = document.querySelectorAll('.away');
                 
                 // console.log(homeScores[1].value);
 
@@ -258,10 +602,10 @@
                 console.log(teams);
 
                 // Create the new table based on the sorted array
-                let newTableA = `<table>          
+                let updatedTable = `<table>          
                     <thead class="blueheader">
                         <tr>
-                            <th colspan="10">Group A</th>
+                            <th colspan="10"> ${currentTableName} </th>
                         </tr>
                         <tr>
                             <th>Pos</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>Pts</th>
@@ -271,7 +615,7 @@
 
                 teams.forEach(function (team, index) {
 
-                    newTableA += `<tr>
+                    updatedTable += `<tr>
                             <td class='pos'>  ${index+1}  </td><td id='TableA-pos3' class='team'> ${team.Team} </td><td class='cols'> ${team.Played} </td>
                             <td class='cols'> ${team.Won} </td><td class='cols'> ${team.Drawn} </td><td class='cols'> ${team.Lost} </td>
                             <td class='cols'> ${team.For} </td><td class='cols'> ${team.Against} </td><td class='cols'> ${team.GoalDiff} </td>
@@ -280,19 +624,13 @@
 
                 });
 
-                newTableA += `</tbody></table>`;
+                updatedTable += `</tbody></table>`;
 
-                // get the ID of the existing TableA
-                let tableA = document.getElementById("TableA");
+//                // get the ID of the existing TableA
+//                let tableA = document.getElementById("TableA");
 
-                // Swap the contents for the new sorted table
-                tableA.innerHTML = newTableA;
-
-//                Teams.forEach(function (team, index) {
-//
-//                    console.log(index, "-", team.Team); // Team name
-//
-//                });
+                // Swap the contents for the current Table for the updated table
+                currentTable.innerHTML = updatedTable;
 
             }, false);   // end of CHANGE event listener
                         
