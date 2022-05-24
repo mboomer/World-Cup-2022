@@ -121,10 +121,11 @@
                                             $grpdesc  = $row["groupdesc"];
 
                                                 echo "  <tr>";
-                                                echo "      <td class='pos'>" . $fixno . "</td> <td class='home'>" . $hometeam . "</td> <td class='rank'>" . $homerank . "</td> ";
-                                                echo "      <td><input class='score' data-table='" . $tablename . "' type='number' min='0' placeholder='0'></td>";
-                                                echo "      <td><input class='score' data-table='" . $tablename . "' type='number' min='0' placeholder='0'></td>";
-                                                echo "      <td class='rank'>" . $awayrank . "</td> <td class='away score'>" . $awayteam . "</td>";
+                                                echo "      <td class='pos'>" . $fixno . "</td> <td class='home'>" . $hometeam . "</td>";
+                                                echo "      <td class='rank'>" . $homerank . "</td>";
+                                                echo "      <td><input class='homescore' data-table='" . $tablename . "' type='number' value=0 min=0 placeholder=0></td>";
+                                                echo "      <td><input class='awayscore' data-table='" . $tablename . "' type='number' value=0 min=0 placeholder=0></td>";
+                                                echo "      <td class='rank'>" . $awayrank . "</td> <td class='away'>" . $awayteam . "</td>";
                                                 echo "  </tr>";
                                     }
 
@@ -314,32 +315,6 @@
 
             scores = document.querySelectorAll('.score');
 
-            // winner and runnerup teams in each of the group tables
-            let winnergroupA    = document.getElementById("TableA-pos1").innerHTML;
-            let runnerupgroupA  = document.getElementById("TableA-pos2").innerHTML;
-            let winnergroupB    = document.getElementById("TableB-pos1").innerHTML;
-            let runnerupgroupB  = document.getElementById("TableB-pos2").innerHTML;
-            let winnergroupC    = document.getElementById("TableC-pos1").innerHTML;
-            let runnerupgroupC  = document.getElementById("TableC-pos2").innerHTML;
-            let winnergroupD    = document.getElementById("TableD-pos1").innerHTML;
-            let runnerupgroupD  = document.getElementById("TableD-pos2").innerHTML;
-
-            // Quarter Final 1
-            document.getElementById("winnerA").innerHTML = winnergroupA;
-            document.getElementById("runnerupB").innerHTML = runnerupgroupB;
-
-            // Quarter Final 2
-            document.getElementById("winnerB").innerHTML = winnergroupB;
-            document.getElementById("runnerupA").innerHTML = runnerupgroupA;
-
-            // Quarter Final 3
-            document.getElementById("winnerC").innerHTML = winnergroupC;
-            document.getElementById("runnerupD").innerHTML = runnerupgroupD;
-
-            // Quarter Final 4
-            document.getElementById("winnerD").innerHTML = winnergroupD;
-            document.getElementById("runnerupC").innerHTML = runnerupgroupC;
-
             // ==================================================================
             // add CLICK event listener for the DOM
             // ==================================================================
@@ -355,37 +330,41 @@
                 // event listeners for the tab links
                 if (event.target.matches('#knockout-stage')) {
 
+                    // winner and runnerup teams in each of the group tables
+                    let winnergroupA    = document.getElementById("TableA-pos1").innerHTML;
+                    let runnerupgroupA  = document.getElementById("TableA-pos2").innerHTML;
+                    let winnergroupB    = document.getElementById("TableB-pos1").innerHTML;
+                    let runnerupgroupB  = document.getElementById("TableB-pos2").innerHTML;
+                    let winnergroupC    = document.getElementById("TableC-pos1").innerHTML;
+                    let runnerupgroupC  = document.getElementById("TableC-pos2").innerHTML;
+                    let winnergroupD    = document.getElementById("TableD-pos1").innerHTML;
+                    let runnerupgroupD  = document.getElementById("TableD-pos2").innerHTML;
+
+                    // Quarter Final 1
+                    document.getElementById("winnerA").innerHTML = winnergroupA;
+                    document.getElementById("runnerupB").innerHTML = runnerupgroupB;
+
+                    // Quarter Final 2
+                    document.getElementById("winnerB").innerHTML = winnergroupB;
+                    document.getElementById("runnerupA").innerHTML = runnerupgroupA;
+
+                    // Quarter Final 3
+                    document.getElementById("winnerC").innerHTML = winnergroupC;
+                    document.getElementById("runnerupD").innerHTML = runnerupgroupD;
+
+                    // Quarter Final 4
+                    document.getElementById("winnerD").innerHTML = winnergroupD;
+                    document.getElementById("runnerupC").innerHTML = runnerupgroupC;
+                
                     console.log("Knockout Stage clicked");
 
                 }
 
             }, false);   // end of CLICK event listener
 
-            // ==================================================================
-            // add CHANGE event listener for the INPUT fields
-            // ==================================================================
-            document.addEventListener('change', function (event) {
-
-                // event listeners for the tab links
-                if (event.target.matches('.score')) {
-
-                    console.log(event.target);
-
-                    if (event.target.matches('[data-table="TableA"]')) {
-                        console.log('Update Table A based on changes to the changes to the scores in Group A');
-                    } else if (event.target.matches('[data-table="TableB"]')) {
-                        console.log('Update Table B based on changes to the changes to the scores in Group B');
-                    } else if (event.target.matches('[data-table="TableC"]')) {
-                        console.log('Update Table C based on changes to the changes to the scores in Group C');
-                    } else if (event.target.matches('[data-table="TableD"]')) {
-                        console.log('Update Table D based on changes to the changes to the scores in Group D');
-                    }  
-                
-                }
-
-            }, false);   // end of CHANGE event listener
-
+            // **********************************************************************************************************
             // Display the content of the selected tab and highlight the tab
+            // **********************************************************************************************************
             function displayStage(evt, tabname) {
 
                 // Declare all variables
@@ -413,6 +392,255 @@
                     document.getElementById(tabname).style.display = "flex";
                 }
             }
+
+            // **********************************************************************************************************
+            // https://atomizedobjects.com/blog/javascript/how-to-sort-an-array-of-objects-by-property-value-in-javascript/
+            // return -1 arrayItemA before arrayItemB
+            // return  0 not sorted as same value
+            // return  1 arrayItemA after arrayItemB
+            // **********************************************************************************************************
+            //      Functions to sort the league table
+            // **********************************************************************************************************
+
+            function compPts(a, b) {
+
+                if (a.Points > b.Points) {return -1}; 
+                if (a.Points < b.Points) {return 1};
+                return 0;
+            };
+            
+            function compGD (a, b) {
+                
+                if (a.GoalDiff > b.GoalDiff) {return -1};
+                if (a.GoalDiff < b.GoalDiff) {return 1};
+                return 0;
+            };
+            
+            function compGF (a, b) {
+
+                if (a.For > b.For) {return -1};
+                if (a.For < b.For) {return 1};
+                return 0;
+            };
+            
+            function leaguePosition (teamA, teamB) {
+                
+                // Sort by points
+                const position = compPts(teamA, teamB)
+                
+                if (position !== 0) { return position; };
+
+                // at this point we have 2 teams with equal points - so compare goal difference                
+                const GD = compGD(teamA, teamB);
+                
+                if (GD !== 0) {return GD;};
+
+                // at this point we will be looking at 2 teams with equal points and equal goal difference - so compare goals scored for
+                return compGF(teamA, teamB);
+                
+            };
+            
+            // ==================================================================
+            // define currentTable outside of the CHANGE event listener 
+            // necessary as if its defined inside CHANGE event listener the scope
+            // doesnt allow it to be accessed outside the CHANGE event listener
+            // ==================================================================
+            let currentTable;
+            let currentTableID;
+            let currentTableName;
+            
+            // ==================================================================
+            // add CHANGE event listener for the INPUT fields
+            // ==================================================================
+            document.addEventListener('change', function (event) {
+                
+                if (event.target.matches('[data-table="TableA"]')) {
+
+                    console.log('Update Table A based on changes to the changes to the scores in Group A');
+                    
+                    let SectA = document.querySelector('#SectionA');
+                    
+                    // console.log(SectA);
+                    
+                    // get the teams and the scores for SectionA
+                    homeTeams  = SectA.querySelectorAll('.home');            
+                    homeScores = SectA.querySelectorAll('.homescore');
+                    awayScores = SectA.querySelectorAll('.awayscore');
+                    awayTeams  = SectA.querySelectorAll('.away');
+                    
+                    // get the ID of the table to update
+                    currentTable     = document.getElementById("TableA");
+                    currentTableID   = currentTable.id;
+                    currentTableName = "Table A";
+                    
+                } else if (event.target.matches('[data-table="TableB"]')) {
+
+                    console.log('Update Table B based on changes to the changes to the scores in Group B');
+
+                    let SectB = document.querySelector('#SectionB');
+                    
+                    // console.log(SectB);
+                    
+                    // get the teams and the scores for SectionB
+                    homeTeams  = SectB.querySelectorAll('.home');            
+                    homeScores = SectB.querySelectorAll('.homescore');
+                    awayScores = SectB.querySelectorAll('.awayscore');
+                    awayTeams  = SectB.querySelectorAll('.away');
+
+                    // get the ID of the table to update
+                    currentTable     = document.getElementById("TableB");
+                    currentTableID   = currentTable.id;
+                    currentTableName = "Table B";
+
+                } else if (event.target.matches('[data-table="TableC"]')) {
+
+                    console.log('Update Table C based on changes to the changes to the scores in Group C');
+
+                    SectC = document.querySelector('#SectionC');
+                    
+                    // console.log(SectC);
+                    
+                    // get the teams and the scores for SectionC
+                    homeTeams  = SectC.querySelectorAll('.home');            
+                    homeScores = SectC.querySelectorAll('.homescore');
+                    awayScores = SectC.querySelectorAll('.awayscore');
+                    awayTeams  = SectC.querySelectorAll('.away');
+
+                    // get the ID of the table to update
+                    currentTable     = document.getElementById("TableC");
+                    currentTableID   = currentTable.id;
+                    currentTableName = "Table C";
+
+                } else if (event.target.matches('[data-table="TableD"]')) {
+                    
+                    console.log('Update Table D based on changes to the changes to the scores in Group D');
+
+                    SectD = document.querySelector('#SectionD');
+                    
+                    // console.log(SectD);
+                    
+                    // get the teams and the scores for SectionD
+                    homeTeams  = SectD.querySelectorAll('.home');            
+                    homeScores = SectD.querySelectorAll('.homescore');
+                    awayScores = SectD.querySelectorAll('.awayscore');
+                    awayTeams  = SectD.querySelectorAll('.away');
+
+                    // get the ID of the table to update
+                    currentTable      = document.getElementById("TableD");
+                    currentTableID   = currentTable.id;
+                    currentTableName = "Table D";
+
+                };  
+                
+                // get the teams and the scores
+                //homeTeams  = document.querySelectorAll('.home');            
+                //homeScores = document.querySelectorAll('.homescore');
+                //awayScores = document.querySelectorAll('.awayscore');
+                //awayTeams  = document.querySelectorAll('.away');
+                
+                // console.log(homeScores[1].value);
+
+                // initialise the Teams Array and team object
+                let teams = [];
+                let team = {};
+                
+                // Create the array of objects that will be used to create the league table
+                for (let f = 0; f < homeTeams.length; f++) {
+                    
+                    // check if home exists in array - if not add object for the team to the array
+                    let found = teams.find(t => t.Team == homeTeams[f].textContent);
+                    
+                    if (found === undefined ) {                        
+                        team = {Team : homeTeams[f].textContent, Played : 0, Won : 0, Drawn: 0, Lost : 0, For : 0, Against : 0, GoalDiff : 0, Points : 0};
+                        teams.push(team);                        
+                    };
+                };
+
+                // const Teams = [
+                //    {Team : "England",          Played : 1, Won : 1, Drawn: 0, Lost : 0, For : 2, Against : 1, GoalDiff : 1,  Points : 3},
+                //    {Team : "Norway",           Played : 1, Won : 0, Drawn: 0, Lost : 0, For : 0, Against : 0, GoalDiff : 0,  Points : 0},
+                //    {Team : "Austria",          Played : 1, Won : 0, Drawn: 0, Lost : 1, For : 1, Against : 2, GoalDiff : -1, Points : 0},
+                //    {Team : "Northern Ireland", Played : 1, Won : 0, Drawn: 0, Lost : 0, For : 0, Against : 0, GoalDiff : 0,  Points : 0}
+                // ]
+                
+                // Update the object properties for each result
+
+                //England	  2 1  Austria
+                //Norway	  1 2  N Ireland
+                //Austria	  2 1  N Ireland
+                //England	  1 2  Norway
+                //N Ireland   2 1  England
+                //Austria	  1 2  Norway
+
+                for (let f = 0; f < homeTeams.length; f++) {
+
+                    let home = teams.findIndex(t => t.Team == homeTeams[f].textContent);                    
+                    let away = teams.findIndex(t => t.Team == awayTeams[f].textContent);                    
+
+                    teams[home].Played++;
+                    teams[away].Played++;
+                
+                    if (homeScores[f].value > awayScores[f].value) {
+                        teams[home].Won++;
+                        teams[away].Lost++;
+                    } else if (homeScores[f].value < awayScores[f].value) {
+                        teams[away].Won++;
+                        teams[home].Lost++;
+                    } else {
+                        teams[away].Drawn++;
+                        teams[home].Drawn++;
+                    };
+
+                    // console.log(f + " Home Score : " + homeScores[f].value + " Away Score : " + awayScores[f].value);
+                    
+                    // have to convert to Number - for some reason .For and .Against are being treated as strings
+                    teams[home].For      = Number(teams[home].For) + Number(homeScores[f].value);
+                    teams[home].Against  = Number(teams[home].Against) + Number(awayScores[f].value);
+                    teams[home].GoalDiff = teams[home].For - teams[home].Against;
+                    teams[home].Points   = ((teams[home].Won * 3) + (teams[home].Drawn * 1));
+                    
+                    teams[away].For      = Number(teams[away].For) + Number(awayScores[f].value);
+                    teams[away].Against  = Number(teams[away].Against) + Number(homeScores[f].value);                    
+                    teams[away].GoalDiff = teams[away].For - teams[away].Against;
+                    teams[away].Points   = ((teams[away].Won * 3) + (teams[away].Drawn * 1));
+
+                };
+                
+                // sort the array of Team objects by points, goal diff, goals for
+                teams.sort(leaguePosition);
+                
+                // outpout the sorted array
+                console.log(teams);
+
+                // Create the new table based on the sorted array
+                let updatedTable = `<table>          
+                    <thead class="blueheader">
+                        <tr>
+                            <th colspan="10"> ${currentTableName} </th>
+                        </tr>
+                        <tr>
+                            <th>Pos</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>Pts</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+
+                teams.forEach(function (team, index) {
+
+                    updatedTable += `<tr>
+                            <td class='pos'>  ${index+1}  </td><td id='${currentTableID}-pos${index+1}' class='team'> ${team.Team} </td><td class='cols'> ${team.Played} </td>
+                            <td class='cols'> ${team.Won} </td><td class='cols'> ${team.Drawn} </td><td class='cols'> ${team.Lost} </td>
+                            <td class='cols'> ${team.For} </td><td class='cols'> ${team.Against} </td><td class='cols'> ${team.GoalDiff} </td>
+                            <td class='cols'> ${team.Points} </td>
+                        </tr>`;
+
+                });
+
+                updatedTable += `</tbody></table>`;
+                
+                // Swap the contents for the current Table for the updated table
+                currentTable.innerHTML = updatedTable;
+
+            }, false);   // end of CHANGE event listener
 
         </script>
 
