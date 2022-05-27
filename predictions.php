@@ -208,28 +208,28 @@
                                 </thead>
                               <tbody>
                                 <tr>
-                                    <td class='pos'>25</td> <td id="winnerA" class='home'>Turkey</td> <td class='rank'>6</td> 
-                                    <td><input type="number" min="0" placeholder="0"></td> 
-                                    <td><input type="number" min="0" placeholder="0"></td>
-                                    <td class="rank">7</td> <td id="runnerupB" class="away">Italy</td>
+                                    <td class='pos'>25</td> <td id='winnerA' class='home'>Winner A</td> <td class='rank'>6</td> 
+                                    <td><input class='homescore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td> 
+                                    <td><input class='awayscore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td>
+                                    <td class='rank'>7</td> <td id='runnerupB' class='away'>Runner Up B</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>26</td> <td id="winnerB" class="home">Wales</td> <td class="rank">14</td> 
-                                    <td><input type="number" min="0" placeholder="0"></td> 
-                                    <td><input type="number" placeholder="0"></td>
-                                    <td class="rank">9</td> <td id="runnerupA" class="away">Switzerland</td>
+                                    <td class='pos'>26</td> <td id='winnerB' class='home'>Winner B</td> <td class='rank'>14</td> 
+                                    <td><input class='homescore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td> 
+                                    <td><input class='awayscore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td>
+                                    <td class='rank'>9</td> <td id='runnerupA' class='away'>Runner Up A</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>27</td> <td id="winnerC" class="home">Turkey</td> <td class="rank">6</td>
-                                    <td><input type="number" min="0" placeholder="0"></td> 
-                                    <td><input type="number" min="0" placeholder="0"></td>                                
-                                    <td class="rank">14</td> <td id="runnerupD" class="away">Wales</td>
+                                    <td class='pos'>27</td> <td id='winnerC' class='home'>Winner C</td> <td class="rank">6</td>
+                                    <td><input class='homescore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td> 
+                                    <td><input class='awayscore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td>                                
+                                    <td class='rank'>14</td> <td id='runnerupD' class='away'>Runner Up D</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>28</td> <td id="winnerD" class="home">Italy</td> <td class="rank">7</td> 
-                                    <td><input type="number" min="0" placeholder="0"></td> 
-                                    <td><input type="number" min="0" placeholder="0"></td>
-                                    <td class="rank">9</td> <td id="runnerupC" class="away">Switzerland</td>
+                                    <td class='pos'>28</td> <td id='winnerD' class='home'>Winner D</td> <td class='rank'>7</td> 
+                                    <td><input class='homescore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td> 
+                                    <td><input class='awayscore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td>
+                                    <td class='rank'>9</td> <td id='runnerupC' class='away'>Runner Up C</td>
                                 </tr>
                               </tbody>
                             </table>        
@@ -249,16 +249,16 @@
                                 </thead>
                               <tbody>
                                 <tr>
-                                    <td class='pos'>29</td> <td class="home">Denmark</td> <td class="rank">6</td> 
-                                    <td><input type="number" placeholder="0"></td> 
-                                    <td><input type="number" placeholder="0"></td>
-                                    <td class="rank">7</td> <td class="away">Finland</td>
+                                    <td class='pos'>29</td> <td id='winnerQF1' class='home'>Winner QF 1</td> <td class='rank'>6</td> 
+                                    <td><input class='homescore' data-stage='SF' type='number' min=0 placeholder=0 value=0></td> 
+                                    <td><input class='awayscore' data-stage='SF' type='number' min=0 placeholder=0 value=0></td>
+                                    <td class='rank'>7</td> <td id='winnerQF2' class='away'>Winner QF 2</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>30</td> <td class="home">Belgium</td> <td class="rank">14</td> 
-                                    <td><input type="number" placeholder="0"></td> 
-                                    <td><input type="number" placeholder="0"></td>
-                                    <td class="rank">9</td> <td class="away">Russia</td>
+                                    <td class='pos'>30</td> <td id='winnerQF3' class='home'>Winner QF 3</td> <td class='rank'>14</td> 
+                                    <td><input class='homescore' data-stage='SF' type='number' min=0 placeholder=0 value=0></td> 
+                                    <td><input class='awayscore' data-stage='SF' type='number' min=0 placeholder=0 value=0></td>
+                                    <td class='rank'>9</td> <td id='winnerQF4' class='away'>Winner QF 4</td>
                                 </tr>
                               </tbody>
                             </table>        
@@ -274,15 +274,15 @@
                                         <th colspan="7">FINAL</th>
                                     </tr>
                                     <tr>
-                                        <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th>AWAY</th>
+                                        <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th> <th>AWAY</th>
                                     </tr>
                                 </thead>
                               <tbody>
                                 <tr>
-                                    <td class='pos'>31</td> <td class="home">Denmark</td> <td class="rank">6</td> 
-                                    <td><input type="number" placeholder="0"></td> 
-                                    <td><input type="number" placeholder="0"></td>
-                                    <td class="rank">7</td> <td class="away">Finland</td>
+                                    <td class='pos'>31</td> <td id='winnerSF1' class='home'>Winner SF 1</td> <td class='rank'>6</td> 
+                                    <td><input class='homescore' data-stage='FL' type='number' min=0 placeholder=0 value=0></td> 
+                                    <td><input class='awayscore' data-stage='FL' type='number' min=0 placeholder=0 value=0></td>
+                                    <td class='rank'>7</td> <td id='winnerSF2' class='away'>Winner SF 2</td>
                                 </tr>
                               </tbody>
                             </table>        
@@ -454,6 +454,73 @@
             // ==================================================================
             document.addEventListener('change', function (event) {
                 
+                if (event.target.matches('[data-stage="QF"]')) {
+
+                    console.log('Update Semi Final based on changes to the changes to the scores in the Quarter Finals');
+
+                    let QF = document.querySelector('#QF');
+                    
+                    // get the teams and the scores for the Quarter Finals
+                    homeTeams  = QF.querySelectorAll('.home');            
+                    homeScores = QF.querySelectorAll('.homescore');
+                    awayScores = QF.querySelectorAll('.awayscore');
+                    awayTeams  = QF.querySelectorAll('.away');
+
+                    if (homeScores[0].value > awayScores[0].value) {
+                        document.getElementById('winnerQF1').innerHTML = homeTeams[0].innerHTML;
+                    } else if (homeScores[0].value < awayScores[0].value) {
+                        document.getElementById('winnerQF1').innerHTML = awayTeams[0].innerHTML;
+                    };
+                        
+                    if (homeScores[1].value > awayScores[1].value) {
+                        document.getElementById('winnerQF2').innerHTML = homeTeams[1].innerHTML;
+                    } else if (homeScores[1].value < awayScores[1].value) {
+                        document.getElementById('winnerQF2').innerHTML = awayTeams[1].innerHTML;
+                    };
+ 
+                    if (homeScores[2].value > awayScores[2].value) {
+                        document.getElementById('winnerQF3').innerHTML = homeTeams[2].innerHTML;
+                    } else if (homeScores[2].value < awayScores[2].value) {
+                        document.getElementById('winnerQF3').innerHTML = awayTeams[2].innerHTML;
+                    };
+ 
+                    if (homeScores[3].value > awayScores[3].value) {
+                        document.getElementById('winnerQF4').innerHTML = homeTeams[3].innerHTML;
+                    } else if (homeScores[3].value < awayScores[3].value) {
+                        document.getElementById('winnerQF4').innerHTML = awayTeams[3].innerHTML;
+                    };
+                    
+                    return;
+                };
+
+                if (event.target.matches('[data-stage="SF"]')) {
+
+                    // console.log('Update Final based on changes to the changes to the scores in the Semi Finals');
+
+                    let SF = document.querySelector('#SF');
+                    
+                    // get the teams and the scores for the Quarter Finals
+                    homeTeams  = SF.querySelectorAll('.home');            
+                    homeScores = SF.querySelectorAll('.homescore');
+                    awayScores = SF.querySelectorAll('.awayscore');
+                    awayTeams  = SF.querySelectorAll('.away');
+
+                    if (homeScores[0].value > awayScores[0].value) {
+                        document.getElementById('winnerSF1').innerHTML = homeTeams[0].innerHTML;
+                    } else if (homeScores[0].value < awayScores[0].value) {
+                        document.getElementById('winnerSF1').innerHTML = awayTeams[0].innerHTML;
+                    };
+                        
+                    if (homeScores[1].value > awayScores[1].value) {
+                        document.getElementById('winnerSF2').innerHTML = homeTeams[1].innerHTML;
+                    } else if (homeScores[1].value < awayScores[1].value) {
+                        document.getElementById('winnerSF2').innerHTML = awayTeams[1].innerHTML;
+                    };
+                   
+                    return;
+
+                };
+
                 if (event.target.matches('[data-table="TableA"]')) {
 
                     console.log('Update Table A based on changes to the changes to the scores in Group A');
