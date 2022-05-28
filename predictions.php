@@ -198,7 +198,7 @@
                         <div id="QuarterFinal">
 
                             <table>
-                                <thead class="blueheader">
+                                <thead class="greenheader">
                                     <tr>
                                         <th colspan="7">QUARTER FINALS</th>
                                     </tr>
@@ -239,7 +239,7 @@
                     <section id="SF">
                         <div id="SemiFinal">
                             <table>
-                                <thead class="blueheader">
+                                <thead class="greenheader">
                                     <tr>
                                         <th colspan="7">SEMI FINALS</th>
                                     </tr>
@@ -269,7 +269,7 @@
                     <section id="FL">
                         <div id="Final">
                             <table>
-                                <thead class="blueheader">
+                                <thead class="greenheader">
                                     <tr>
                                         <th colspan="7">FINAL</th>
                                     </tr>
