@@ -37,6 +37,7 @@
             <div id="tabs" class="tab">
               <button id="group-stages" name="GROUPS" class="tablinks active">Group Stage</button>
               <button id="knockout-stage" name="KNOCKOUT-STAGE" class="tablinks ">Knockout Stage</button>
+              <button id="save-predictions" name="SAVE_PREDICTIONS" class="tablinks ">Save Predictions</button>
             </div>
 
             <section id="tournment">
@@ -70,21 +71,23 @@
                             $qry =   "SELECT \n" 
                                     . "  	fx.FixtureNo,  \n"
                                     . "     grp.Description as groupdesc, \n"
+                                    . "     hmt.ID as homeid, \n"
                                     . "     hmt.Team as hometeam, \n"
                                     . "     hmt.Ranking as homerank, \n"
                                     . "     awt.Ranking as awayrank, \n"
-                                    . "     awt.Team as awayteam\n"
+                                    . "     awt.Team as awayteam, \n"
+                                    . "     awt.ID as awayid \n"
                                     . "  FROM  \n"
                                     . "  	Fixtures fx \n"
                                     . "  	INNER JOIN						# get the Group description from GroupStage table \n"
                                     . "  		GroupStage grp \n"
                                     . "  	ON \n"
                                     . "  		fx.GroupID = grp.ID \n"
-                                    . "  	INNER JOIN						# get the Home TEam from the Teams table \n"
+                                    . "  	INNER JOIN						# get the Home Team from the Teams table \n"
                                     . "  		Teams hmt \n"
                                     . "  	ON \n"
                                     . "  		fx.HomeTeamID = hmt.ID \n"
-                                    . "  	INNER JOIN						# get the Away Team from teh Teams table \n"
+                                    . "  	INNER JOIN						# get the Away Team from the Teams table \n"
                                     . "  		Teams awt \n"
                                     . "  	ON \n"
                                     . "  		fx.AwayTeamID = awt.ID \n"
@@ -104,7 +107,7 @@
                                     echo "      <table>";
                                     echo "          <thead class='greenheader'>";
                                     echo "              <tr>";
-                                    echo "                  <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th> <th>AWAY</th>";
+                                    echo "                  <th>No</th> <th class='hidden'></th> <th>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th> <th class='hidden'></th> <th>AWAY</th>";
                                     echo "              </tr>";
                                     echo "          </thead>";
                                     echo "          <tbody>";
@@ -114,18 +117,24 @@
                                             // echo "<div> IN THE WHILE LOOP </div>";
                                     
                                             $fixno    = $row["FixtureNo"];
+                                            $homeid   = $row["homeid"];
                                             $hometeam = $row["hometeam"];
                                             $homerank = $row["homerank"];
                                             $awayrank = $row["awayrank"];
                                             $awayteam = $row["awayteam"];
+                                            $awayid   = $row["awayid"];
                                             $grpdesc  = $row["groupdesc"];
 
                                                 echo "  <tr>";
-                                                echo "      <td class='pos'>" . $fixno . "</td> <td class='home'>" . $hometeam . "</td>";
-                                                echo "      <td class='rank'>" . $homerank . "</td>";
+                                                echo "      <td class='pos'>" . $fixno . "</td>";
+                                                echo "      <td class='homeid hidden'>" . $homeid . "</td>";        // hidden cell for ID of home team
+                                                echo "      <td class='home'>" . $hometeam . "</td>";
+                                                echo "      <td class='h-rank'>" . $homerank . "</td>";
                                                 echo "      <td><input class='homescore' data-table='" . $tablename . "' type='number' value=0 min=0 placeholder=0></td>";
                                                 echo "      <td><input class='awayscore' data-table='" . $tablename . "' type='number' value=0 min=0 placeholder=0></td>";
-                                                echo "      <td class='rank'>" . $awayrank . "</td> <td class='away'>" . $awayteam . "</td>";
+                                                echo "      <td class='a-rank'>" . $awayrank . "</td>";
+                                                echo "      <td class='awayid hidden'>" . $awayid . "</td>";        // hidden cell for ID of away team
+                                                echo "      <td class='away'>" . $awayteam . "</td>";
                                                 echo "  </tr>";
                                     }
 
@@ -135,6 +144,8 @@
 
                                 // Start SQL QRY FOR THE TABLES
                                 $qry =   "SELECT \n" 
+                                        . "  	ID,  \n"
+                                        . "  	Ranking,  \n"
                                         . "  	Team  \n"
                                         . "  FROM  \n"
                                         . "  	Teams \n"
@@ -157,7 +168,8 @@
                                         echo "                  <th colspan='10'>" . $groupdesc .  "</th>";
                                         echo "              </tr>";
                                         echo "              <tr>";
-                                        echo "                  <th>Pos</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>Pts</th>";
+                                        echo "                  <th>Pos</th><th>Team</th><th class='hidden'></th><th class='hidden'></th>";
+                                        echo "                  <th>P</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>Pts</th>";
                                         echo "              </tr>";
                                         echo "          </thead>";
                                         echo "          <tbody>";
@@ -168,6 +180,7 @@
                                         
                                             echo "          <tr>";
                                             echo "              <td class='pos'>" . $rowno . "</td><td id=" . $tablename . "-pos" . $rowno . " class='team'>" . $row['Team'] . "</td>";
+                                            echo "              <td class='hidden team-id'>" . $row['ID'] . "</td> <td class='hidden team-rk'>" . $row['Ranking'] . "</td>";
                                             echo "              <td class='cols'>0</td> <td class='cols'>0</td><td class='cols'>0</td><td class='cols'>0</td><td class='cols'>0</td>";
                                             echo "              <td class='cols'>0</td> <td class='cols'>0</td><td class='cols'>0</td>";
                                             echo "          </tr>";
@@ -203,33 +216,53 @@
                                         <th colspan="7">QUARTER FINALS</th>
                                     </tr>
                                     <tr>
-                                        <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th>AWAY</th>
+                                        <th>No</th> <th>HOME</th> <th class="hidden"></th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th class="hidden"></th> <th>AWAY</th>
                                     </tr>
                                 </thead>
                               <tbody>
                                 <tr>
-                                    <td class='pos'>25</td> <td id='winnerA' class='home'>Winner A</td> <td class='rank'>6</td> 
+                                    <td class='pos'>25</td> 
+                                    <td id='winnerA' class='home'>Winner A</td> 
+                                    <td class='hidden q-homeid'></td> 
+                                    <td class='h-rank'></td> 
                                     <td><input class='homescore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td> 
                                     <td><input class='awayscore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td>
-                                    <td class='rank'>7</td> <td id='runnerupB' class='away'>Runner Up B</td>
+                                    <td class='a-rank'></td> 
+                                    <td class='hidden q-awayid'></td> 
+                                    <td id='runnerupB' class='away'>Runner Up B</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>26</td> <td id='winnerB' class='home'>Winner B</td> <td class='rank'>14</td> 
+                                    <td class='pos'>26</td> 
+                                    <td id='winnerB' class='home'>Winner B</td> 
+                                    <td class='hidden q-homeid'></td> 
+                                    <td class='h-rank'></td> 
                                     <td><input class='homescore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td> 
                                     <td><input class='awayscore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td>
-                                    <td class='rank'>9</td> <td id='runnerupA' class='away'>Runner Up A</td>
+                                    <td class='a-rank'></td> 
+                                    <td class='hidden q-awayid'></td> 
+                                    <td id='runnerupA' class='away'>Runner Up A</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>27</td> <td id='winnerC' class='home'>Winner C</td> <td class="rank">6</td>
+                                    <td class='pos'>27</td>
+                                    <td id='winnerC' class='home'>Winner C</td> 
+                                    <td class='hidden q-homeid'></td> 
+                                    <td class="h-rank"></td>
                                     <td><input class='homescore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td> 
                                     <td><input class='awayscore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td>                                
-                                    <td class='rank'>14</td> <td id='runnerupD' class='away'>Runner Up D</td>
+                                    <td class='a-rank'></td> 
+                                    <td class='hidden q-awayid'></td> 
+                                    <td id='runnerupD' class='away'>Runner Up D</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>28</td> <td id='winnerD' class='home'>Winner D</td> <td class='rank'>7</td> 
+                                    <td class='pos'>28</td> 
+                                    <td id='winnerD' class='home'>Winner D</td> 
+                                    <td class='hidden q-homeid'></td> 
+                                    <td class='h-rank'></td> 
                                     <td><input class='homescore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td> 
                                     <td><input class='awayscore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td>
-                                    <td class='rank'>9</td> <td id='runnerupC' class='away'>Runner Up C</td>
+                                    <td class='a-rank'></td> 
+                                    <td class='hidden q-awayid'></td> 
+                                    <td id='runnerupC' class='away'>Runner Up C</td>
                                 </tr>
                               </tbody>
                             </table>        
@@ -244,21 +277,31 @@
                                         <th colspan="7">SEMI FINALS</th>
                                     </tr>
                                     <tr>
-                                        <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th>AWAY</th>
+                                        <th>No</th> <th>HOME</th> <th class="hidden"></th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th class="hidden"></th> <th>AWAY</th>
                                     </tr>
                                 </thead>
                               <tbody>
                                 <tr>
-                                    <td class='pos'>29</td> <td id='winnerQF1' class='home'>Winner QF 1</td> <td class='rank'>6</td> 
+                                    <td class='pos'>29</td> 
+                                    <td id='winnerQF1' class='home'>Winner QF 1</td> 
+                                    <td class='hidden s-homeid'></td> 
+                                    <td class='h-rank'></td> 
                                     <td><input class='homescore' data-stage='SF' type='number' min=0 placeholder=0 value=0></td> 
                                     <td><input class='awayscore' data-stage='SF' type='number' min=0 placeholder=0 value=0></td>
-                                    <td class='rank'>7</td> <td id='winnerQF2' class='away'>Winner QF 2</td>
+                                    <td class='a-rank'></td> 
+                                    <td class='hidden s-awayid'></td> 
+                                    <td id='winnerQF2' class='away'>Winner QF 2</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>30</td> <td id='winnerQF3' class='home'>Winner QF 3</td> <td class='rank'>14</td> 
+                                    <td class='pos'>30</td> 
+                                    <td id='winnerQF3' class='home'>Winner QF 3</td> 
+                                    <td class='hidden s-homeid'></td> 
+                                    <td class='h-rank'></td> 
                                     <td><input class='homescore' data-stage='SF' type='number' min=0 placeholder=0 value=0></td> 
                                     <td><input class='awayscore' data-stage='SF' type='number' min=0 placeholder=0 value=0></td>
-                                    <td class='rank'>9</td> <td id='winnerQF4' class='away'>Winner QF 4</td>
+                                    <td class='a-rank'></td> 
+                                    <td class='hidden s-awayid'></td> 
+                                    <td id='winnerQF4' class='away'>Winner QF 4</td>
                                 </tr>
                               </tbody>
                             </table>        
@@ -274,15 +317,20 @@
                                         <th colspan="7">FINAL</th>
                                     </tr>
                                     <tr>
-                                        <th>No</th> <th>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th> <th>AWAY</th>
+                                        <th>No</th> <th>HOME</th> <th class="hidden"></th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th> <th class="hidden"></th> <th>AWAY</th>
                                     </tr>
                                 </thead>
                               <tbody>
                                 <tr>
-                                    <td class='pos'>31</td> <td id='winnerSF1' class='home'>Winner SF 1</td> <td class='rank'>6</td> 
+                                    <td class='pos'>31</td> 
+                                    <td id='winnerSF1' class='home'>Winner SF 1</td> 
+                                    <td class='hidden f-homeid'></td> 
+                                    <td class='h-rank'></td> 
                                     <td><input class='homescore' data-stage='FL' type='number' min=0 placeholder=0 value=0></td> 
                                     <td><input class='awayscore' data-stage='FL' type='number' min=0 placeholder=0 value=0></td>
-                                    <td class='rank'>7</td> <td id='winnerSF2' class='away'>Winner SF 2</td>
+                                    <td class='a-rank'></td> 
+                                    <td class='hidden f-homeid'></td> 
+                                    <td id='winnerSF2' class='away'>Winner SF 2</td>
                                 </tr>
                               </tbody>
                             </table>        
@@ -330,33 +378,78 @@
                 // event listeners for the tab links
                 if (event.target.matches('#knockout-stage')) {
 
+                    // Use the next/previous sibling methods to get the hidden team id and the team rank from the table
+
                     // winner and runnerup teams in each of the group tables
-                    let winnergroupA    = document.getElementById("TableA-pos1").innerHTML;
-                    let runnerupgroupA  = document.getElementById("TableA-pos2").innerHTML;
+                    let winnergroupA   = document.getElementById("TableA-pos1").innerHTML;
+                    let winnergroupAid = document.getElementById("TableA-pos1").nextElementSibling.innerHTML;
+                    let winnergroupArk = document.getElementById("TableA-pos1").nextElementSibling.nextElementSibling.innerHTML;
+
+                    let runnerupgroupA   = document.getElementById("TableA-pos2").innerHTML;
+                    let runnerupgroupAid = document.getElementById("TableA-pos2").nextElementSibling.innerHTML;
+                    let runnerupgroupArk = document.getElementById("TableA-pos2").nextElementSibling.nextElementSibling.innerHTML;
+
                     let winnergroupB    = document.getElementById("TableB-pos1").innerHTML;
-                    let runnerupgroupB  = document.getElementById("TableB-pos2").innerHTML;
+                    let winnergroupBid  = document.getElementById("TableB-pos1").nextElementSibling.innerHTML;
+                    let winnergroupBrk  = document.getElementById("TableB-pos1").nextElementSibling.nextElementSibling.innerHTML;
+
+                    let runnerupgroupB   = document.getElementById("TableB-pos2").innerHTML;
+                    let runnerupgroupBid = document.getElementById("TableB-pos2").nextElementSibling.innerHTML;
+                    let runnerupgroupBrk = document.getElementById("TableB-pos2").nextElementSibling.nextElementSibling.innerHTML;
+
                     let winnergroupC    = document.getElementById("TableC-pos1").innerHTML;
-                    let runnerupgroupC  = document.getElementById("TableC-pos2").innerHTML;
+                    let winnergroupCid  = document.getElementById("TableC-pos1").nextElementSibling.innerHTML;
+                    let winnergroupCrk  = document.getElementById("TableC-pos1").nextElementSibling.nextElementSibling.innerHTML;
+
+                    let runnerupgroupC   = document.getElementById("TableC-pos2").innerHTML;
+                    let runnerupgroupCid = document.getElementById("TableC-pos2").nextElementSibling.innerHTML;
+                    let runnerupgroupCrk = document.getElementById("TableC-pos2").nextElementSibling.nextElementSibling.innerHTML;
+
                     let winnergroupD    = document.getElementById("TableD-pos1").innerHTML;
-                    let runnerupgroupD  = document.getElementById("TableD-pos2").innerHTML;
+                    let winnergroupDid  = document.getElementById("TableD-pos1").nextElementSibling.innerHTML;
+                    let winnergroupDrk  = document.getElementById("TableD-pos1").nextElementSibling.nextElementSibling.innerHTML;
+
+                    let runnerupgroupD   = document.getElementById("TableD-pos2").innerHTML;
+                    let runnerupgroupDid = document.getElementById("TableD-pos2").nextElementSibling.innerHTML;
+                    let runnerupgroupDrk = document.getElementById("TableD-pos2").nextElementSibling.nextElementSibling.innerHTML;
 
                     // Quarter Final 1
                     document.getElementById("winnerA").innerHTML = winnergroupA;
+                    document.getElementById("winnerA").nextElementSibling.innerHTML = winnergroupAid;
+                    document.getElementById("winnerA").nextElementSibling.nextElementSibling.innerHTML = winnergroupArk;
+
                     document.getElementById("runnerupB").innerHTML = runnerupgroupB;
+                    document.getElementById("runnerupB").previousElementSibling.innerHTML = runnerupgroupBid;
+                    document.getElementById("runnerupB").previousElementSibling.previousElementSibling.innerHTML = runnerupgroupBrk;
 
                     // Quarter Final 2
                     document.getElementById("winnerB").innerHTML = winnergroupB;
+                    document.getElementById("winnerB").nextElementSibling.innerHTML = winnergroupBid;
+                    document.getElementById("winnerB").nextElementSibling.nextElementSibling.innerHTML = winnergroupBrk;
+
                     document.getElementById("runnerupA").innerHTML = runnerupgroupA;
+                    document.getElementById("runnerupA").previousElementSibling.innerHTML = runnerupgroupAid;
+                    document.getElementById("runnerupA").previousElementSibling.previousElementSibling.innerHTML = runnerupgroupArk;
 
                     // Quarter Final 3
                     document.getElementById("winnerC").innerHTML = winnergroupC;
+                    document.getElementById("winnerC").nextElementSibling.innerHTML = winnergroupCid;
+                    document.getElementById("winnerC").nextElementSibling.nextElementSibling.innerHTML = winnergroupCrk;
+
                     document.getElementById("runnerupD").innerHTML = runnerupgroupD;
+                    document.getElementById("runnerupD").previousElementSibling.innerHTML = runnerupgroupDid;
+                    document.getElementById("runnerupD").previousElementSibling.previousElementSibling.innerHTML = runnerupgroupDrk;
 
                     // Quarter Final 4
                     document.getElementById("winnerD").innerHTML = winnergroupD;
+                    document.getElementById("winnerD").nextElementSibling.innerHTML = winnergroupDid;
+                    document.getElementById("winnerD").nextElementSibling.nextElementSibling.innerHTML = winnergroupDrk;
+
                     document.getElementById("runnerupC").innerHTML = runnerupgroupC;
+                    document.getElementById("runnerupC").previousElementSibling.innerHTML = runnerupgroupCid;
+                    document.getElementById("runnerupC").previousElementSibling.previousElementSibling.innerHTML = runnerupgroupCrk;
                 
-                    console.log("Knockout Stage clicked");
+                    // console.log("Knockout Stage clicked");
 
                 }
 
@@ -456,7 +549,7 @@
                 
                 if (event.target.matches('[data-stage="QF"]')) {
 
-                    console.log('Update Semi Final based on changes to the changes to the scores in the Quarter Finals');
+                    // console.log('Update Semi Final based on changes to the changes to the scores in the Quarter Finals');
 
                     let QF = document.querySelector('#QF');
                     
@@ -523,7 +616,7 @@
 
                 if (event.target.matches('[data-table="TableA"]')) {
 
-                    console.log('Update Table A based on changes to the changes to the scores in Group A');
+                    // console.log('Update Table A based on changes to the changes to the scores in Group A');
                     
                     let SectA = document.querySelector('#SectionA');
                     
@@ -561,7 +654,7 @@
 
                 } else if (event.target.matches('[data-table="TableC"]')) {
 
-                    console.log('Update Table C based on changes to the changes to the scores in Group C');
+                    // console.log('Update Table C based on changes to the changes to the scores in Group C');
 
                     SectC = document.querySelector('#SectionC');
                     
@@ -580,7 +673,7 @@
 
                 } else if (event.target.matches('[data-table="TableD"]')) {
                     
-                    console.log('Update Table D based on changes to the changes to the scores in Group D');
+                    // console.log('Update Table D based on changes to the changes to the scores in Group D');
 
                     SectD = document.querySelector('#SectionD');
                     
