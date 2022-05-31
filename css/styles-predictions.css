@@ -177,6 +177,70 @@ nav {
             background-color: skyblue;
         }
 
+#SAVE-PREDICTIONS {
+    
+    grid-area: SAVE-PREDICTIONS;
+    
+    background-color: white;
+    width: 50%;
+    padding: 10px;
+    margin: 0 auto;            
+    
+}
+        #chkbox-error {
+            display: none;
+            font-style: italic;
+            text-align: center;
+            padding: 10px;
+            color: red;
+        }
+
+        input[type="checkbox"] {
+            width: 5%;
+        }
+
+        #save-predictions {
+            padding: 10px;
+        }
+
+        #confirm-save {
+
+            grid-area: confirm-save;            
+            padding: 10px;
+            text-align: center;
+        }    
+
+        #confirm-btn {
+
+            display: flex;
+            justify-content: center;
+
+        }    
+
+        #save-btn {
+
+            grid-area: confirm-btn;            
+
+            border: 0;
+            line-height: 2.5;
+            padding: 0 20px;
+            font-size: 1rem;
+            text-align: center;
+            color: #fff;
+            text-shadow: 1px 1px 1px #000;
+            border-radius: 10px;
+            background-color: #3498db;
+        }
+
+        #save-btn:hover {
+            background-color: cadetblue;
+        }
+
+        #save-btn:active {
+            border-color: black;           
+        }
+            
+
 footer {
     grid-area: footer;
 
@@ -386,7 +450,7 @@ input {
     #KNOCKOUT-STAGE {
         width: 95%;
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: auto;
         grid-gap: 5px;
         margin: 0 auto;
@@ -402,3 +466,61 @@ input {
         flex-direction: row;
         justify-content: space-between;
     }
+
+    #SAVE-PREDICTIONS {
+
+        display: block;
+    }
+
+        #chkbox-error {
+            display: none;
+            font-style: italic;
+            text-align: center;
+            padding: 10px;
+            color: red;
+        }
+
+        input[type="checkbox"] {
+                width: 5%;
+            }
+
+        #save-predictions {
+                padding: 10px;
+            }
+
+            #confirm-save {
+
+                grid-area: confirm-save;            
+                padding: 10px;
+                text-align: center;
+            }    
+            #confirm-btn {
+
+                display: flex;
+                justify-content: center;
+                
+            }    
+            #save-btn {
+
+                grid-area: confirm-btn;            
+
+                border: 0;
+                line-height: 2.5;
+                padding: 0 20px;
+                font-size: 1rem;
+                text-align: center;
+                color: #fff;
+                text-shadow: 1px 1px 1px #000;
+                border-radius: 10px;
+                background-color: #3498db;
+            }
+
+            #save-btn:hover {
+                background-color: cadetblue;
+            }
+
+            #save-btn:active {
+                border-color: black;           
+            }
+    }
+    

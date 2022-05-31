@@ -37,7 +37,7 @@
             <div id="tabs" class="tab">
               <button id="group-stages" name="GROUPS" class="tablinks active">Group Stage</button>
               <button id="knockout-stage" name="KNOCKOUT-STAGE" class="tablinks ">Knockout Stage</button>
-              <button id="save-predictions" name="SAVE_PREDICTIONS" class="tablinks ">Save Predictions</button>
+              <button id="save-predictions" name="SAVE-PREDICTIONS" class="tablinks ">Save Predictions</button>
             </div>
 
             <section id="tournment">
@@ -340,8 +340,23 @@
 
                 </div> <!-- end of KNOCKOUT STAGES -->
 
+                <div id="SAVE-PREDICTIONS" class="tabcontent">
+                    <section id='save-predictions'>
+                        <div id='confirm-save'>
+                            <input type='checkbox' id='confirm-chkbox' name='confirm-chkbox'>
+                            <label for="confirm-chkbox">Check to confirm that you want to save your predictions</label>
+                        </div>
+                        <div id='chkbox-error' style="display:none;">
+                            Click the Checkbox to confirm that you want to save your predictions
+                        </div>
+                        <div id='confirm-btn'>
+                            <button type='button' id='save-btn' class='predictions-btn'>Save Predictions</button>
+                        </div>
+                    </section>
+                </div>  <!-- end of SAVE PREDICTIONS -->
+                
             </section> <!-- end of Tournment -->
-                        
+
             <footer id="social-media">
                 <ul>
                     <li><a href='#' target='_blank'><i class='fab fa-facebook-square'></i></a></li>
@@ -368,22 +383,35 @@
             // ==================================================================
             document.addEventListener('click', function (event) {
 
+                if (event.target.matches('#save-btn')) {
+
+                    document.getElementById("chkbox-error").style.display = "block";
+                    return;                
+                }
+                
+                if (event.target.matches('#confirm-chkbox')) {
+
+                    document.getElementById("chkbox-error").style.display = "none";
+                    return;                
+                }
+
                 // event listeners for the tab links
                 if (event.target.matches('.tablinks')) {
-                    displayStage(event, event.target.name);
 
+                    displayStage(event, event.target.name);
                     event.target.className += " active";
+
                 }
 
                 // event listeners for the tab links
                 if (event.target.matches('#knockout-stage')) {
 
-                    // Use the next/previous sibling methods to get the hidden team id and the team rank from the table
-
                     // winner and runnerup teams in each of the group tables
                     let winnergroupA   = document.getElementById("TableA-pos1").innerHTML;
                     let winnergroupAid = document.getElementById("TableA-pos1").nextElementSibling.innerHTML;
                     let winnergroupArk = document.getElementById("TableA-pos1").nextElementSibling.nextElementSibling.innerHTML;
+
+                    // console.log(winnergroupAid, " - ", winnergroupArk);
 
                     let runnerupgroupA   = document.getElementById("TableA-pos2").innerHTML;
                     let runnerupgroupAid = document.getElementById("TableA-pos2").nextElementSibling.innerHTML;
@@ -481,8 +509,11 @@
                 if (tabname == "GROUPS") {
                     document.getElementById(tabname).style.display = "grid";
                 }
-                else {
+                else if (tabname == "KNOCKOUT-STAGE") {
                     document.getElementById(tabname).style.display = "flex";
+                } 
+                else {
+                    document.getElementById(tabname).style.display = "block";
                 }
             }
 
@@ -546,7 +577,7 @@
             // add CHANGE event listener for the INPUT fields
             // ==================================================================
             document.addEventListener('change', function (event) {
-                
+
                 if (event.target.matches('[data-stage="QF"]')) {
 
                     // console.log('Update Semi Final based on changes to the changes to the scores in the Quarter Finals');
