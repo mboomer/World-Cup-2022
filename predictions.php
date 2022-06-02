@@ -126,7 +126,7 @@
                                             $grpdesc  = $row["groupdesc"];
 
                                                 echo "  <tr>";
-                                                echo "      <td class='pos'>" . $fixno . "</td>";
+                                                echo "      <td class='fixno'>" . $fixno . "</td>";
                                                 echo "      <td class='homeid hidden'>" . $homeid . "</td>";        // hidden cell for ID of home team
                                                 echo "      <td class='home'>" . $hometeam . "</td>";
                                                 echo "      <td class='h-rank'>" . $homerank . "</td>";
@@ -188,11 +188,12 @@
                                             $rowno = $rowno + 1;    // increment row counter
                                         }
                                         echo "          </tbody>";
-                                        echo "      </table>";
+                                        echo "      </table> <!-- end of league table DIV -->"; 
+
                                     } // end of nested else for Table        
+                                    
                                     //     // END SQL QRY
 
-                                        // echo "  </div> <!-- end of group table div -->";
                                     echo "</section> <!-- end of section div -->";                         
 
                                 } // end of else
@@ -221,7 +222,7 @@
                                 </thead>
                               <tbody>
                                 <tr>
-                                    <td class='pos'>25</td> 
+                                    <td class='fixno'>25</td> 
                                     <td id='winnerA' class='home'>Winner A</td> 
                                     <td class='hidden q-homeid'></td> 
                                     <td class='h-rank'></td> 
@@ -232,7 +233,7 @@
                                     <td id='runnerupB' class='away'>Runner Up B</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>26</td> 
+                                    <td class='fixno'>26</td> 
                                     <td id='winnerB' class='home'>Winner B</td> 
                                     <td class='hidden q-homeid'></td> 
                                     <td class='h-rank'></td> 
@@ -243,7 +244,7 @@
                                     <td id='runnerupA' class='away'>Runner Up A</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>27</td>
+                                    <td class='fixno'>27</td>
                                     <td id='winnerC' class='home'>Winner C</td> 
                                     <td class='hidden q-homeid'></td> 
                                     <td class="h-rank"></td>
@@ -254,7 +255,7 @@
                                     <td id='runnerupD' class='away'>Runner Up D</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>28</td> 
+                                    <td class='fixno'>28</td> 
                                     <td id='winnerD' class='home'>Winner D</td> 
                                     <td class='hidden q-homeid'></td> 
                                     <td class='h-rank'></td> 
@@ -282,7 +283,7 @@
                                 </thead>
                               <tbody>
                                 <tr>
-                                    <td class='pos'>29</td> 
+                                    <td class='fixno'>29</td> 
                                     <td id='winnerQF1' class='home'>Winner QF 1</td> 
                                     <td class='hidden s-homeid'></td> 
                                     <td class='h-rank'></td> 
@@ -293,7 +294,7 @@
                                     <td id='winnerQF2' class='away'>Winner QF 2</td>
                                 </tr>
                                 <tr>
-                                    <td class='pos'>30</td> 
+                                    <td class='fixno'>30</td> 
                                     <td id='winnerQF3' class='home'>Winner QF 3</td> 
                                     <td class='hidden s-homeid'></td> 
                                     <td class='h-rank'></td> 
@@ -322,14 +323,14 @@
                                 </thead>
                               <tbody>
                                 <tr>
-                                    <td class='pos'>31</td> 
+                                    <td class='fixno'>31</td> 
                                     <td id='winnerSF1' class='home'>Winner SF 1</td> 
                                     <td class='hidden f-homeid'></td> 
                                     <td class='h-rank'></td> 
                                     <td><input class='homescore' data-stage='FL' type='number' min=0 placeholder=0 value=0></td> 
                                     <td><input class='awayscore' data-stage='FL' type='number' min=0 placeholder=0 value=0></td>
                                     <td class='a-rank'></td> 
-                                    <td class='hidden f-homeid'></td> 
+                                    <td class='hidden f-awayid'></td> 
                                     <td id='winnerSF2' class='away'>Winner SF 2</td>
                                 </tr>
                               </tbody>
@@ -342,17 +343,22 @@
 
                 <div id="SAVE-PREDICTIONS" class="tabcontent">
                     <section id='save-predictions'>
+
                         <div id='confirm-save'>
                             <input type='checkbox' id='confirm-chkbox' name='confirm-chkbox'>
                             <label for="confirm-chkbox">Check to confirm that you want to save your predictions</label>
                         </div>
+
                         <div id='chkbox-error' style="display:none;">
                             Click the Checkbox to confirm that you want to save your predictions
                         </div>
+
                         <div id='confirm-btn'>
                             <button type='button' id='save-btn' class='predictions-btn'>Save Predictions</button>
                         </div>
-                    </section>
+
+                    </section> <!-- end of SAVE PREDICTIONS section -->
+
                 </div>  <!-- end of SAVE PREDICTIONS -->
                 
             </section> <!-- end of Tournment -->
@@ -373,10 +379,9 @@
         <script type="text/javascript" >
 
             // Change the display of the content tab from none to flex to display content
-            // Hide the Knockout stage 
+            // Hide the Knockout stage and the Save Predictions stage
             document.getElementById("KNOCKOUT-STAGE").style.display = "none";
-
-            scores = document.querySelectorAll('.score');
+            document.getElementById("SAVE-PREDICTIONS").style.display = "none";
 
             // ==================================================================
             // add CLICK event listener for the DOM
@@ -385,12 +390,58 @@
 
                 if (event.target.matches('#save-btn')) {
 
-                    document.getElementById("chkbox-error").style.display = "block";
-                    return;                
-                }
+                    if (!document.getElementById("confirm-chkbox").checked) {
+                        document.getElementById("chkbox-error").style.display = "block";
+                    } else {
+                        console.log("Save the predictions");
+                        
+                        fixtureids  = document.querySelectorAll('.fixno');            
+                        hometeamids = document.querySelectorAll('.homeid, .q-homeid, .s-homeid, .f-homeid');            
+                        homescores  = document.querySelectorAll('.homescore') ;
+                        awayscores  = document.querySelectorAll('.awayscore');
+                        awayteamids = document.querySelectorAll('.awayid, .q-awayid, .s-awayid, .f-awayid');
+
+                        // initialise the array to hold the predictions 
+                        // UserID FixtureID HomeScore AwayScore HomeTeam AwayTeam ResultID Points Bonus
+                        let predictions = [];
+                        // initialise the object to hold each prediction
+                        let prediction = {};
+                
+                        // Create the array of objects that will be used to create the league table
+                        for (let f = 0; f < fixtureids.length; f++) {
+                            
+                            prediction = {  UserID     : 1, 
+                                            FixtureID  : fixtureids[f].textContent, 
+                                            HomeScore  : homescores[f].value, 
+                                            AwayScore  : awayscores[f].value, 
+                                            HomeTeamID : hometeamids[f].textContent, 
+                                            AwayTeamID : awayteamids[f].textContent, 
+                                            ResultID   : 0, 
+                                            Points     : 0, 
+                                            Bonus      : 0                                        
+                                        };
+
+                            // home win ID - 1, away win ID - 2, draw ID - 3 
+                            if (homescores[f].value > awayscores[f].value) {
+                                prediction.ResultID = 1;                            
+                            } else if (homescores[f].value < awayscores[f].value) {
+                                prediction.ResultID = 2;
+                            } else if (homescores[f].value == awayscores[f].value) {
+                                prediction.ResultID = 3;
+                            };
+
+                            // add the prediction object to the Predictions Array                                                                
+                            predictions.push(prediction);
+
+                            // now process the predictions array and save result to predictions table
+
+                        };
+                    };
+                    return;   // end of click event for SAVE-PREDICTIONS button                 
+                };
                 
                 if (event.target.matches('#confirm-chkbox')) {
-
+                    // hide any error messgae thats displayed
                     document.getElementById("chkbox-error").style.display = "none";
                     return;                
                 }
@@ -406,12 +457,10 @@
                 // event listeners for the tab links
                 if (event.target.matches('#knockout-stage')) {
 
-                    // winner and runnerup teams in each of the group tables
+                    // QUARTER FINALS - WINNERS AND RUNNERS UP FROM EACH GROUP
                     let winnergroupA   = document.getElementById("TableA-pos1").innerHTML;
                     let winnergroupAid = document.getElementById("TableA-pos1").nextElementSibling.innerHTML;
                     let winnergroupArk = document.getElementById("TableA-pos1").nextElementSibling.nextElementSibling.innerHTML;
-
-                    // console.log(winnergroupAid, " - ", winnergroupArk);
 
                     let runnerupgroupA   = document.getElementById("TableA-pos2").innerHTML;
                     let runnerupgroupAid = document.getElementById("TableA-pos2").nextElementSibling.innerHTML;
@@ -477,8 +526,6 @@
                     document.getElementById("runnerupC").previousElementSibling.innerHTML = runnerupgroupCid;
                     document.getElementById("runnerupC").previousElementSibling.previousElementSibling.innerHTML = runnerupgroupCrk;
                 
-                    // console.log("Knockout Stage clicked");
-
                 }
 
             }, false);   // end of CLICK event listener
@@ -578,6 +625,12 @@
             // ==================================================================
             document.addEventListener('change', function (event) {
 
+                if (event.target.matches('#confirm-chkbox')) {
+                    // dont complete this change event
+                    // console.log("Checkbox clicked");
+                    return;                
+                }
+
                 if (event.target.matches('[data-stage="QF"]')) {
 
                     // console.log('Update Semi Final based on changes to the changes to the scores in the Quarter Finals');
@@ -585,33 +638,53 @@
                     let QF = document.querySelector('#QF');
                     
                     // get the teams and the scores for the Quarter Finals
+                    homeIDs    = QF.querySelectorAll('.q-homeid');            
+                    homeRanks  = QF.querySelectorAll('.h-rank');            
                     homeTeams  = QF.querySelectorAll('.home');            
                     homeScores = QF.querySelectorAll('.homescore');
                     awayScores = QF.querySelectorAll('.awayscore');
                     awayTeams  = QF.querySelectorAll('.away');
+                    awayIDs    = QF.querySelectorAll('.q-awayid');            
+                    awayRanks  = QF.querySelectorAll('.a-rank');            
 
                     if (homeScores[0].value > awayScores[0].value) {
                         document.getElementById('winnerQF1').innerHTML = homeTeams[0].innerHTML;
+                        document.getElementById('winnerQF1').nextElementSibling.innerHTML = homeIDs[0].innerHTML;
+                        document.getElementById('winnerQF1').nextElementSibling.nextElementSibling.innerHTML = homeRanks[0].innerHTML;
                     } else if (homeScores[0].value < awayScores[0].value) {
                         document.getElementById('winnerQF1').innerHTML = awayTeams[0].innerHTML;
+                        document.getElementById('winnerQF1').nextElementSibling.innerHTML = awayIDs[0].innerHTML;
+                        document.getElementById('winnerQF1').nextElementSibling.nextElementSibling.innerHTML = awayRanks[0].innerHTML;
                     };
                         
                     if (homeScores[1].value > awayScores[1].value) {
                         document.getElementById('winnerQF2').innerHTML = homeTeams[1].innerHTML;
+                        document.getElementById('winnerQF2').previousElementSibling.innerHTML = homeIDs[1].innerHTML;
+                        document.getElementById('winnerQF2').previousElementSibling.previousElementSibling.innerHTML = homeRanks[1].innerHTML;
                     } else if (homeScores[1].value < awayScores[1].value) {
                         document.getElementById('winnerQF2').innerHTML = awayTeams[1].innerHTML;
+                        document.getElementById('winnerQF2').previousElementSibling.innerHTML = awayIDs[1].innerHTML;
+                        document.getElementById('winnerQF2').previousElementSibling.previousElementSibling.innerHTML = awayRanks[1].innerHTML;
                     };
  
                     if (homeScores[2].value > awayScores[2].value) {
                         document.getElementById('winnerQF3').innerHTML = homeTeams[2].innerHTML;
+                        document.getElementById('winnerQF3').nextElementSibling.innerText = homeIDs[2].innerHTML;
+                        document.getElementById('winnerQF3').nextElementSibling.nextElementSibling.innerText = homeRanks[2].innerHTML;
                     } else if (homeScores[2].value < awayScores[2].value) {
                         document.getElementById('winnerQF3').innerHTML = awayTeams[2].innerHTML;
+                        document.getElementById('winnerQF3').nextElementSibling.innerText = awayIDs[2].innerHTML;
+                        document.getElementById('winnerQF3').nextElementSibling.nextElementSibling.innerText = awayRanks[2].innerHTML;
                     };
  
                     if (homeScores[3].value > awayScores[3].value) {
                         document.getElementById('winnerQF4').innerHTML = homeTeams[3].innerHTML;
+                        document.getElementById('winnerQF4').previousElementSibling.innerText = homeIDs[3].innerHTML;
+                        document.getElementById('winnerQF4').previousElementSibling.previousElementSibling.innerText = homeRanks[3].innerHTML;
                     } else if (homeScores[3].value < awayScores[3].value) {
                         document.getElementById('winnerQF4').innerHTML = awayTeams[3].innerHTML;
+                        document.getElementById('winnerQF4').previousElementSibling.innerText = awayIDs[3].innerHTML;
+                        document.getElementById('winnerQF4').previousElementSibling.previousElementSibling.innerText = awayRanks[3].innerHTML;
                     };
                     
                     return;
@@ -624,36 +697,62 @@
                     let SF = document.querySelector('#SF');
                     
                     // get the teams and the scores for the Quarter Finals
+                    homeIDs    = SF.querySelectorAll('.s-homeid');            
+                    homeRanks  = SF.querySelectorAll('.h-rank');            
                     homeTeams  = SF.querySelectorAll('.home');            
                     homeScores = SF.querySelectorAll('.homescore');
                     awayScores = SF.querySelectorAll('.awayscore');
                     awayTeams  = SF.querySelectorAll('.away');
+                    awayIDs    = SF.querySelectorAll('.s-awayid');            
+                    awayRanks  = SF.querySelectorAll('.a-rank');            
 
                     if (homeScores[0].value > awayScores[0].value) {
                         document.getElementById('winnerSF1').innerHTML = homeTeams[0].innerHTML;
+                        document.getElementById('winnerSF1').nextElementSibling.innerHTML = homeIDs[0].innerHTML;
+                        document.getElementById('winnerSF1').nextElementSibling.nextElementSibling.innerHTML = homeRanks[0].innerHTML;
                     } else if (homeScores[0].value < awayScores[0].value) {
                         document.getElementById('winnerSF1').innerHTML = awayTeams[0].innerHTML;
+                        document.getElementById('winnerSF1').nextElementSibling.innerHTML = awayIDs[0].innerHTML;
+                        document.getElementById('winnerSF1').nextElementSibling.nextElementSibling.innerHTML = awayRanks[0].innerHTML;
                     };
                         
                     if (homeScores[1].value > awayScores[1].value) {
                         document.getElementById('winnerSF2').innerHTML = homeTeams[1].innerHTML;
+                        document.getElementById('winnerSF2').previousElementSibling.innerHTML = homeIDs[1].innerHTML;
+                        document.getElementById('winnerSF2').previousElementSibling.previousElementSibling.innerHTML = homeRanks[1].innerHTML;
                     } else if (homeScores[1].value < awayScores[1].value) {
                         document.getElementById('winnerSF2').innerHTML = awayTeams[1].innerHTML;
+                        document.getElementById('winnerSF2').previousElementSibling.innerHTML = awayIDs[1].innerHTML;
+                        document.getElementById('winnerSF2').previousElementSibling.previousElementSibling.innerHTML = awayRanks[1].innerHTML;
                     };
                    
                     return;
 
                 };
 
+                if (event.target.matches('[data-stage="FL"]')) {
+
+                    // console.log('Update Final based on changes to the changes to the scores in the Semi Finals');
+
+                    let SF = document.querySelector('#FL');
+                    
+                    // get the teams and the scores for the Quarter Finals
+                    homeTeams  = FL.querySelectorAll('.home');            
+                    homeScores = FL.querySelectorAll('.homescore');
+                    awayScores = FL.querySelectorAll('.awayscore');
+                    awayTeams  = FL.querySelectorAll('.away');
+
+                    return;
+
+                };
+
                 if (event.target.matches('[data-table="TableA"]')) {
 
-                    // console.log('Update Table A based on changes to the changes to the scores in Group A');
-                    
                     let SectA = document.querySelector('#SectionA');
                     
-                    // console.log(SectA);
-                    
-                    // get the teams and the scores for SectionA
+                    // get the teams, hidden id , hidden rank and the scores for SectionA
+                    teamIds    = SectA.querySelectorAll('.homeid');
+                    teamRks    = SectA.querySelectorAll('.h-rank');
                     homeTeams  = SectA.querySelectorAll('.home');            
                     homeScores = SectA.querySelectorAll('.homescore');
                     awayScores = SectA.querySelectorAll('.awayscore');
@@ -666,13 +765,11 @@
                     
                 } else if (event.target.matches('[data-table="TableB"]')) {
 
-                    console.log('Update Table B based on changes to the changes to the scores in Group B');
-
                     let SectB = document.querySelector('#SectionB');
                     
-                    // console.log(SectB);
-                    
                     // get the teams and the scores for SectionB
+                    teamIds    = SectB.querySelectorAll('.homeid');
+                    teamRks    = SectB.querySelectorAll('.h-rank');
                     homeTeams  = SectB.querySelectorAll('.home');            
                     homeScores = SectB.querySelectorAll('.homescore');
                     awayScores = SectB.querySelectorAll('.awayscore');
@@ -685,13 +782,11 @@
 
                 } else if (event.target.matches('[data-table="TableC"]')) {
 
-                    // console.log('Update Table C based on changes to the changes to the scores in Group C');
-
                     SectC = document.querySelector('#SectionC');
                     
-                    // console.log(SectC);
-                    
                     // get the teams and the scores for SectionC
+                    teamIds    = SectC.querySelectorAll('.homeid');
+                    teamRks    = SectC.querySelectorAll('.h-rank');
                     homeTeams  = SectC.querySelectorAll('.home');            
                     homeScores = SectC.querySelectorAll('.homescore');
                     awayScores = SectC.querySelectorAll('.awayscore');
@@ -704,33 +799,30 @@
 
                 } else if (event.target.matches('[data-table="TableD"]')) {
                     
-                    // console.log('Update Table D based on changes to the changes to the scores in Group D');
-
                     SectD = document.querySelector('#SectionD');
                     
-                    // console.log(SectD);
-                    
                     // get the teams and the scores for SectionD
+                    teamIds    = SectD.querySelectorAll('.homeid');
+                    teamRks    = SectD.querySelectorAll('.h-rank');
                     homeTeams  = SectD.querySelectorAll('.home');            
                     homeScores = SectD.querySelectorAll('.homescore');
                     awayScores = SectD.querySelectorAll('.awayscore');
                     awayTeams  = SectD.querySelectorAll('.away');
 
                     // get the ID of the table to update
-                    currentTable      = document.getElementById("TableD");
+                    currentTable     = document.getElementById("TableD");
                     currentTableID   = currentTable.id;
                     currentTableName = "Table D";
 
                 };  
                 
-                // get the teams and the scores
-                //homeTeams  = document.querySelectorAll('.home');            
-                //homeScores = document.querySelectorAll('.homescore');
-                //awayScores = document.querySelectorAll('.awayscore');
-                //awayTeams  = document.querySelectorAll('.away');
+                // const Teams = [
+                //    {Team : "England",          ID : 1, Rank: 1, Played : 1, Won : 1, Drawn: 0, Lost : 0, For : 2, Against : 1, GoalDiff : 1,  Points : 3},
+                //    {Team : "Norway",           ID : 1, Rank: 1, Played : 1, Won : 0, Drawn: 0, Lost : 0, For : 0, Against : 0, GoalDiff : 0,  Points : 0},
+                //    {Team : "Austria",          ID : 1, Rank: 1, Played : 1, Won : 0, Drawn: 0, Lost : 1, For : 1, Against : 2, GoalDiff : -1, Points : 0},
+                //    {Team : "Northern Ireland", ID : 1, Rank: 1, Played : 1, Won : 0, Drawn: 0, Lost : 0, For : 0, Against : 0, GoalDiff : 0,  Points : 0}
+                // ]
                 
-                // console.log(homeScores[1].value);
-
                 // initialise the Teams Array and team object
                 let teams = [];
                 let team = {};
@@ -738,31 +830,23 @@
                 // Create the array of objects that will be used to create the league table
                 for (let f = 0; f < homeTeams.length; f++) {
                     
-                    // check if home exists in array - if not add object for the team to the array
+                    // check if home team exists in array - if not add object for the team to the array
                     let found = teams.find(t => t.Team == homeTeams[f].textContent);
                     
                     if (found === undefined ) {                        
-                        team = {Team : homeTeams[f].textContent, Played : 0, Won : 0, Drawn: 0, Lost : 0, For : 0, Against : 0, GoalDiff : 0, Points : 0};
+                        team = {Team: homeTeams[f].textContent, ID: teamIds[f].textContent, Rank: teamRks[f].textContent, Played: 0, Won: 0, Drawn: 0, Lost: 0, For: 0, Against: 0, GoalDiff: 0, Points: 0};
                         teams.push(team);                        
                     };
                 };
 
-                // const Teams = [
-                //    {Team : "England",          Played : 1, Won : 1, Drawn: 0, Lost : 0, For : 2, Against : 1, GoalDiff : 1,  Points : 3},
-                //    {Team : "Norway",           Played : 1, Won : 0, Drawn: 0, Lost : 0, For : 0, Against : 0, GoalDiff : 0,  Points : 0},
-                //    {Team : "Austria",          Played : 1, Won : 0, Drawn: 0, Lost : 1, For : 1, Against : 2, GoalDiff : -1, Points : 0},
-                //    {Team : "Northern Ireland", Played : 1, Won : 0, Drawn: 0, Lost : 0, For : 0, Against : 0, GoalDiff : 0,  Points : 0}
-                // ]
-                
-                // Update the object properties for each result
+                // England	 2 1  Austria
+                // Norway	 1 2  N Ireland
+                // Austria	 2 1  N Ireland
+                // England	 1 2  Norway
+                // N Ireland 2 1  England
+                // Austria	 1 2  Norway
 
-                //England	  2 1  Austria
-                //Norway	  1 2  N Ireland
-                //Austria	  2 1  N Ireland
-                //England	  1 2  Norway
-                //N Ireland   2 1  England
-                //Austria	  1 2  Norway
-
+                // Update the properties for each team object for each result
                 for (let f = 0; f < homeTeams.length; f++) {
 
                     let home = teams.findIndex(t => t.Team == homeTeams[f].textContent);                    
@@ -782,9 +866,7 @@
                         teams[home].Drawn++;
                     };
 
-                    // console.log(f + " Home Score : " + homeScores[f].value + " Away Score : " + awayScores[f].value);
-                    
-                    // have to convert to Number - for some reason .For and .Against are being treated as strings
+                    // have to convert to Number - only the INPUT fields have a value
                     teams[home].For      = Number(teams[home].For) + Number(homeScores[f].value);
                     teams[home].Against  = Number(teams[home].Against) + Number(awayScores[f].value);
                     teams[home].GoalDiff = teams[home].For - teams[home].Against;
@@ -800,9 +882,6 @@
                 // sort the array of Team objects by points, goal diff, goals for
                 teams.sort(leaguePosition);
                 
-                // outpout the sorted array
-                console.log(teams);
-
                 // Create the new table based on the sorted array
                 let updatedTable = `<table>          
                     <thead class="blueheader">
@@ -810,15 +889,23 @@
                             <th colspan="10"> ${currentTableName} </th>
                         </tr>
                         <tr>
-                            <th>Pos</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>Pts</th>
+                            <th>Pos</th><th>Team</th><th class='hidden'></th><th class='hidden'></th><th>P</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>Pts</th>";
                         </tr>
                     </thead>
                     <tbody>`;
 
                 teams.forEach(function (team, index) {
 
+                    // echo "              <td class='pos'>" . $rowno . "</td><td id=" . $tablename . "-pos" . $rowno . " class='team'>" . $row['Team'] . "</td>";
+                    // echo "              <td class='hidden team-id'>" . $row['ID'] . "</td> <td class='hidden team-rk'>" . $row['Ranking'] . "</td>";
+                    // echo "              <td class='cols'>0</td> <td class='cols'>0</td><td class='cols'>0</td><td class='cols'>0</td><td class='cols'>0</td>";
+                    // echo "              <td class='cols'>0</td> <td class='cols'>0</td><td class='cols'>0</td>";
+
+
                     updatedTable += `<tr>
-                            <td class='pos'>  ${index+1}  </td><td id='${currentTableID}-pos${index+1}' class='team'> ${team.Team} </td><td class='cols'> ${team.Played} </td>
+                            <td class='pos'>  ${index+1}  </td><td id='${currentTableID}-pos${index+1}' class='team'> ${team.Team} </td>
+                            <td class='hidden team-id'> ${team.ID} </td> <td class='hidden team-rk'> ${team.Rank} </td>
+                            <td class='cols'> ${team.Played} </td>
                             <td class='cols'> ${team.Won} </td><td class='cols'> ${team.Drawn} </td><td class='cols'> ${team.Lost} </td>
                             <td class='cols'> ${team.For} </td><td class='cols'> ${team.Against} </td><td class='cols'> ${team.GoalDiff} </td>
                             <td class='cols'> ${team.Points} </td>
