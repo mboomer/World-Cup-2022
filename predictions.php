@@ -393,8 +393,8 @@
                     if (!document.getElementById("confirm-chkbox").checked) {
                         document.getElementById("chkbox-error").style.display = "block";
                     } else {
-                        console.log("Save the predictions");
                         
+                        // get the the results from the group tables 
                         fixtureids  = document.querySelectorAll('.fixno');            
                         hometeamids = document.querySelectorAll('.homeid, .q-homeid, .s-homeid, .f-homeid');            
                         homescores  = document.querySelectorAll('.homescore') ;
@@ -433,12 +433,18 @@
                             // add the prediction object to the Predictions Array                                                                
                             predictions.push(prediction);
 
-                            // now process the predictions array and save result to predictions table
+                        }; // end of FOR loop
 
-                        };
-                    };
-                    return;   // end of click event for SAVE-PREDICTIONS button                 
-                };
+                        console.log(predictions);
+                    
+                        // now process the predictions array and save result to predictions table
+                        console.log(JSON.stringify(predictions));
+
+                    }; 
+
+                    return;
+
+                }; // end of click event for SAVE-PREDICTIONS button 
                 
                 if (event.target.matches('#confirm-chkbox')) {
                     // hide any error messgae thats displayed
