@@ -342,6 +342,28 @@
                 </div> <!-- end of KNOCKOUT STAGES -->
 
                 <div id="SAVE-PREDICTIONS" class="tabcontent">
+
+<!--
+
+ https://phpenthusiast.com/blog/javascript-fetch-api-tutorial#:~:text=Posting%20data%20with%20the%20Fetch%20To%20post%20the,%28%28data%29%20%3D%3E%20console.log%20%28data%29%29.catch%20%28%28error%29%20%3D%3E%20console.log%20%28error%29%29
+
+fetch('https://example.com/profile', {
+  method: 'POST', // or 'PUT'
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(data => {
+  console.log('Success:', data);
+})
+.catch((error) => {
+  console.error('Error:', error);
+}); 
+
+-->
+
                     <section id='save-predictions'>
 
                         <div id='confirm-save'>
@@ -355,6 +377,10 @@
 
                         <div id='confirm-btn'>
                             <button type='button' id='save-btn' class='predictions-btn'>Save Predictions</button>
+                        </div>
+
+                        <div id='confirm-predictions'>
+                            <p>Nothing saved yet</p>
                         </div>
 
                     </section> <!-- end of SAVE PREDICTIONS section -->
@@ -435,12 +461,44 @@
 
                         }; // end of FOR loop
 
-                        console.log(predictions);
+                        // console.log(predictions);
                     
                         // now process the predictions array and save result to predictions table
-                        console.log(JSON.stringify(predictions));
+                        // console.log(JSON.stringify(predictions));
 
-                    }; 
+                        fetch('https://www.9habu.com/wc2022/php/save-predictions.php', {
+                                
+                                method: 'POST',
+                                mode: "same-origin",
+                                credentials: "same-origin",
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json'
+                                    },
+                                body: JSON.stringify(predictions),
+                            }) 
+                            .then(function (response) {
+
+                                // If the response is successful, get the JSON
+                                if (response.ok) {
+                                    return response.json();
+                                };
+
+                                // Otherwise, throw an error
+                                return response.text().then(function (msg) {
+                                    throw msg;
+                                });
+
+                            }).then(function (data) {
+                                // This is the JSON from our response
+                                console.log(data);
+                                document.getElementById("confirm-predictions").innerHTML = data[0].UserID;
+                            }).catch(function (error) {
+                                // There was an error
+                                console.warn(error);
+                            });
+
+                        };
 
                     return;
 
