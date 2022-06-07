@@ -676,7 +676,7 @@
                     // dont complete this change event
                     // console.log("Checkbox clicked");
                     return;                
-                }
+                };
 
                 if (event.target.matches('[data-stage="QF"]')) {
 
@@ -809,7 +809,7 @@
                     currentTable     = document.getElementById("TableA");
                     currentTableID   = currentTable.id;
                     currentTableName = "Table A";
-                    
+
                 } else if (event.target.matches('[data-table="TableB"]')) {
 
                     let SectB = document.querySelector('#SectionB');
@@ -913,7 +913,9 @@
                         teams[home].Drawn++;
                     };
 
-                    // have to convert to Number - only the INPUT fields have a value
+                    /**
+                        have to convert to Number - only the INPUT fields have a value
+                    */
                     teams[home].For      = Number(teams[home].For) + Number(homeScores[f].value);
                     teams[home].Against  = Number(teams[home].Against) + Number(awayScores[f].value);
                     teams[home].GoalDiff = teams[home].For - teams[home].Against;
@@ -929,25 +931,19 @@
                 // sort the array of Team objects by points, goal diff, goals for
                 teams.sort(leaguePosition);
                 
-                // Create the new table based on the sorted array
+               // Create the new table based on the sorted array
                 let updatedTable = `<table>          
                     <thead class="blueheader">
                         <tr>
                             <th colspan="10"> ${currentTableName} </th>
                         </tr>
                         <tr>
-                            <th>Pos</th><th>Team</th><th class='hidden'></th><th class='hidden'></th><th>P</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>Pts</th>";
+                            <th>Pos</th><th>Team</th><th class='hidden'></th><th class='hidden'></th><th>P</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>Pts</th>
                         </tr>
                     </thead>
                     <tbody>`;
 
                 teams.forEach(function (team, index) {
-
-                    // echo "              <td class='pos'>" . $rowno . "</td><td id=" . $tablename . "-pos" . $rowno . " class='team'>" . $row['Team'] . "</td>";
-                    // echo "              <td class='hidden team-id'>" . $row['ID'] . "</td> <td class='hidden team-rk'>" . $row['Ranking'] . "</td>";
-                    // echo "              <td class='cols'>0</td> <td class='cols'>0</td><td class='cols'>0</td><td class='cols'>0</td><td class='cols'>0</td>";
-                    // echo "              <td class='cols'>0</td> <td class='cols'>0</td><td class='cols'>0</td>";
-
 
                     updatedTable += `<tr>
                             <td class='pos'>  ${index+1}  </td><td id='${currentTableID}-pos${index+1}' class='team'> ${team.Team} </td>
@@ -962,7 +958,9 @@
 
                 updatedTable += `</tbody></table>`;
                 
-                // Swap the contents for the current Table for the updated table
+                /** 
+                 Swap the contents of the current Table for the updated table
+                */
                 currentTable.innerHTML = updatedTable;
 
             }, false);   // end of CHANGE event listener

@@ -16,8 +16,7 @@
     $json_array = json_decode($predictions, true);
 
     try {
-    
-        // Try and establish database connection.
+        // Try and establish the database connection.
         try {
             $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
         }
@@ -45,17 +44,6 @@
         $query->bindParam(':Points',    $points,        PDO::PARAM_INT);
         $query->bindParam(':Bonus',     $bonus,         PDO::PARAM_INT);
 
-        // assign the values to the  place holders
-        $userid     = $elem['UserID'];
-        $fixtureid  = $elem['FixtureID'];
-        $homescore  = $elem['HomeScore'];
-        $awayscore  = $elem['AwayScore'];
-        $hometeamid = $elem['HomeTeamID'];
-        $awayteamid = $elem['AwayTeamID'];
-        $resultid   = $elem['ResultID'];
-        $points     = $elem['Points'];
-        $bonus      = $elem['Bonus'];
-
         /**
             need to have this header in place to make the return of the JSON successful
         */ 
@@ -66,8 +54,22 @@
         */
         $msg_arr = array( 'Success' => 'Insert predictons into database SUCCESSFUL', 'Failure' => 'Insert predictons into database FAILED' );
 
+    foreach($json_array as $elem)  {
+   
+     // assign the values to the  place holders
+        $userid     = $elem['UserID'];
+        $fixtureid  = $elem['FixtureID'];
+        $homescore  = $elem['HomeScore'];
+        $awayscore  = $elem['AwayScore'];
+        $hometeamid = $elem['HomeTeamID'];
+        $awayteamid = $elem['AwayTeamID'];
+        $resultid   = $elem['ResultID'];
+        $points     = $elem['Points'];
+        $bonus      = $elem['Bonus'];
+
         /** 
-            execute the query and check if it fails to insert
+            execute the query and check if it fails to insert prediction
+            have to return something formatted as JSON to the calling PHP file
         */
         if ($query -> execute() === FALSE) {    
             echo json_encode( $msg_arr[Failure] );
