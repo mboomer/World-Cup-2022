@@ -70,6 +70,7 @@
 
                             $qry =   "SELECT \n" 
                                     . "  	fx.FixtureNo,  \n"
+                                    . "     rnd.Code as roundcode, \n"
                                     . "     grp.Description as groupdesc, \n"
                                     . "     hmt.ID as homeid, \n"
                                     . "     hmt.Team as hometeam, \n"
@@ -79,6 +80,10 @@
                                     . "     awt.ID as awayid \n"
                                     . "  FROM  \n"
                                     . "  	Fixtures fx \n"
+                                    . "  	INNER JOIN						# get the Code from Rounds table \n"
+                                    . "  		Rounds rnd \n"
+                                    . "  	ON \n"
+                                    . "  		fx.RoundID = rnd.ID \n"
                                     . "  	INNER JOIN						# get the Group description from GroupStage table \n"
                                     . "  		GroupStage grp \n"
                                     . "  	ON \n"
@@ -107,7 +112,8 @@
                                     echo "      <table>";
                                     echo "          <thead class='greenheader'>";
                                     echo "              <tr>";
-                                    echo "                  <th>No</th> <th class='hidden'></th> <th>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th> <th class='hidden'></th> <th>AWAY</th>";
+                                    echo "                  <th>No</th><th class='hidden'><th class='hidden'></th><th>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th>";
+                                    echo "                  <th class='hidden'></th> <th>AWAY</th>";
                                     echo "              </tr>";
                                     echo "          </thead>";
                                     echo "          <tbody>";
@@ -124,9 +130,11 @@
                                             $awayteam = $row["awayteam"];
                                             $awayid   = $row["awayid"];
                                             $grpdesc  = $row["groupdesc"];
+                                            $rndcode  = $row["roundcode"];
 
                                                 echo "  <tr>";
                                                 echo "      <td class='fixno'>" . $fixno . "</td>";
+                                                echo "      <td class='stage hidden'>" . $rndcode . "</td>";                      // hidden cell for code of the tournament stage 
                                                 echo "      <td class='homeid hidden'>" . $homeid . "</td>";        // hidden cell for ID of home team
                                                 echo "      <td class='home'>" . $hometeam . "</td>";
                                                 echo "      <td class='h-rank'>" . $homerank . "</td>";
@@ -217,12 +225,13 @@
                                         <th colspan="7">QUARTER FINALS</th>
                                     </tr>
                                     <tr>
-                                        <th>No</th> <th>HOME</th> <th class="hidden"></th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th class="hidden"></th> <th>AWAY</th>
+                                        <th>No</th><th>HOME</th> <th class="hidden"></th> <th class="hidden"></th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th class="hidden"></th> <th>AWAY</th>
                                     </tr>
                                 </thead>
                               <tbody>
                                 <tr>
                                     <td class='fixno'>25</td> 
+                                    <td class='hidden stage'>QF</td> 
                                     <td id='winnerA' class='home'>Winner A</td> 
                                     <td class='hidden q-homeid'></td> 
                                     <td class='h-rank'></td> 
@@ -234,6 +243,7 @@
                                 </tr>
                                 <tr>
                                     <td class='fixno'>26</td> 
+                                    <td class='hidden stage'>QF</td> 
                                     <td id='winnerB' class='home'>Winner B</td> 
                                     <td class='hidden q-homeid'></td> 
                                     <td class='h-rank'></td> 
@@ -245,6 +255,7 @@
                                 </tr>
                                 <tr>
                                     <td class='fixno'>27</td>
+                                    <td class='hidden stage'>QF</td> 
                                     <td id='winnerC' class='home'>Winner C</td> 
                                     <td class='hidden q-homeid'></td> 
                                     <td class="h-rank"></td>
@@ -256,6 +267,7 @@
                                 </tr>
                                 <tr>
                                     <td class='fixno'>28</td> 
+                                    <td class='hidden stage'>QF</td> 
                                     <td id='winnerD' class='home'>Winner D</td> 
                                     <td class='hidden q-homeid'></td> 
                                     <td class='h-rank'></td> 
@@ -278,12 +290,13 @@
                                         <th colspan="7">SEMI FINALS</th>
                                     </tr>
                                     <tr>
-                                        <th>No</th> <th>HOME</th> <th class="hidden"></th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th class="hidden"></th> <th>AWAY</th>
+                                        <th>No</th> <th>HOME</th> <th class="hidden"></th> <th class="hidden"></th> <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th class="hidden"></th> <th>AWAY</th>
                                     </tr>
                                 </thead>
                               <tbody>
                                 <tr>
                                     <td class='fixno'>29</td> 
+                                    <td class='hidden stage'>SF</td> 
                                     <td id='winnerQF1' class='home'>Winner QF 1</td> 
                                     <td class='hidden s-homeid'></td> 
                                     <td class='h-rank'></td> 
@@ -295,6 +308,7 @@
                                 </tr>
                                 <tr>
                                     <td class='fixno'>30</td> 
+                                    <td class='hidden stage'>SF</td> 
                                     <td id='winnerQF3' class='home'>Winner QF 3</td> 
                                     <td class='hidden s-homeid'></td> 
                                     <td class='h-rank'></td> 
@@ -318,12 +332,13 @@
                                         <th colspan="7">FINAL</th>
                                     </tr>
                                     <tr>
-                                        <th>No</th> <th>HOME</th> <th class="hidden"></th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th> <th class="hidden"></th> <th>AWAY</th>
+                                        <th>No</th> <th>HOME</th> <th class="hidden"></th> <th class="hidden"></th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th> <th class="hidden"></th> <th>AWAY</th>
                                     </tr>
                                 </thead>
                               <tbody>
                                 <tr>
                                     <td class='fixno'>31</td> 
+                                    <td class='hidden stage'>FI</td> 
                                     <td id='winnerSF1' class='home'>Winner SF 1</td> 
                                     <td class='hidden f-homeid'></td> 
                                     <td class='h-rank'></td> 
@@ -401,13 +416,14 @@
                         
                         // get the the results from the group tables 
                         fixtureids  = document.querySelectorAll('.fixno');            
+                        stages      = document.querySelectorAll('.stage');            
                         hometeamids = document.querySelectorAll('.homeid, .q-homeid, .s-homeid, .f-homeid');            
                         homescores  = document.querySelectorAll('.homescore') ;
                         awayscores  = document.querySelectorAll('.awayscore');
                         awayteamids = document.querySelectorAll('.awayid, .q-awayid, .s-awayid, .f-awayid');
 
                         // initialise the array to hold the predictions 
-                        // UserID FixtureID HomeScore AwayScore HomeTeam AwayTeam ResultID Points Bonus
+                        // UserID FixtureID HomeScore AwayScore HomeTeam AwayTeam ResultID Points Stage
                         let predictions = [];
                         // initialise the object to hold each prediction
                         let prediction = {};
@@ -423,7 +439,7 @@
                                             AwayTeamID : awayteamids[f].textContent, 
                                             ResultID   : 0, 
                                             Points     : 0, 
-                                            Bonus      : 0                                        
+                                            Stage      : stages[f].textContent                                        
                                         };
 
                             // home win ID - 1, away win ID - 2, draw ID - 3 

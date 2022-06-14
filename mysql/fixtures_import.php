@@ -520,6 +520,8 @@
     // Next Fixture
     ++$fixtureno;
 
+    $roundid = 3;                  // Quarter Final QF 
+
     $groupid = 8;                  // Quarter Finals
 
     $venueid = 0;                  // 
@@ -604,6 +606,8 @@
     // Next Fixture
     ++$fixtureno;
 
+    $roundid = 4;                  // Semi Final SF 
+
     $groupid = 9;                  // Semi Finals
 
     $venueid = 0;                  // 
@@ -647,6 +651,8 @@
 
     // Next Fixture
     ++$fixtureno;
+
+    $roundid = 5;                  // Final FI 
 
     $groupid = 10;                  // Finals
 

@@ -26,9 +26,9 @@
 
         //prepare the sql statement
         $sql = "INSERT INTO Predictions 
-                    (UserID, FixtureID, HomeScore, AwayScore, HomeTeam, AwayTeam, ResultID, Points, Bonus) 
+                    (UserID, FixtureID, HomeScore, AwayScore, HomeTeam, AwayTeam, ResultID, Points, Stage) 
                 VALUES 
-                    (:UserID, :FixtureID, :HomeScore, :AwayScore, :HomeTeam, :AwayTeam, :ResultID, :Points, :Bonus)";
+                    (:UserID, :FixtureID, :HomeScore, :AwayScore, :HomeTeam, :AwayTeam, :ResultID, :Points, :Stage)";
 
         // prepare the query for the database connection
         $query = $dbh -> prepare($sql);
@@ -42,7 +42,7 @@
         $query->bindParam(':AwayTeam',  $awayteamid,    PDO::PARAM_INT);
         $query->bindParam(':ResultID',  $resultid,      PDO::PARAM_INT);
         $query->bindParam(':Points',    $points,        PDO::PARAM_INT);
-        $query->bindParam(':Bonus',     $bonus,         PDO::PARAM_INT);
+        $query->bindParam(':Stage',     $stage,         PDO::PARAM_STR);
 
         /**
             need to have this header in place to make the return of the JSON successful
@@ -65,7 +65,7 @@
         $awayteamid = $elem['AwayTeamID'];
         $resultid   = $elem['ResultID'];
         $points     = $elem['Points'];
-        $bonus      = $elem['Bonus'];
+        $stage      = $elem['Stage'];
 
         /** 
             execute the query and check if it fails to insert prediction
