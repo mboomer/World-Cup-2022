@@ -468,6 +468,10 @@
                                     echo "      <table>";
                                     echo "          <thead class='greenheader'>";
                                     echo "              <tr>";
+                                    echo "                  <th colspan='10'>" . $groupdesc .  "</th>";
+                                    echo "              </tr>";
+                                    echo "              <tr>";
+                                    echo "              <tr>";
                                     echo "                  <th>No</th><th class='hidden'><th class='hidden'></th><th>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th>";
                                     echo "                  <th class='hidden'></th> <th>AWAY</th>";
                                     echo "              </tr>";
@@ -841,7 +845,7 @@
                             echo "      <table>";
                             echo "          <thead class='greenheader'>";
                             echo "              <tr>";
-                            echo "                  <th colspan='7'>SEMI FINALS</th>";
+                            echo "                  <th colspan='7'>FINAL</th>";
                             echo "              </tr>";
                             echo "              <tr>";
                             echo "                  <th>No</th><th>HOME</th> <th class='hidden'></th> <th class='hidden'></th> <th>Rk</th> <th colspan='2'>SCORE</th>";
@@ -947,15 +951,7 @@
             // Hide the Knockout stage and the Update Predictions stage
             document.getElementById("KNOCKOUT-STAGE").style.display = "none";
             document.getElementById("UPDATE-PREDICTIONS").style.display = "none";
-
-            /**
-             * Create events to trigger the changes in the input fields and so update the league tables
-             */
-            var changeEvent = new Event('change', {
-                bubbles: true,
-                cancelable: true,
-            });
-            
+          
             // ==================================================================
             // add CLICK event listener for the DOM
             // ==================================================================
@@ -1075,6 +1071,8 @@
                  */
                 // event listeners for the tab links
                 if (event.target.matches('#knockout-stage')) {
+
+                    document.getElementById("confirm-predictions").innerHTML = "<p></p>";
 
                     // QUARTER FINALS - WINNERS AND RUNNERS UP FROM EACH GROUP
                     let winnergroupA   = document.getElementById("TableA-pos1").innerHTML;
