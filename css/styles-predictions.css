@@ -240,6 +240,67 @@ nav {
             border-color: black;           
         }
             
+#UPDATE-PREDICTIONS {
+    
+    grid-area: UPDATE-PREDICTIONS;
+    
+    background-color: white;
+    width: 50%;
+    padding: 10px;
+    margin: 0 auto;            
+    
+}
+        #chkbox-error {
+            display: none;
+            font-style: italic;
+            text-align: center;
+            padding: 10px;
+            color: red;
+        }
+
+        input[type="checkbox"] {
+            width: 5%;
+        }
+
+        #update-predictions {
+            padding: 10px;
+        }
+
+        #confirm-save {
+
+            grid-area: confirm-save;            
+            padding: 10px;
+            text-align: center;
+        }    
+
+        #confirm-btn {
+
+            display: flex;
+            justify-content: center;
+
+        }    
+        #update-btn {
+
+            grid-area: update-btn;            
+
+            border: 0;
+            line-height: 2.5;
+            padding: 0 20px;
+            font-size: 1rem;
+            text-align: center;
+            color: #fff;
+            text-shadow: 1px 1px 1px #000;
+            border-radius: 10px;
+            background-color: #3498db;
+        }
+
+        #update-btn:hover {
+            background-color: cadetblue;
+        }
+
+        #update-btn:active {
+            border-color: black;           
+        }
 
 footer {
     grid-area: footer;
@@ -291,7 +352,7 @@ th, td {
     border-bottom: 1px dotted black;
 }
 
-.pos {
+.pos, .fixno {
     width: 6%;
     background-color: gainsboro;
 }
@@ -441,6 +502,12 @@ input {
             "SectionD"
     }
     
+        #TableA, #TableB, #TableC, #TableD {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
         #SectionA, #SectionB, #SectionC, #SectionD {
             display: flex;
             flex-direction: row;
@@ -465,6 +532,7 @@ input {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
     }
 
     #SAVE-PREDICTIONS {
