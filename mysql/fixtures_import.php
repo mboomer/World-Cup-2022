@@ -524,9 +524,9 @@
 
     $groupid = 8;                  // Quarter Finals
 
-    $venueid = 0;                  // 
-    $hometeamid = 0;               // Winner Group A
-    $awayteamid = 0;               // Runner Up Group B
+    $venueid = 10;                  // Brighton & Hove Community Stadium
+    $hometeamid = 17;              // Winner Group A
+    $awayteamid = 20;               // Runner Up Group B
     $dateplayed = "2022/07/20";
     $timeplayed = "20:00";
     $homescore = NULL;
@@ -544,9 +544,9 @@
 
     $groupid = 8;                  // Quarter Finals
 
-    $venueid = 0;                  // 
-    $hometeamid = 0;               // Winner Group B
-    $awayteamid = 0;               // Runner Up Group A
+    $venueid = 4;                  // Brentford Community Stadium 
+    $hometeamid = 19;               // Winner Group B
+    $awayteamid = 18;               // Runner Up Group A
     $dateplayed = "2022/07/20";
     $timeplayed = "20:00";
     $homescore = NULL;
@@ -564,9 +564,9 @@
 
     $groupid = 8;                  // Quarter Finals
 
-    $venueid = 0;                  // 
-    $hometeamid = 0;               // Winner Group C
-    $awayteamid = 0;               // Runner Up Group D
+    $venueid = 5;                  // Leigh Sports Village 
+    $hometeamid = 21;               // Winner Group C
+    $awayteamid = 24;               // Runner Up Group D
     $dateplayed = "2022/07/20";
     $timeplayed = "20:00";
     $homescore = NULL;
@@ -584,9 +584,9 @@
 
     $groupid = 8;                  // Quarter Finals
 
-    $venueid = 0;                  // 
-    $hometeamid = 0;               // Winner Group D
-    $awayteamid = 0;               // Runner Up Group C
+    $venueid = 8;                  // New York Stadium
+    $hometeamid = 23;               // Winner Group D
+    $awayteamid = 22;               // Runner Up Group C
     $dateplayed = "2022/07/20";
     $timeplayed = "20:00";
     $homescore = NULL;
@@ -610,9 +610,9 @@
 
     $groupid = 9;                  // Semi Finals
 
-    $venueid = 0;                  // 
-    $hometeamid = 0;               // Winner QF 1 
-    $awayteamid = 0;               // Winner QF 3
+    $venueid = 6;                  // Bramall Lane 
+    $hometeamid = 25;               // Winner QF 1 
+    $awayteamid = 27;               // Winner QF 3
     $dateplayed = "2022/07/26";
     $timeplayed = "20:00";
     $homescore = NULL;
@@ -628,11 +628,11 @@
     // Next Fixture
     ++$fixtureno;
 
-    $groupid = 9;                  // Quarter Finals
+    $groupid = 9;                  // Semi Finals
 
-    $venueid = 0;                  // 
-    $hometeamid = 0;               // Winner QF 2
-    $awayteamid = 0;               // Winner QF 4
+    $venueid = 3;                  // Stadium MK 
+    $hometeamid = 26;               // Winner QF 2
+    $awayteamid = 28;               // Winner QF 4
     $dateplayed = "2022/07/27";
     $timeplayed = "20:00";
     $homescore = NULL;
@@ -656,9 +656,9 @@
 
     $groupid = 10;                  // Finals
 
-    $venueid = 0;                  // 
-    $hometeamid = 0;               // Winner SF 1 
-    $awayteamid = 0;               // Winner SF 2
+    $venueid = 9;                  // Wembley Stadium
+    $hometeamid = 29;               // Winner SF 1 
+    $awayteamid = 30;               // Winner SF 2
     $dateplayed = "2022/07/31";
     $timeplayed = "17:00";
     $homescore = NULL;
