@@ -1,0 +1,271 @@
+*{                                  /* Override browsers default CSS rules  */
+    margin:0;
+    padding:0;
+    box-sizing: content-box;
+}
+
+body {
+     font-family: 'Open Sans', sans-serif;
+     background-color: #131633;
+     color: #34495e;
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: white;
+    text-shadow: 2px 2px #22638E;
+}
+#points-total {
+    background-color: green; 
+    color: white; 
+    padding: 3px 3px;
+}
+
+/* 
+----------------------------------------------------------------------------------
+Each section has a GRID-AREA named after the section ID
+----------------------------------------------------------------------------------
+*/
+
+header {
+    grid-area: header;
+    background-color: lightgrey;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+} 
+
+nav {
+    grid-area: nav;
+}
+
+#tabs {
+    grid-area: tabs;
+}
+
+#tournament {
+    grid-area: tournament;
+}
+
+#results {
+    
+    background-color: white;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+    
+        #results-tbl {
+            width: 100%;
+            background-color: skyblue;
+        }
+
+#predictions {
+    
+    background-color: white;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    }
+    
+        #predictions-tbl {
+            width: 100%;
+            background-color: skyblue;
+        }
+
+footer {
+    grid-area: footer;
+
+    display: flex;                                  /* display UL, P & P elements vertically and center them */
+    flex-direction: column;
+    align-items: center;
+
+    background: linear-gradient(to bottom, #284e7a, #000 100%);
+    color: white;
+}
+
+/* ******************************************************************************************   */
+/*                                          IMAGES                                              */
+/* ******************************************************************************************   */
+
+/* ******************************************************************************************   */
+/*                                          TABLES                                              */
+/* ******************************************************************************************   */
+
+.greenheader {
+    background-color: green;
+    color: white;
+}
+
+.blueheader {
+    background-color: navy;
+    color: white;
+}
+
+tbody {
+    background-color: white;
+    color: black;
+}
+
+table {
+    font-size: 0.75em;
+    width: 95%;
+    padding: 2px;
+    text-align: center;    
+    border: 1px dotted black;
+    margin: auto auto;
+}
+
+th, td {
+    border-right: 1px dotted black;
+    border-bottom: 1px dotted black;
+}
+
+.tbl-header {
+    padding: 5px;
+}
+
+.pos, .fixno {
+    width: 6%;
+    background-color: gainsboro;
+}
+
+.home {
+    width: 30%;
+    padding-right: 5px;
+    text-align: right;
+}
+
+.h-rank, .a-rank {
+    width: 6%;
+    background-color: aliceblue;
+}
+
+.hidden {
+    width: 10%;
+    display: none;
+}
+
+.away {
+    width: 30%;
+    padding-left: 5px;
+    text-align: left;
+}
+
+.team {
+    width: 30%;
+    padding-left: 5px;
+    text-align: left;
+}
+
+.cols {
+    width: 8%;
+}
+.res, .pts, .bon {
+    width: 4%;
+    background-color: gainsboro;
+}
+
+/* ******************************************************************************************   */
+
+/* ******************************************************************************************   */
+/*                                          NAV SECTION                                         */
+/* ******************************************************************************************   */
+
+.options {    
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+    
+    background-color: white;
+    padding: 10px;
+}
+
+.options-link {
+    text-decoration: none;
+    font-size: 0.9em;
+    color: #3498db;
+}
+
+.options-link:hover {
+    color: darkgreen;
+    text-decoration: underline;
+}
+
+/* ******************************************************************************************   */
+/*                                          FOOTER SECTION                                      */
+/* ******************************************************************************************   */
+
+footer p {
+    text-transform: uppercase;          /* change text in para tags to uppercase */
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);       /* add a transparent overlay of white - 0.6 = 60% opacity */
+    margin-bottom: 10px;
+}
+
+footer ul {
+    display: flex;                      /* display child items of parent element, ie the ul, into a row */
+    flex-direction: row;
+    list-style: none;
+    margin-bottom: 5px;
+}
+
+footer ul li {
+    margin: 0 20px;                     /* spreads out the line items containing the social media icons */
+}
+
+footer ul li a {
+    font-size: 36px;                    /* makes the icons bigger and ensure the cursor is always the pointer */
+    cursor: pointer;
+    color: white;
+}
+
+/* ---------------------------------- END OF DEFAULT MEDIA RULE FOR 576 --------------------------------------------------------- */
+
+
+/* ******************************************************************************************   */
+/*                       MEDIA RULES 1200px 992ox 768px 552px                                   */
+/* ******************************************************************************************   */
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 1200px or higher                              */
+/* ******************************************************************************************   */
+
+@media screen and (min-width:1200px){                   
+    
+    main {
+        width: 95%;
+ 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 10vh 5vh auto auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+  
+    #container {
+        grid-template-areas:
+            "header"
+            "nav"
+            "tournament"
+            "footer";
+    }
+ 
+    #tournament {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 0.75fr 1.25fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+
+        grid-template-areas:
+            "results"
+            "predictions"
+    }
+
+}
+/* ******************************************************************************************   */
