@@ -1,6 +1,23 @@
 <?php
+
+    // checks if session exists
+    session_start();
+
+    // these are the session variables
+    // $_SESSION["worldcup"]  = true;
+    // $_SESSION["loggedin"]  = true;
+    // $_SESSION["userid"]    = $userid;                            
+    // $_SESSION["username"]  = $username;                            
+    // $_SESSION["useremail"] = $email;
+
+    // If user is logged in, store the userid from session variable 
+    if ( isset($_SESSION['userid']) ) {
+        $userid = $_SESSION["userid"];    
+    }; 
+    
     // Include config file
     require_once "../../../.php/inc/db.worldcup.inc.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -400,6 +417,12 @@
     
         <script type="text/javascript" >
 
+            /** 
+                pass the php session variable, $userid, to a javascript variable 
+                this can then be used in the FETCH POST
+            */ 
+            var userID = "<?=$userid?>";
+
             // Change the display of the content tab from none to flex to display content
             // Hide the Knockout stage and the Save Predictions stage
             document.getElementById("KNOCKOUT-STAGE").style.display = "none";
@@ -433,7 +456,7 @@
                         // Create the array of objects that will be used to create the league table
                         for (let f = 0; f < fixtureids.length; f++) {
                             
-                            prediction = {  UserID     : 1, 
+                            prediction = {  UserID     : userID, 
                                             FixtureID  : fixtureids[f].textContent, 
                                             HomeScore  : homescores[f].value, 
                                             AwayScore  : awayscores[f].value, 
@@ -795,11 +818,11 @@
 
                 };
 
-                if (event.target.matches('[data-stage="FL"]')) {
+                if (event.target.matches('[data-stage="FI"]')) {
 
                     // console.log('Update Final based on changes to the changes to the scores in the Semi Finals');
 
-                    let SF = document.querySelector('#FL');
+                    let FI = document.querySelector('#FL');
                     
                     // get the teams and the scores for the Quarter Finals
                     homeTeams  = FL.querySelectorAll('.home');            

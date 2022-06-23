@@ -37,7 +37,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -57,7 +57,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -77,7 +77,7 @@
     $timeplayed = "17:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -97,7 +97,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -117,7 +117,7 @@
     $timeplayed = "17:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -137,7 +137,7 @@
     $timeplayed = "17:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -157,7 +157,7 @@
     $timeplayed = "17:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -177,7 +177,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -201,7 +201,7 @@
     $timeplayed = "17:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -221,7 +221,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -241,7 +241,7 @@
     $timeplayed = "17:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -261,7 +261,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -281,7 +281,7 @@
     $timeplayed = "17:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -301,7 +301,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -321,7 +321,7 @@
     $timeplayed = "17:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -341,7 +341,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -365,7 +365,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -385,7 +385,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -405,7 +405,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -419,13 +419,13 @@
     $groupid = 2;                  // Group B
 
     $venueid = 4;                  // Brentford Community Stadium - 4
-    $hometeamid = 6;               // Denmark
-    $awayteamid = 7;               // Spain
+    $hometeamid = 7;               // Denmark
+    $awayteamid = 6;               // Spain
     $dateplayed = "2022/07/16";
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -445,7 +445,7 @@
     $timeplayed = "17:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -465,7 +465,7 @@
     $timeplayed = "17:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -485,7 +485,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -505,7 +505,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -531,7 +531,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -551,7 +551,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -571,7 +571,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -591,7 +591,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -617,7 +617,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -637,7 +637,7 @@
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
@@ -663,7 +663,7 @@
     $timeplayed = "17:00";
     $homescore = NULL;
     $awayscore = NULL;
-    $resultid = NULL;
+    $resultid = 6;
     
     if ($stmt->execute()) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");

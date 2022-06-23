@@ -306,7 +306,7 @@
 
                                         // echo "<script>console.log(" . $TotalPoints . " - " . $pts . " - " . $bonus . ");" . "</script>;";
 
-                                        echo "<script>console.log('Points : '" . $pts . ',' . $bonus . ',' . $TotalPoints . "');</script>";
+                                        // echo "<script>console.log('Points : '" . $pts . ',' . $bonus . ',' . $TotalPoints . "');</script>";
 
                                         $TotalPoints = $TotalPoints + ($pts + $bonus);
 
