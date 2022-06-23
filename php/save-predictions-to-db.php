@@ -1,5 +1,20 @@
 <?php
 
+    // checks if session exists
+    session_start();
+
+    // $_SESSION["worldcup"]  = true;
+    // $_SESSION["loggedin"]  = true;
+    // $_SESSION["userid"]    = $userid;                            
+    // $_SESSION["username"]  = $username;                            
+    // $_SESSION["useremail"] = $email;
+
+    /** as the userid is stored along with teh predictions there is no need to extract it from the session variables */
+    // If logged in store the userid from session 
+    // if ( isset($_SESSION['userid']) ) {
+    //     $userid = $_SESSION["userid"];    
+    // }; 
+
     // Include config file
     require_once "../../../.php/inc/db.worldcup.inc.php";
 
@@ -23,6 +38,10 @@
         catch (PDOException $e) {
             exit("Error: " . $e->getMessage());
         };
+
+        /**
+        * Insert the predictions in to the predictions table
+        */
 
         //prepare the sql statement
         $sql = "INSERT INTO Predictions 
@@ -52,30 +71,62 @@
         /** 
             array to be returned to the calling PHP stage 
         */
-        $msg_arr = array( 'Success' => 'Insert predictons into database SUCCESSFUL', 'Failure' => 'Insert predictons into database FAILED' );
+        $msg_arr = array(   
+                        'Success' => 'Insert predictons into database SUCCESSFUL', 
+                        'Failure' => 'Insert predictons into database FAILED', 
+                        'Users'   => 'Update User record FAILED' 
+                        );
 
-    foreach($json_array as $elem)  {
-   
-     // assign the values to the  place holders
-        $userid     = $elem['UserID'];
-        $fixtureid  = $elem['FixtureID'];
-        $homescore  = $elem['HomeScore'];
-        $awayscore  = $elem['AwayScore'];
-        $hometeamid = $elem['HomeTeamID'];
-        $awayteamid = $elem['AwayTeamID'];
-        $resultid   = $elem['ResultID'];
-        $points     = $elem['Points'];
-        $stage      = $elem['Stage'];
+        foreach($json_array as $elem)  {
+    
+            /** assign the values to the place holders - the userid is stored with the predictions so can be extracted from the json array */
+            $userid     = $elem['UserID'];
+            $fixtureid  = $elem['FixtureID'];
+            $homescore  = $elem['HomeScore'];
+            $awayscore  = $elem['AwayScore'];
+            $hometeamid = $elem['HomeTeamID'];
+            $awayteamid = $elem['AwayTeamID'];
+            $resultid   = $elem['ResultID'];
+            $points     = $elem['Points'];
+            $stage      = $elem['Stage'];
+
+            /** 
+                execute the query and check if it fails to insert prediction
+                have to return something formatted as JSON to the calling PHP file
+            */
+            if ($query -> execute() === FALSE) {    
+                echo json_encode( $msg_arr[Failure] );
+                exit;            
+            }; 
+        };                       // end of Prediction ForEach loop
+
+        /**
+        * Update the User record to record the fact that predictions have been saved to the predictions table
+        */
+        //prepare the update sql statement
+        $sql = "UPDATE Users SET Predictions = :Predictions WHERE ID = :ID";
+
+        // prepare the query for the database connection
+        $query = $dbh -> prepare($sql);
+
+        // bind the parameters
+        $query->bindParam(':ID',          $userid,       PDO::PARAM_INT);
+        $query->bindParam(':Predictions', $predictions,  PDO::PARAM_INT);
+
+        // assign the values to the place holders
+        // $userid is already assigned a value from previous execution
+
+        // set predictions to true = 1
+        $predictions = 1;
 
         /** 
             execute the query and check if it fails to insert prediction
             have to return something formatted as JSON to the calling PHP file
         */
         if ($query -> execute() === FALSE) {    
-            echo json_encode( $msg_arr[Failure] );
+            echo json_encode( $msg_arr[Users] );
             exit;            
-        } 
-    }                       // end of ForEach loop
+        }; 
 
     /**
         Successful completion 
