@@ -1,6 +1,21 @@
 <?php
     // Include config file
     require_once "../../../.php/inc/db.worldcup.inc.php";
+
+    // checks if session exists
+    session_start();
+
+    // $_SESSION["worldcup"]  = true;
+    // $_SESSION["loggedin"]  = true;
+    // $_SESSION["userid"]    = $userid;                            
+    // $_SESSION["username"]  = $username;                            
+    // $_SESSION["useremail"] = $email;
+
+    // If logged in store the userid from session 
+    if ( isset($_SESSION['userid']) ) {
+        $userid = $_SESSION["userid"];    
+    }; 
+
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +24,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Predictions</title>
+        <title>Saved Predictions</title>
         
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
         <link rel="stylesheet" href="../css/styles-predictions.css">
@@ -183,11 +198,12 @@
 
                 };
 
-                if (event.target.matches('[data-stage="FL"]')) {
+                /** the data-stage FI is diferent to the section id FL */
+                if (event.target.matches('[data-stage="FI"]')) {
 
                     // console.log('Update Final based on changes to the changes to the scores in the Semi Finals');
 
-                    let SF = document.querySelector('#FL');
+                    let FL = document.querySelector('#FL');
                     
                     // get the teams and the scores for the Quarter Finals
                     homeTeams  = FL.querySelectorAll('.home');            
@@ -235,7 +251,7 @@
 
                 } else if (event.target.matches('[data-table="TableC"]')) {
 
-                    SectC = document.querySelector('#SectionC');
+                    let SectC = document.querySelector('#SectionC');
                     
                     // get the teams and the scores for SectionC
                     teamIds    = SectC.querySelectorAll('.homeid');
@@ -252,7 +268,7 @@
 
                 } else if (event.target.matches('[data-table="TableD"]')) {
                     
-                    SectD = document.querySelector('#SectionD');
+                    let SectD = document.querySelector('#SectionD');
                     
                     // get the teams and the scores for SectionD
                     teamIds    = SectD.querySelectorAll('.homeid');
@@ -280,9 +296,13 @@
                 let teams = [];
                 let team = {};
                 
+                // console.log("Home Team Length : ", homeTeams.length);
+
                 // Create the array of objects that will be used to create the league table
                 for (let f = 0; f < homeTeams.length; f++) {
                     
+                    // console.log("Team : ", homeTeams[f].textContent);
+
                     // check if home team exists in array - if not add object for the team to the array
                     let found = teams.find(t => t.Team == homeTeams[f].textContent);
                     
@@ -291,6 +311,8 @@
                         teams.push(team);                        
                     };
                 };
+
+                // console.log(teams);
 
                 // England	 2 1  Austria
                 // Norway	 1 2  N Ireland
@@ -453,7 +475,7 @@
                                     . "  		ON \n"
                                     . "  			pred.AwayTeam = awt.ID \n" 
                                     . "     WHERE  \n"
-                                    . "         fx.GroupID = " . $groupid . " \n"
+                                    . "         fx.GroupID = " . $groupid . " AND pred.UserID = " . $userid . "\n"
                                     . "  ORDER BY \n"
                                     . "  	  fx.FixtureNo \n";
 
@@ -572,7 +594,7 @@
                                     // echo "  tbl.value = '99';";
                                     // echo "  tbl.value = tempscore;";
                                     echo "  tbl.dispatchEvent(event);";
-                                    echo "  console.log(event, tbl)";
+                                    // echo "  console.log(event, tbl)";
                                     echo "</script>";
 
                                     echo "</section> <!-- end of section div -->";                         
@@ -619,7 +641,7 @@
                         . "  		ON \n"
                         . "  			pred.AwayTeam = awt.ID \n" 
                         . "     WHERE  \n"
-                        . "         fx.GroupID = 8 \n"
+                        . "         fx.GroupID = 8 AND pred.UserID = " . $userid . "\n"
                         . "  ORDER BY \n"
                         . "  	  fx.FixtureNo \n";
 
@@ -724,7 +746,7 @@
                         . "  		ON \n"
                         . "  			pred.AwayTeam = awt.ID \n" 
                         . "     WHERE  \n"
-                        . "         fx.GroupID = 9 \n"
+                        . "         fx.GroupID = 9 AND pred.UserID = " . $userid . "\n"
                         . "  ORDER BY \n"
                         . "  	  fx.FixtureNo \n";
 
@@ -829,7 +851,7 @@
                         . "  		ON \n"
                         . "  			pred.AwayTeam = awt.ID \n" 
                         . "     WHERE  \n"
-                        . "         fx.GroupID = 10 \n"
+                        . "         fx.GroupID = 10 AND pred.UserID = " . $userid . "\n"
                         . "  ORDER BY \n"
                         . "  	  fx.FixtureNo \n";
 
@@ -947,6 +969,12 @@
     
         <script type="text/javascript" >
 
+            /** 
+                pass the php session variable, $userid, to a javascript variable 
+                this can then be used in the FETCH POST
+            */ 
+            var userID = "<?=$userid?>";
+
             // Change the display of the content tab from none to flex to display content
             // Hide the Knockout stage and the Update Predictions stage
             document.getElementById("KNOCKOUT-STAGE").style.display = "none";
@@ -980,7 +1008,7 @@
                         // Create the array of objects that will be used to create the league table
                         for (let f = 0; f < fixtureids.length; f++) {
                             
-                            prediction = {  UserID     : 1, 
+                            prediction = {  UserID     : userID, 
                                             FixtureID  : fixtureids[f].textContent, 
                                             HomeScore  : homescores[f].value, 
                                             AwayScore  : awayscores[f].value, 
@@ -1008,7 +1036,7 @@
 
                         }; // end of FOR loop
 
-                        // console.log(predictions);
+                        console.log(predictions);
                     
                         // now process the predictions array and save result to predictions table
                         // console.log(JSON.stringify(predictions));
