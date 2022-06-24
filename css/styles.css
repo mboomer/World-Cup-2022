@@ -1,0 +1,458 @@
+*{                                  /* Override browsers default CSS rules  */
+    margin:0;
+    padding:0;
+    box-sizing: content-box;
+}
+
+body {
+     font-family: 'Open Sans', sans-serif;
+/*     background-color: #131633;*/
+     background-color: white;
+     color: #34495e;
+/*     color:white;*/
+     line-height: 1.5;
+}
+
+header h1 {
+     font-size: 2.5em;
+     text-align: center;
+     color: white;
+     margin-bottom: 20px;
+     text-shadow: 2px 2px #22638E;
+}
+
+/* 
+----------------------------------------------------------------------------------
+Each section has a GRID-AREA named after the section ID
+----------------------------------------------------------------------------------
+*/
+
+#container {
+    margin-top: 5px;
+}
+
+header {
+    
+    display: grid;
+    grid-area: header;
+    grid-template-columns: 1fr 10fr 2fr;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    
+    width: 100%;
+    background-color: lightgray;
+    align-items: center;
+    justify-content: center;    
+/*    margin: auto auto;*/
+} 
+
+header img {
+    width: 75px;
+}
+
+#logo {
+    text-align: center;
+}
+
+nav {
+    grid-area: nav;
+    background-color: darkviolet;
+}
+
+#lastest-results {
+    grid-area: lastest-results;
+    background-color: red; 
+}
+
+#top-scorers {
+    grid-area: top-scorers;
+    background-color: blue; 
+}
+
+#important-stats {
+    grid-area: important-stats;
+    background-color: green; 
+}
+
+#upcoming-fixtures {
+    grid-area: upcoming-fixtures;
+    background-color: olive;
+}
+
+#venues {
+    grid-area: venues;
+    background-color: chocolate;
+}
+
+#about {
+    grid-area: about;
+    background-color: mediumaquamarine;
+}
+
+.card-title {
+    color:white;
+    background-color: #4f97d5;
+    font-size: 1.25em;
+    padding: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+input {
+    width: 85%;
+    color: darkblue;
+    background-color: aliceblue;
+    font-size: 1.25em;
+    padding: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+section {
+    padding:10px;
+    text-align: center;
+}
+
+/* ******************************************************************************************   */
+/*                                          FOOTER SECTION                                      */
+/* ******************************************************************************************   */
+
+#social-media {
+    grid-area: footer;
+
+    display: flex;                                  /* display UL, P & P elements vertically and center them */
+    flex-direction: column;
+    align-items: center;
+
+    background: linear-gradient(to bottom, #284e7a, #000 100%);
+    color: white;
+}
+
+#social-media p {
+    text-transform: uppercase;          /* change text in para tags to uppercase */
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);       /* add a transparent overlay of white - 0.6 = 60% opacity */
+    margin-bottom: 10px;
+}
+
+#social-media ul {
+    display: flex;                      /* display child items of parent element, ie the ul, into a row */
+    flex-direction: row;
+    list-style: none;
+    margin-bottom: 5px;
+}
+
+#social-media ul li {
+    margin: 0 20px;                     /* spreads out the line items containing the social media icons */
+}
+
+#social-media ul li a {
+    font-size: 36px;                    /* makes the icons bigger and ensure the cursor is always the pointer */
+    cursor: pointer;
+    color: white;
+}
+
+.options {
+    
+    display:flex;
+    align-items: center;
+    justify-content: flex-end;
+    
+    background-color: white;
+    padding: 10px 10px;
+}
+
+.options-link {
+    background-color: #199319;
+    text-decoration: none;
+    font-size: 0.9em;
+    color: #3498db;
+    padding: 5px;
+    
+    
+  color: white;
+  padding: 15px 25px;
+  text-decoration: none;
+}
+
+.options-link:hover {
+    color: darkgreen;
+    text-decoration: underline;
+}
+
+/* ------------------ Transparent Buttons ------------------------- */
+
+/* white text white border                                          */
+.transparent-btn { 
+    display: inline-block; 
+    padding: 5px 10px; 
+    color: #FFF; 
+    border: 1px solid #FFF; 
+    text-decoration: none; 
+    font-size: 16px; 
+    line-height: 120%; 
+    background-color: rgba(255,255,255, 0); 
+    border-radius: 4px; transition: background-color 300ms ease; 
+    cursor: pointer; 
+}
+.transparent-btn:hover { 
+    background-color: rgba(255,255,255, 0.2); 
+    color: #000; 
+}
+
+/* white text blue background                                      */
+.transparent-btn-blue { 
+    display: inline-block; 
+    padding: 5px 10px; 
+    margin: 10px;
+    color: #FFF; 
+    border: 1px solid #00F; 
+    text-decoration: none; 
+    font-size: 14px; 
+    line-height: 120%; 
+    background-color: rgba(0,0,255, 0.6); 
+    border-radius: 4px; 
+    transition: background-color 300ms ease; 
+    cursor: pointer; 
+}
+.transparent-btn-blue:hover { 
+    background-color: rgba(0,0,255, 0.2); 
+    color: #000; 
+}
+
+/* smaller blue text white background                                      */
+.transparent-btn-white { 
+    display: inline-block; 
+    padding: 3px 5px; 
+    color: #00F; 
+    border: 1px solid #00F; 
+    text-decoration: none; 
+    font-size: 12px; 
+    line-height: 120%; 
+    background-color: rgba(255,255,255, 0); 
+    border-radius: 4px; 
+    transition: background-color 300ms ease; 
+    cursor: pointer; 
+}
+
+.transparent-btn-white:hover { 
+    background-color: rgba(0,0,255, 0.3); 
+    color: #000; 
+}
+
+/* smaller blue border text white                                       */
+.transparent-btn-blue-small { 
+    display: inline-block; 
+    padding: 3px 5px; 
+    color: #FFF; 
+    border: 2px solid #00F; 
+    text-decoration: none; 
+    font-size: 12px; 
+    line-height: 120%; 
+    background-color: rgba(0,123,255, 1); 
+    border-radius: 4px; 
+    transition: background-color 300ms ease; 
+    cursor: pointer; 
+}
+.transparent-btn-blue-small:hover { 
+    background-color: rgba(0,123,255, 0.2); 
+    color: #FFF; 
+}
+
+#login-register {
+    text-align: center;
+}
+
+/* ---------------------------------- END OF DEFAULT MEDIA RULE FOR 576 --------------------------------------------------------- */
+
+
+/* ******************************************************************************************   */
+/*                       MEDIA RULES 1200px 992ox 768px 552px                                   */
+/* ******************************************************************************************   */
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 1200px or higher                              */
+/* ******************************************************************************************   */
+
+@media screen and (min-width:1200px){                   
+    
+    main {
+        width: 98%;
+/*        max-width: 800px;*/
+ 
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+/*        grid-template-rows: 10vh 5vh 35vh 35vh auto;*/
+        grid-template-rows: 10vh 35vh 35vh auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+ 
+    /* 
+    ----------------------------------------------------------------------------------
+    Grid is three columns - specify what is in each column on each row
+    header, navigation, and footer span across the 3 colums
+    content is spaced into each column as seen below.
+    ----------------------------------------------------------------------------------
+    */
+    #container{
+        grid-template-areas:
+            "header header header"
+/*            "nav nav nav"*/
+            "lastest-results top-scorers important-stats"
+            "upcoming-fixtures venues about"
+            "footer footer footer";
+    }
+ 
+    header {
+        grid-template-areas:
+            "logo header-text";
+    }
+}
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 992px or higher                              */
+/* ******************************************************************************************   */
+
+@media screen and (max-width:1200px){                   
+    
+    body {
+        background-color: antiquewhite;
+    }
+    main{
+        width: 90%;
+/*        max-width: 800px;*/
+ 
+        display: grid;
+        grid-template-columns: 1fr 8fr 3fr;
+        grid-template-columns: 1fr 1fr;
+/*        grid-template-rows: 10vh 5vh auto 25vh 25vh auto;*/
+        grid-template-rows: 10vh auto 25vh 25vh auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+ 
+    .transparent-btn-blue {
+        margin: 2px;
+    }
+    
+    /* 
+    ----------------------------------------------------------------------------------
+    Grid is three columns - specify what is in each column on each row
+    header, navigation, and footer span across the 3 colums
+    content is spaced into each column as seen below.
+    ----------------------------------------------------------------------------------
+    */
+    #container{
+        grid-template-areas:
+            "header header"
+/*            "nav nav"*/
+            "lastest-results top-scorers"
+            "important-stats upcoming-fixtures"
+            "venues about"
+            "footer footer";
+    }
+ 
+}
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 768px or higher                              */
+/* ******************************************************************************************   */
+
+@media screen and (max-width:992px){                   
+    
+    body {
+        background-color: burlywood;
+    }
+    main{
+        width: 90%;
+/*        max-width: 800px;*/
+ 
+        display: grid;
+        grid-template-columns: 1fr 8fr 3fr;
+        grid-template-columns: 1fr 1fr;
+/*        grid-template-rows: 10vh 5vh auto 25vh 25vh auto;*/
+        grid-template-rows: 10vh auto 25vh 25vh auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+ 
+    .transparent-btn-blue {
+        margin: 2px;
+    }
+    
+    /* 
+    ----------------------------------------------------------------------------------
+    Grid is three columns - specify what is in each column on each row
+    header, navigation, and footer span across the 3 colums
+    content is spaced into each column as seen below.
+    ----------------------------------------------------------------------------------
+    */
+    #container{
+        grid-template-areas:
+            "header header"
+/*            "nav nav"*/
+            "lastest-results top-scorers"
+            "important-stats upcoming-fixtures"
+            "venues about"
+            "footer footer";
+    }
+ 
+}
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 552px or higher                              */
+/* ******************************************************************************************   */
+
+@media screen and (max-width:768px){                   
+    
+    body {
+/*        background-color: yellow;*/
+    }
+    main{
+        width: 90%;
+/*        max-width: 800px;*/
+ 
+        display: grid;
+        grid-template-columns: 1fr;
+/*        grid-template-rows: auto 5vh auto 15vh 15vh 15vh 15vh 15vh auto;*/
+        grid-template-rows: auto auto 15vh 15vh 15vh 15vh 15vh auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+ 
+    header h1 {
+     font-size: 2em;
+}
+    /* 
+    ----------------------------------------------------------------------------------
+    Grid is three columns - specify what is in each column on each row
+    header, navigation, and footer span across the 3 colums
+    content is spaced into each column as seen below.
+    ----------------------------------------------------------------------------------
+    */
+    #container{
+        grid-template-areas:
+            "header"
+/*            "nav"*/
+            "lastest-results"
+            "top-scorers"
+            "important-stats" 
+            "upcoming-fixtures"
+            "venues" 
+            "about"
+            "footer";
+    }
+ 
+    #social-media p {
+        font-size: 10px;
+        margin-bottom: 5px;
+    }
+
+    #social-media ul li {
+        margin: 0 10px;                     /* spreads out the line items containing the social media icons */
+    }
+
+    #social-media ul li a {
+        font-size: 30px;                    /* makes the icons bigger and ensure the cursor is always the pointer */
+    }
+}
