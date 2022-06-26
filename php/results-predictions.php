@@ -106,11 +106,11 @@
                                 echo "      <table>";
                                 echo "          <thead class='greenheader'>";
                                 echo "              <tr>";
-                                echo "                  <th class='tbl-header' colspan='8'>FIXTURES / RESULTS</th>";
+                                echo "                  <th class='tbl-header' colspan='10'>FIXTURES / RESULTS</th>";
                                 echo "              </tr>";
                                 echo "              <tr>";
-                                echo "                  <th>No</th><th class='hidden'><th class='hidden'></th><th>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th>";
-                                echo "                  <th class='hidden'></th> <th>AWAY</th><th>Res</th>";
+                                echo "                  <th>No</th><th class='hidden'><th class='hidden'></th><th colspan='2'>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th>";
+                                echo "                  <th class='hidden'></th> <th colspan='2'>AWAY</th><th class='res-header'>Res</th>";
                                 echo "              </tr>";
                                 echo "          </thead>";
                                 echo "          <tbody>";
@@ -149,8 +149,9 @@
 
                                         echo "  <tr>";
                                         echo "      <td class='fixno'>" . $fixno . "</td>";
-                                        echo "      <td class='stage hidden'>" . $rndcode . "</td>";                      // hidden cell for code of the tournament stage 
-                                        echo "      <td class='homeid hidden'>" . $homeid . "</td>";        // hidden cell for ID of home team
+                                        echo "      <td class='stage hidden'>" . $rndcode . "</td>";                                // hidden cell for code of the tournament stage 
+                                        echo "      <td class='homeid hidden'>" . $homeid . "</td>";                                // hidden cell for ID of home team
+                                        echo "      <td class='results-home-flag'><img src='../img/teams/" . $hometeam . ".png'></td>";      
                                         echo "      <td class='home'>" . $hometeam . "</td>";
                                         echo "      <td class='h-rank'>" . $homerank . "</td>";
                                         echo "      <td>" . $homescore . "</td>";
@@ -158,7 +159,8 @@
                                         echo "      <td class='a-rank'>" . $awayrank . "</td>";
                                         echo "      <td class='awayid hidden'>" . $awayid . "</td>";        // hidden cell for ID of away team
                                         echo "      <td class='away'>" . $awayteam . "</td>";
-                                        echo "      <td>" . $resultcode . "</td>";
+                                        echo "      <td class='results-away-flag'><img src='../img/teams/" . $awayteam . ".png'></td>";      
+                                        echo "      <td class='res'>" . $resultcode . "</td>";
                                         echo "  </tr>";
                                 
                                 }   // end of while loop
@@ -222,12 +224,12 @@
                                 echo "      <table>";
                                 echo "          <thead class='blueheader'>";
                                 echo "              <tr>";
-                                echo "                  <th class='tbl-header' colspan='10'>PREDICTIONS / POINTS</th>";
+                                echo "                  <th class='tbl-header' colspan='12'>PREDICTIONS / POINTS</th>";
                                 echo "              </tr>";
                                 echo "              <tr>";
                                 echo "              <tr>";
-                                echo "                  <th>No</th><th class='hidden'><th class='hidden'></th><th>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th>";
-                                echo "                  <th class='hidden'></th> <th>AWAY</th><th>RES</th><th>Pts</th><th>Bonus</th>";
+                                echo "                  <th>No</th><th class='hidden'><th class='hidden'></th><th colspan='2'>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th>";
+                                echo "                  <th class='hidden'></th> <th colspan='2'>AWAY</th><th class='res-header'>Res</th><th class='res-header'>Pts</th><th class='res-header'>Bonus</th>";
                                 echo "              </tr>";
                                 echo "          </thead>";
                                 echo "          <tbody>";
@@ -312,8 +314,9 @@
 
                                         echo "  <tr>";
                                         echo "      <td class='fixno'>" . $fixno . "</td>";
-                                        echo "      <td class='stage hidden'>" . $rndcode . "</td>";                      // hidden cell for code of the tournament stage 
-                                        echo "      <td class='homeid hidden'>" . $homeid . "</td>";        // hidden cell for ID of home team
+                                        echo "      <td class='stage hidden'>" . $rndcode . "</td>";                                // hidden cell for code of the tournament stage 
+                                        echo "      <td class='homeid hidden'>" . $homeid . "</td>";                                // hidden cell for ID of home team
+                                        echo "      <td class='predictions-home-flag'><img src='../img/teams/" . $hometeam . ".png'></td>";      
                                         echo "      <td class='home'>" . $hometeam . "</td>";
                                         echo "      <td class='h-rank'>" . $homerank . "</td>";
                                         echo "      <td class='pos'>" . $homescore . "</td>";
@@ -321,6 +324,7 @@
                                         echo "      <td class='a-rank'>" . $awayrank . "</td>";
                                         echo "      <td class='awayid hidden'>" . $awayid . "</td>";        // hidden cell for ID of away team
                                         echo "      <td class='away'>" . $awayteam . "</td>";
+                                        echo "      <td class='predictions-away-flag'><img src='../img/teams/" . $awayteam . ".png'></td>";      
                                         echo "      <td class='res'>" . $resultcode . "</td>";
                                         echo "      <td class='pts'>" . $pts . "</td>";
                                         echo "      <td class='bon'>" . $bonus . "</td>";
