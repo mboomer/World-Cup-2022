@@ -6,15 +6,11 @@
 
 body {
      font-family: 'Open Sans', sans-serif;
-     background-color: #131633;
+     /* background-color: #131633; */
+     background-color: white;
      color: #34495e;
 }
 
-header h1 {
-    font-size: 2.5em;
-    color: white;
-    text-shadow: 2px 2px #22638E;
-}
 /* ******************************************************************************************   */
 /*                                          TABS                                                */
 /* ******************************************************************************************   */
@@ -67,14 +63,40 @@ Each section has a GRID-AREA named after the section ID
 ----------------------------------------------------------------------------------
 */
 
-header {
-    grid-area: header;
-    background-color: lightgrey;
+#container {
+    margin-top: 5px;
+}
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+header {
+    
+    display: grid;
+    grid-area: header;
+    grid-template-columns: 1fr 10fr 2fr;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    
+    width: 100%;
+    background-color: lightgray;
+    align-items: center;
+    justify-content: center;    
+/*    margin: auto auto;*/
 } 
+
+header h1 {
+     font-size: 2.5em;
+     text-align: center;
+     color: white;
+     margin-bottom: 20px;
+     text-shadow: 2px 2px #22638E;
+}
+
+header img {
+    width: 75px;
+}
+
+#logo {
+    text-align: center;
+}
 
 nav {
     grid-area: nav;
@@ -180,7 +202,8 @@ nav {
 #SAVE-PREDICTIONS {
     
     grid-area: SAVE-PREDICTIONS;
-    
+    justify-content: center;
+
     background-color: white;
     width: 50%;
     padding: 10px;
@@ -243,7 +266,8 @@ nav {
 #UPDATE-PREDICTIONS {
     
     grid-area: UPDATE-PREDICTIONS;
-    
+    justify-content: center;
+
     background-color: white;
     width: 50%;
     padding: 10px;
@@ -316,8 +340,7 @@ footer {
 /* ******************************************************************************************   */
 /*                                          IMAGES                                              */
 /* ******************************************************************************************   */
-img {
-}
+
 
 /* ******************************************************************************************   */
 /*                                          TABLES                                              */
@@ -358,7 +381,7 @@ th, td {
 }
 
 .home {
-    width: 30%;
+    width: 26%;
     padding-right: 5px;
     text-align: right;
 }
@@ -374,7 +397,7 @@ th, td {
 }
 
 .away {
-    width: 30%;
+    width: 26%;
     padding-left: 5px;
     text-align: left;
 }
@@ -388,6 +411,16 @@ th, td {
 .cols {
     width: 8%;
 }
+
+.home-flag, .away-flag {
+    width: 6%
+}
+
+.home-flag img, .away-flag img {
+    width: 55%;
+    text-align: center;
+}
+
 /* ******************************************************************************************   */
 
 /* ******************************************************************************************   */
@@ -441,6 +474,88 @@ footer ul li a {
     cursor: pointer;
     color: white;
 }
+/* ------------------ Transparent Buttons ------------------------- */
+
+/* white text white border                                          */
+.transparent-btn { 
+    display: inline-block; 
+    padding: 5px 10px; 
+    color: #FFF; 
+    border: 1px solid #FFF; 
+    text-decoration: none; 
+    font-size: 16px; 
+    line-height: 120%; 
+    background-color: rgba(255,255,255, 0); 
+    border-radius: 4px; transition: background-color 300ms ease; 
+    cursor: pointer; 
+}
+.transparent-btn:hover { 
+    background-color: rgba(255,255,255, 0.2); 
+    color: #000; 
+}
+
+/* white text blue background                                      */
+.transparent-btn-blue { 
+    display: inline-block; 
+    padding: 5px 10px; 
+    margin: 10px;
+    color: #FFF; 
+    border: 1px solid #00F; 
+    text-decoration: none; 
+    font-size: 14px; 
+    line-height: 120%; 
+    background-color: rgba(0,0,255, 0.6); 
+    border-radius: 4px; 
+    transition: background-color 300ms ease; 
+    cursor: pointer; 
+}
+.transparent-btn-blue:hover { 
+    background-color: rgba(0,0,255, 0.2); 
+    color: #000; 
+}
+
+/* smaller blue text white background                                      */
+.transparent-btn-white { 
+    display: inline-block; 
+    padding: 3px 5px; 
+    color: #00F; 
+    border: 1px solid #00F; 
+    text-decoration: none; 
+    font-size: 12px; 
+    line-height: 120%; 
+    background-color: rgba(255,255,255, 0); 
+    border-radius: 4px; 
+    transition: background-color 300ms ease; 
+    cursor: pointer; 
+}
+
+.transparent-btn-white:hover { 
+    background-color: rgba(0,0,255, 0.3); 
+    color: #000; 
+}
+
+/* smaller blue border text white                                       */
+.transparent-btn-blue-small { 
+    display: inline-block; 
+    padding: 3px 5px; 
+    color: #FFF; 
+    border: 2px solid #00F; 
+    text-decoration: none; 
+    font-size: 12px; 
+    line-height: 120%; 
+    background-color: rgba(0,123,255, 1); 
+    border-radius: 4px; 
+    transition: background-color 300ms ease; 
+    cursor: pointer; 
+}
+.transparent-btn-blue-small:hover { 
+    background-color: rgba(0,123,255, 0.2); 
+    color: #FFF; 
+}
+
+#logout {
+    text-align: center;
+}
 
 /* ******************************************************************************************   */
 /*                                          FORM FIELDS                                         */
@@ -473,7 +588,8 @@ input {
  
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 10vh 5vh auto auto;
+        /* grid-template-rows: 10vh 5vh auto auto; */
+        grid-template-rows: 10vh auto auto;
         grid-gap: 5px;
         margin: 0 auto;
     }
@@ -481,10 +597,15 @@ input {
     #container {
         grid-template-areas:
             "header"
-            "nav"
+            /* "nav" */
             "tabs"
             "tournment"
             "footer";
+    }
+
+    header {
+        grid-template-areas:
+            "logo header-text";
     }
  
     #GROUPS {
