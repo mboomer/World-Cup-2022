@@ -326,6 +326,31 @@ nav {
             border-color: black;           
         }
 
+#RESULTS-PREDICTIONS {
+    grid-area: RESULTS-PREDICTIONS;
+}
+    #results-predictions {
+        grid-area: results-predictions;
+    }
+
+        #results {
+            grid-area : results;
+        }
+
+            #results-tbl {
+                width: 100%;
+                background-color: skyblue;
+            }
+
+        #predictions {
+            grid-area : predictions;
+
+        }
+            #predictions-tbl {
+                width: 100%;
+                background-color: skyblue;
+            }
+
 footer {
     grid-area: footer;
 
@@ -409,7 +434,7 @@ th, td {
 }
 
 .cols {
-    width: 8%;
+    width: 6%;
 }
 
 .home-flag, .away-flag {
@@ -417,6 +442,32 @@ th, td {
 }
 
 .home-flag img, .away-flag img {
+    width: 55%;
+    text-align: center;
+}
+.res, .pts, .bon {
+    width: 4%;
+    background-color: gainsboro;
+}
+
+.res-header {
+    padding: 2px;
+}
+
+.results-home-flag, .results-away-flag {
+    width: 6%
+}
+
+.predictions-home-flag, .predictions-away-flag {
+    width: 4%
+}
+
+.results-home-flag img, .results-away-flag img {
+    width: 55%;
+    text-align: center;
+}
+
+.predictions-home-flag img, .predictions-away-flag img {
     width: 55%;
     text-align: center;
 }
@@ -581,10 +632,10 @@ input {
 /* apply to any device that has a screen width of 1200px or higher                              */
 /* ******************************************************************************************   */
 
-@media screen and (min-width:1200px){                   
+@media screen and (min-width:1200px) {                   
     
     main {
-        width: 95%;
+        width: 96%;
  
         display: grid;
         grid-template-columns: 1fr;
@@ -636,11 +687,10 @@ input {
         }
 
     #KNOCKOUT-STAGE {
-        width: 95%;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: auto;
-        grid-gap: 5px;
+        grid-gap: 3px;
         margin: 0 auto;
 
         grid-template-areas:
@@ -649,12 +699,12 @@ input {
             "FL"
     }
 
-    #QF, #SF, #FL {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
+        #QF, #SF, #FL {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
 
     #SAVE-PREDICTIONS {
 
@@ -711,5 +761,22 @@ input {
             #save-btn:active {
                 border-color: black;           
             }
+
+    #RESULTS-PREDICTIONS {
+        display: flex;
     }
-    
+
+        #results-predictions {
+
+            display: grid;
+            grid-template-columns: 0.75fr 1.25fr;
+            grid-template-rows: auto;
+            grid-gap: 5px;
+            margin: 0 auto;
+
+            grid-template-areas:
+                "results predictions";
+        }
+
+} /** end of @media screen and (min-width:1200px) */
+
