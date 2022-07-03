@@ -37,7 +37,7 @@
         } else if ($error_msg == "invalidpassword") {
             $error_msg = "Password entered is incorrect";
         } else if ($error_msg == "invalidusername") {
-            $error_msg = "Username entered in incorrect";
+            $error_msg = "Username entered is incorrect";
         }
     } 
 ?>
@@ -53,69 +53,11 @@
         
         <script src="https://kit.fontawesome.com/130d5316ba.js" crossorigin="anonymous"></script>
         
-        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="../css/styles-login.css">
 
         <style type="text/css">
 
-            header nav img {
-                display: flex;
-            }
-
-            .container { 
-                height: 100%;
-
-                display: grid;
-                grid-template-columns: 1fr;
-                grid-template-rows: 100px auto 60px;
-            }
-            .wrapper { 
-                display: flex;
-                flex-direction: column;
-                align-content: center;
-                justify-content: center;
-
-                min-width: 300px;
-
-                padding: 10px;
-                margin: 0px auto;
-
-                border: 1px solid #0E6EB8;
-                border-radius: 10px;
-            }
-            .wrapper > * {
-                margin: 10px;
-                text-align: center;
-            }
-            .wrapper > h2 {
-                padding-top: 10px;
-            }
-            .centered { 
-                grid-column: 1;
-                grid-row: 2;
-            }
-            .button-group input, button{ 
-                margin: 5px;
-                padding: 5px;
-                width: 100%;
-            }
-            .input-group * { 
-                margin: 5px;
-                padding: 5px;
-                width: 100%;
-            }
-            .help-block {
-                display: none;
-                color: red;
-                background: lightgrey;
-                padding: 10px;
-                border: 1px solid black;
-                width: 80%;
-            }
-            #menu-items {
-                grid-template-columns: 1fr;
-                width: 70%;
-            }
-            /* ********************************************** MEDIA RULES *******************************   */
+          /* ********************************************** MEDIA RULES *******************************   */
 
             /* ******************************************************************************************   */
             /* apply to any device that has a screen width of 576px or higher                               */
@@ -137,6 +79,7 @@
             /* ******************************************************************************************   */
             @media screen and (min-width: 1200px) {
             }
+
         </style>
     
     </head>
@@ -148,7 +91,7 @@
             <!-- ------------------------------------------------------ -->
             <!-- INCLUDE THE PHP CODE FOR THE NAV MENU                  -->
             <!-- ------------------------------------------------------ -->            
-<!--            <?php include "../inc/nav.level1.inc.php"; ?>-->
+            <!--            <?php include "../inc/nav.level1.inc.php"; ?>-->
             
         </header>
 
@@ -193,7 +136,7 @@
         <!-- ------------------------------------------------------ -->
         <!-- INCLUDE THE PHP CODE FOR THE FOOTER                    -->
         <!-- ------------------------------------------------------ -->            
-<!--        <?php include "../inc/footer.inc.php"; ?>-->
+        <!--        <?php include "../inc/footer.inc.php"; ?>       -->
             
 <!-- ------------------------------------------------------------------------------------------- -->        
 <!-- Javascript                                                                                  -->        

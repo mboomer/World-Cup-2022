@@ -113,11 +113,11 @@ nav {
 #GROUPS {
     grid-area: GROUPS;
     
-    background-color: white;
+    /* background-color: white;
     
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-around; */
 }
     
         #team-header {
@@ -177,11 +177,11 @@ nav {
     
     grid-area: KNOCKOUT-STAGE;
     
-    background-color: white;
+    /* background-color: white;
     
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-around; */
     }
     
         #QuarterFinal {
@@ -198,6 +198,29 @@ nav {
             grid-area: Final;
             background-color: skyblue;
         }
+
+#TOP-SCORER {
+    grid-area: TOP-SCORER;
+}
+
+    #top-goal-scorer {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        grid-template-rows: auto;
+    }
+
+    #top-scorer-instructions {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+
+    #top-scorer-selections {
+        display: flex;
+    }
+
+    #top-scorer-selections table {
+        width: 60%;
+    }
 
 #SAVE-PREDICTIONS {
     
@@ -239,6 +262,11 @@ nav {
             justify-content: center;
 
         }    
+
+        #confirm-predictions {
+            text-align: center;
+            padding:15px;
+        }
 
         #save-btn {
 
@@ -400,7 +428,7 @@ th, td {
     border-bottom: 1px dotted black;
 }
 
-.pos, .fixno {
+.pos, .fixno, .predno {
     width: 6%;
     background-color: gainsboro;
 }
@@ -455,7 +483,7 @@ th, td {
 }
 
 .results-home-flag, .results-away-flag {
-    width: 6%
+    width: 6.5%
 }
 
 .predictions-home-flag, .predictions-away-flag {
@@ -470,6 +498,19 @@ th, td {
 .predictions-home-flag img, .predictions-away-flag img {
     width: 55%;
     text-align: center;
+}
+
+#playerheader {
+    padding: 5px;
+    font-size: 1em;
+}
+
+#playerheader th td {
+    border: none;
+}
+
+.col-scorer {
+    width: 80%;
 }
 
 /* ******************************************************************************************   */
@@ -621,6 +662,25 @@ input {
     text-align: center;
 }
 
+#scorer-input {
+    text-align: left;
+}
+
+#goals-input {
+    text-align: center;
+}
+
+#scorer-input, .goals-input {
+    font-size: 1em;
+    padding: 2px;
+}
+
+#scorer, #goals th td {
+    padding: 4px;
+    border: dotted 1px black
+}
+
+
 /* ---------------------------------- END OF DEFAULT MEDIA RULE FOR 576 --------------------------------------------------------- */
 
 
@@ -704,6 +764,20 @@ input {
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
+        }
+
+
+    #team-flags {
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+
+    }
+        #team-flags div {
+            text-align: center;
         }
 
     #SAVE-PREDICTIONS {
