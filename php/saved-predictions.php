@@ -100,6 +100,16 @@
                     return;                
                 };
 
+                if (event.target.matches('#scorer-input')) {
+                    // dont complete this change event
+                    return;                
+                };
+
+                if (event.target.matches('#goals-input')) {
+                    // dont complete this change event
+                    return;                
+                };
+                
                 if (event.target.matches('[data-stage="QF"]')) {
 
                     // console.log('Update Semi Final based on changes to the changes to the scores in the Quarter Finals');
@@ -118,48 +128,48 @@
 
                     if (homeScores[0].value > awayScores[0].value) {
                         document.getElementById('winnerQF1').innerHTML = homeTeams[0].innerHTML;
-                        document.getElementById('winnerQF1flag').innerHTML = "<img src='../img/teams/" + homeTeams[0].innerHTML.trim() + ".png'>";
+                        document.getElementById('winnerQF1flag').innerHTML = "<img src='../img/teams/" + homeTeams[0].innerHTML.trim() + ".png' alt='" + homeTeams[0].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerQF1').nextElementSibling.innerHTML = homeIDs[0].innerHTML;
                         document.getElementById('winnerQF1').nextElementSibling.nextElementSibling.innerHTML = homeRanks[0].innerHTML;
                     } else if (homeScores[0].value < awayScores[0].value) {
                         document.getElementById('winnerQF1').innerHTML = awayTeams[0].innerHTML;
-                        document.getElementById('winnerQF1flag').innerHTML = "<img src='../img/teams/" + awayTeams[0].innerHTML.trim() + ".png'>";
+                        document.getElementById('winnerQF1flag').innerHTML = "<img src='../img/teams/" + awayTeams[0].innerHTML.trim() + ".png' alt='" + awayTeams[0].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerQF1').nextElementSibling.innerHTML = awayIDs[0].innerHTML;
                         document.getElementById('winnerQF1').nextElementSibling.nextElementSibling.innerHTML = awayRanks[0].innerHTML;
                     };
                         
                     if (homeScores[1].value > awayScores[1].value) {
                         document.getElementById('winnerQF2').innerHTML = homeTeams[1].innerHTML;
-                        document.getElementById('winnerQF2flag').innerHTML = "<img src='../img/teams/" + homeTeams[1].innerHTML.trim() + ".png'>";
+                        document.getElementById('winnerQF2flag').innerHTML = "<img src='../img/teams/" + homeTeams[1].innerHTML.trim() + ".png' alt='" + homeTeams[1].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerQF2').previousElementSibling.innerHTML = homeIDs[1].innerHTML;
                         document.getElementById('winnerQF2').previousElementSibling.previousElementSibling.innerHTML = homeRanks[1].innerHTML;
                     } else if (homeScores[1].value < awayScores[1].value) {
                         document.getElementById('winnerQF2').innerHTML = awayTeams[1].innerHTML;
-                        document.getElementById('winnerQF2flag').innerHTML = "<img src='../img/teams/" + awayTeams[1].innerHTML.trim() + ".png'>";
+                        document.getElementById('winnerQF2flag').innerHTML = "<img src='../img/teams/" + awayTeams[1].innerHTML.trim() + ".png' alt='" + awayTeams[1].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerQF2').previousElementSibling.innerHTML = awayIDs[1].innerHTML;
                         document.getElementById('winnerQF2').previousElementSibling.previousElementSibling.innerHTML = awayRanks[1].innerHTML;
                     };
  
                     if (homeScores[2].value > awayScores[2].value) {
                         document.getElementById('winnerQF3').innerHTML = homeTeams[2].innerHTML;
-                        document.getElementById('winnerQF3flag').innerHTML = "<img src='../img/teams/" + homeTeams[2].innerHTML.trim() + ".png'>";
+                        document.getElementById('winnerQF3flag').innerHTML = "<img src='../img/teams/" + homeTeams[2].innerHTML.trim() + ".png' alt='" + homeTeams[2].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerQF3').nextElementSibling.innerText = homeIDs[2].innerHTML;
                         document.getElementById('winnerQF3').nextElementSibling.nextElementSibling.innerText = homeRanks[2].innerHTML;
                     } else if (homeScores[2].value < awayScores[2].value) {
                         document.getElementById('winnerQF3').innerHTML = awayTeams[2].innerHTML;
-                        document.getElementById('winnerQF3flag').innerHTML = "<img src='../img/teams/" + awayTeams[2].innerHTML.trim() + ".png'>";
+                        document.getElementById('winnerQF3flag').innerHTML = "<img src='../img/teams/" + awayTeams[2].innerHTML.trim() + ".png' alt='" + awayTeams[2].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerQF3').nextElementSibling.innerText = awayIDs[2].innerHTML;
                         document.getElementById('winnerQF3').nextElementSibling.nextElementSibling.innerText = awayRanks[2].innerHTML;
                     };
  
                     if (homeScores[3].value > awayScores[3].value) {
                         document.getElementById('winnerQF4').innerHTML = homeTeams[3].innerHTML;
-                        document.getElementById('winnerQF4flag').innerHTML = "<img src='../img/teams/" + homeTeams[3].innerHTML.trim() + ".png'>";
+                        document.getElementById('winnerQF4flag').innerHTML = "<img src='../img/teams/" + homeTeams[3].innerHTML.trim() + ".png' alt='" + homeTeams[3].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerQF4').previousElementSibling.innerText = homeIDs[3].innerHTML;
                         document.getElementById('winnerQF4').previousElementSibling.previousElementSibling.innerText = homeRanks[3].innerHTML;
                     } else if (homeScores[3].value < awayScores[3].value) {
                         document.getElementById('winnerQF4').innerHTML = awayTeams[3].innerHTML;
-                        document.getElementById('winnerQF4flag').innerHTML = "<img src='../img/teams/" + awayTeams[3].innerHTML.trim() + ".png'>";
+                        document.getElementById('winnerQF4flag').innerHTML = "<img src='../img/teams/" + awayTeams[3].innerHTML.trim() + ".png' alt='" + awayTeams[3].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerQF4').previousElementSibling.innerText = awayIDs[3].innerHTML;
                         document.getElementById('winnerQF4').previousElementSibling.previousElementSibling.innerText = awayRanks[3].innerHTML;
                     };
@@ -185,24 +195,24 @@
 
                     if (homeScores[0].value > awayScores[0].value) {
                         document.getElementById('winnerSF1').innerHTML = homeTeams[0].innerHTML;
-                        document.getElementById('winnerSF1flag').innerHTML = "<img src='../img/teams/" + homeTeams[0].innerHTML.trim() + ".png'>";
+                        document.getElementById('winnerSF1flag').innerHTML = "<img src='../img/teams/" + homeTeams[0].innerHTML.trim() + ".png' alt='" + homeTeams[0].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerSF1').nextElementSibling.innerHTML = homeIDs[0].innerHTML;
                         document.getElementById('winnerSF1').nextElementSibling.nextElementSibling.innerHTML = homeRanks[0].innerHTML;
                     } else if (homeScores[0].value < awayScores[0].value) {
                         document.getElementById('winnerSF1').innerHTML = awayTeams[0].innerHTML;
-                        document.getElementById('winnerSF1flag').innerHTML = "<img src='../img/teams/" + awayTeams[0].innerHTML.trim() + ".png'>";
+                        document.getElementById('winnerSF1flag').innerHTML = "<img src='../img/teams/" + awayTeams[0].innerHTML.trim() + ".png' alt='" + awayTeams[0].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerSF1').nextElementSibling.innerHTML = awayIDs[0].innerHTML;
                         document.getElementById('winnerSF1').nextElementSibling.nextElementSibling.innerHTML = awayRanks[0].innerHTML;
                     };
                         
                     if (homeScores[1].value > awayScores[1].value) {
                         document.getElementById('winnerSF2').innerHTML = homeTeams[1].innerHTML;
-                        document.getElementById('winnerSF2flag').innerHTML = "<img src='../img/teams/" + homeTeams[1].innerHTML.trim() + ".png'>";
+                        document.getElementById('winnerSF2flag').innerHTML = "<img src='../img/teams/" + homeTeams[1].innerHTML.trim() + ".png' alt='" + homeTeams[1].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerSF2').previousElementSibling.innerHTML = homeIDs[1].innerHTML;
                         document.getElementById('winnerSF2').previousElementSibling.previousElementSibling.innerHTML = homeRanks[1].innerHTML;
                     } else if (homeScores[1].value < awayScores[1].value) {
                         document.getElementById('winnerSF2').innerHTML = awayTeams[1].innerHTML;
-                        document.getElementById('winnerSF2flag').innerHTML = "<img src='../img/teams/" + awayTeams[1].innerHTML.trim() + ".png'>";
+                        document.getElementById('winnerSF2flag').innerHTML = "<img src='../img/teams/" + awayTeams[1].innerHTML.trim() + ".png' alt='" + awayTeams[1].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerSF2').previousElementSibling.innerHTML = awayIDs[1].innerHTML;
                         document.getElementById('winnerSF2').previousElementSibling.previousElementSibling.innerHTML = awayRanks[1].innerHTML;
                     };
@@ -388,7 +398,7 @@
 
                     updatedTable += `<tr>
                             <td class='pos'>  ${index+1}  </td>
-                            <td class='home-flag'><img src="../img/teams/${team.Team}.png"></td>
+                            <td class='home-flag'><img src="../img/teams/${team.Team}.png" alt="${team.Team} team flag"></td>
                             <td id='${currentTableID}-pos${index+1}' class='team'> ${team.Team} </td>
                             <td class='hidden team-id'> ${team.ID} </td> <td class='hidden team-rk'> ${team.Rank} </td>
                             <td class='cols'> ${team.Played} </td>
@@ -443,7 +453,7 @@
               <button id="group-stages" name="GROUPS" class="tablinks active">Group Stage</button>
               <button id="knockout-stage" name="KNOCKOUT-STAGE" class="tablinks ">Knockout Stage</button>
               <button id="top-scorer" name="TOP-SCORER" class="tablinks ">Top Goal Scorer</button>
-              <button id="update-predictions" name="UPDATE-PREDICTIONS" class="tablinks ">Update Predictions</button>
+              <button id="update-predictions-btn" name="UPDATE-PREDICTIONS" class="tablinks ">Update Predictions</button>
               <button id="res-pred" name="RESULTS-PREDICTIONS" class="tablinks ">Results / Predictions</button>
             </div>
 
@@ -547,7 +557,7 @@
                                                 echo "      <td class='fixno'>" . $fixno . "</td>";
                                                 echo "      <td class='stage hidden'>" . $rndcode . "</td>";                      // hidden cell for code of the tournament stage 
                                                 echo "      <td class='homeid hidden'>" . $homeid . "</td>";        // hidden cell for ID of home team
-                                                echo "      <td class='home-flag'><img src='../img/teams/" . $hometeam . ".png'></td>";      
+                                                echo "      <td class='home-flag'><img src='../img/teams/" . $hometeam . ".png' alt='" . $hometeam . " team flag'></td>";      
                                                 echo "      <td class='home'>" . $hometeam . "</td>";
                                                 echo "      <td class='h-rank'>" . $homerank . "</td>";
                                                 echo "      <td><input class='homescore' data-table='" . $tablename . "' value=" . $homescore . " type='number' min=0 placeholder=0></td>";
@@ -555,7 +565,7 @@
                                                 echo "      <td class='a-rank'>" . $awayrank . "</td>";
                                                 echo "      <td class='awayid hidden'>" . $awayid . "</td>";        // hidden cell for ID of away team
                                                 echo "      <td class='away'>" . $awayteam . "</td>";
-                                                echo "      <td class='away-flag'><img src='../img/teams/" . $awayteam . ".png'></td>";      
+                                                echo "      <td class='away-flag'><img src='../img/teams/" . $awayteam . ".png'alt='" . $awayteam . " team flag'></td>";      
                                                 echo "  </tr>";
                                     }
 
@@ -599,13 +609,13 @@
 
                                         while ($row = $result->fetch_assoc()) {
                                         
-                                            echo "          <tr>";
-                                            echo "              <td class='pos'>" . $rowno . "</td><td class='home-flag'><img src='../img/teams/" . $row['Team'] . ".png'></td>";
-                                            echo "              <td id=" . $tablename . "-pos" . $rowno . " class='team'>" . $row['Team'] . "</td>";
-                                            echo "              <td class='hidden team-id'>" . $row['ID'] . "</td> <td class='hidden team-rk'>" . $row['Ranking'] . "</td>";
-                                            echo "              <td class='cols'>0</td> <td class='cols'>0</td><td class='cols'>0</td><td class='cols'>0</td><td class='cols'>0</td>";
-                                            echo "              <td class='cols'>0</td> <td class='cols'>0</td><td class='cols'>0</td>";
-                                            echo "          </tr>";
+                                            echo "       <tr>";
+                                            echo "           <td class='pos'>" . $rowno . "</td><td class='home-flag'><img src='../img/teams/" . $row['Team'] . ".png' alt='" . $row['Team'] . " team flag'></td>";
+                                            echo "           <td id=" . $tablename . "-pos" . $rowno . " class='team'>" . $row['Team'] . "</td>";
+                                            echo "           <td class='hidden team-id'>" . $row['ID'] . "</td> <td class='hidden team-rk'>" . $row['Ranking'] . "</td>";
+                                            echo "           <td class='cols'>0</td> <td class='cols'>0</td><td class='cols'>0</td><td class='cols'>0</td><td class='cols'>0</td>";
+                                            echo "           <td class='cols'>0</td> <td class='cols'>0</td><td class='cols'>0</td>";
+                                            echo "       </tr>";
 
                                             $rowno = $rowno + 1;    // increment row counter
                                         }
@@ -968,24 +978,89 @@
 
                 <div id="TOP-SCORER" class="tabcontent">
 
-                    <section id='top-scorer'>
+                    <?php
+                        $qry =   "SELECT \n" 
+                                . "  	ID,  \n"
+                                . "     GroupID, \n"
+                                . "     Team, \n"
+                                . "     Ranking, \n"
+                                . "     WikipediaLink \n"
+                                . "  FROM  \n"
+                                . "  	Teams \n"
+                                . "  ORDER BY \n"
+                                . "  	GroupID \n";
 
-                        <div id='confirm-save'>
-                            <input type='checkbox' id='confirm-chkbox' name='confirm-chkbox' checked>
-                            <label for="confirm-chkbox">Select your top scorer and number of goals</label>
+                        $result = $conn->query($qry);
+
+                        if ($result->num_rows == 0) {
+                            echo "<div>NO RESULTS RETURNED</div>";
+                        } else {
+
+                            echo "<section id='team-flags'>";
+                                                
+                            while ($row = $result->fetch_assoc()) {
+                                
+                                if ($row["WikipediaLink"] > "") {
+                                    echo "<a target='_blank' href='" . $row["WikipediaLink"] . "'><img src='../img/flags/" . $row["Team"] . ".png' alt='" . $row['Team'] . " team flag'></a>";
+                                };
+
+                            }
+
+                            echo "</section>";
+                        }
+                    ?>
+
+                    <section id='top-goal-scorer'>
+
+                        <div id='top-scorer-instructions'>
+                            <p>Click on the flags above to see the squads, players and the top goal scorers for each squad.</p><br>
+                            <p>Select the player you think will be the top scorer in the competition and the number of goals you think they will score.</p><br>
+                            <p>In the event of a tie on points these selections will be used as a tie-breaker.</p><br>
                         </div>
 
-                        <div id='chkbox-error' style="display:none;">
-                            Click the Checkbox to confirm that you want to save your Top Scorer
-                        </div>
+                        <div id='top-scorer-selections'>
 
-                        <div id='confirm-btn'>
-                            <button type='button' id='save-btn' class='predictions-btn'>Save Predictions</button>
-                        </div>
+                            <?php
+                                $qry =   "SELECT \n" 
+                                        . "  	TopScorer,  \n"
+                                        . "     GoalsScored \n"
+                                        . "  FROM  \n"
+                                        . "  	Users \n"
+                                        . "  WHERE \n"
+                                        . "  	ID = " .$userid . " \n";
 
-                        <div style="text-align: center; padding:15px" id='confirm-predictions'>
-                            <p>Nothing saved yet</p>
-                        </div>
+                                $result = $conn->query($qry);
+
+                                if ($result->num_rows == 0) {
+                                    echo "<div>NO RESULTS RETURNED</div>";
+                                } else {
+
+                                    echo "<table>";
+                                    echo "    <thead class='greenheader'>";
+                                    echo "        <tr class='playerheader'>";
+                                    echo "            <th class='col-scorer'>Top Scorer</th> <th>Goals Scored</th>"; 
+                                    echo "        </tr>";
+                                    echo "    </thead>";
+                                    echo "    <tbody>";
+                                                        
+                                    while ($row = $result->fetch_assoc()) {
+                                        
+                                        echo "      <tr>";
+                                        echo "          <td id='scorer'>";
+                                        echo "              <input id='scorer-input' type='text' placeholder='  Player who is top goal scorer' value='" . $row['TopScorer'] . "'>";
+                                        echo "          </td>"; 
+                                        echo "          <td id='goals'>";
+                                        echo "              <input id='goals-input' type='number' min=0 placeholder=0 value='" . $row['GoalsScored'] . "'>";
+                                        echo "          </td>";
+                                        echo "      </tr>";
+                                    }
+
+                                    echo "  </tbody>";
+                                    echo "</table>";        
+                                }
+                            ?>
+
+                        </div> <!-- end of TOP SCORER SELECTIONS div -->
 
                     </section> <!-- end of TOP SCORER section -->
 
@@ -1000,7 +1075,7 @@
                             <label for="confirm-chkbox">Check to confirm that you want to update your predictions</label>
                         </div>
 
-                        <div id='chkbox-error' style="display:none;">
+                        <div id='chkbox-error'>
                             Click the Checkbox to confirm that you want to save your predictions
                         </div>
 
@@ -1008,7 +1083,7 @@
                             <button type='button' id='update-btn' class='predictions-btn'>Update Predictions</button>
                         </div>
 
-                        <div style="text-align: center; padding:15px" id='confirm-predictions'>
+                        <div id='confirm-predictions'>
                             <p>No updates made</p>
                         </div>
 
@@ -1132,10 +1207,10 @@
                                                 array_push($results, $res);
 
                                                 echo "  <tr>";
-                                                echo "      <td class='fixno'>" . $fixno . "</td>";
+                                                echo "      <td class='predno'>" . $fixno . "</td>";
                                                 echo "      <td class='stage hidden'>" . $rndcode . "</td>";                                // hidden cell for code of the tournament stage 
                                                 echo "      <td class='homeid hidden'>" . $homeid . "</td>";                                // hidden cell for ID of home team
-                                                echo "      <td class='results-home-flag'><img src='../img/teams/" . $hometeam . ".png'></td>";      
+                                                echo "      <td class='results-home-flag'><img src='../img/teams/" . $hometeam . ".png' alt='" . $hometeam . " team flag'></td>";      
                                                 echo "      <td class='home'>" . $hometeam . "</td>";
                                                 echo "      <td class='h-rank'>" . $homerank . "</td>";
                                                 echo "      <td>" . $homescore . "</td>";
@@ -1143,7 +1218,7 @@
                                                 echo "      <td class='a-rank'>" . $awayrank . "</td>";
                                                 echo "      <td class='awayid hidden'>" . $awayid . "</td>";        // hidden cell for ID of away team
                                                 echo "      <td class='away'>" . $awayteam . "</td>";
-                                                echo "      <td class='results-away-flag'><img src='../img/teams/" . $awayteam . ".png'></td>";      
+                                                echo "      <td class='results-away-flag'><img src='../img/teams/" . $awayteam . ".png' alt='" . $awayteam . " team flag'></td>";      
                                                 echo "      <td class='res'>" . $resultcode . "</td>";
                                                 echo "  </tr>";
                                         
@@ -1214,7 +1289,7 @@
                                         echo "              </tr>";
                                         echo "              <tr>";
                                         echo "              <tr>";
-                                        echo "                  <th>No</th><th class='hidden'><th class='hidden'></th><th colspan='2'>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th>";
+                                        echo "                  <th>No.</th><th class='hidden'><th class='hidden'></th><th colspan='2'>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th>";
                                         echo "                  <th class='hidden'></th> <th colspan='2'>AWAY</th><th class='res-header'>Res</th><th class='res-header'>Pts</th><th class='res-header'>Bonus</th>";
                                         echo "              </tr>";
                                         echo "          </thead>";
@@ -1299,10 +1374,10 @@
                                                 $TotalPoints = $TotalPoints + ($pts + $bonus);
 
                                                 echo "  <tr>";
-                                                echo "      <td class='fixno'>" . $fixno . "</td>";
+                                                echo "      <td class='predno'>" . $fixno . "</td>";
                                                 echo "      <td class='stage hidden'>" . $rndcode . "</td>";                                // hidden cell for code of the tournament stage 
                                                 echo "      <td class='homeid hidden'>" . $homeid . "</td>";                                // hidden cell for ID of home team
-                                                echo "      <td class='predictions-home-flag'><img src='../img/teams/" . $hometeam . ".png'></td>";      
+                                                echo "      <td class='predictions-home-flag'><img src='../img/teams/" . $hometeam . ".png' alt='" . $hometeam . " team flag'></td>";      
                                                 echo "      <td class='home'>" . $hometeam . "</td>";
                                                 echo "      <td class='h-rank'>" . $homerank . "</td>";
                                                 echo "      <td class='pos'>" . $homescore . "</td>";
@@ -1310,7 +1385,7 @@
                                                 echo "      <td class='a-rank'>" . $awayrank . "</td>";
                                                 echo "      <td class='awayid hidden'>" . $awayid . "</td>";        // hidden cell for ID of away team
                                                 echo "      <td class='away'>" . $awayteam . "</td>";
-                                                echo "      <td class='predictions-away-flag'><img src='../img/teams/" . $awayteam . ".png'></td>";      
+                                                echo "      <td class='predictions-away-flag'><img src='../img/teams/" . $awayteam . ".png' alt='" . $awayteam . " team flag'></td>";      
                                                 echo "      <td class='res'>" . $resultcode . "</td>";
                                                 echo "      <td class='pts'>" . $pts . "</td>";
                                                 echo "      <td class='bon'>" . $bonus . "</td>";
@@ -1323,7 +1398,7 @@
                                 };
 
                                 // echo "<script>console.log(" . $TotalPoints . ");</script>;";
-                                echo "<script>document.getElementById('points-total').innerText = 'Points : " . $TotalPoints . "';</script>;";
+                                echo "<script>document.getElementById('points-total').innerText = 'Points : " . $TotalPoints . "'</script>";
                             
                             ?> <!-- end of the predictions php -->
 
@@ -1336,12 +1411,14 @@
             </section> <!-- end of Tournment -->
 
             <footer id="social-media">
+                <!--
                 <ul>
                     <li><a href='#' target='_blank'><i class='fab fa-facebook-square'></i></a></li>
                     <li><a href='#' target='_blank'><i class='fab fa-twitter-square'></i></a></li>
                     <li><a href='#' target='_blank'><i class='fab fa-youtube-square'></i></a></li>
                     <li><a href='#' target='_blank'><i class='fab fa-instagram-square'></i></a></li>
                 </ul>
+                -->
                 <p>&copy; <script>document.write(new Date().getFullYear());</script> World Cup 2022 Predictor</p>
                 <p>All Rights Reserved &mdash; Designed by Mark Boomer</p>
             </footer>
@@ -1374,6 +1451,10 @@
                         document.getElementById("chkbox-error").style.display = "block";
                     } else {
                         
+                        // get the pedictions for who will be top scorer and the number of goals scored
+                        topgoalscorer = document.getElementById('scorer-input').value; 
+                        nogoalsscored = document.getElementById('goals-input').value; 
+                        
                         // get the the results from the group tables 
                         fixtureids  = document.querySelectorAll('.fixno');            
                         stages      = document.querySelectorAll('.stage');            
@@ -1388,7 +1469,26 @@
                         // initialise the object to hold each prediction
                         let prediction = {};
                 
-                        // Create the array of objects that will be used to create the league table
+                        /**
+                         * push the top goal scorer to the first element in the array
+                         * use dummy values to fill the other array values 
+                        */
+
+                        prediction = {  UserID     : userID, 
+                                        FixtureID  : 99, 
+                                        HomeScore  : topgoalscorer, 
+                                        AwayScore  : 0, 
+                                        HomeTeamID : nogoalsscored, 
+                                        AwayTeamID : 0, 
+                                        ResultID   : 0, 
+                                        Points     : 0, 
+                                        Stage      : ''                                        
+                                    };
+
+                        // add the top goal scorer prediction object to the Predictions Array                                                                
+                        predictions.push(prediction);
+                        
+                        // add the array of objects that will be used to create the league table
                         for (let f = 0; f < fixtureids.length; f++) {
                             
                             prediction = {  UserID     : userID, 
@@ -1419,8 +1519,6 @@
 
                         }; // end of FOR loop
 
-                        console.log(predictions);
-                    
                         // now process the predictions array and save result to predictions table
                         // console.log(JSON.stringify(predictions));
 
@@ -1519,56 +1617,56 @@
                     let runnerupgroupDrk = document.getElementById("TableD-pos2").nextElementSibling.nextElementSibling.innerHTML;
 
                     // Quarter Final 1
-                    document.getElementById("winnerAflag").innerHTML = "<img src='../img/teams/" + winnergroupA.trim() + ".png'>";
+                    document.getElementById("winnerAflag").innerHTML = "<img src='../img/teams/" + winnergroupA.trim() + ".png' alt='" + winnergroupA.trim() + " team flag'>";
                     document.getElementById("winnerA").innerHTML = winnergroupA;
                     document.getElementById("winnerA").nextElementSibling.innerHTML = winnergroupAid;
                     document.getElementById("winnerA").nextElementSibling.nextElementSibling.innerHTML = winnergroupArk;
 
-                    document.getElementById("runnerupBflag").innerHTML = "<img src='../img/teams/" + runnerupgroupB.trim() + ".png'>";
+                    document.getElementById("runnerupBflag").innerHTML = "<img src='../img/teams/" + runnerupgroupB.trim() + ".png' alt='" + runnerupgroupB.trim() + " team flag'>";
                     document.getElementById("runnerupB").innerHTML = runnerupgroupB;
                     document.getElementById("runnerupB").previousElementSibling.innerHTML = runnerupgroupBid;
                     document.getElementById("runnerupB").previousElementSibling.previousElementSibling.innerHTML = runnerupgroupBrk;
 
                     // Quarter Final 2
-                    document.getElementById("winnerBflag").innerHTML = "<img src='../img/teams/" + winnergroupB.trim() + ".png'>";
+                    document.getElementById("winnerBflag").innerHTML = "<img src='../img/teams/" + winnergroupB.trim() + ".png' alt='" + winnergroupB.trim() + " team flag'>";
                     document.getElementById("winnerB").innerHTML = winnergroupB;
                     document.getElementById("winnerB").nextElementSibling.innerHTML = winnergroupBid;
                     document.getElementById("winnerB").nextElementSibling.nextElementSibling.innerHTML = winnergroupBrk;
 
-                    document.getElementById("runnerupAflag").innerHTML = "<img src='../img/teams/" + runnerupgroupA.trim() + ".png'>";
+                    document.getElementById("runnerupAflag").innerHTML = "<img src='../img/teams/" + runnerupgroupA.trim() + ".png' alt='" + runnerupgroupA.trim() + " team flag'>";
                     document.getElementById("runnerupA").innerHTML = runnerupgroupA;
                     document.getElementById("runnerupA").previousElementSibling.innerHTML = runnerupgroupAid;
                     document.getElementById("runnerupA").previousElementSibling.previousElementSibling.innerHTML = runnerupgroupArk;
 
                     // Quarter Final 3
-                    document.getElementById("winnerCflag").innerHTML = "<img src='../img/teams/" + winnergroupC.trim() + ".png'>";
+                    document.getElementById("winnerCflag").innerHTML = "<img src='../img/teams/" + winnergroupC.trim() + ".png' alt='" + winnergroupC.trim() + " team flag'>";
                     document.getElementById("winnerC").innerHTML = winnergroupC;
                     document.getElementById("winnerC").nextElementSibling.innerHTML = winnergroupCid;
                     document.getElementById("winnerC").nextElementSibling.nextElementSibling.innerHTML = winnergroupCrk;
 
-                    document.getElementById("runnerupDflag").innerHTML = "<img src='../img/teams/" + runnerupgroupD.trim() + ".png'>";
+                    document.getElementById("runnerupDflag").innerHTML = "<img src='../img/teams/" + runnerupgroupD.trim() + ".png' alt='" + runnerupgroupD.trim() + " team flag'>";
                     document.getElementById("runnerupD").innerHTML = runnerupgroupD;
                     document.getElementById("runnerupD").previousElementSibling.innerHTML = runnerupgroupDid;
                     document.getElementById("runnerupD").previousElementSibling.previousElementSibling.innerHTML = runnerupgroupDrk;
 
                     // Quarter Final 4
-                    document.getElementById("winnerDflag").innerHTML = "<img src='../img/teams/" + winnergroupD.trim() + ".png'>";
+                    document.getElementById("winnerDflag").innerHTML = "<img src='../img/teams/" + winnergroupD.trim() + ".png' alt='" + winnergroupD.trim() + " team flag'>";
                     document.getElementById("winnerD").innerHTML = winnergroupD;
                     document.getElementById("winnerD").nextElementSibling.innerHTML = winnergroupDid;
                     document.getElementById("winnerD").nextElementSibling.nextElementSibling.innerHTML = winnergroupDrk;
 
-                    document.getElementById("runnerupCflag").innerHTML = "<img src='../img/teams/" + runnerupgroupC.trim() + ".png'>";
+                    document.getElementById("runnerupCflag").innerHTML = "<img src='../img/teams/" + runnerupgroupC.trim() + ".png' alt='" + runnerupgroupC.trim() + " team flag'>";
                     document.getElementById("runnerupC").innerHTML = runnerupgroupC;
                     document.getElementById("runnerupC").previousElementSibling.innerHTML = runnerupgroupCid;
                     document.getElementById("runnerupC").previousElementSibling.previousElementSibling.innerHTML = runnerupgroupCrk;
 
-                    document.getElementById('winnerQF1flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerQF1').innerHTML.trim() + ".png'>";
-                    document.getElementById('winnerQF2flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerQF2').innerHTML.trim() + ".png'>";
-                    document.getElementById('winnerQF3flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerQF3').innerHTML.trim() + ".png'>";
-                    document.getElementById('winnerQF4flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerQF4').innerHTML.trim() + ".png'>";
+                    document.getElementById('winnerQF1flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerQF1').innerHTML.trim() + ".png' alt='Winner of Quarter Final 1'>";
+                    document.getElementById('winnerQF2flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerQF2').innerHTML.trim() + ".png' alt='Winner of Quarter Final 2'>";
+                    document.getElementById('winnerQF3flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerQF3').innerHTML.trim() + ".png' alt='Winner of Quarter Final 3'>>";
+                    document.getElementById('winnerQF4flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerQF4').innerHTML.trim() + ".png' alt='Winner of Quarter Final 4'>>";
 
-                    document.getElementById('winnerSF1flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerSF1').innerHTML.trim() + ".png'>";
-                    document.getElementById('winnerSF2flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerSF2').innerHTML.trim() + ".png'>";
+                    document.getElementById('winnerSF1flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerSF1').innerHTML.trim() + ".png' alt='Winner of Semi Final 1'>>";
+                    document.getElementById('winnerSF2flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerSF2').innerHTML.trim() + ".png' alt='Winner of Semi Final 2'>>";
                 }
             }, false);   // end of CLICK event listener
 
@@ -1599,7 +1697,10 @@
                     document.getElementById(tabname).style.display = "grid";
                 }
                 else if (tabname == "KNOCKOUT-STAGE") {
-                    document.getElementById(tabname).style.display = "flex";
+                    document.getElementById(tabname).style.display = "grid";
+                } 
+                else if (tabname == "TOP-SCORER") {
+                    document.getElementById(tabname).style.display = "grid";
                 } 
                 else if (tabname == "RESULTS-PREDICTIONS") {
                     document.getElementById(tabname).style.display = "block";
@@ -1636,3 +1737,4 @@
     </body>
 
 </html>
+        
