@@ -1237,7 +1237,7 @@
 
                             <?php
 
-                            $qry =   "SELECT \n"
+                                $qry =   "SELECT \n"
                                     . "  	    pred.UserID     as userid, \n"
                                     . "  		pred.FixtureID  as fixtureno, \n"
                                     . "  		pred.Stage      as stage, \n" 
@@ -1419,7 +1419,7 @@
                     <li><a href='#' target='_blank'><i class='fab fa-instagram-square'></i></a></li>
                 </ul>
                 -->
-                <p>&copy; <script>document.write(new Date().getFullYear());</script> World Cup 2022 Predictor</p>
+                <p><br>&copy; <script>document.write(new Date().getFullYear());</script> World Cup 2022 Predictor</p>
                 <p>All Rights Reserved &mdash; Designed by Mark Boomer</p>
             </footer>
             
@@ -1662,11 +1662,11 @@
 
                     document.getElementById('winnerQF1flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerQF1').innerHTML.trim() + ".png' alt='Winner of Quarter Final 1'>";
                     document.getElementById('winnerQF2flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerQF2').innerHTML.trim() + ".png' alt='Winner of Quarter Final 2'>";
-                    document.getElementById('winnerQF3flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerQF3').innerHTML.trim() + ".png' alt='Winner of Quarter Final 3'>>";
-                    document.getElementById('winnerQF4flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerQF4').innerHTML.trim() + ".png' alt='Winner of Quarter Final 4'>>";
+                    document.getElementById('winnerQF3flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerQF3').innerHTML.trim() + ".png' alt='Winner of Quarter Final 3'>";
+                    document.getElementById('winnerQF4flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerQF4').innerHTML.trim() + ".png' alt='Winner of Quarter Final 4'>";
 
-                    document.getElementById('winnerSF1flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerSF1').innerHTML.trim() + ".png' alt='Winner of Semi Final 1'>>";
-                    document.getElementById('winnerSF2flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerSF2').innerHTML.trim() + ".png' alt='Winner of Semi Final 2'>>";
+                    document.getElementById('winnerSF1flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerSF1').innerHTML.trim() + ".png' alt='Winner of Semi Final 1'>";
+                    document.getElementById('winnerSF2flag').innerHTML = "<img src='../img/teams/" + document.getElementById('winnerSF2').innerHTML.trim() + ".png' alt='Winner of Semi Final 2'>";
                 }
             }, false);   // end of CLICK event listener
 
@@ -1737,4 +1737,3 @@
     </body>
 
 </html>
-        
