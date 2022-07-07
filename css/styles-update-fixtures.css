@@ -1,0 +1,439 @@
+*{                                  /* Override browsers default CSS rules  */
+    margin:0;
+    padding:0;
+    box-sizing: content-box;
+}
+
+body {
+     font-family: 'Open Sans', sans-serif;
+     /* background-color: #131633; */
+     background-color: white;
+     color: #34495e;
+}
+
+/* ******************************************************************************************   */
+/*                                          TABS                                                */
+/* ******************************************************************************************   */
+
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        margin: 2px;
+    }
+
+    /* Style the buttons that are used to open the tab content */
+    .tab button {
+      background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 10px 8px;
+      transition: 0.3s;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+        background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: block;
+    }
+
+/* 
+----------------------------------------------------------------------------------
+Each section has a GRID-AREA named after the section ID
+----------------------------------------------------------------------------------
+*/
+
+#container {
+    margin-top: 5px;
+}
+
+header {
+    
+    display: grid;
+    grid-area: header;
+    grid-template-columns: 1fr 10fr 2fr;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    
+    width: 100%;
+    background-color: lightgray;
+    align-items: center;
+    justify-content: center;    
+/*    margin: auto auto;*/
+} 
+
+header h1 {
+     font-size: 2.5em;
+     text-align: center;
+     color: white;
+     margin-bottom: 20px;
+     text-shadow: 2px 2px #22638E;
+}
+
+header img {
+    width: 75px;
+}
+
+#logo {
+    text-align: center;
+}
+
+nav {
+    grid-area: nav;
+}
+
+#tabs {
+    grid-area: tabs;
+}
+
+#tournment {
+    grid-area: tournment;
+}
+
+#FIXTURES {
+    grid-area: FIXTURES;
+    
+}    
+        #team-header {
+            grid-area: team-header;
+            background-color: white;
+        }
+
+#GOALS-SCORED {
+    
+    grid-area: GOALS-SCORED;
+    
+    }
+    
+footer {
+    grid-area: footer;
+
+    display: flex;                                  /* display UL, P & P elements vertically and center them */
+    flex-direction: column;
+    align-items: center;
+
+    background: linear-gradient(to bottom, #284e7a, #000 100%);
+    color: white;
+}
+
+/* ******************************************************************************************   */
+/*                                          IMAGES                                              */
+/* ******************************************************************************************   */
+
+
+/* ******************************************************************************************   */
+/*                                          TABLES                                              */
+/* ******************************************************************************************   */
+
+.greenheader {
+    background-color: green;
+    color: white;
+}
+
+.blueheader {
+    background-color: navy;
+    color: white;
+}
+
+tbody {
+    background-color: white;
+    color: black;
+}
+
+table {
+    font-size: 0.75em;
+    width: 95%;
+    padding: 2px;
+    text-align: center;    
+    border: 1px dotted black;
+    margin: auto auto;
+}
+
+th, td {
+    border-right: 1px dotted black;
+    border-bottom: 1px dotted black;
+}
+
+.pos, .fixno, .predno {
+    width: 6%;
+    background-color: gainsboro;
+}
+
+.home {
+    width: 20%;
+    padding-right: 5px;
+    text-align: right;
+}
+
+.h-rank, .a-rank {
+    width: 4%;
+    background-color: aliceblue;
+}
+
+.hidden {
+    width: 10%;
+    display: none;
+}
+
+.away {
+    width: 20%;
+    padding-left: 5px;
+    text-align: left;
+}
+
+.team {
+    width: 30%;
+    padding-left: 5px;
+    text-align: left;
+}
+
+.player {
+    width: 30%;
+    padding-left: 5px;
+    text-align: left;
+}
+
+.cols {
+    width: 8%;
+}
+
+.home-flag, .away-flag {
+    width: 6%
+}
+
+.home-flag img, .away-flag img {
+    width: 55%;
+    text-align: center;
+}
+.res, .pts, .bon {
+    width: 4%;
+    background-color: gainsboro;
+}
+
+.res-header {
+    padding: 2px;
+}
+
+.results-home-flag, .results-away-flag {
+    width: 6.5%
+}
+
+.predictions-home-flag, .predictions-away-flag {
+    width: 4%
+}
+
+.results-home-flag img, .results-away-flag img {
+    width: 55%;
+    text-align: center;
+}
+
+.predictions-home-flag img, .predictions-away-flag img {
+    width: 55%;
+    text-align: center;
+}
+
+#playerheader {
+    padding: 5px;
+    font-size: 1em;
+}
+
+#playerheader th td {
+    border: none;
+}
+
+.col-scorer {
+    width: 80%;
+}
+
+/* ******************************************************************************************   */
+
+/* ******************************************************************************************   */
+/*                                          FOOTER SECTION                                      */
+/* ******************************************************************************************   */
+
+footer p {
+    text-transform: uppercase;          /* change text in para tags to uppercase */
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);       /* add a transparent overlay of white - 0.6 = 60% opacity */
+    margin-bottom: 10px;
+}
+
+footer ul {
+    display: flex;                      /* display child items of parent element, ie the ul, into a row */
+    flex-direction: row;
+    list-style: none;
+    margin-bottom: 5px;
+}
+
+footer ul li {
+    margin: 0 20px;                     /* spreads out the line items containing the social media icons */
+}
+
+footer ul li a {
+    font-size: 36px;                    /* makes the icons bigger and ensure the cursor is always the pointer */
+    cursor: pointer;
+    color: white;
+}
+/* ------------------ Transparent Buttons ------------------------- */
+
+/* white text white border                                          */
+.transparent-btn { 
+    display: inline-block; 
+    padding: 5px 10px; 
+    color: #FFF; 
+    border: 1px solid #FFF; 
+    text-decoration: none; 
+    font-size: 16px; 
+    line-height: 120%; 
+    background-color: rgba(255,255,255, 0); 
+    border-radius: 4px; transition: background-color 300ms ease; 
+    cursor: pointer; 
+}
+.transparent-btn:hover { 
+    background-color: rgba(255,255,255, 0.2); 
+    color: #000; 
+}
+
+/* white text blue background                                      */
+.transparent-btn-blue { 
+    display: inline-block; 
+    padding: 5px 5px; 
+    margin: 5px;
+    color: #FFF; 
+    border: 1px solid #00F; 
+    text-decoration: none; 
+    font-size: 12px; 
+    line-height: 120%; 
+    background-color: rgba(0,0,255, 0.6); 
+    border-radius: 4px; 
+    transition: background-color 300ms ease; 
+    cursor: pointer; 
+}
+.transparent-btn-blue:hover { 
+    background-color: rgba(0,0,255, 0.2); 
+    color: #000; 
+}
+
+/* smaller blue text white background                                      */
+.transparent-btn-white { 
+    display: inline-block; 
+    padding: 3px 5px; 
+    color: #00F; 
+    border: 1px solid #00F; 
+    text-decoration: none; 
+    font-size: 12px; 
+    line-height: 120%; 
+    background-color: rgba(255,255,255, 0); 
+    border-radius: 4px; 
+    transition: background-color 300ms ease; 
+    cursor: pointer; 
+}
+
+.transparent-btn-white:hover { 
+    background-color: rgba(0,0,255, 0.3); 
+    color: #000; 
+}
+
+/* smaller blue border text white                                       */
+.transparent-btn-blue-small { 
+    display: inline-block; 
+    padding: 3px 5px; 
+    color: #FFF; 
+    border: 2px solid #00F; 
+    text-decoration: none; 
+    font-size: 12px; 
+    line-height: 120%; 
+    background-color: rgba(0,123,255, 1); 
+    border-radius: 4px; 
+    transition: background-color 300ms ease; 
+    cursor: pointer; 
+}
+.transparent-btn-blue-small:hover { 
+    background-color: rgba(0,123,255, 0.2); 
+    color: #FFF; 
+}
+
+#logout {
+    text-align: center;
+}
+
+/* ******************************************************************************************   */
+/*                                          FORM FIELDS                                         */
+/* ******************************************************************************************   */
+
+
+input {
+    width: 85%;
+    color: darkblue;
+    background-color: aliceblue;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+input[id="goal-scorer"] {
+    width: 95%;
+    text-align: left;
+}
+
+/* ---------------------------------- END OF DEFAULT MEDIA RULE FOR 576 --------------------------------------------------------- */
+
+
+/* ******************************************************************************************   */
+/*                       MEDIA RULES 1200px 992ox 768px 552px                                   */
+/* ******************************************************************************************   */
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 1200px or higher                              */
+/* ******************************************************************************************   */
+
+@media screen and (min-width:1200px) {                   
+    
+    main {
+        width: 98%;
+ 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 10vh auto auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+  
+    #container {
+        grid-template-areas:
+            "header"
+            "tabs"
+            "tournment"
+            "footer";
+    }
+
+    header {
+        grid-template-areas:
+            "logo header-text";
+    }
+ 
+    #tournament {
+        width: 98%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+
+        grid-template-areas:
+            "FIXTURES GOALS-SCORED"
+
+    }
+
+} /** end of @media screen and (min-width:1200px) */
+
