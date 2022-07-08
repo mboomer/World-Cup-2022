@@ -65,7 +65,7 @@
                 <div id="FIXTURES" class="tabcontent">
 
                   <div id="results-tbl">  
-                      <div id="update-fixture-msg"></div>      
+
                       <table>          
                           <thead class="greenheader">              
                               <tr>                  
@@ -197,14 +197,16 @@
                                     ?>
 
                             </tbody>      
-                      </table>  </div>  <!-- end of results-tbl div -->
+                      </table>  
+
+                    </div>  <!-- end of results-tbl div -->
+                
                 </div>  <!-- end of FIXTURES -->
 
                 <div id="GOALS-SCORED" class="tabcontent">
 
                     <section id='goals-scored'>
 
-                        <div id="update-goal-msg"></div>      
                         <div id='goals-scored-selections'>
 
                             <table>
@@ -234,12 +236,14 @@
                                         <td> <input id='goal-et2min'  type='number' min=0 max=50 value=0> </td>
                                         <td> <input id='goal-penalty' type='number' min=0 max=1  value=0> </td>
                                         <td> <input id='goal-own'     type='number' min=0 max=1  value=0> </td>
-                                        <td><button id='goal-upd-btn' class='transparent-btn-blue'>Update</button></td>  
+                                        <td><button id='goal-upd-btn' class='goal-btn-blue'>Update</button></td>  
                                     </tr>
                                 </tbody>
                             </table>      
 
                         </div> <!-- end of GOALS SCORED SELECTIONS div -->
+
+                        <div id="update-msg"></div> <!-- end of database update message -->      
 
                     </section> <!-- end of GOALS SCORED section -->
 
@@ -256,13 +260,18 @@
     
         <script type="text/javascript">
 
+            document.getElementById("update-msg").style.display = "none";
+
             // ==================================================================
             // add CLICK event listener for the DOM
             // ==================================================================
             document.addEventListener('click', function (event) {
 
                 // event listeners for the fixture update buttons
-                if (event.target.matches('.update-btn')) {
+                if (event.target.matches('.transparent-btn-blue')) {
+
+                    document.getElementById("update-msg").style.display = "block";
+                    document.getElementById("update-msg").style.display = "Updating Score...please wait";
 
                     const fixtureid = document.getElementById(event.target.id);
 
@@ -329,10 +338,13 @@
 
                         }).then(function (data) {
 
-                            document.getElementById("update-fixture-msg").innerHTML = data;
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = data;
 
                         }).catch(function (error) {
                             // There was an error
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = error;
                             console.warn("Error : ", error);
                         });
 
@@ -342,6 +354,9 @@
 
                 // event listeners for the goals update button
                 if (event.target.matches('#goal-upd-btn')) {
+
+                    document.getElementById("update-msg").style.display = "block";
+                    document.getElementById("update-msg").style.display = "Updating Goals Score...please wait";
 
                     // initialise the object to hold each goal
                     let goals = [];
@@ -391,10 +406,13 @@
 
                         }).then(function (data) {
 
-                            document.getElementById("update-goal-msg").innerHTML = data;
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = data;
 
                         }).catch(function (error) {
                             // There was an error
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = error;
                             console.warn("Error : ", error);
                         });
 

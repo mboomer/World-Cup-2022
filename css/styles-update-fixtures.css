@@ -259,6 +259,23 @@ th, td {
 /* ******************************************************************************************   */
 
 /* ******************************************************************************************   */
+/*                                          ERROR MESSAGE                                       */
+/* ******************************************************************************************   */
+
+#update-msg {
+
+    display: none;
+    
+    font-size: 0.9em;
+    text-align: center;
+    width: 90%;
+    border: 2px solid greenyellow;
+    margin: 10px auto;
+    padding: 5px;
+}
+
+
+/* ******************************************************************************************   */
 /*                                          FOOTER SECTION                                      */
 /* ******************************************************************************************   */
 
@@ -320,6 +337,7 @@ footer ul li a {
     transition: background-color 300ms ease; 
     cursor: pointer; 
 }
+
 .transparent-btn-blue:hover { 
     background-color: rgba(0,0,255, 0.2); 
     color: #000; 
@@ -363,6 +381,28 @@ footer ul li a {
     background-color: rgba(0,123,255, 0.2); 
     color: #FFF; 
 }
+
+/* white text blue background                                      */
+.goal-btn-blue { 
+    display: inline-block; 
+    padding: 5px 5px; 
+    margin: 5px;
+    color: #FFF; 
+    border: 1px solid #00F; 
+    text-decoration: none; 
+    font-size: 12px; 
+    line-height: 120%; 
+    background-color: rgba(0,0,255, 0.6); 
+    border-radius: 4px; 
+    transition: background-color 300ms ease; 
+    cursor: pointer; 
+}
+
+.goal-btn-blue:hover { 
+    background-color: rgba(0,0,255, 0.2); 
+    color: #000; 
+}
+
 
 #logout {
     text-align: center;
