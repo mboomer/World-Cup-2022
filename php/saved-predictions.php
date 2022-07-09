@@ -35,6 +35,50 @@
         <script>
 
             // **********************************************************************************************************
+            // Helper function needed to buld the predictions table  
+            // needed as the predictions table needs rebulit after the saved predictions are updated
+            // **********************************************************************************************************
+            function buildPredictionsTable() {
+
+                var userID = "<?=$userid?>";
+
+                fetch('https://www.9habu.com/wc2022/php/build-results-predictions.php', {
+                        
+                        method: 'POST',
+                        mode: "same-origin",
+                        credentials: "same-origin",
+                        headers: {
+                            'Content-Type': 'text/html',
+                            'Accept': 'text/html'
+                            },
+                        body: userID,
+
+                    }).then(function (response) {
+
+                        // If the response is successful, get the JSON
+                        if (response.ok) {
+                            return response.text();
+                        };
+
+                        // Otherwise, throw an error
+                        return response.text().then(function (msg) {
+                            // console.log(response.json());
+                            throw msg;
+                        });
+
+                    }).then(function (data) {
+
+                        // console.log(data);
+                        document.getElementById("predictions").innerHTML = data;
+
+                    }).catch(function (error) {
+                        // There was an error
+                        console.warn("Error : ", error);
+                    });
+
+            };  // end of buildPredictionsTable
+
+            // **********************************************************************************************************
             // Helper functions needed to update the league tables  
             // return -1 arrayItemA before arrayItemB
             // return  0 not sorted as same value
@@ -1235,6 +1279,10 @@
 
                         <div id="predictions">
 
+                            <!-- call the function to build predictions content -->
+                            <script>buildPredictionsTable();</script>
+
+<!--    
                             <?php
 
                                 $qry =   "SELECT \n"
@@ -1394,7 +1442,7 @@
 
                                     echo "          </tbody>";
                                     echo "      </table>";   
-                                    echo "  </div>  <!-- end of predictions-tbl div -->";     
+                                    echo "  </div>  ";     
                                 };
 
                                 // echo "<script>console.log(" . $TotalPoints . ");</script>;";
@@ -1440,6 +1488,47 @@
             document.getElementById("UPDATE-PREDICTIONS").style.display = "none";
             document.getElementById("RESULTS-PREDICTIONS").style.display = "none";
           
+                // **********************************************************************************************************
+                // Display the content of the selected tab and highlight the tab
+                // **********************************************************************************************************
+                function displayStage(evt, tabname) {
+
+                    // Declare all variables
+                    var i, tabcontent, tablinks;
+
+                    // Get all elements with class="tabcontent" and hide them
+                    tabcontent = document.getElementsByClassName("tabcontent");                
+                
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+
+                    // Get all elements with class="tablinks" and remove the class "active"
+                    tablinks = document.getElementsByClassName("tablinks");
+                                    
+                    for (i = 0; i < tablinks.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+                    
+                    // Show the selected tab content and add an "active" class to the button that selected the tab
+                    if (tabname == "GROUPS") {
+                        document.getElementById(tabname).style.display = "grid";
+                    }
+                    else if (tabname == "KNOCKOUT-STAGE") {
+                        document.getElementById(tabname).style.display = "grid";
+                    } 
+                    else if (tabname == "TOP-SCORER") {
+                        document.getElementById(tabname).style.display = "grid";
+                    } 
+                    else if (tabname == "RESULTS-PREDICTIONS") {
+                        document.getElementById(tabname).style.display = "block";
+                    } 
+                    else {
+                        document.getElementById("confirm-predictions").innerText = "";
+                        document.getElementById(tabname).style.display = "block";
+                    }
+                };  // end of DisplayStage function definition
+
             // ==================================================================
             // add CLICK event listener for the DOM
             // ==================================================================
@@ -1549,6 +1638,9 @@
                             }).then(function (data) {
 
                                 document.getElementById("confirm-predictions").innerHTML = data;
+
+                                // call the function to re-build the predictions content
+                                buildPredictionsTable();
 
                             }).catch(function (error) {
                                 // There was an error
@@ -1670,45 +1762,6 @@
                 }
             }, false);   // end of CLICK event listener
 
-            // **********************************************************************************************************
-            // Display the content of the selected tab and highlight the tab
-            // **********************************************************************************************************
-            function displayStage(evt, tabname) {
-
-                // Declare all variables
-                var i, tabcontent, tablinks;
-
-                // Get all elements with class="tabcontent" and hide them
-                tabcontent = document.getElementsByClassName("tabcontent");                
-            
-                for (i = 0; i < tabcontent.length; i++) {
-                    tabcontent[i].style.display = "none";
-                }
-
-                // Get all elements with class="tablinks" and remove the class "active"
-                tablinks = document.getElementsByClassName("tablinks");
-                                
-                for (i = 0; i < tablinks.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" active", "");
-                }
-                
-                // Show the selected tab content and add an "active" class to the button that selected the tab
-                if (tabname == "GROUPS") {
-                    document.getElementById(tabname).style.display = "grid";
-                }
-                else if (tabname == "KNOCKOUT-STAGE") {
-                    document.getElementById(tabname).style.display = "grid";
-                } 
-                else if (tabname == "TOP-SCORER") {
-                    document.getElementById(tabname).style.display = "grid";
-                } 
-                else if (tabname == "RESULTS-PREDICTIONS") {
-                    document.getElementById(tabname).style.display = "block";
-                } 
-                else {
-                    document.getElementById(tabname).style.display = "block";
-                }
-            }
 
             // ==================================================================
             // define currentTable outside of the CHANGE event listener 
