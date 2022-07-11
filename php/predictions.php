@@ -486,7 +486,7 @@
                     <section id='save-predictions'>
 
                         <div id='confirm-save'>
-                            <input type='checkbox' id='confirm-chkbox' name='confirm-chkbox' checked>
+                            <input type='checkbox' id='confirm-chkbox' name='confirm-chkbox'>
                             <label for="confirm-chkbox">Check to confirm that you want to save your predictions</label>
                         </div>
 
@@ -644,6 +644,7 @@
                             }).then(function (data) {
 
                                 document.getElementById("confirm-predictions").innerHTML = data;
+                                window.location.href = "https://www.9habu.com/wc2022/php/saved-predictions.php";
 
                             }).catch(function (error) {
                                 // There was an error

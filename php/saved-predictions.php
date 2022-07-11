@@ -1115,7 +1115,7 @@
                     <section id='update-predictions'>
 
                         <div id='confirm-save'>
-                            <input type='checkbox' id='confirm-chkbox' name='confirm-chkbox' checked>
+                            <input type='checkbox' id='confirm-chkbox' name='confirm-chkbox'>
                             <label for="confirm-chkbox">Check to confirm that you want to update your predictions</label>
                         </div>
 
