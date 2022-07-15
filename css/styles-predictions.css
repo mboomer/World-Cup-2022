@@ -59,6 +59,23 @@ body {
 
 /* 
 ----------------------------------------------------------------------------------
+Update buttons on fixtures update table
+----------------------------------------------------------------------------------
+*/
+
+.update-btn {
+    margin: 5px;
+    padding: 2px;
+    background-color: aliceblue;
+}
+
+.update-btn:hover {
+    background-color: blue;
+    color: white;
+}
+
+/* 
+----------------------------------------------------------------------------------
 Each section has a GRID-AREA named after the section ID
 ----------------------------------------------------------------------------------
 */
@@ -176,12 +193,7 @@ nav {
 #KNOCKOUT-STAGE {
     
     grid-area: KNOCKOUT-STAGE;
-    
-    /* background-color: white;
-    
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around; */
+        /* background-color: white; */
     }
     
         #QuarterFinal {
@@ -196,7 +208,7 @@ nav {
 
         #Final {
             grid-area: Final;
-            background-color: skyblue;
+            background-color: sky
         }
 
 #TOP-SCORER {
@@ -370,12 +382,16 @@ nav {
                 background-color: skyblue;
             }
 
+            #results-tbl table {
+                width: 99%;
+            }
+
         #predictions {
             grid-area : predictions;
 
         }
-            #predictions-tbl {
-                width: 100%;
+            #predictions-tbl table {
+                width: 99%;
                 background-color: skyblue;
             }
 
@@ -754,9 +770,8 @@ input {
         margin: 0 auto;
 
         grid-template-areas:
-            "QF"
-            "SF"
-            "FL"
+            "QF SF FL"
+            "UM"
     }
 
         #QF, #SF, #FL {
@@ -765,7 +780,6 @@ input {
             justify-content: space-between;
             align-items: center;
         }
-
 
     #team-flags {
 

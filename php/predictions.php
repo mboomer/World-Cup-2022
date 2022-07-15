@@ -1,5 +1,8 @@
 <?php
 
+    // Include config file
+    require_once "../../../.php/inc/db.worldcup.inc.php";
+
     // checks if session exists
     session_start();
 
@@ -15,9 +18,6 @@
         $userid = $_SESSION["userid"];    
     }; 
     
-    // Include config file
-    require_once "../../../.php/inc/db.worldcup.inc.php";
-
 ?>
 
 <!DOCTYPE html>
@@ -65,9 +65,9 @@
 -->            
             <!-- Tab links -->
             <div id="tabs" class="tab">
-              <button id="group-stages" name="GROUPS" class="tablinks active">Group Stage</button>
-              <button id="knockout-stage" name="KNOCKOUT-STAGE" class="tablinks ">Knockout Stage</button>
-              <button id="top-scorer" name="TOP-SCORER" class="tablinks ">Top Goal Scorer</button>
+              <button id="group-stages"         name="GROUPS"           class="tablinks active">Group Stage</button>
+              <button id="knockout-stage"       name="KNOCKOUT-STAGE"   class="tablinks ">Knockout Stage</button>
+              <button id="top-scorer"           name="TOP-SCORER"       class="tablinks ">Top Goal Scorer</button>
               <button id="save-predictions-tab" name="SAVE-PREDICTIONS" class="tablinks ">Save Predictions</button>
             </div>
 
@@ -509,14 +509,10 @@
             </section> <!-- end of Tournment -->
 
             <footer id="social-media">
-                <ul>
-                    <li><a href='#' target='_blank'><i class='fab fa-facebook-square'></i></a></li>
-                    <li><a href='#' target='_blank'><i class='fab fa-twitter-square'></i></a></li>
-                    <li><a href='#' target='_blank'><i class='fab fa-youtube-square'></i></a></li>
-                    <li><a href='#' target='_blank'><i class='fab fa-instagram-square'></i></a></li>
-                </ul>
+
                 <p>&copy; <script>document.write(new Date().getFullYear());</script> World Cup 2022 Predictor</p>
                 <p>All Rights Reserved &mdash; Designed by Mark Boomer</p>
+
             </footer>
             
         </main>
@@ -529,12 +525,135 @@
             */ 
             var userID = "<?=$userid?>";
 
-            // Change the display of the content tab from none to flex to display content
-            // Hide the Knockout stage and the Save Predictions stage
+            // Change the display of the content tab from none to flex/grid to display content
+            // Hide the Knockout stage, Save Predictions and Top Scorer stage
             document.getElementById("KNOCKOUT-STAGE").style.display = "none";
             document.getElementById("SAVE-PREDICTIONS").style.display = "none";
             document.getElementById("TOP-SCORER").style.display = "none";
 
+            // ==================================================================
+            // define currentTable outside of the CHANGE event listener 
+            // necessary as if its defined inside CHANGE event listener the scope
+            // doesnt allow it to be accessed outside the CHANGE event listener
+            // ==================================================================
+            let currentTable;
+            let currentTableID;
+            let currentTableName;
+            
+            /** 
+             * set true to enable the display of the UPDATE-PREDICTIONS TAB 
+             * can only be true if QuarterFinalsOK, SemiFinalsOK, FinalsOK are set true
+            */
+            let AllowPredictionsUpdate = false;
+
+            /** set true if each of the fixtures in the stage are set as a home win or an away win */
+            let QuarterFinalsOK = false;
+            let SemiFinalsOK = false;
+            let FinalsOK = false;
+            
+            // **********************************************************************************************************
+            // Display the content of the selected tab and highlight the tab
+            // **********************************************************************************************************
+            function displayStage(evt, tabname) {
+
+                // Declare all variables
+                var i, tabcontent, tablinks;
+
+                // Get all elements with class="tabcontent" and hide them
+                tabcontent = document.getElementsByClassName("tabcontent");                
+            
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+
+                // Get all elements with class="tablinks" and remove the class "active"
+                tablinks = document.getElementsByClassName("tablinks");
+                                
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                
+                // Show the selected tab content and add an "active" class to the button that selected the tab
+                if (tabname == "GROUPS") {
+                    document.getElementById(tabname).style.display = "grid";
+                }
+                else if (tabname == "KNOCKOUT-STAGE") {
+                    document.getElementById(tabname).style.display = "grid";
+                } 
+                else if (tabname == "SAVE-PREDICTIONS") {
+
+                    // if the AllowPredictionsUpdate flag is FALSE then one or more scores in the knockout stages are set as a draw
+                    // dont allow an update unless the scores are set correctly as a win for one or other of the teams 
+
+                    AllowPredictionsUpdate = QuarterFinalsOK && SemiFinalsOK && FinalsOK;
+
+                    // console.log(AllowPredictionsUpdate, QuarterFinalsOK, SemiFinalsOK, FinalsOK)
+
+                    if (AllowPredictionsUpdate === false) {
+                        document.getElementById(tabname).style.display = "block";
+                        document.getElementById("confirm-predictions").innerHTML  = "Please review your predictions in the Knockout stages.<br>";
+                        document.getElementById("confirm-predictions").innerHTML += "One or more of the games are predicted to be a draw.<br>";
+                        document.getElementById("confirm-predictions").innerHTML += "Every game in the knockout stages must be set as either a home win or an away win.";
+                        document.getElementById("confirm-btn").style.display = "none";
+                        document.getElementById("confirm-save").style.display = "none";
+                    } else {
+                        document.getElementById("confirm-predictions").innerText = "";
+                        document.getElementById(tabname).style.display = "block";
+                        document.getElementById("confirm-btn").style.display = "grid";
+                        document.getElementById("confirm-save").style.display = "block";
+                    }
+                } else {
+                    document.getElementById(tabname).style.display = "block";
+                };
+            };
+
+            // **********************************************************************************************************
+            // https://atomizedobjects.com/blog/javascript/how-to-sort-an-array-of-objects-by-property-value-in-javascript/
+            // return -1 arrayItemA before arrayItemB
+            // return  0 not sorted as same value
+            // return  1 arrayItemA after arrayItemB
+            // **********************************************************************************************************
+            //      Functions to sort the league table
+            // **********************************************************************************************************
+
+            function compPts(a, b) {
+
+                if (a.Points > b.Points) {return -1}; 
+                if (a.Points < b.Points) {return 1};
+                return 0;
+            };
+            
+            function compGD (a, b) {
+                
+                if (a.GoalDiff > b.GoalDiff) {return -1};
+                if (a.GoalDiff < b.GoalDiff) {return 1};
+                return 0;
+            };
+            
+            function compGF (a, b) {
+
+                if (a.For > b.For) {return -1};
+                if (a.For < b.For) {return 1};
+                return 0;
+            };
+            
+            function leaguePosition (teamA, teamB) {
+                
+                // Sort by points
+                const position = compPts(teamA, teamB)
+                
+                if (position !== 0) { return position; };
+
+                // at this point we have 2 teams with equal points - so compare goal difference                
+                const GD = compGD(teamA, teamB);
+                
+                if (GD !== 0) {return GD;};
+
+                // at this point we will be looking at 2 teams with equal points and equal goal difference - so compare goals scored for
+                return compGF(teamA, teamB);
+                
+            };
+            
             // ==================================================================
             // add CLICK event listener for the DOM
             // ==================================================================
@@ -755,96 +874,6 @@
 
             }, false);   // end of CLICK event listener
 
-            // **********************************************************************************************************
-            // Display the content of the selected tab and highlight the tab
-            // **********************************************************************************************************
-            function displayStage(evt, tabname) {
-
-                // Declare all variables
-                var i, tabcontent, tablinks;
-
-                // Get all elements with class="tabcontent" and hide them
-                tabcontent = document.getElementsByClassName("tabcontent");                
-            
-                for (i = 0; i < tabcontent.length; i++) {
-                    tabcontent[i].style.display = "none";
-                }
-
-                // Get all elements with class="tablinks" and remove the class "active"
-                tablinks = document.getElementsByClassName("tablinks");
-                                
-                for (i = 0; i < tablinks.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" active", "");
-                }
-                
-                // Show the selected tab content and add an "active" class to the button that selected the tab
-                if (tabname == "GROUPS") {
-                    document.getElementById(tabname).style.display = "grid";
-                }
-                else if (tabname == "KNOCKOUT-STAGE") {
-                    document.getElementById(tabname).style.display = "grid";
-                } 
-                else {
-                    document.getElementById(tabname).style.display = "block";
-                };
-            };
-
-            // **********************************************************************************************************
-            // https://atomizedobjects.com/blog/javascript/how-to-sort-an-array-of-objects-by-property-value-in-javascript/
-            // return -1 arrayItemA before arrayItemB
-            // return  0 not sorted as same value
-            // return  1 arrayItemA after arrayItemB
-            // **********************************************************************************************************
-            //      Functions to sort the league table
-            // **********************************************************************************************************
-
-            function compPts(a, b) {
-
-                if (a.Points > b.Points) {return -1}; 
-                if (a.Points < b.Points) {return 1};
-                return 0;
-            };
-            
-            function compGD (a, b) {
-                
-                if (a.GoalDiff > b.GoalDiff) {return -1};
-                if (a.GoalDiff < b.GoalDiff) {return 1};
-                return 0;
-            };
-            
-            function compGF (a, b) {
-
-                if (a.For > b.For) {return -1};
-                if (a.For < b.For) {return 1};
-                return 0;
-            };
-            
-            function leaguePosition (teamA, teamB) {
-                
-                // Sort by points
-                const position = compPts(teamA, teamB)
-                
-                if (position !== 0) { return position; };
-
-                // at this point we have 2 teams with equal points - so compare goal difference                
-                const GD = compGD(teamA, teamB);
-                
-                if (GD !== 0) {return GD;};
-
-                // at this point we will be looking at 2 teams with equal points and equal goal difference - so compare goals scored for
-                return compGF(teamA, teamB);
-                
-            };
-            
-            // ==================================================================
-            // define currentTable outside of the CHANGE event listener 
-            // necessary as if its defined inside CHANGE event listener the scope
-            // doesnt allow it to be accessed outside the CHANGE event listener
-            // ==================================================================
-            let currentTable;
-            let currentTableID;
-            let currentTableName;
-            
             // ==================================================================
             // add CHANGE event listener for the INPUT fields
             // ==================================================================
@@ -852,7 +881,6 @@
 
                 if (event.target.matches('#confirm-chkbox')) {
                     // dont complete this change event
-                    // console.log("Checkbox clicked");
                     return;                
                 };
 
@@ -868,7 +896,8 @@
 
                 if (event.target.matches('[data-stage="QF"]')) {
 
-                    // console.log('Update Semi Final based on changes to the changes to the scores in the Quarter Finals');
+                    // will be set to false if any predictions are set as a draw
+                    QuarterFinalsOK = true;
 
                     let QF = document.querySelector('#QF');
                     
@@ -892,6 +921,8 @@
                         document.getElementById('winnerQF1flag').innerHTML = "<img src='../img/teams/" + awayTeams[0].innerHTML.trim() + ".png' alt='" + awayTeams[0].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerQF1').nextElementSibling.innerHTML = awayIDs[0].innerHTML;
                         document.getElementById('winnerQF1').nextElementSibling.nextElementSibling.innerHTML = awayRanks[0].innerHTML;
+                    } else if (homeScores[0].value == awayScores[0].value) {
+                        QuarterFinalsOK = false;
                     };
                         
                     if (homeScores[1].value > awayScores[1].value) {
@@ -904,6 +935,8 @@
                         document.getElementById('winnerQF2flag').innerHTML = "<img src='../img/teams/" + awayTeams[1].innerHTML.trim() + ".png' alt='" + awayTeams[1].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerQF2').previousElementSibling.innerHTML = awayIDs[1].innerHTML;
                         document.getElementById('winnerQF2').previousElementSibling.previousElementSibling.innerHTML = awayRanks[1].innerHTML;
+                    } else if (homeScores[1].value == awayScores[1].value) {
+                        QuarterFinalsOK = false;
                     };
  
                     if (homeScores[2].value > awayScores[2].value) {
@@ -916,6 +949,8 @@
                         document.getElementById('winnerQF3flag').innerHTML = "<img src='../img/teams/" + awayTeams[2].innerHTML.trim() + ".png' alt='" + awayTeams[2].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerQF3').nextElementSibling.innerText = awayIDs[2].innerHTML;
                         document.getElementById('winnerQF3').nextElementSibling.nextElementSibling.innerText = awayRanks[2].innerHTML;
+                    } else if (homeScores[2].value == awayScores[2].value) {
+                        QuarterFinalsOK = false;
                     };
  
                     if (homeScores[3].value > awayScores[3].value) {
@@ -928,6 +963,8 @@
                         document.getElementById('winnerQF4flag').innerHTML = "<img src='../img/teams/" + awayTeams[3].innerHTML.trim() + ".png' alt='" + awayTeams[3].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerQF4').previousElementSibling.innerText = awayIDs[3].innerHTML;
                         document.getElementById('winnerQF4').previousElementSibling.previousElementSibling.innerText = awayRanks[3].innerHTML;
+                    } else if (homeScores[3].value == awayScores[3].value) {
+                        QuarterFinalsOK = false;
                     };
                     
                     return;
@@ -935,8 +972,9 @@
 
                 if (event.target.matches('[data-stage="SF"]')) {
 
-                    // console.log('Update Final based on changes to the changes to the scores in the Semi Finals');
-
+                    // will be set to false if any predictions are set as a draw
+                    SemiFinalsOK = true;
+                    
                     let SF = document.querySelector('#SF');
                     
                     // get the teams and the scores for the Quarter Finals
@@ -959,6 +997,8 @@
                         document.getElementById('winnerSF1flag').innerHTML = "<img src='../img/teams/" + awayTeams[0].innerHTML.trim() + ".png' alt='" + awayTeams[0].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerSF1').nextElementSibling.innerHTML = awayIDs[0].innerHTML;
                         document.getElementById('winnerSF1').nextElementSibling.nextElementSibling.innerHTML = awayRanks[0].innerHTML;
+                    } else if (homeScores[0].value == awayScores[0].value) {
+                        SemiFinalsOK = false;
                     };
                         
                     if (homeScores[1].value > awayScores[1].value) {
@@ -971,6 +1011,8 @@
                         document.getElementById('winnerSF2flag').innerHTML = "<img src='../img/teams/" + awayTeams[1].innerHTML.trim() + ".png' alt='" + awayTeams[1].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerSF2').previousElementSibling.innerHTML = awayIDs[1].innerHTML;
                         document.getElementById('winnerSF2').previousElementSibling.previousElementSibling.innerHTML = awayRanks[1].innerHTML;
+                    } else if (homeScores[1].value == awayScores[1].value) {
+                        SemiFinalsOK = false;
                     };
                    
                     return;
@@ -979,7 +1021,8 @@
 
                 if (event.target.matches('[data-stage="FL"]')) {
 
-                    // console.log('Update Final based on changes to the changes to the scores in the Semi Finals');
+                    // will be set to false if any predictions are set as a draw
+                    FinalsOK = true;
 
                     let FL = document.querySelector('#FL');
                     
@@ -988,6 +1031,10 @@
                     homeScores = FL.querySelectorAll('.homescore');
                     awayScores = FL.querySelectorAll('.awayscore');
                     awayTeams  = FL.querySelectorAll('.away');
+
+                    if (homeScores[0].value == awayScores[0].value) {
+                        FinalsOK = false;
+                    }
 
                     return;
 
