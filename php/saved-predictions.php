@@ -34,6 +34,17 @@
 
         <script>
 
+            /** 
+             * set true to enable the display of the UPDATE-PREDICTIONS TAB 
+             * can only be true if QuarterFinalsOK, SemiFinalsOK, FinalsOK  are set true
+            */
+            let AllowPredictionsUpdate;
+
+            /** set true if each of the fixtures in the stage are set as a win */
+            let QuarterFinalsOK;
+            let SemiFinalsOK;
+            let FinalsOK;
+
             // **********************************************************************************************************
             // Helper function needed to buld the predictions table  
             // needed as the predictions table needs rebulit after the saved predictions are updated
@@ -135,12 +146,9 @@
             };
             
             function updateLeagueTables(event) {
-
-                // console.log("Change Event Triggered : ", event);
-
+                
                 if (event.target.matches('#confirm-chkbox')) {
                     // dont complete this change event
-                    // console.log("Checkbox clicked");
                     return;                
                 };
 
@@ -156,8 +164,9 @@
                 
                 if (event.target.matches('[data-stage="QF"]')) {
 
-                    // console.log('Update Semi Final based on changes to the changes to the scores in the Quarter Finals');
-
+                    // will be set to false if any predictions are set as a draw
+                    QuarterFinalsOK = true;
+                    
                     let QF = document.querySelector('#QF');
                     
                     // get the teams and the scores for the Quarter Finals
@@ -180,6 +189,8 @@
                         document.getElementById('winnerQF1flag').innerHTML = "<img src='../img/teams/" + awayTeams[0].innerHTML.trim() + ".png' alt='" + awayTeams[0].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerQF1').nextElementSibling.innerHTML = awayIDs[0].innerHTML;
                         document.getElementById('winnerQF1').nextElementSibling.nextElementSibling.innerHTML = awayRanks[0].innerHTML;
+                    } else if (homeScores[0].value == awayScores[0].value) {
+                        QuarterFinalsOK = false;
                     };
                         
                     if (homeScores[1].value > awayScores[1].value) {
@@ -192,6 +203,8 @@
                         document.getElementById('winnerQF2flag').innerHTML = "<img src='../img/teams/" + awayTeams[1].innerHTML.trim() + ".png' alt='" + awayTeams[1].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerQF2').previousElementSibling.innerHTML = awayIDs[1].innerHTML;
                         document.getElementById('winnerQF2').previousElementSibling.previousElementSibling.innerHTML = awayRanks[1].innerHTML;
+                    } else if (homeScores[1].value == awayScores[1].value) {
+                        QuarterFinalsOK = false;
                     };
  
                     if (homeScores[2].value > awayScores[2].value) {
@@ -204,6 +217,8 @@
                         document.getElementById('winnerQF3flag').innerHTML = "<img src='../img/teams/" + awayTeams[2].innerHTML.trim() + ".png' alt='" + awayTeams[2].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerQF3').nextElementSibling.innerText = awayIDs[2].innerHTML;
                         document.getElementById('winnerQF3').nextElementSibling.nextElementSibling.innerText = awayRanks[2].innerHTML;
+                    } else if (homeScores[2].value == awayScores[2].value) {
+                        QuarterFinalsOK = false;
                     };
  
                     if (homeScores[3].value > awayScores[3].value) {
@@ -216,6 +231,8 @@
                         document.getElementById('winnerQF4flag').innerHTML = "<img src='../img/teams/" + awayTeams[3].innerHTML.trim() + ".png' alt='" + awayTeams[3].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerQF4').previousElementSibling.innerText = awayIDs[3].innerHTML;
                         document.getElementById('winnerQF4').previousElementSibling.previousElementSibling.innerText = awayRanks[3].innerHTML;
+                    } else if (homeScores[3].value == awayScores[3].value) {
+                        QuarterFinalsOK = false;
                     };
                     
                     return;
@@ -223,7 +240,8 @@
 
                 if (event.target.matches('[data-stage="SF"]')) {
 
-                    // console.log('Update Final based on changes to the changes to the scores in the Semi Finals');
+                    // will be set to false if any predictions are set as a draw
+                    SemiFinalsOK = true;
 
                     let SF = document.querySelector('#SF');
                     
@@ -247,6 +265,8 @@
                         document.getElementById('winnerSF1flag').innerHTML = "<img src='../img/teams/" + awayTeams[0].innerHTML.trim() + ".png' alt='" + awayTeams[0].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerSF1').nextElementSibling.innerHTML = awayIDs[0].innerHTML;
                         document.getElementById('winnerSF1').nextElementSibling.nextElementSibling.innerHTML = awayRanks[0].innerHTML;
+                    } else if (homeScores[0].value == awayScores[0].value) {
+                        SemiFinalsOK = false;
                     };
                         
                     if (homeScores[1].value > awayScores[1].value) {
@@ -259,6 +279,8 @@
                         document.getElementById('winnerSF2flag').innerHTML = "<img src='../img/teams/" + awayTeams[1].innerHTML.trim() + ".png' alt='" + awayTeams[1].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerSF2').previousElementSibling.innerHTML = awayIDs[1].innerHTML;
                         document.getElementById('winnerSF2').previousElementSibling.previousElementSibling.innerHTML = awayRanks[1].innerHTML;
+                    } else if (homeScores[1].value == awayScores[1].value) {
+                        SemiFinalsOK = false;
                     };
                    
                     return;
@@ -268,7 +290,8 @@
                 /** the data-stage FI is diferent to the section id FL */
                 if (event.target.matches('[data-stage="FL"]')) {
 
-                    // console.log('Update Final based on changes to the changes to the scores in the Semi Finals');
+                    // will be set to false if any predictions are set as a draw
+                    FinalsOK = true;
 
                     let FL = document.querySelector('#FL');
                     
@@ -277,6 +300,10 @@
                     homeScores = FL.querySelectorAll('.homescore');
                     awayScores = FL.querySelectorAll('.awayscore');
                     awayTeams  = FL.querySelectorAll('.away');
+
+                    if (homeScores[0].value == awayScores[0].value) {
+                        FinalsOK = false;
+                    }
 
                     return;
 
@@ -495,7 +522,7 @@
             <!-- Tab links -->
             <div id="tabs" class="tab">
               <button id="group-stages" name="GROUPS" class="tablinks active">Group Stage</button>
-              <button id="knockout-stage" name="KNOCKOUT-STAGE" class="tablinks ">Knockout Stage</button>
+              <button id="knockout-stage"name="KNOCKOUT-STAGE" class="tablinks ">Knockout Stage</button>
               <button id="top-scorer" name="TOP-SCORER" class="tablinks ">Top Goal Scorer</button>
               <button id="update-predictions-btn" name="UPDATE-PREDICTIONS" class="tablinks ">Update Predictions</button>
               <button id="res-pred" name="RESULTS-PREDICTIONS" class="tablinks ">Results / Predictions</button>
@@ -1018,6 +1045,15 @@
                 ?> 
                 <!-- end of final -->
 
+                 <section id="EM">
+
+                    <div id="error-message">
+                        <p>The knockout stages must NOT be predicted to be a draw. You must specify either a home win or an away win. Please review the fixture below.</p>
+                        <p id="review-fixture-list"></p>
+                    </div>
+
+                </section> <!-- end of Score Draw Message section -->
+
                 </div> <!-- end of KNOCKOUT STAGES -->
 
                 <div id="TOP-SCORER" class="tabcontent">
@@ -1282,174 +1318,6 @@
                             <!-- call the function to build predictions content -->
                             <script>buildPredictionsTable();</script>
 
-<!--    
-                            <?php
-
-                                $qry =   "SELECT \n"
-                                    . "  	    pred.UserID     as userid, \n"
-                                    . "  		pred.FixtureID  as fixtureno, \n"
-                                    . "  		pred.Stage      as stage, \n" 
-                                    . "  		pred.HomeScore  as homescore, \n" 
-                                    . "  		pred.AwayScore  as awayscore, \n" 
-                                    . "  		fx.GroupID      as groupid, \n"
-                                    . "  	    hmt.ID          as homeid, \n"
-                                    . "  		hmt.Team        as hometeam, \n" 
-                                    . "  		hmt.Ranking     as homerank, \n"
-                                    . "  		awt.Ranking     as awayrank, \n"
-                                    . "  		awt.Team        as awayteam, \n"
-                                    . "  		awt.ID          as awayid, \n"
-                                    . "  	    res.Code		as resultcode, \n"
-                                    . "  	    res.Description	as resultdesc \n"
-                                    . "  	FROM \n"
-                                    . "  		Predictions pred \n" 
-                                    . "  	INNER JOIN \n"						# get the GroupID from the Fixture table 
-                                    . "  			Fixtures fx \n"
-                                    . "  		ON \n" 
-                                    . "  			pred.FixtureID = fx.FixtureNo \n"
-                                    . "  	INNER JOIN \n"						# get the Home Team from the Teams table 
-                                    . "  			Teams hmt \n" 
-                                    . "  		ON \n" 
-                                    . "  			pred.HomeTeam = hmt.ID \n" 
-                                    . "  	INNER JOIN \n"						# get the Away Team from the Teams table 
-                                    . "  			Teams awt \n"
-                                    . "  		ON \n"
-                                    . "  			pred.AwayTeam = awt.ID \n" 
-                                    . "     INNER JOIN \n"
-                                    . "  	    Results res \n"
-                                    . "     ON \n"
-                                    . "  	    pred.ResultID = res.ID \n"
-                                    . "WHERE  \n"
-                                    . "     pred.UserID = " . $userid . "\n"
-                                    . "  ORDER BY \n"
-                                    . "  	  pred.FixtureID \n";
-
-                                    $result = $conn->query($qry);
-
-                                    if ($result->num_rows == 0) {
-                                        echo "<div>NO RESULTS RETURNED</div>";
-                                    } else {
-                                        echo "  <div id='predictions-tbl'>";
-
-                                        echo "      <table>";
-                                        echo "          <thead class='blueheader'>";
-                                        echo "              <tr>";
-                                        echo "                  <th class='tbl-header' colspan='9'>PREDICTIONS / POINTS</th><th id='points-total' colspan='3'>Points : </th>";
-                                        echo "              </tr>";
-                                        echo "              <tr>";
-                                        echo "              <tr>";
-                                        echo "                  <th>No.</th><th class='hidden'><th class='hidden'></th><th colspan='2'>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th>";
-                                        echo "                  <th class='hidden'></th> <th colspan='2'>AWAY</th><th class='res-header'>Res</th><th class='res-header'>Pts</th><th class='res-header'>Bonus</th>";
-                                        echo "              </tr>";
-                                        echo "          </thead>";
-                                        echo "          <tbody>";
-                                        
-                                        // create the arrays to hold the arrays for each result
-                                        // create an array for each result and push it to the results array
-                                        $predicts = array();
-                                        $predict  = array();
-
-                                        while ($row = $result->fetch_assoc()) {
-
-                                                $userid     = $row["userid"];
-                                                $fixno      = $row["fixtureno"];
-                                                $homeid     = $row["homeid"];
-                                                $hometeam   = $row["hometeam"];
-                                                $homescore  = $row["homescore"];
-                                                $homerank   = $row["homerank"];
-                                                $awayrank   = $row["awayrank"];
-                                                $awayscore  = $row["awayscore"];
-                                                $awayteam   = $row["awayteam"];
-                                                $awayid     = $row["awayid"];
-                                                $grpdesc    = $row["groupdesc"];
-                                                $rndcode    = $row["roundcode"];
-                                                $resultcode = $row["resultcode"];
-                                                $resultdesc = $row["resultdesc"];
-                                                $stage      = $row["stage"];
-
-                                                $predict = array(
-                                                            "fixtureno"     => $fixno,
-                                                            "hometeamid"    => $homeid,
-                                                            "homescore"     => $homescore,
-                                                            "awayscore"     => $awayscore,
-                                                            "awayteamid"    => $awayid,
-                                                            "resultcode"    => $resultcode,
-                                                            "stage"         => $stage
-                                                            );
-
-                                                array_push($predicts, $predict);
-
-                                                $pts    = 0; 
-                                                $bonus  = 0;
-
-                                                $r   = $results[$fixno-1];
-                                                $p   = $predict;
-
-                                                if ($r["resultcode"] == $p["resultcode"]) {
-
-                                                    $pts = $pts + 1;
-                                                    
-                                                    if ( ($r["homescore"] == $p["homescore"]) && ($r["awayscore"] == $p["awayscore"])) {
-                                                        $pts = $pts + 2;
-                                                    };
-                                                };
-
-                                                if ( ($r["hometeamid"] == $p["hometeamid"]) ) {
-
-                                                    if ($p["stage"] == "QF") {                                
-                                                        $bonus = $bonus + 1;
-                                                    } if ($p["stage"] == "SF") {
-                                                        $bonus = $bonus + 2;
-                                                    } if ($p["stage"] == "FI") {
-                                                        $bonus = $bonus + 3;
-                                                    };
-                                                };
-
-                                                if ( ($r["awayteamid"] == $p["awayteamid"]) ) {
-
-                                                    if ($p["stage"] == "QF") {                                
-                                                        $bonus = $bonus + 1;
-                                                    } if ($p["stage"] == "SF") {
-                                                        $bonus = $bonus + 2;
-                                                    } if ($p["stage"] == "FI") {
-                                                        $bonus = $bonus + 3;
-                                                    };
-                                                };
-
-                                                // echo "<script>console.log(" . $TotalPoints . " - " . $pts . " - " . $bonus . ");" . "</script>;";
-
-                                                // echo "<script>console.log('Points : '" . $pts . ',' . $bonus . ',' . $TotalPoints . "');</script>";
-
-                                                $TotalPoints = $TotalPoints + ($pts + $bonus);
-
-                                                echo "  <tr>";
-                                                echo "      <td class='predno'>" . $fixno . "</td>";
-                                                echo "      <td class='stage hidden'>" . $rndcode . "</td>";                                // hidden cell for code of the tournament stage 
-                                                echo "      <td class='homeid hidden'>" . $homeid . "</td>";                                // hidden cell for ID of home team
-                                                echo "      <td class='predictions-home-flag'><img src='../img/teams/" . $hometeam . ".png' alt='" . $hometeam . " team flag'></td>";      
-                                                echo "      <td class='home'>" . $hometeam . "</td>";
-                                                echo "      <td class='h-rank'>" . $homerank . "</td>";
-                                                echo "      <td class='pos'>" . $homescore . "</td>";
-                                                echo "      <td class='pos'>" . $awayscore . "</td>";
-                                                echo "      <td class='a-rank'>" . $awayrank . "</td>";
-                                                echo "      <td class='awayid hidden'>" . $awayid . "</td>";        // hidden cell for ID of away team
-                                                echo "      <td class='away'>" . $awayteam . "</td>";
-                                                echo "      <td class='predictions-away-flag'><img src='../img/teams/" . $awayteam . ".png' alt='" . $awayteam . " team flag'></td>";      
-                                                echo "      <td class='res'>" . $resultcode . "</td>";
-                                                echo "      <td class='pts'>" . $pts . "</td>";
-                                                echo "      <td class='bon'>" . $bonus . "</td>";
-                                                echo "  </tr>";
-                                        }
-
-                                    echo "          </tbody>";
-                                    echo "      </table>";   
-                                    echo "  </div>  ";     
-                                };
-
-                                // echo "<script>console.log(" . $TotalPoints . ");</script>;";
-                                echo "<script>document.getElementById('points-total').innerText = 'Points : " . $TotalPoints . "'</script>";
-                            
-                            ?> <!-- end of the predictions php -->
-
                         </div> <!-- end of predictions section -->
 
                     </section> <!-- end of results-predictions section -->
@@ -1488,46 +1356,66 @@
             document.getElementById("UPDATE-PREDICTIONS").style.display = "none";
             document.getElementById("RESULTS-PREDICTIONS").style.display = "none";
           
-                // **********************************************************************************************************
-                // Display the content of the selected tab and highlight the tab
-                // **********************************************************************************************************
-                function displayStage(evt, tabname) {
+            // **********************************************************************************************************
+            // Display the content of the selected tab and highlight the tab
+            // **********************************************************************************************************
+            function displayStage(evt, tabname) {
 
-                    // Declare all variables
-                    var i, tabcontent, tablinks;
+                // Declare all variables
+                var i, tabcontent, tablinks;
 
-                    // Get all elements with class="tabcontent" and hide them
-                    tabcontent = document.getElementsByClassName("tabcontent");                
+                // Get all elements with class="tabcontent" and hide them
+                tabcontent = document.getElementsByClassName("tabcontent");                
+            
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+
+                // Get all elements with class="tablinks" and remove the class "active"
+                tablinks = document.getElementsByClassName("tablinks");
+                                
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
                 
-                    for (i = 0; i < tabcontent.length; i++) {
-                        tabcontent[i].style.display = "none";
-                    }
+                // Show the selected tab content and add an "active" class to the button that selected the tab
+                if (tabname == "GROUPS") {
+                    document.getElementById(tabname).style.display = "grid";
+                }
+                else if (tabname == "KNOCKOUT-STAGE") {
+                    document.getElementById(tabname).style.display = "grid";
+                } 
+                else if (tabname == "TOP-SCORER") {
+                    document.getElementById(tabname).style.display = "grid";
+                } 
+                else if (tabname == "RESULTS-PREDICTIONS") {
+                    document.getElementById(tabname).style.display = "block";
+                } 
+                else if (tabname == "UPDATE-PREDICTIONS") {
 
-                    // Get all elements with class="tablinks" and remove the class "active"
-                    tablinks = document.getElementsByClassName("tablinks");
-                                    
-                    for (i = 0; i < tablinks.length; i++) {
-                        tablinks[i].className = tablinks[i].className.replace(" active", "");
-                    }
-                    
-                    // Show the selected tab content and add an "active" class to the button that selected the tab
-                    if (tabname == "GROUPS") {
-                        document.getElementById(tabname).style.display = "grid";
-                    }
-                    else if (tabname == "KNOCKOUT-STAGE") {
-                        document.getElementById(tabname).style.display = "grid";
-                    } 
-                    else if (tabname == "TOP-SCORER") {
-                        document.getElementById(tabname).style.display = "grid";
-                    } 
-                    else if (tabname == "RESULTS-PREDICTIONS") {
+                    // if the AllowPredictionsUpdate flag is FALSE then one or more scores in the knockout stages are set as a draw
+                    // dont allow an update unless the scores are set correctly as a win for one or other of the teams 
+
+                    AllowPredictionsUpdate = QuarterFinalsOK && SemiFinalsOK && FinalsOK;
+
+                    // console.log(AllowPredictionsUpdate, QuarterFinalsOK, SemiFinalsOK, FinalsOK)
+
+                    if (AllowPredictionsUpdate === false) {
                         document.getElementById(tabname).style.display = "block";
-                    } 
-                    else {
+                        document.getElementById("confirm-predictions").innerHTML  = "Please review your predictions in the Knockout stages.<br>";
+                        document.getElementById("confirm-predictions").innerHTML += "One or more of the games are predicted to be a draw.<br>";
+                        document.getElementById("confirm-predictions").innerHTML += "Every game in the knockout stages must be set as either a home win or an away win.";
+                        document.getElementById("confirm-btn").style.display = "none";
+                        document.getElementById("confirm-save").style.display = "none";
+                    } else {
                         document.getElementById("confirm-predictions").innerText = "";
                         document.getElementById(tabname).style.display = "block";
+                        document.getElementById("confirm-btn").style.display = "grid";
+                        document.getElementById("confirm-save").style.display = "block";
                     }
-                };  // end of DisplayStage function definition
+                }                    
+
+            };  // end of DisplayStage function definition
 
             // ==================================================================
             // add CLICK event listener for the DOM
@@ -1777,13 +1665,10 @@
             // ==================================================================
             document.addEventListener('change', function (event) {
 
-                    // call the function to update the league tables
-                    updateLeagueTables(event);
+                // call the function to update the league tables
+                updateLeagueTables(event);
 
             }, false);   // end of CHANGE event listener
-
-            // document.addEventListener('change', updateLeagueTables(event));
-
 
         </script>
 
