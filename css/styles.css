@@ -66,7 +66,7 @@ nav {
 
 #top-scorers {
     grid-area: top-scorers;
-    background-color: blue; 
+    /* background-color: blue;  */
 }
 
 #important-stats {
@@ -167,11 +167,10 @@ section {
     font-size: 0.9em;
     color: #3498db;
     padding: 5px;
-    
-    
-  color: white;
-  padding: 15px 25px;
-  text-decoration: none;
+        
+    /* // color: white;
+    // padding: 15px 25px;
+    text-decoration: none; */
 }
 
 .options-link:hover {
@@ -262,6 +261,64 @@ section {
     text-align: center;
 }
 
+/* ******************************************************************************************   */
+/*                                          TABLES                                              */
+/* ******************************************************************************************   */
+
+.greenheader {
+    background-color: green;
+    color: white;
+}
+
+.blueheader {
+    background-color: navy;
+    color: white;
+}
+
+tbody {
+    background-color: white;
+    color: black;
+}
+
+table {
+    font-size: 0.75em;
+    width: 96%;
+    padding: 2px;
+    text-align: center;    
+    border: 1px dotted black;
+    margin: auto auto;
+}
+
+th, td {
+    border-right: 1px dotted black;
+    border-bottom: 1px dotted black;
+}
+
+
+.align-right {
+    width: 44%;
+    padding-right: 5px;
+    text-align: right;
+}
+
+.hidden {
+    display: none;
+}
+
+.align-left {
+    width: 40%;
+    padding-left: 5px;
+    text-align: left;
+}
+
+.cols {
+    width: 10%;
+    text-align: center;
+}
+
+
+/* ******************************************************************************************   */
+
 /* ---------------------------------- END OF DEFAULT MEDIA RULE FOR 576 --------------------------------------------------------- */
 
 
@@ -282,7 +339,7 @@ section {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
 /*        grid-template-rows: 10vh 5vh 35vh 35vh auto;*/
-        grid-template-rows: 10vh 35vh 35vh auto;
+        grid-template-rows: 10vh auto auto auto;
         grid-gap: 5px;
         margin: 0 auto;
     }
@@ -320,13 +377,13 @@ section {
     }
     main{
         width: 90%;
-/*        max-width: 800px;*/
+/*        max-width: 800px; */
  
         display: grid;
-        grid-template-columns: 1fr 8fr 3fr;
+        /* grid-template-columns: 1fr 8fr 3fr; */
         grid-template-columns: 1fr 1fr;
 /*        grid-template-rows: 10vh 5vh auto 25vh 25vh auto;*/
-        grid-template-rows: 10vh auto 25vh 25vh auto;
+        grid-template-rows: 10vh auto auto 25vh auto;
         grid-gap: 5px;
         margin: 0 auto;
     }
@@ -368,10 +425,10 @@ section {
 /*        max-width: 800px;*/
  
         display: grid;
-        grid-template-columns: 1fr 8fr 3fr;
+        /* grid-template-columns: 1fr 8fr 3fr; */
         grid-template-columns: 1fr 1fr;
 /*        grid-template-rows: 10vh 5vh auto 25vh 25vh auto;*/
-        grid-template-rows: 10vh auto 25vh 25vh auto;
+        grid-template-rows: 10vh auto auto 25vh auto;
         grid-gap: 5px;
         margin: 0 auto;
     }
@@ -415,7 +472,7 @@ section {
         display: grid;
         grid-template-columns: 1fr;
 /*        grid-template-rows: auto 5vh auto 15vh 15vh 15vh 15vh 15vh auto;*/
-        grid-template-rows: auto auto 15vh 15vh 15vh 15vh 15vh auto;
+        grid-template-rows: auto auto auto auto auto auto auto auto;
         grid-gap: 5px;
         margin: 0 auto;
     }
