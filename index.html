@@ -12,6 +12,51 @@
         
         <script src="https://kit.fontawesome.com/130d5316ba.js" crossorigin="anonymous"></script>
         
+        <script>
+
+            function UserTop10 () {
+
+                var userID = 1;
+
+                fetch('https://www.9habu.com/wc2022/php/retrieve-top-ten.php', {
+                        
+                        method: 'POST',
+                        mode: "same-origin",
+                        credentials: "same-origin",
+                        headers: {
+                            'Content-Type': 'text/html',
+                            'Accept': 'text/html'
+                            },
+                        body: userID,
+
+                    }).then(function (response) {
+
+                        // If the response is successful, get the JSON
+                        if (response.ok) {
+                            return response.text();
+                        };
+
+                        // Otherwise, throw an error
+                        return response.text().then(function (msg) {
+                            // console.log(response.json());
+                            throw msg;
+                        });
+
+                    }).then(function (data) {
+
+                        // console.log(data);
+                        document.getElementById("top-scorers").innerHTML += data;
+
+                    }).catch(function (error) {
+                        // There was an error
+                        console.warn("Error : ", error);
+                    });
+
+            }; // end of UserTop10 function
+
+        </script>
+    
+
     </head>
     
     <body>
@@ -47,8 +92,10 @@
             </div>
             
             <div class="card" id="top-scorers">
-                <h2 class="card-title">Top Scorers</h2>
+                <h2 class="card-title">Top Ten Users</h2>
             </div>
+
+            <script>UserTop10();</script>
 
             <div class="card" id="important-stats">
                 <h2 class="card-title">Important Stats</h2>
@@ -67,12 +114,12 @@
             </div>
             
             <footer id="social-media">
-                <ul>
+                <!-- <ul>
                     <li><a href='#' target='_blank'><i class='fab fa-facebook-square'></i></a></li>
                     <li><a href='#' target='_blank'><i class='fab fa-twitter-square'></i></a></li>
                     <li><a href='#' target='_blank'><i class='fab fa-youtube-square'></i></a></li>
                     <li><a href='#' target='_blank'><i class='fab fa-instagram-square'></i></a></li>
-                </ul>
+                </ul> -->
                 <p>&copy; <script>document.write(new Date().getFullYear());</script> World Cup 2022 Predictor</p>
                 <p>All Rights Reserved &mdash; Designed by Mark Boomer</p>
             </footer>
