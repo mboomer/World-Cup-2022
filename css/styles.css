@@ -64,19 +64,19 @@ nav {
     background-color: red; 
 }
 
-#top-scorers {
-    grid-area: top-scorers;
+#top-ten-users {
+    grid-area: top-ten-users;
     /* background-color: blue;  */
 }
 
-#important-stats {
-    grid-area: important-stats;
-    background-color: green; 
+#golden-boot {
+    grid-area: golden-boot;
+    /* background-color: green;  */
 }
 
 #upcoming-fixtures {
     grid-area: upcoming-fixtures;
-    background-color: olive;
+    background-color: navy;
 }
 
 #venues {
@@ -178,7 +178,9 @@ section {
     text-decoration: underline;
 }
 
-/* ------------------ Transparent Buttons ------------------------- */
+/* ******************************************************************************************   */
+/*                                          BUTTONS                                             */
+/* ******************************************************************************************   */
 
 /* white text white border                                          */
 .transparent-btn { 
@@ -294,15 +296,34 @@ th, td {
     border-bottom: 1px dotted black;
 }
 
+.cols {
+    width: 10%;
+    text-align: center;
+}
+.team-flag {
+    width: 6%
+}
 
-.align-right {
-    width: 44%;
-    padding-right: 5px;
-    text-align: right;
+.team-flag img {
+    width: 55%;
+    text-align: center;
+    vertical-align: sub;
 }
 
 .hidden {
     display: none;
+}
+
+.upcoming-fixtures-tbl table {
+    width: 98%;
+    margin: 5px auto;
+    border-collapse: collapse;
+}
+
+.align-right {
+    width: 40%;
+    padding-right: 5px;
+    text-align: right;
 }
 
 .align-left {
@@ -311,11 +332,31 @@ th, td {
     text-align: left;
 }
 
-.cols {
+.align-center {
     width: 10%;
     text-align: center;
+    font-weight: bold;
 }
 
+.versus {
+    width: 10%;
+    font-size: 1.5em;
+    text-align: center;
+    font-weight: bold;
+}
+
+.team {
+    font-size: 2em;
+    width: 30%;
+    text-align: center;
+    color: navy;
+    font-weight: bold;
+}
+
+.country-flag img {
+    width: 55%;
+    text-align: center;
+}
 
 /* ******************************************************************************************   */
 
@@ -338,7 +379,6 @@ th, td {
  
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-/*        grid-template-rows: 10vh 5vh 35vh 35vh auto;*/
         grid-template-rows: 10vh auto auto auto;
         grid-gap: 5px;
         margin: 0 auto;
@@ -354,8 +394,7 @@ th, td {
     #container{
         grid-template-areas:
             "header header header"
-/*            "nav nav nav"*/
-            "lastest-results top-scorers important-stats"
+            "lastest-results top-ten-users golden-boot"
             "upcoming-fixtures venues about"
             "footer footer footer";
     }
@@ -380,10 +419,8 @@ th, td {
 /*        max-width: 800px; */
  
         display: grid;
-        /* grid-template-columns: 1fr 8fr 3fr; */
         grid-template-columns: 1fr 1fr;
-/*        grid-template-rows: 10vh 5vh auto 25vh 25vh auto;*/
-        grid-template-rows: 10vh auto auto 25vh auto;
+        grid-template-rows: 10vh auto auto auto auto;
         grid-gap: 5px;
         margin: 0 auto;
     }
@@ -402,9 +439,8 @@ th, td {
     #container{
         grid-template-areas:
             "header header"
-/*            "nav nav"*/
-            "lastest-results top-scorers"
-            "important-stats upcoming-fixtures"
+            "lastest-results top-ten-users"
+            "golden-boot upcoming-fixtures"
             "venues about"
             "footer footer";
     }
@@ -425,10 +461,8 @@ th, td {
 /*        max-width: 800px;*/
  
         display: grid;
-        /* grid-template-columns: 1fr 8fr 3fr; */
         grid-template-columns: 1fr 1fr;
-/*        grid-template-rows: 10vh 5vh auto 25vh 25vh auto;*/
-        grid-template-rows: 10vh auto auto 25vh auto;
+        grid-template-rows: 10vh auto auto auto auto;
         grid-gap: 5px;
         margin: 0 auto;
     }
@@ -447,9 +481,8 @@ th, td {
     #container{
         grid-template-areas:
             "header header"
-/*            "nav nav"*/
-            "lastest-results top-scorers"
-            "important-stats upcoming-fixtures"
+            "lastest-results top-ten-users"
+            "golden-boot upcoming-fixtures"
             "venues about"
             "footer footer";
     }
@@ -471,7 +504,6 @@ th, td {
  
         display: grid;
         grid-template-columns: 1fr;
-/*        grid-template-rows: auto 5vh auto 15vh 15vh 15vh 15vh 15vh auto;*/
         grid-template-rows: auto auto auto auto auto auto auto auto;
         grid-gap: 5px;
         margin: 0 auto;
@@ -490,10 +522,9 @@ th, td {
     #container{
         grid-template-areas:
             "header"
-/*            "nav"*/
             "lastest-results"
-            "top-scorers"
-            "important-stats" 
+            "top-ten-users"
+            "golden-boot" 
             "upcoming-fixtures"
             "venues" 
             "about"
