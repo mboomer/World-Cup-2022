@@ -1045,15 +1045,6 @@
                 ?> 
                 <!-- end of final -->
 
-                 <section id="EM">
-
-                    <div id="error-message">
-                        <p>The knockout stages must NOT be predicted to be a draw. You must specify either a home win or an away win. Please review the fixture below.</p>
-                        <p id="review-fixture-list"></p>
-                    </div>
-
-                </section> <!-- end of Score Draw Message section -->
-
                 </div> <!-- end of KNOCKOUT STAGES -->
 
                 <div id="TOP-SCORER" class="tabcontent">
