@@ -59,9 +59,9 @@ nav {
     background-color: darkviolet;
 }
 
-#lastest-results {
+#latest-results {
     grid-area: lastest-results;
-    background-color: red; 
+    /* background-color: red;  */
 }
 
 #top-ten-users {
@@ -76,7 +76,7 @@ nav {
 
 #upcoming-fixtures {
     grid-area: upcoming-fixtures;
-    background-color: navy;
+    /* background-color: navy; */
 }
 
 #venues {
@@ -314,11 +314,11 @@ th, td {
     display: none;
 }
 
-.upcoming-fixtures-tbl table {
+/* .upcoming-fixtures-tbl table {
     width: 98%;
     margin: 5px auto;
     border-collapse: collapse;
-}
+} */
 
 .align-right {
     width: 40%;

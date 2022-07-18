@@ -130,7 +130,47 @@
                         console.warn("Error : ", error);
                     });
 
-            }; // end of GoalScorerTop10 function
+            }; // end of UpcomingFixtures() function
+
+            function LatestResults () {
+
+                var userID = 1;
+
+                fetch('https://www.9habu.com/wc2022/php/latest-results.php', {
+                        
+                        method: 'POST',
+                        mode: "same-origin",
+                        credentials: "same-origin",
+                        headers: {
+                            'Content-Type': 'text/html',
+                            'Accept': 'text/html'
+                            },
+                        body: userID,
+
+                    }).then(function (response) {
+
+                        // If the response is successful, get the JSON
+                        if (response.ok) {
+                            return response.text();
+                        };
+
+                        // Otherwise, throw an error
+                        return response.text().then(function (msg) {
+                            // console.log(response.json());
+                            throw msg;
+                        });
+
+                    }).then(function (data) {
+
+                        // console.log(data);
+                        document.getElementById("latest-results").innerHTML += data;
+
+                    }).catch(function (error) {
+                        // There was an error
+                        console.warn("Error : ", error);
+                    });
+
+            }; // end of LatestFixture() function
 
         </script>
     
@@ -165,10 +205,12 @@
             </nav>
 -->
 
-            <div class="card" id="lastest-results">
+            <div class="card" id="latest-results">
                 <h2 class="card-title">Latest Results</h2>
             </div>
             
+            <script>LatestResults();</script>
+
             <div class="card" id="top-ten-users">
                 <h2 class="card-title">Top Ten Users</h2>
             </div>
