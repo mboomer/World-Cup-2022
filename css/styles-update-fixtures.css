@@ -209,6 +209,15 @@ th, td {
     text-align: left;
 }
 
+.country {
+    width: 15%;
+}
+
+#goalteam {
+    width: 92%;
+    font-size: 1em;
+} 
+
 .player {
     width: 30%;
     padding-left: 5px;

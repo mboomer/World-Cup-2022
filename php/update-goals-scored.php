@@ -61,8 +61,8 @@
                 
             /** assign the values to the place holders - the userid is stored with the predictions so can be extracted from the json array */
             $fixtureid = $goal['FixtureID'];
-            $player    = $goal['Player'];
             $teamid    = $goal['TeamID'];
+            $player    = $goal['Player'];
             $h1minute  = $goal['H1Minute'];
             $h2minute  = $goal['H2Minute'];
             $et1minute = $goal['ET1Minute'];
