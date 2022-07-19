@@ -247,12 +247,16 @@
 
                     </section> <!-- end of GOALS SCORED section -->
 
+                    <section id="update-user-points">
+                        <div><button id='update-user-points-btn' class='goal-btn-blue'>Update User Points</button></div>
+                    </section>
+
                 </div>  <!-- end of GOALS SCORED -->
 
             </section> <!-- end of Tournament -->
 
             <footer id="social-media">
-                <p><br>&copy; <script>document.write(new Date().getFullYear());</script> World Cup Predictor</p>
+                <p>&copy; <script>document.write(new Date().getFullYear());</script> World Cup Predictor</p>
                 <p>All Rights Reserved — Designed by Mark Boomer</p>
             </footer>
             
@@ -419,6 +423,53 @@
                     return;
 
                 };
+
+                // event listeners for the goals update button
+                if (event.target.matches('#update-user-points-btn')) {
+
+                    document.getElementById("update-msg").style.display = "block";
+                    document.getElementById("update-msg").style.display = "Updating User Points Totals...please wait";
+
+                    // now process the goals array and save result to goals-scored table
+                    fetch('https://www.9habu.com/wc2022/php/update-user-points.php', {
+                            
+                            method: 'POST',
+                            mode: "same-origin",
+                            credentials: "same-origin",
+                            headers: {
+                                'Content-Type': 'text/html',
+                                'Accept': 'text/html'
+                                },
+                            body: "Dummy Data",
+
+                        }).then(function (response) {
+
+                            // If the response is successful, get the JSON
+                            if (response.ok) {
+                                return response.text();
+                            };
+
+                            // Otherwise, throw an error
+                            return response.text().then(function (msg) {
+                                // console.log(response.text());
+                                throw msg;
+                            });
+
+                        }).then(function (data) {
+
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = data;
+
+                        }).catch(function (error) {
+                            // There was an error
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = error;
+                            console.warn("Error : ", error);
+                        });
+
+                    return;
+
+                };  // end of click update-user-points Btn
 
             }, false);   // end of CLICK event listener
 
