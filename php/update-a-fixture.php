@@ -212,10 +212,11 @@
                             <table>
                                 <thead class='greenheader'>
                                     <tr>                  
-                                        <th class="tbl-header" colspan="9">GOAL SCORED</th>              
+                                        <th class="tbl-header" colspan="10">GOAL SCORED</th>              
                                     </tr>              
                                     <tr>                  
-                                        <th class="cols">Fix. No.</th>
+                                        <th class="cols">Fixture</th>
+                                        <th class="country">Team</th>
                                         <th class="player">Goal Scorer</th>
                                         <th class="cols">Minute (1H)</th> 
                                         <th class="cols">Minute (2H)</th> 
@@ -229,11 +230,72 @@
                                 <tbody>
                                     <tr>
                                         <td> <input id='goal-fixture' type='text'   placeholder='Fixture Number' min=1 max=31 value=1> </td>
-                                        <td> <input id='goal-scorer'  type='text'   placeholder='Goal Scorer' value="">  </td> 
-                                        <td> <input id='goal-h1min'   type='number' min=0 max=50 value=1> </td>
-                                        <td> <input id='goal-h2min'   type='number' min=0 max=50 value=0> </td>
-                                        <td> <input id='goal-et1min'  type='number' min=0 max=50 value=0> </td>
-                                        <td> <input id='goal-et2min'  type='number' min=0 max=50 value=0> </td>
+                                        <td>    
+                                            <select name="goal-team" id="goal-team">
+
+                                                <option value="0"></option>
+
+                                                <?php
+
+                                                // Try and establish the database connection.
+                                                try {
+                                                    $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+                                                }
+                                                catch (PDOException $e) {
+                                                    echo("Error: " . $e->getMessage());
+                                                    exit("Error: " . $e->getMessage());
+                                                };
+
+                                                $sql =    "SELECT \n" 
+                                                        . "  	ID, \n"
+                                                        . "  	Team, \n"
+                                                        . "  	Ranking \n"
+                                                        . "FROM  \n"
+                                                        . "  	Teams tm \n"
+                                                        . "WHERE  \n"
+                                                        . "  	Ranking != 0 \n"
+                                                        . "ORDER BY \n"
+                                                        . "  	Ranking \n";
+
+                                                        $query = $dbh -> prepare($sql);
+
+                                                        /**
+                                                            no need to bind params as we are retrieving all results
+                                                            $query -> bindParam(':city', $city, PDO::PARAM_STR);
+                                                            $city = "New York";
+                                                        */
+
+                                                        // execute the sql query
+                                                        $query -> execute();
+
+                                                        // get all rows
+                                                        $results = $query -> fetchAll(PDO::FETCH_OBJ);
+
+                                                        if ($query->rowCount() == 0) {
+                                                            echo "NO TEAMS RETURNED";
+                                                            exit;
+                                                        } else {
+
+                                                            // loop through the fixtures
+                                                            foreach($results as $key => $result) {
+
+                                                                $teamid = $result -> ID;
+                                                                $team   = $result -> Team;
+
+                                                                echo "<option value=" . $teamid . ">" . $team . "</option>";
+
+                                                            }; // end of results foreach
+                                                                                                    
+                                                        }; // end of results else rowcount
+
+                                                ?>
+                                            </select>
+                                        </td>
+                                        <td> <input id='goal-scorer'  type='text'   placeholder='Goal Scorer' value=""> </td> 
+                                        <td> <input id='goal-h1min'   type='number' min=0 max=65 value=1> </td>
+                                        <td> <input id='goal-h2min'   type='number' min=0 max=65 value=0> </td>
+                                        <td> <input id='goal-et1min'  type='number' min=0 max=65 value=0> </td>
+                                        <td> <input id='goal-et2min'  type='number' min=0 max=65 value=0> </td>
                                         <td> <input id='goal-penalty' type='number' min=0 max=1  value=0> </td>
                                         <td> <input id='goal-own'     type='number' min=0 max=1  value=0> </td>
                                         <td><button id='goal-upd-btn' class='goal-btn-blue'>Update</button></td>  
@@ -275,7 +337,7 @@
                 if (event.target.matches('.transparent-btn-blue')) {
 
                     document.getElementById("update-msg").style.display = "block";
-                    document.getElementById("update-msg").style.display = "Updating Score...please wait";
+                    document.getElementById("update-msg").innerHTML = "Updating Score...please wait";
 
                     const fixtureid = document.getElementById(event.target.id);
 
@@ -360,7 +422,7 @@
                 if (event.target.matches('#goal-upd-btn')) {
 
                     document.getElementById("update-msg").style.display = "block";
-                    document.getElementById("update-msg").style.display = "Updating Goals Score...please wait";
+                    document.getElementById("update-msg").style.innerHTML = "Updating Goals Scored...please wait";
 
                     // initialise the object to hold each goal
                     let goals = [];
@@ -369,15 +431,15 @@
                     /** push the goal to the first element in the array */
 
                     goal = { 
-                            FixtureID  : document.getElementById('goal-fixture').value, 
-                            Player     : document.getElementById('goal-scorer').value, 
-                            TeamID     : 0, 
-                            H1Minute   : document.getElementById('goal-h1min').value,
-                            H2Minute   : document.getElementById('goal-h2min').value,
-                            ET1Minute  : document.getElementById('goal-et1min').value,
-                            ET2Minute  : document.getElementById('goal-et2min').value,
-                            Penalty    : document.getElementById('goal-penalty').value,
-                            OwnGoal    : document.getElementById('goal-own').value
+                            FixtureID : document.getElementById('goal-fixture').value,
+                            TeamID    : document.getElementById('goal-team').value,
+                            Player    : document.getElementById('goal-scorer').value, 
+                            H1Minute  : document.getElementById('goal-h1min').value,
+                            H2Minute  : document.getElementById('goal-h2min').value,
+                            ET1Minute : document.getElementById('goal-et1min').value,
+                            ET2Minute : document.getElementById('goal-et2min').value,
+                            Penalty   : document.getElementById('goal-penalty').value,
+                            OwnGoal   : document.getElementById('goal-own').value
                            };
 
                     // add the goal scorer and time goal was scored to the goals array                                                                
@@ -428,7 +490,7 @@
                 if (event.target.matches('#update-user-points-btn')) {
 
                     document.getElementById("update-msg").style.display = "block";
-                    document.getElementById("update-msg").style.display = "Updating User Points Totals...please wait";
+                    document.getElementById("update-msg").style.innerHTML = "Updating User Points Totals...please wait";
 
                     // now process the goals array and save result to goals-scored table
                     fetch('https://www.9habu.com/wc2022/php/update-user-points.php', {
