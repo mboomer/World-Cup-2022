@@ -1317,6 +1317,7 @@
 
             </section> <!-- end of Tournment -->
 
+            
             <footer id="social-media">
                 <!--
                 <ul>
@@ -1326,7 +1327,7 @@
                     <li><a href='#' target='_blank'><i class='fab fa-instagram-square'></i></a></li>
                 </ul>
                 -->
-                <p><br>&copy; <script>document.write(new Date().getFullYear());</script> World Cup 2022 Predictor</p>
+                <p>&copy; <script>document.write(new Date().getFullYear());</script> World Cup 2022 Predictor</p>
                 <p>All Rights Reserved &mdash; Designed by Mark Boomer</p>
             </footer>
             

@@ -115,7 +115,18 @@ nav {
     grid-area: GOALS-SCORED;
     
     }
-    
+
+#UPDATE-USER-POINTS {
+    grid-area: update-user-points;
+
+}
+
+    #update-user-points div {
+        display: flex;
+        justify-content: center;
+        margin: 20px;
+    }
+
 footer {
     grid-area: footer;
 
