@@ -1,63 +1,53 @@
 <?php
 
-//    // checks if session exists
-//    session_start();
-//
-//    if (isset($_SESSION['mariesmeals'])) {
-//        header("location: weekly-plan.php");    
-//    } else {
-//        // Initialise error message and parameters
-//        $error_msg  = "";
-//        $error_name = "";
-//    }
+    $selector  = $_GET['selector'];
+    $validator = $_GET['validator'];
+    $error_msg = $_GET['error'];
+    
+    // there will not be an error message if we are sent to this page from the reset URL 
+    // so check that we have valid selector and validator
+    if (empty($error_msg)) {
 
-    $post_url  = "validate-login.php";
-
-    // Processing form data when form is submitted
-    if ($_SERVER["REQUEST_METHOD"] == "GET") {
-
-        // GET error code from the URL
-        $error_msg = $_GET['error'];
-        // GET error name from the URL
-        $error_name = $_GET['name'];
-        
-        // Set the error message to be displayed
-        if ($error_msg == "accessdenied") {
-            $error_msg = "Invalid Access Detected";
-        } else if ($error_msg == "nousernopw") {
-            $error_msg = "Please enter a username & password";
-        } else if ($error_msg == "nousername") {
-            $error_msg = "Please enter a username";
-        } else if ($error_msg == "nopassword") {
-            $error_msg = "Please enter a password";
-        } else if ($error_msg == "dbconnecterror") {
-            $error_msg = "Database connection failed";
-        } else if ($error_msg == "sqlexecerror") {
-            $error_msg = "Error retrieving login details";
-        } else if ($error_msg == "invalidpassword") {
-            $error_msg = "Password entered is incorrect";
-        } else if ($error_msg == "invalidusername") {
-            $error_msg = "Username entered is incorrect";
+        if ( empty($selector) || empty($validator) ) {
+            echo "Could not validate your request";
+            exit;
+        } else {
+            if (ctype_xdigit($selector) == false && ctype_xdigit($validator) == false) {
+                echo "Could not validate your request";
+                exit;
+            }
         }
+    }
+
+    // Set the error message to be displayed
+    if ($error_msg == "pwdempty") {
+        $error_msg = "You cannot submit a blank password";
+    } else if ($error_msg == "pwdnotmatch") {
+        $error_msg = "Passwords do not match...please try again";
     } 
+
+    // URL the form is submitted to
+    $post_url  = "validate-new-password.php";
+
 ?>
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        
-        <title>User Login</title>
+
+        <title>Create New Password</title>
     
          <!-- sets initial scale to 100% -->
         <meta name="viewport" content="width=device-width initial-scale=1">
         
         <script src="https://kit.fontawesome.com/130d5316ba.js" crossorigin="anonymous"></script>
-        
-        <link rel="stylesheet" href="../css/styles-login.css">
 
+         <link rel="stylesheet" href="../css/styles-login.css"> 
+        
         <style type="text/css">
 
-          /* ********************************************** MEDIA RULES *******************************   */
+            /* ********************************************** MEDIA RULES *******************************   */
 
             /* ******************************************************************************************   */
             /* apply to any device that has a screen width of 576px or higher                               */
@@ -79,53 +69,51 @@
             /* ******************************************************************************************   */
             @media screen and (min-width: 1200px) {
             }
-
         </style>
     
     </head>
 
     <body id="body-top">
-        
+
         <header>
         
             <!-- ------------------------------------------------------ -->
             <!-- INCLUDE THE PHP CODE FOR THE NAV MENU                  -->
             <!-- ------------------------------------------------------ -->            
-            <!--            <?php include "../inc/nav.level1.inc.php"; ?>-->
+            <!-- <?php include "../inc/nav.level1.inc.php"; ?>          -->
             
         </header>
 
         <div class="container">
-            
+        
             <div class="wrapper centered">
 
-                <h2>Login to your account</h2>
+                <h2>Reset Password</h2>
                 
                 <span class="help-block" <?php echo (!empty($error_msg)) ? 'style="display:block;"' : ''; ?> ><?php echo $error_msg; ?></span>
 
                 <form action="<?php echo $post_url; ?>" method="POST">
+                
+                    <input type="hidden" name="selector"  value="<?php echo $selector;?>">
+                    <input type="hidden" name="validator" value="<?php echo $validator;?>">
+                    
+                    <div class="input-group">
+                        <input type="password" id="password" name="password" placeholder="Enter New Password">
+                    </div>
 
                     <div class="input-group">
-                        <input type="text" id="username" name="username" placeholder="Username" value="<?php echo $error_name; ?>">
-                    </div>    
-
-                    <div class="input-group">
-                        <input type="password" name="password" placeholder="Password">
+                        <input type="password" id="repeat-password" name="repeat-password" placeholder="Repeat New Password">
                     </div>
 
                     <div class="button-group">
 
                         <div>
-                            <input id="login-btn" name="login-btn" type="submit" class="transparent-btn-blue" value="Login">
-                        </div>
-
-                        <div>
-                            <input id="reset-password-btn" name="reset-password-btn" type="submit" class="transparent-btn-blue" formaction="reset-password.php" value="Forgot Password?">
+                            <input id="reset-password-submit-btn" name="reset-password-submit" type="submit" class="transparent-btn-blue" value="Reset Password">
                         </div>
 
                     </div>
 
-                    <p style="padding-top: 10px;">Don't have an account? <a href="sign-up.php">Sign up now</a></p>
+                    <p style="margin: 10px;">Already created an account? <a href="login.php">Log In</a></p>
 
                 </form>
 
@@ -136,7 +124,7 @@
         <!-- ------------------------------------------------------ -->
         <!-- INCLUDE THE PHP CODE FOR THE FOOTER                    -->
         <!-- ------------------------------------------------------ -->            
-        <!--        <?php include "../inc/footer.inc.php"; ?>       -->
+        <!-- <?php include "../inc/footer.inc.php"; ?>              -->
             
 <!-- ------------------------------------------------------------------------------------------- -->        
 <!-- Javascript                                                                                  -->        
@@ -145,7 +133,7 @@
         <script type="text/javascript">
             
             // set focus to meal-filter
-            document.getElementById("username").focus();
+            document.getElementById("password").focus();
 
         </script>
         

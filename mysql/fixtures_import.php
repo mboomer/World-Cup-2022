@@ -547,7 +547,7 @@
     $venueid = 4;                  // Brentford Community Stadium 
     $hometeamid = 19;               // Winner Group B
     $awayteamid = 18;               // Runner Up Group A
-    $dateplayed = "2022/07/20";
+    $dateplayed = "2022/07/21";
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
@@ -567,7 +567,7 @@
     $venueid = 5;                  // Leigh Sports Village 
     $hometeamid = 21;               // Winner Group C
     $awayteamid = 24;               // Runner Up Group D
-    $dateplayed = "2022/07/20";
+    $dateplayed = "2022/07/22";
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;
@@ -587,7 +587,7 @@
     $venueid = 8;                  // New York Stadium
     $hometeamid = 23;               // Winner Group D
     $awayteamid = 22;               // Runner Up Group C
-    $dateplayed = "2022/07/20";
+    $dateplayed = "2022/07/23";
     $timeplayed = "20:00";
     $homescore = NULL;
     $awayscore = NULL;

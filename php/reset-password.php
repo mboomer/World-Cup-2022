@@ -1,63 +1,51 @@
 <?php
 
-//    // checks if session exists
-//    session_start();
-//
-//    if (isset($_SESSION['mariesmeals'])) {
-//        header("location: weekly-plan.php");    
-//    } else {
-//        // Initialise error message and parameters
-//        $error_msg  = "";
-//        $error_name = "";
-//    }
+    // checks if session exists
+    session_start();
 
-    $post_url  = "validate-login.php";
+    // if ( isset($_SESSION['session']) ) {
+    //     header("location: ../weekly_plan.php");    
+    // } else {
+    //     // Initialise error messages
+    //     $error_msg   = "";
+    //     $error_name  = "";
+    //     $error_email = "";
+    // }
+
+    $post_url  = "reset-request.php";
 
     // Processing form data when form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
-        // GET error code from the URL
-        $error_msg = $_GET['error'];
-        // GET error name from the URL
-        $error_name = $_GET['name'];
+        // GET success/failed code from the URL
+        $error_msg = $_GET['reset'];
         
         // Set the error message to be displayed
-        if ($error_msg == "accessdenied") {
-            $error_msg = "Invalid Access Detected";
-        } else if ($error_msg == "nousernopw") {
-            $error_msg = "Please enter a username & password";
-        } else if ($error_msg == "nousername") {
-            $error_msg = "Please enter a username";
-        } else if ($error_msg == "nopassword") {
-            $error_msg = "Please enter a password";
-        } else if ($error_msg == "dbconnecterror") {
-            $error_msg = "Database connection failed";
-        } else if ($error_msg == "sqlexecerror") {
-            $error_msg = "Error retrieving login details";
-        } else if ($error_msg == "invalidpassword") {
-            $error_msg = "Password entered is incorrect";
-        } else if ($error_msg == "invalidusername") {
-            $error_msg = "Username entered is incorrect";
-        }
+        if ($error_msg == "failed") {
+            $error_msg = "The password reset failed";
+        } else if ($error_msg == "success") {
+            $error_msg = "Please check you email for the password reset link";
+        } 
     } 
+
 ?>
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        
-        <title>User Login</title>
+
+        <title>Reset Your Password</title>
     
          <!-- sets initial scale to 100% -->
         <meta name="viewport" content="width=device-width initial-scale=1">
         
         <script src="https://kit.fontawesome.com/130d5316ba.js" crossorigin="anonymous"></script>
-        
-        <link rel="stylesheet" href="../css/styles-login.css">
 
+         <link rel="stylesheet" href="../css/styles-login.css"> 
+        
         <style type="text/css">
 
-          /* ********************************************** MEDIA RULES *******************************   */
+            /* ********************************************** MEDIA RULES *******************************   */
 
             /* ******************************************************************************************   */
             /* apply to any device that has a screen width of 576px or higher                               */
@@ -79,53 +67,45 @@
             /* ******************************************************************************************   */
             @media screen and (min-width: 1200px) {
             }
-
         </style>
     
     </head>
 
     <body id="body-top">
-        
+
         <header>
         
             <!-- ------------------------------------------------------ -->
             <!-- INCLUDE THE PHP CODE FOR THE NAV MENU                  -->
             <!-- ------------------------------------------------------ -->            
-            <!--            <?php include "../inc/nav.level1.inc.php"; ?>-->
+            <!-- <?php include "../inc/nav.level1.inc.php"; ?>          -->
             
         </header>
 
         <div class="container">
-            
+        
             <div class="wrapper centered">
 
-                <h2>Login to your account</h2>
-                
+                <h2>Reset Your Password</h2>
+                <p>You will receive an email with instructions on how to reset your password.</p> 
+
                 <span class="help-block" <?php echo (!empty($error_msg)) ? 'style="display:block;"' : ''; ?> ><?php echo $error_msg; ?></span>
 
                 <form action="<?php echo $post_url; ?>" method="POST">
-
+                
                     <div class="input-group">
-                        <input type="text" id="username" name="username" placeholder="Username" value="<?php echo $error_name; ?>">
+                        <input type="text" id="emailaddress" name="emailaddress" placeholder="Enter you email address" >
                     </div>    
-
-                    <div class="input-group">
-                        <input type="password" name="password" placeholder="Password">
-                    </div>
 
                     <div class="button-group">
 
                         <div>
-                            <input id="login-btn" name="login-btn" type="submit" class="transparent-btn-blue" value="Login">
-                        </div>
-
-                        <div>
-                            <input id="reset-password-btn" name="reset-password-btn" type="submit" class="transparent-btn-blue" formaction="reset-password.php" value="Forgot Password?">
+                            <input type="submit" id="reset-request-btn" name="reset-request-submit" class="transparent-btn-blue" value="Send Reset Password Email">
                         </div>
 
                     </div>
 
-                    <p style="padding-top: 10px;">Don't have an account? <a href="sign-up.php">Sign up now</a></p>
+                    <p style="margin: 10px;">Already created an account? <a href="login.php">Log In</a></p>
 
                 </form>
 
@@ -136,7 +116,7 @@
         <!-- ------------------------------------------------------ -->
         <!-- INCLUDE THE PHP CODE FOR THE FOOTER                    -->
         <!-- ------------------------------------------------------ -->            
-        <!--        <?php include "../inc/footer.inc.php"; ?>       -->
+        <!-- <?php include "../inc/footer.inc.php"; ?>              -->
             
 <!-- ------------------------------------------------------------------------------------------- -->        
 <!-- Javascript                                                                                  -->        
