@@ -180,7 +180,7 @@
                                                 echo "    <td class='h-rank'>" . $homerank .  "</td>";      
                                                 echo "    <td><input class='homescore' name='fixtureno" . $fixno.  "' data-h-fixtureno='" . $fixno . "' value='" . $homescore . "' type='number' min='0' placeholder='0'></td>";      
                                                 echo "    <td><input class='awayscore' name='fixtureno" . $fixno.  "' data-a-fixtureno='" . $fixno . "' value='" . $awayscore . "' type='number' min='0' placeholder='0'></td>";      
-                                                echo "    <td class='a-rank'>" . $homerank . "</td>";      
+                                                echo "    <td class='a-rank'>" . $awayrank . "</td>";      
                                                 echo "    <td class='awayid hidden'>" . $awayid . "</td>";      
                                                 echo "    <td class='away'>" . $awayteam . "</td>";      
                                                 echo "    <td class='results-away-flag'><img src='../img/teams/" . $awayteam . ".png' alt='" . $awayteam . " team flag'></td>";      
