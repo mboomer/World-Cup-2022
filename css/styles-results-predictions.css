@@ -120,6 +120,7 @@ table {
 }
 
 th, td {
+    border-left: 1px dotted black;
     border-right: 1px dotted black;
     border-bottom: 1px dotted black;
 }
@@ -167,6 +168,28 @@ th, td {
 .res, .pts, .bon {
     width: 4%;
     background-color: gainsboro;
+}
+
+.res-header {
+    padding: 2px;
+}
+
+.results-home-flag, .results-away-flag {
+    width: 6%
+}
+
+.predictions-home-flag, .predictions-away-flag {
+    width: 4%
+}
+
+.results-home-flag img, .results-away-flag img {
+    width: 55%;
+    text-align: center;
+}
+
+.predictions-home-flag img, .predictions-away-flag img {
+    width: 55%;
+    text-align: center;
 }
 
 /* ******************************************************************************************   */
