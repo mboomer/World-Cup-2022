@@ -310,7 +310,35 @@
                     </section> <!-- end of GOALS SCORED section -->
 
                     <section id="update-user-points">
-                        <div><button id='update-user-points-btn' class='goal-btn-blue'>Update User Points</button></div>
+
+                        <!-- <div><button id='update-user-points-btn' class='goal-btn-blue'>Update User Points</button></div> -->
+
+                        <div id='statistics-update'>
+
+                            <table id='stats-update-tbl'>
+                                <thead class='blueheader'>
+                                    <tr>                  
+                                        <th class="tbl-header">Update Statistics</th>              
+                                    </tr>              
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><button id='update-user-points-btn' class='stats-btn-blue'>User Points</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><button id='update-top-scorer-btn'  class='stats-btn-blue'>Top Scorer</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><button id='update-latest-results-btn' class='stats-btn-blue'>Latest Results</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><button id='update-upcoming-fixtures-btn' class='stats-btn-blue'>Upcoming Fixtures</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
                     </section>
 
                 </div>  <!-- end of GOALS SCORED -->
@@ -422,7 +450,7 @@
                 if (event.target.matches('#goal-upd-btn')) {
 
                     document.getElementById("update-msg").style.display = "block";
-                    document.getElementById("update-msg").style.innerHTML = "Updating Goals Scored...please wait";
+                    document.getElementById("update-msg").innerHTML = "Updating Goals Scored...please wait";
 
                     // initialise the object to hold each goal
                     let goals = [];
@@ -490,10 +518,10 @@
                 if (event.target.matches('#update-user-points-btn')) {
 
                     document.getElementById("update-msg").style.display = "block";
-                    document.getElementById("update-msg").style.innerHTML = "Updating User Points Totals...please wait";
+                    document.getElementById("update-msg").innerHTML = "Updating User Points Totals...please wait";
 
                     // now process the goals array and save result to goals-scored table
-                    fetch('https://www.9habu.com/wc2022/php/update-user-points.php', {
+                    fetch('https://www.9habu.com/wc2022/php/static-top-ten.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -533,8 +561,148 @@
 
                 };  // end of click update-user-points Btn
 
-            }, false);   // end of CLICK event listener
+                // event listener for the top goal scorer update button
+                if (event.target.matches('#update-top-scorer-btn')) {
 
+                    document.getElementById("update-msg").style.display = "block";
+                    document.getElementById("update-msg").innerHTML = "Updating To Goal Scorer...Please Wait";
+
+                    // now process the goals array and save result to goals-scored table
+                    fetch('https://www.9habu.com/wc2022/php/static-top-goal-scorer.php', {
+                            
+                            method: 'POST',
+                            mode: "same-origin",
+                            credentials: "same-origin",
+                            headers: {
+                                'Content-Type': 'text/html',
+                                'Accept': 'text/html'
+                                },
+                            body: "Dummy Data",
+
+                        }).then(function (response) {
+
+                            // If the response is successful, get the JSON
+                            if (response.ok) {
+                                return response.text();
+                            };
+
+                            // Otherwise, throw an error
+                            return response.text().then(function (msg) {
+                                // console.log(response.text());
+                                throw msg;
+                            });
+
+                        }).then(function (data) {
+
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = data;
+
+                        }).catch(function (error) {
+                            // There was an error
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = error;
+                            console.warn("Error : ", error);
+                        });
+
+                    return;
+
+                };  // end of click update-top-scorer-btn
+
+                // event listeners for the update latest results button
+                if (event.target.matches('#update-latest-results-btn')) {
+
+                    document.getElementById("update-msg").style.display = "block";
+                    document.getElementById("update-msg").innerHTML = "Updating Latest Results...Please Wait";
+
+                    // now process the goals array and save result to goals-scored table
+                    fetch('https://www.9habu.com/wc2022/php/static-latest-results.php', {
+                            
+                            method: 'POST',
+                            mode: "same-origin",
+                            credentials: "same-origin",
+                            headers: {
+                                'Content-Type': 'text/html',
+                                'Accept': 'text/html'
+                                },
+                            body: "Dummy Data",
+
+                        }).then(function (response) {
+
+                            // If the response is successful, get the JSON
+                            if (response.ok) {
+                                return response.text();
+                            };
+
+                            // Otherwise, throw an error
+                            return response.text().then(function (msg) {
+                                // console.log(response.text());
+                                throw msg;
+                            });
+
+                        }).then(function (data) {
+
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = data;
+
+                        }).catch(function (error) {
+                            // There was an error
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = error;
+                            console.warn("Error : ", error);
+                        });
+
+                    return;
+
+                };  // end of click update-latest-results-btn
+
+                // event listeners for the update latest results button
+                if (event.target.matches('#update-upcoming-fixtures-btn')) {
+
+                    document.getElementById("update-msg").style.display = "block";
+                    document.getElementById("update-msg").innerHTML = "Updating Upcoming Fixtures...Please Wait";
+
+                    // now process the goals array and save result to goals-scored table
+                    fetch('https://www.9habu.com/wc2022/php/static-upcoming-fixtures.php', {
+                            
+                            method: 'POST',
+                            mode: "same-origin",
+                            credentials: "same-origin",
+                            headers: {
+                                'Content-Type': 'text/html',
+                                'Accept': 'text/html'
+                                },
+                            body: "Dummy Data",
+
+                        }).then(function (response) {
+
+                            // If the response is successful, get the JSON
+                            if (response.ok) {
+                                return response.text();
+                            };
+
+                            // Otherwise, throw an error
+                            return response.text().then(function (msg) {
+                                // console.log(response.text());
+                                throw msg;
+                            });
+
+                        }).then(function (data) {
+
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = data;
+
+                        }).catch(function (error) {
+                            // There was an error
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = error;
+                            console.warn("Error : ", error);
+                        });
+
+                    return;
+
+                };  // end of click update-upcoming-fixtures-btn
+
+            }, false);   // end of CLICK event listener
             
             // ==================================================================
             // add CHANGE event listener for the INPUT fields
