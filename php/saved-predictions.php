@@ -196,13 +196,13 @@
                     if (homeScores[1].value > awayScores[1].value) {
                         document.getElementById('winnerQF2').innerHTML = homeTeams[1].innerHTML;
                         document.getElementById('winnerQF2flag').innerHTML = "<img src='../img/teams/" + homeTeams[1].innerHTML.trim() + ".png' alt='" + homeTeams[1].innerHTML.trim() + " team flag'>";
-                        document.getElementById('winnerQF2').previousElementSibling.innerHTML = homeIDs[1].innerHTML;
-                        document.getElementById('winnerQF2').previousElementSibling.previousElementSibling.innerHTML = homeRanks[1].innerHTML;
+                        document.getElementById('winnerQF2').nextElementSibling.innerHTML = homeIDs[1].innerHTML;
+                        document.getElementById('winnerQF2').nextElementSibling.nextElementSibling.innerHTML = homeRanks[1].innerHTML;
                     } else if (homeScores[1].value < awayScores[1].value) {
                         document.getElementById('winnerQF2').innerHTML = awayTeams[1].innerHTML;
                         document.getElementById('winnerQF2flag').innerHTML = "<img src='../img/teams/" + awayTeams[1].innerHTML.trim() + ".png' alt='" + awayTeams[1].innerHTML.trim() + " team flag'>";
-                        document.getElementById('winnerQF2').previousElementSibling.innerHTML = awayIDs[1].innerHTML;
-                        document.getElementById('winnerQF2').previousElementSibling.previousElementSibling.innerHTML = awayRanks[1].innerHTML;
+                        document.getElementById('winnerQF2').nextElementSibling.innerHTML = awayIDs[1].innerHTML;
+                        document.getElementById('winnerQF2').nextElementSibling.nextElementSibling.innerHTML = awayRanks[1].innerHTML;
                     } else if (homeScores[1].value == awayScores[1].value) {
                         QuarterFinalsOK = false;
                     };
@@ -210,13 +210,13 @@
                     if (homeScores[2].value > awayScores[2].value) {
                         document.getElementById('winnerQF3').innerHTML = homeTeams[2].innerHTML;
                         document.getElementById('winnerQF3flag').innerHTML = "<img src='../img/teams/" + homeTeams[2].innerHTML.trim() + ".png' alt='" + homeTeams[2].innerHTML.trim() + " team flag'>";
-                        document.getElementById('winnerQF3').nextElementSibling.innerText = homeIDs[2].innerHTML;
-                        document.getElementById('winnerQF3').nextElementSibling.nextElementSibling.innerText = homeRanks[2].innerHTML;
+                        document.getElementById('winnerQF3').previousElementSibling.innerText = homeIDs[2].innerHTML;
+                        document.getElementById('winnerQF3').previousElementSibling.previousElementSibling.innerText = homeRanks[2].innerHTML;
                     } else if (homeScores[2].value < awayScores[2].value) {
                         document.getElementById('winnerQF3').innerHTML = awayTeams[2].innerHTML;
                         document.getElementById('winnerQF3flag').innerHTML = "<img src='../img/teams/" + awayTeams[2].innerHTML.trim() + ".png' alt='" + awayTeams[2].innerHTML.trim() + " team flag'>";
-                        document.getElementById('winnerQF3').nextElementSibling.innerText = awayIDs[2].innerHTML;
-                        document.getElementById('winnerQF3').nextElementSibling.nextElementSibling.innerText = awayRanks[2].innerHTML;
+                        document.getElementById('winnerQF3').previousElementSibling.innerText = awayIDs[2].innerHTML;
+                        document.getElementById('winnerQF3').previousElementSibling.previousElementSibling.innerText = awayRanks[2].innerHTML;
                     } else if (homeScores[2].value == awayScores[2].value) {
                         QuarterFinalsOK = false;
                     };
@@ -888,8 +888,8 @@
 
                             $semifinalid = 1;
 
-                            $homewinners = array("", "winnerQF1"  , "winnerQF3"); 
-                            $awaywinners = array("", "winnerQF2"  , "winnerQF4"); 
+                            $homewinners = array("", "winnerQF1"  , "winnerQF2"); 
+                            $awaywinners = array("", "winnerQF3"  , "winnerQF4"); 
 
                             while ($row = $result->fetch_assoc()) {
 
