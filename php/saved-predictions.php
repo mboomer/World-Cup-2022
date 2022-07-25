@@ -44,6 +44,9 @@
             let QuarterFinalsOK;
             let SemiFinalsOK;
             let FinalsOK;
+            
+            /** set true if each of the Top Goal Scorer and the Number of goals have been entered */
+            let TopScorerOK = false;
 
             // **********************************************************************************************************
             // Helper function needed to buld the predictions table  
@@ -152,13 +155,15 @@
                     return;                
                 };
 
-                if (event.target.matches('#scorer-input')) {
-                    // dont complete this change event
-                    return;                
-                };
+                // set TopScorerOK true only botht he playere and the number of goals have been entered
+                if ( (event.target.matches('#scorer-input')) || (event.target.matches('#goals-input')) ) {
 
-                if (event.target.matches('#goals-input')) {
-                    // dont complete this change event
+                    if ( (document.getElementById("scorer-input").value > "") && (document.getElementById("goals-input").value > 0) ) {
+                        TopScorerOK = true;
+                    } else {
+                        TopScorerOK = false;
+                    }
+
                     return;                
                 };
                 
@@ -1116,6 +1121,9 @@
                                                         
                                     while ($row = $result->fetch_assoc()) {
                                         
+                                        // top scorer has been saved previously, so set flag to true
+                                        echo "<script>TopScorerOK = true</script>;";
+
                                         echo "      <tr>";
                                         echo "          <td id='scorer'>";
                                         echo "              <input id='scorer-input' type='text' placeholder='  Player who is top goal scorer' value='" . $row['TopScorer'] . "'>";
@@ -1169,15 +1177,6 @@
                         <div id="results">
 
                             <?php
-                                // // Create database connection
-                                // $conn = new mysqli($servername, $username, $password, $db);
-
-                                // // Check connection
-                                // if ($conn->connect_error) {
-                                //     die("Connection failed: " . $conn->connect_error . "<br");
-                                // } else {
-                                //     // echo "<div>" . "Connection successful" . "</div>";
-                                // }
 
                                 $qry =    "SELECT \n" 
                                         . "  	FixtureNo		as fixtureno, \n"
@@ -1390,9 +1389,14 @@
 
                     AllowPredictionsUpdate = QuarterFinalsOK && SemiFinalsOK && FinalsOK;
 
-                    // console.log(AllowPredictionsUpdate, QuarterFinalsOK, SemiFinalsOK, FinalsOK)
-
-                    if (AllowPredictionsUpdate === false) {
+                    if (TopScorerOK === false) {
+                        document.getElementById(tabname).style.display = "block";
+                        document.getElementById("confirm-predictions").innerHTML  = "You haven't selected a Top Goal Scorer and the number of goals scored.<br>";
+                        document.getElementById("confirm-predictions").innerHTML += "Select the player you think will be the top scorer in the tournament<br>";
+                        document.getElementById("confirm-predictions").innerHTML += "and enter the number of goals you think they will score.";
+                        document.getElementById("confirm-btn").style.display = "none";
+                        document.getElementById("confirm-save").style.display = "none";
+                    } else if (AllowPredictionsUpdate === false) {
                         document.getElementById(tabname).style.display = "block";
                         document.getElementById("confirm-predictions").innerHTML  = "Please review your predictions in the Knockout stages.<br>";
                         document.getElementById("confirm-predictions").innerHTML += "One or more of the games are predicted to be a draw.<br>";
@@ -1511,14 +1515,13 @@
 
                                 // Otherwise, throw an error
                                 return response.json().then(function (msg) {
-                                    // console.log(response.json());
                                     throw msg;
                                 });
 
                             }).then(function (data) {
 
                                 document.getElementById("confirm-predictions").innerHTML = data;
-
+                                
                                 // call the function to re-build the predictions content
                                 buildPredictionsTable();
 

@@ -1,5 +1,11 @@
 <?php
 
+    // If you didnt get from saved-predictions, return to home page
+    if ( $_SERVER['REQUEST_METHOD'] != "POST" ) {
+        header("Location: ../index.php");
+        exit();
+    }
+
     // checks if session exists
     session_start();
 

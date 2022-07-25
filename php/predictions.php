@@ -550,6 +550,8 @@
             let QuarterFinalsOK = false;
             let SemiFinalsOK = false;
             let FinalsOK = false;
+            /** set true if each of the Top Goal Scorer and the Number of goals have been entered */
+            let TopScorerOK = false;
             
             // **********************************************************************************************************
             // Display the content of the selected tab and highlight the tab
@@ -582,14 +584,23 @@
                 } 
                 else if (tabname == "SAVE-PREDICTIONS") {
 
-                    // if the AllowPredictionsUpdate flag is FALSE then one or more scores in the knockout stages are set as a draw
-                    // dont allow an update unless the scores are set correctly as a win for one or other of the teams 
+                    /** 
+                     * if the AllowPredictionsUpdate flag is FALSE then one or more scores in the knockout stages are set as a draw
+                     * OR a top goal scorer hsnt been selected
+                     * dont allow an update unless the scores are set correctly as a win for one or other of the teams
+                     * and the top scorer has been selected
+                    */ 
 
                     AllowPredictionsUpdate = QuarterFinalsOK && SemiFinalsOK && FinalsOK;
 
-                    // console.log(AllowPredictionsUpdate, QuarterFinalsOK, SemiFinalsOK, FinalsOK)
-
-                    if (AllowPredictionsUpdate === false) {
+                    if (TopScorerOK === false) {
+                        document.getElementById(tabname).style.display = "block";
+                        document.getElementById("confirm-predictions").innerHTML  = "You haven't selected a Top Goal Scorer and the number of goals scored.<br>";
+                        document.getElementById("confirm-predictions").innerHTML += "Select the player you think will be the top scorer in the tournament<br>";
+                        document.getElementById("confirm-predictions").innerHTML += "and enter the number of goals you think they will score.";
+                        document.getElementById("confirm-btn").style.display = "none";
+                        document.getElementById("confirm-save").style.display = "none";
+                    } else if (AllowPredictionsUpdate === false) {
                         document.getElementById(tabname).style.display = "block";
                         document.getElementById("confirm-predictions").innerHTML  = "Please review your predictions in the Knockout stages.<br>";
                         document.getElementById("confirm-predictions").innerHTML += "One or more of the games are predicted to be a draw.<br>";
@@ -602,9 +613,11 @@
                         document.getElementById("confirm-btn").style.display = "grid";
                         document.getElementById("confirm-save").style.display = "block";
                     }
+
                 } else {
                     document.getElementById(tabname).style.display = "block";
-                };
+                }; // end of SAVE-PREDICTIONS
+
             };
 
             // **********************************************************************************************************
@@ -884,13 +897,14 @@
                     return;                
                 };
 
-                if (event.target.matches('#scorer-input')) {
-                    // dont complete this change event
-                    return;                
-                };
+                if ( (event.target.matches('#scorer-input')) || (event.target.matches('#goals-input')) ) {
 
-                if (event.target.matches('#goals-input')) {
-                    // dont complete this change event
+                    if ( (document.getElementById("scorer-input").value > "") && (document.getElementById("goals-input").value > 0) ) {
+                        TopScorerOK = true;
+                    } else {
+                        TopScorerOK = false;
+                    }
+
                     return;                
                 };
 
