@@ -4,16 +4,25 @@
     $validator = $_GET['validator'];
     $error_msg = $_GET['error'];
     
+    /**
+    * cannot call this page directly, must be called from either the reset URL with the correct parameters 
+    * or returned to here with an error message from validate-new-password
+    */
+    if (empty($error_msg) && empty($selector) && empty($validator) ) {
+        header("Location: ../index.php");
+        exit;
+    }
+
     // there will not be an error message if we are sent to this page from the reset URL 
-    // so check that we have valid selector and validator
+    // check that we have valid selector and validator
     if (empty($error_msg)) {
 
-        if ( empty($selector) || empty($validator) ) {
-            echo "Could not validate your request";
+        if ( empty($selector) || empty($validator) ) {            
+            header("Location: ../index.php");
             exit;
         } else {
-            if (ctype_xdigit($selector) == false && ctype_xdigit($validator) == false) {
-                echo "Could not validate your request";
+            if (ctype_xdigit($selector) === false || ctype_xdigit($validator) === false) {
+                header("Location: ../index.php");
                 exit;
             }
         }
@@ -24,7 +33,19 @@
         $error_msg = "You cannot submit a blank password";
     } else if ($error_msg == "pwdnotmatch") {
         $error_msg = "Passwords do not match...please try again";
-    } 
+    } else if ($error_msg == "invalid") {
+        $error_msg = "A valid reset request has not been found.<br>Please click on the reset link in your email and try again.";
+    } else if ($error_msg == "invalid-request") {
+        $error_msg = "A valid reset request has not been found.<br>Please submit a new reset request from the login page.";
+    } else if ($error_msg == "expired") {
+        $error_msg = "Your password reset request has expired. Please re-submit a new reset request";
+    } else if ($error_msg == "userpwfail") {
+        $error_msg = "No Update to the your password was possible.<br>Please make a new reset request from the login page.";
+    } else if ($error_msg == "deletefail") {
+        $error_msg = "Failed to delete reset request.<br>You should still be able to login.<br>Please contact support if you experience any issues.";
+    } else if ($error_msg == "success") {
+        $error_msg = "Your password has been reset.<br>Please return to login page to login in.";
+    }
 
     // URL the form is submitted to
     $post_url  = "validate-new-password.php";
