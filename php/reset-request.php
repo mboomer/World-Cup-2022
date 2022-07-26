@@ -1,9 +1,16 @@
 <?php
 
-    if (!isset($_POST["reset-request-submit"])) {
+    // if you dont get here from password reset form, then return to login 
+    if (empty($_POST["reset-request-submit"])) {
         header("Location: login.php");
         exit();
     }
+
+    // if there is no password entered, return to reset-password with merror message 
+    if ( empty($_POST["emailaddress"]) ) {
+        header("Location: reset-password.php?reset=pwdempty");
+        exit();
+    }    
     
     // Include config file
     require_once "../../../.php/inc/db.worldcup.inc.php";

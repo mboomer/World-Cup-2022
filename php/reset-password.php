@@ -1,5 +1,21 @@
 <?php
 
+    // Processing form data when form is submitted
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+
+        // GET success/failed code from the URL
+        $error_msg = $_GET['reset'];
+        
+        // Set the error message to be displayed
+        if ($error_msg == "failed") {
+            $error_msg = "The password reset request failed.<br>Please try again.";
+        } else if ($error_msg == "success") {
+            $error_msg = "Please check you email for the password reset link";
+        } else if ($error_msg == "pwdempty") {
+            $error_msg = "Please enter your email address";
+        } 
+    } 
+
     // checks if session exists
     session_start();
 
@@ -14,19 +30,6 @@
 
     $post_url  = "reset-request.php";
 
-    // Processing form data when form is submitted
-    if ($_SERVER["REQUEST_METHOD"] == "GET") {
-
-        // GET success/failed code from the URL
-        $error_msg = $_GET['reset'];
-        
-        // Set the error message to be displayed
-        if ($error_msg == "failed") {
-            $error_msg = "The password reset failed";
-        } else if ($error_msg == "success") {
-            $error_msg = "Please check you email for the password reset link";
-        } 
-    } 
 
 ?>
  <!DOCTYPE html>
@@ -100,6 +103,7 @@
                     <div class="button-group">
 
                         <div>
+                            <!-- <button type="submit" id="reset-request-btn" name="reset-request-submit" class="transparent-btn-blue">Send Reset Password Email</button> -->
                             <input type="submit" id="reset-request-btn" name="reset-request-submit" class="transparent-btn-blue" value="Send Reset Password Email">
                         </div>
 

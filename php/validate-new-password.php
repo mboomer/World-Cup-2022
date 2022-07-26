@@ -1,5 +1,11 @@
 <?php
 
+    // if you didnt get here from the create-new-password return to home page
+    if ( !isset($_POST["reset-password-submit"]) ) {
+        header("Location: ../index.php");
+        exit();
+    }
+
     // Include config file
     require_once "../../../.php/inc/db.worldcup.inc.php";
 
@@ -8,12 +14,6 @@
     define('DB_NAME', $db);
     define('DB_USER', $username);
     define('DB_PASS', $password);
-
-    // if you didnt get here from the create-new-password return to home page
-    if ( !isset($_POST["reset-password-submit"]) ) {
-        header("Location: ../index.html");
-        exit();
-    }
 
     // get the data from the Form POST 
     $postSelector   = $_POST["selector"];
@@ -24,10 +24,10 @@
     // check that we have valid passwords
     if ( empty($postPassword) || empty($postRepeatPwd) ) {
         header("Location: create-new-password.php?error=pwdempty");
-        // exit();
+        exit();
     } else if ($postPassword != $postRepeatPwd) {
         header("Location: create-new-password.php?error=pwdnotmatch");
-        // exit();
+        exit();
     }
 
     // Try and establish the database connection.
@@ -59,7 +59,8 @@
     $results = $query -> fetchAll(PDO::FETCH_OBJ);
 
     if ($query->rowCount() == 0) {
-        echo "No Reset Request Has Been Made - Selector not found : " . $selector . " - " . $postSelector . " - " . $currentdate;
+        // echo "A valid reset request has not been found - please make a reset request from the login page." . $selector . " - " . $postSelector . " - " . $currentdate;
+        header("Location: create-new-password.php?error=invalid");
         exit;
     } else {
 
@@ -72,24 +73,27 @@
             $DBexpires   = $result -> Expires;
 
             if ($currentdate > $DBexpires) {
-                echo "Your request has expired. Please re-submit a new reset request : " . $DBexpires . " - " . $currentdate;
+                // echo "Your password reset request has expired. Please re-submit a new reset request" . $DBexpires . " - " . $currentdate;
+                header("Location: create-new-password.php?error=expired");
                 exit;
             }
 
-            $tokenBin = hex2bin($postValidator);
+            $tokenBin   = hex2bin($postValidator);
+            
             $tokencheck = password_verify($tokenBin, $DBtoken);
 
-            echo "Post Validator : " . $postValidator . "<br>";
-            echo "DB Token       : " . $DBtoken . "<br>";
-            echo "Token (BIN)    : " . $tokenBin . "<br>";
+            // echo "Post Validator : " . $postValidator . "<br>";
+            // echo "DB Token       : " . $DBtoken . "<br>";
+            // echo "Token (BIN)    : " . $tokenBin . "<br>";
             
             if ($tokencheck === false) {
-                echo "Invalid data received. Please re-submit your request <br>";
-                echo "Validator : " . $tokenHashed . " DB Token " . $DBtoken;
+                echo "Invalid data received. Please re-submit a new password reset request";
+                header("Location: create-new-password.php?error=invalid");
+                // echo "Validator : " . $tokenHashed . " DB Token " . $DBtoken;
                 exit();
             } 
 
-            echo "tokens match";
+            // echo "tokens match";
 
         }; // end of users foreach 
 
@@ -119,14 +123,14 @@
     $query -> execute();
                                     
     if ($query->rowCount() == 0) {
-        echo "No Update was made to the User password<br>";
+        // echo "No Update to the your password was possible - please make a new reset request";
+        header("Location: create-new-password.php?error=userpwfail");
         exit;
-    } else {
-        echo "User password updated successfully<br>";
     };
 
-    // delete the user token from database with same email
-    // redirect to login page with message to show password was reset
+    /** delete the user token from database with same email
+    * redirect to login page with message to show password was reset
+    */
 
     // Update the user record with the new password
     $qry = "DELETE FROM PasswordReset WHERE UserEmail = :UserEmail";
@@ -143,10 +147,11 @@
     $query -> execute();
                                     
     if ($query->rowCount() == 0) {
-        echo "No Deletion was made from Password Rest Table<br>";
+        // echo "No Deletion was made from Password Rest Table<br>";
+        header("Location: create-new-password.php?error=deletefail");
         exit;
-    } else {
-        echo "All password reset requests where deleted from Password Reset Table<br>";
     };
+
+    header("Location: create-new-password.php?error=success");
 
 ?>
