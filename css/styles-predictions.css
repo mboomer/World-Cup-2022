@@ -145,49 +145,49 @@ nav {
         #GroupA {
             width: 50%;
             grid-area: GroupA;
-            background-color: skyblue;
+            /* background-color: skyblue; */
         }
 
         #TableA {
             width: 50%;
             grid-area: TableA;
-            background-color: aliceblue;
+            /* background-color: aliceblue; */
         }
 
         #GroupB {
             width: 50%;
             grid-area: GroupB;
-            background-color: skyblue;
+            /* background-color: skyblue; */
         }
 
         #TableB {
             width: 50%;
             grid-area: TableB;
-            background-color: aliceblue;
+            /* background-color: aliceblue; */
         }
 
         #GroupC {
             width: 50%;
             grid-area: GroupC;
-            background-color: skyblue;
+            /* background-color: skyblue; */
         }
 
         #TableC {
             width: 50%;
             grid-area: TableC;
-            background-color: aliceblue;
+            /* background-color: aliceblue; */
         }
 
         #GroupD {
             width: 50%;
             grid-area: GroupD;
-            background-color: skyblue;
+            /* background-color: skyblue; */
         }
 
         #TableD {
             width: 50%;
             grid-area: TableD;
-            background-color: aliceblue;
+            /* background-color: aliceblue; */
         }
 
 #KNOCKOUT-STAGE {
@@ -198,17 +198,17 @@ nav {
     
         #QuarterFinal {
             grid-area: QuarterFinal;
-            background-color: skyblue;
+            /* background-color: skyblue; */
         }
 
         #SemiFinal {
             grid-area: SemiFinal;
-            background-color: skyblue;
+            /* background-color: skyblue; */
         }
 
         #Final {
             grid-area: Final;
-            background-color: sky
+            /* background-color: skyblue; */
         }
 
 #TOP-SCORER {
@@ -379,7 +379,7 @@ nav {
 
             #results-tbl {
                 width: 100%;
-                background-color: skyblue;
+                /* background-color: skyblue; */
             }
 
             #results-tbl table {
@@ -392,8 +392,18 @@ nav {
         }
             #predictions-tbl table {
                 width: 99%;
-                background-color: skyblue;
+                /* background-color: skyblue; */
             }
+
+    .qf-color {
+        background: lightcyan;
+    }
+    .sf-color {
+        background: lightblue;
+    }
+    .fi-color {
+        background: lightgreen;
+    }
 
 footer {
     grid-area: footer;
