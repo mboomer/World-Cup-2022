@@ -4,16 +4,16 @@
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
         // GET success/failed code from the URL
-        $error_msg = $_GET['reset'];
+        $error_code = $_GET['reset'];
         
         // Set the error message to be displayed
-        if ($error_msg == "failed") {
+        if ($error_code == "failed") {
             $error_msg = "The password reset request failed.<br>Please try again.";
-        } else if ($error_msg == "success") {
-            $error_msg = "Please check you email for the password reset link";
-        } else if ($error_msg == "pwdempty") {
+        } else if ($error_code == "pwdempty") {
             $error_msg = "Please enter your email address";
-        } 
+        } else if ($error_code == "success") {
+            $error_msg = "Please check your email for the password reset link";
+        }
     } 
 
     // checks if session exists
@@ -90,9 +90,17 @@
             <div class="wrapper centered">
 
                 <h2>Reset Your Password</h2>
-                <p>You will receive an email with instructions on how to reset your password.</p> 
-
-                <span class="help-block" <?php echo (!empty($error_msg)) ? 'style="display:block;"' : ''; ?> ><?php echo $error_msg; ?></span>
+                <p>Enter your email address and click the "Reset Password" button.<br> You will receive an email with instructions to reset your password.</p> 
+                
+                <?php
+                    if ($error_code == "success") {
+                        echo "<span class='help-block-success'>" . $error_msg . "</span>";
+                    } else if ($error_code == "failed") {
+                        echo "<span class='help-block-failure'>" . $error_msg . "</span>";
+                    } else if ($error_code == "pwdempty") {
+                        echo "<span class='help-block-failure'>" . $error_msg . "</span>";
+                    }
+                ?>
 
                 <form action="<?php echo $post_url; ?>" method="POST">
                 
@@ -104,7 +112,7 @@
 
                         <div>
                             <!-- <button type="submit" id="reset-request-btn" name="reset-request-submit" class="transparent-btn-blue">Send Reset Password Email</button> -->
-                            <input type="submit" id="reset-request-btn" name="reset-request-submit" class="transparent-btn-blue" value="Send Reset Password Email">
+                            <input type="submit" id="reset-request-btn" name="reset-request-submit" class="transparent-btn-blue" value="Reset Password">
                         </div>
 
                     </div>
@@ -129,7 +137,7 @@
         <script type="text/javascript">
             
             // set focus to meal-filter
-            document.getElementById("username").focus();
+            document.getElementById("emailaddress").focus();
 
         </script>
         

@@ -1,0 +1,200 @@
+* { box-sizing: border-box; margin: 0px; padding: 0px; }
+
+html { 
+    font-family: 'Raleway' , sans-serif; 
+    font-size: 16px; 
+    color: #555; 
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    color: #555;                            /* this is a grey */
+}
+
+/* RED-ish*/
+#body-top { 
+/*    background: rgba(255,0,0, 0.5);                   */
+}
+
+.margin-75  { margin-top:  75px; }
+.margin-85  { margin-top:  85px; }
+.margin-95  { margin-top:  95px; }
+.margin-105 { margin-top: 105px; }
+.margin-115 { margin-top: 115px; }
+.margin-125 { margin-top: 125px; }
+
+.hidden {
+    display: none;
+}
+header nav img {
+    display: flex;
+}
+
+.container { 
+    height: 100%;
+    background-color: white;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 100px auto 60px;
+}
+.wrapper { 
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+
+    min-width: 300px;
+
+    padding: 10px;
+    margin: 0px auto;
+
+    border: 1px solid #0E6EB8;
+    border-radius: 10px;
+}
+.wrapper > * {
+    margin: 10px;
+    text-align: center;
+}
+.wrapper > h2 {
+    padding-top: 10px;
+}
+.centered { 
+    grid-column: 1;
+    grid-row: 2;
+}
+.button-group input, button { 
+    margin: 5px;
+    padding: 5px;
+    width: 100%;
+}
+.input-group * { 
+    margin: 5px;
+    padding: 5px;
+    width: 100%;
+}
+.help-block-failure {
+    /* display: none; */
+    color: red;
+    background: lightgrey;
+    padding: 10px;
+    border: 1px solid black;
+    width: 95%;
+}
+.help-block-success {
+    /* display: none; */
+    color: green;
+    background: lightgrey;
+    padding: 10px;
+    border: 1px solid black;
+    width: 95%;
+}
+
+#menu-items {
+    grid-template-columns: 1fr;
+    width: 70%;
+}
+/* ------------------ Transparent Buttons ------------------------- */
+
+/* white text white border                                          */
+.transparent-btn { 
+    display: inline-block; 
+    padding: 5px 10px; 
+    color: #FFF; 
+    border: 1px solid #FFF; 
+    text-decoration: none; 
+    font-size: 16px; 
+    line-height: 120%; 
+    background-color: rgba(255,255,255, 0); 
+    border-radius: 4px; transition: background-color 300ms ease; 
+    cursor: pointer; 
+}
+.transparent-btn:hover { 
+    background-color: rgba(255,255,255, 0.2); 
+    color: #000; 
+}
+
+/* white text blue background                                      */
+.transparent-btn-blue { 
+    display: inline-block; 
+    padding: 5px 10px; 
+    color: #FFF; 
+    border: 1px solid #00F; 
+    text-decoration: none; 
+    font-size: 16px; 
+    line-height: 120%; 
+    background-color: rgba(0,0,255, 0.6); 
+    border-radius: 4px; 
+    transition: background-color 300ms ease; 
+    cursor: pointer; 
+}
+.transparent-btn-blue:hover { 
+    background-color: rgba(0,0,255, 0.2); 
+    color: #000; 
+}
+
+/* smaller blue text white background                                      */
+.transparent-btn-white { 
+    display: inline-block; 
+    padding: 3px 5px; 
+    color: #00F; 
+    border: 1px solid #00F; 
+    text-decoration: none; 
+    font-size: 12px; 
+    line-height: 120%; 
+    background-color: rgba(255,255,255, 0); 
+    border-radius: 4px; 
+    transition: background-color 300ms ease; 
+    cursor: pointer; 
+}
+
+.transparent-btn-white:hover { 
+    background-color: rgba(0,0,255, 0.3); 
+    color: #000; 
+}
+
+/* smaller blue border text white                                       */
+.transparent-btn-blue-small { 
+    display: inline-block; 
+    padding: 3px 5px; 
+    color: #FFF; 
+    border: 2px solid #00F; 
+    text-decoration: none; 
+    font-size: 12px; 
+    line-height: 120%; 
+    background-color: rgba(0,123,255, 1); 
+    border-radius: 4px; 
+    transition: background-color 300ms ease; 
+    cursor: pointer; 
+}
+.transparent-btn-blue-small:hover { 
+    background-color: rgba(0,123,255, 0.2); 
+    color: #FFF; 
+}
+
+/* ---------------------------------- END OF DEFAULT MEDIA RULE FOR 576 --------------------------------------------------------- */
+
+
+/* ********************************************** MEDIA RULES *******************************   */
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 576px or higher                               */
+/* ******************************************************************************************   */
+@media screen and (min-width: 576px) {
+}
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 768px or higher                               */
+/* ******************************************************************************************   */
+@media screen and (min-width: 768px) {
+}
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 992px or higher                               */
+/* ******************************************************************************************   */
+@media screen and (min-width: 992px) {
+}
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 1200px or higher                              */
+/* ******************************************************************************************   */
+@media screen and (min-width: 1200px) {    
+}  

@@ -14,40 +14,42 @@
 
     $post_url  = "validate-registration.php";
 
+    $error_code = "";
+
     // Processing form data when form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
         // GET error code from the URL
-        $error_msg = $_GET['error'];
+        $error_code = $_GET['error'];
         // GET error name from the URL
         $error_name = $_GET['name'];
         // GET error email from the URL
         $error_email = $_GET['email'];
         
         // Set the error message to be displayed
-        if ($error_msg == "accessdenied") {
+        if ($error_code == "accessdenied") {
             $error_msg = "Invalid Access Detected";
-        } else if ($error_msg == "incomplete") {
+        } else if ($error_code == "incomplete") {
             $error_msg = "Please complete all fields";
-        } else if ($error_msg == "invaliduseremail") {
+        } else if ($error_code == "invaliduseremail") {
             $error_msg = "Invalid username and email";
-        } else if ($error_msg == "passwordmatch") {
+        } else if ($error_code == "passwordmatch") {
             $error_msg = "Passwords dont match";
-        } else if ($error_msg == "dbconnecterror") {
+        } else if ($error_code == "dbconnecterror") {
             $error_msg = "Database connection failed";
-        } else if ($error_msg == "invalidemail") {
+        } else if ($error_code == "invalidemail") {
             $error_msg = "Invalid email entered";
-        } else if ($error_msg == "invalidname") {
+        } else if ($error_code == "invalidname") {
             $error_msg = "Username should only contain<br>letters and numbers";
-        } else if ($error_msg == "sqlexecerror") {
+        } else if ($error_code == "sqlexecerror") {
             $error_msg = "Error executing select statement";
-        } else if ($error_msg == "userexists") {
+        } else if ($error_code == "userexists") {
             $error_msg = "User Name already exists<br>Try a different user name";
-        } else if ($error_msg == "insertsqlexecerror") {
+        } else if ($error_code == "insertsqlexecerror") {
             $error_msg = "Error inserting record in database ";
-        } else if ($error_msg == "inserterror") {
-            $error_msg = $error_name;
-        } else if ($error_msg == "success") {
+        } else if ($error_code == "inserterror") {
+            $error_msg = "Failed to insert user : ".$error_name;
+        } else if ($error_code == "success") {
             $error_msg = "New account created successfully";
         }
     } 
@@ -91,7 +93,6 @@
             /* ******************************************************************************************   */
             @media screen and (min-width: 1200px) {
             }
-            
         </style>
     
     </head>
@@ -113,7 +114,15 @@
 
                 <h2>Create New Account</h2>
                 
-                <span class="help-block" <?php echo (!empty($error_msg)) ? 'style="display:block;"' : ''; ?> ><?php echo $error_msg; ?></span>
+                <!-- <span class="help-block" <?php echo (!empty($error_msg)) ? 'style="display:block;"' : ''; ?> ><?php echo $error_msg; ?></span> -->
+
+                <?php
+                    if ($error_code == "success") {
+                        echo "<span class='help-block-success'>" . $error_msg . "</span>";
+                    } else if (!empty($error_code)) {
+                        echo "<span class='help-block-failure'>" . $error_msg . "</span>";
+                    }
+                ?>
 
                 <form action="<?php echo $post_url; ?>" method="POST">
                 
