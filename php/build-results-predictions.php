@@ -184,7 +184,7 @@
 
     // echo "</div> <!-- end of results -->";
 
-    echo "<div id='predictions'>"; 
+    // echo "<div id='predictions'>"; 
 
     $qry =   "SELECT \n"
         . "  	    pred.UserID     as userid, \n"
@@ -351,10 +351,21 @@
 
                 $TotalPoints = $TotalPoints + ($pts + $bonus);
 
+                // colorize the stages to identify the QF, SF and FI
+                if ($stage === "QF") {
+                    $rowclass = "  <tr class='qf-color'>";
+                } else if ($stage === "SF") {
+                    $rowclass = "  <tr class='sf-color'>";
+                } else if ($stage === "FI") {
+                    $rowclass = "  <tr class='fi-color'>";
+                } else {
+                    $rowclass = "  <tr>";
+                }
+
                 $html = $html 
-                        . "  <tr>" 
-                        . "    <td class='predno'>" . $fixno . "</td>"
-                        . "    <td class='stage hidden'>" . $rndcode . "</td>" 
+                        . $rowclass 
+                        . "      <td class='predno'>" . $fixno . "</td>"
+                        . "      <td class='stage hidden'>" . $stage . "</td>" 
                         . "      <td class='homeid hidden'>" . $homeid . "</td>"
                         . "      <td class='predictions-home-flag'><img src='../img/teams/" . $hometeam . ".png' alt='" . $hometeam . " team flag'></td>"      
                         . "      <td class='home'>" . $hometeam . "</td>"

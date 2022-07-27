@@ -1276,7 +1276,18 @@
 
                                                 array_push($results, $res);
 
-                                                echo "  <tr>";
+                                                // colorize the stages to identify the QF, SF and FI
+                                                if ($rndcode === "QF") {
+                                                    echo "  <tr class='qf-color'>";
+                                                } else if ($rndcode === "SF") {
+                                                    echo "  <tr class='sf-color'>";
+                                                } else if ($rndcode === "FI") {
+                                                    echo "  <tr class='fi-color'>";
+                                                } else {
+                                                    echo "  <tr>";
+                                                }
+
+                                                // echo "  <tr>";
                                                 echo "      <td class='predno'>" . $fixno . "</td>";
                                                 echo "      <td class='stage hidden'>" . $rndcode . "</td>";                                // hidden cell for code of the tournament stage 
                                                 echo "      <td class='homeid hidden'>" . $homeid . "</td>";                                // hidden cell for ID of home team
