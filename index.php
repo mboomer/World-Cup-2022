@@ -4,6 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <meta http-equiv="cache-control" content="no-cache">        <!-- tells browser not to cache -->
+        <meta http-equiv="expires"       content="0">               <!-- says that the cache expires 'now' -->
+        <meta http-equiv="pragma"        content="no-cache">        <!-- says not to use cached stuff, if there is any -->
+
         <title>World Cup 2022 Predictor</title>
         
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -25,12 +29,25 @@
                 <div id="header-text">
                     <h1>World Cup 2022 Predictions</h1> 
                 </div>
-                
+<!--                
                 <div id="login-register">
                     <a class="transparent-btn-blue" href="https://9habu.com/wc2022/php/login.php">Login</a>
                     <a class="transparent-btn-blue" href="https://9habu.com/wc2022/php/sign-up.php">Register</a>
                 </div>
-            
+-->            
+                <div id="profile" class="dropdown">
+
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3">
+                        <div class="dropdown-content">
+                            <a href="php/login.php">Login</a>
+                            <a href="php/sign-up.php">Register</a>
+                        </div>
+                    </div>
+
+                </div>
+
             </header>
 
             <div class="card" id="latest-results">

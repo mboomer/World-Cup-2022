@@ -1,5 +1,12 @@
 <?php 
 
+
+    // if you didnt get here from update-a-fixture return to home page
+    if ( !isset($_POST["login-btn"]) ) {
+        header("Location: ../index.php");
+        exit();
+    }
+
     // // checks if session exists
     // session_start();
 
@@ -87,9 +94,9 @@
                     foreach($results as $result) {
                     
                         // store values for session data
-                        $userid    = $result -> ID;
-                        $username  = $result -> UserName;
-                        $useremail = $result -> UserEmail;
+                        $userid      = $result -> ID;
+                        $username    = $result -> UserName;
+                        $useremail   = $result -> UserEmail;
 
                         // retrieve the encrypted password from the database 
                         $hashedPassword = $result -> UserPass;
@@ -106,11 +113,12 @@
                     // Password is correct, Start a new session
                     session_start();
                     // Store session variables
-                    $_SESSION["worldcup"]  = true;
-                    $_SESSION["loggedin"]  = true;
-                    $_SESSION["userid"]    = $userid;                            
-                    $_SESSION["username"]  = $username;                            
-                    $_SESSION["useremail"] = $email;
+                    $_SESSION["worldcup"]    = true;
+                    $_SESSION["loggedin"]    = true;
+                    $_SESSION["userid"]      = $userid;                            
+                    $_SESSION["username"]    = $username;                            
+                    $_SESSION["useremail"]   = $email;
+                    $_SESSION["predictions"] = $predictions;
 
                     // Redirect user to Predictions page
                     if ($predictions) {

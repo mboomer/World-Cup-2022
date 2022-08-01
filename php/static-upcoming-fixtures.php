@@ -8,6 +8,12 @@
     define('DB_USER', $username);
     define('DB_PASS', $password);
 
+    // if you didnt get here from a update-a-fixture POST then return to home page
+    if ( $_SERVER['REQUEST_METHOD'] != "POST" ) {
+        header("Location: ../index.php");
+        exit();
+    }
+
     // Try and establish the database connection.
     try {
         $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
@@ -81,9 +87,11 @@
         // get all rows
         $results = $query -> fetchAll(PDO::FETCH_OBJ);
 
+        // open file for writing
+        $fh = fopen("upcoming-fixtures.html", "w");
+
         if ($query->rowCount() == 0) {
-            echo "<div class='upcoming-fixtures-tbl'>No upcoming fixtures</div>";
-            exit;
+            $html = "<div class='upcoming-fixtures-tbl'>No upcoming fixtures</div>";
         } else {
 
             $html = "";
@@ -98,8 +106,6 @@
                 $city       = $result -> city;
                 $hometeam   = $result -> hometeam;
                 $awayteam   = $result -> awayteam;
-
-                $fh = fopen("upcoming-fixtures.html", "w");
 
                 $html .= "  <div class='upcoming-fixtures-tbl'>"
                      .  "      <table>"

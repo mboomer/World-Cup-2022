@@ -192,6 +192,7 @@
         . "  		pred.Stage      as stage, \n" 
         . "  		pred.HomeScore  as homescore, \n" 
         . "  		pred.AwayScore  as awayscore, \n" 
+        . "  		usr.UserName    as username, \n" 
         . "  		fx.GroupID      as groupid, \n"
         . "  	    hmt.ID          as homeid, \n"
         . "  		hmt.Team        as hometeam, \n" 
@@ -203,6 +204,10 @@
         . "  	    res.Description	as resultdesc \n"
         . "  	FROM \n"
         . "  		Predictions pred \n" 
+        . "  	INNER JOIN \n"						
+        . "  			Users usr \n"
+        . "  		ON \n" 
+        . "  			pred.UserID = usr.ID \n"
         . "  	INNER JOIN \n"						
         . "  			Fixtures fx \n"
         . "  		ON \n" 
@@ -281,6 +286,7 @@
             foreach($predictions as $key => $prediction) {
 
                 $userid     = $prediction -> userid;
+                $username   = $prediction -> username;
                 $fixno      = $prediction -> fixtureno;
                 $homeid     = $prediction -> homeid;
                 $hometeam   = $prediction -> hometeam;
@@ -362,6 +368,20 @@
                     $rowclass = "  <tr>";
                 }
 
+                // colorize the pts awarded for correct result
+                if ($pts > 0) {
+                    $ptsclass = "  <td class='points'>";
+                } else {
+                    $ptsclass = "  <td class='pts'>";
+                }
+
+                // colorize the bonus awarded for correct teams
+                if ($bonus > 0) {
+                    $bonusclass = "  <td class='bonus'>";
+                } else {
+                    $bonusclass = "  <td class='bon'>";
+                }
+
                 $html = $html 
                         . $rowclass 
                         . "      <td class='predno'>" . $fixno . "</td>"
@@ -377,8 +397,10 @@
                         . "      <td class='away'>" . $awayteam . "</td>"
                         . "      <td class='predictions-away-flag'><img src='../img/teams/" . $awayteam . ".png' alt='" . $awayteam . " team flag'></td>"      
                         . "      <td class='res'>" . $resultcode . "</td>"
-                        . "      <td class='pts'>" . $pts . "</td>"
-                        . "      <td class='bon'>" . $bonus . "</td>"
+                        . "      " . $ptsclass . $pts . "</td>"
+                        . "      " . $bonusclass . $bonus . "</td>"
+                        // . "      <td class='pts'>" . $pts . "</td>"
+                        // . "      <td class='bon'>" . $bonus . "</td>"
                         . "  </tr>";
 
                 // echo "  <tr>";
@@ -404,7 +426,7 @@
                 . "      <table>"
                 . "          <thead class='blueheader'>"
                 . "              <tr>"
-                . "                  <th class='tbl-header' colspan='9'>PREDICTIONS / POINTS</th><th id='points-total' colspan='3'>User " . $userid . " Pts : " . $TotalPoints . "</th>"
+                . "                  <th class='tbl-header' colspan='9'>" . strtoupper($username) . " - PREDICTIONS / POINTS</th><th colspan='3'>Points : " . $TotalPoints . "</th>"
                 . "              </tr>"
                 . "              <tr>"
                 . "              <tr>"
