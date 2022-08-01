@@ -13,9 +13,10 @@
     // $_SESSION["username"]  = $username;                            
     // $_SESSION["useremail"] = $email;
 
-    // If user is logged in, store the userid from session variable 
+    // If user is logged in, store the session variables 
     if ( isset($_SESSION['userid']) ) {
-        $userid = $_SESSION["userid"];    
+        $userid      = $_SESSION["userid"];    
+        $predictions = $_SESSION["predictions"];
     }; 
     
 ?>
@@ -48,11 +49,24 @@
                 <div id="header-text">
                     <h1>World Cup 2022 Predictions</h1> 
                 </div>
-                
+<!--                
                 <div id="logout">
                     <a class="transparent-btn-blue" href="https://9habu.com/wc2022/php/logout.php">Logout</a>
                 </div>
+-->
+                <div id="profile" class="dropdown">
 
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3">
+                        <div class="dropdown-content">
+                            <a href="user-profile.php">User Profile</a>
+                            <a id="logout-lnk" href="logout.php">Logout</a>
+                        </div>
+                    </div>
+
+                </div>
+                
             </header>
             
 <!--    

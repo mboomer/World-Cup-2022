@@ -171,7 +171,18 @@
                                                 $rndcode    = $fixture -> roundcode;
                                                 $resultcode = $fixture -> resultcode;
                                             
-                                                echo "<tr>";      
+                                                // colorize the stages to identify the QF, SF and FI
+                                                if ($stage === "QF") {
+                                                    echo "  <tr class='qf-color'>";
+                                                } else if ($stage === "SF") {
+                                                    echo "  <tr class='sf-color'>";
+                                                } else if ($stage === "FI") {
+                                                    echo "  <tr class='fi-color'>";
+                                                } else {
+                                                    echo "  <tr>";
+                                                } 
+
+                                                // echo "<tr>";      
                                                 echo "    <td class='fixno'>" . $fixno . "</td>";      
                                                 echo "    <td class='stage hidden'>" . $stage . "</td>";      
                                                 echo "    <td class='homeid hidden'>" . $homeid . "</td>";      
@@ -323,20 +334,22 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><button id='update-user-points-btn' class='stats-btn-blue'>User Points</button></td>
+                                        <td><button id='update-user-points-btn' name='update-user-points-btn' class='stats-update-btn'>Update User Points</button></td>
                                     </tr>
                                     <tr>
-                                        <td><button id='update-top-scorer-btn'  class='stats-btn-blue'>Top Scorer</button></td>
+                                        <td><button id='update-top-ten-btn' name='update-top-ten-btn' class='stats-update-btn'>Top Ten Users</button></td>
                                     </tr>
                                     <tr>
-                                        <td><button id='update-latest-results-btn' class='stats-btn-blue'>Latest Results</button></td>
+                                        <td><button id='update-top-scorer-btn' name='update-top-scorer-btn' class='stats-update-btn'>Top Scorer</button></td>
                                     </tr>
                                     <tr>
-                                        <td><button id='update-upcoming-fixtures-btn' class='stats-btn-blue'>Upcoming Fixtures</button></td>
+                                        <td><button id='update-latest-results-btn' name='update-latest-results-btn' class='stats-update-btn'>Latest Results</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><button id='update-upcoming-fixtures-btn' name='update-upcoming-fixtures-btn' class='stats-update-btn'>Upcoming Fixtures</button></td>
                                     </tr>
                                 </tbody>
-                            </table>
-
+                            </table>      
                         </div>
 
                     </section>
@@ -365,7 +378,7 @@
                 if (event.target.matches('.transparent-btn-blue')) {
 
                     document.getElementById("update-msg").style.display = "block";
-                    document.getElementById("update-msg").innerHTML = "Updating Score...please wait";
+                    document.getElementById("update-msg").innerHTML = "Updating Scores...please wait";
 
                     const fixtureid = document.getElementById(event.target.id);
 
@@ -405,7 +418,6 @@
                     fixtures.push(fixture);
 
                     // process the fixtures array and save result to fixtures table
-
                     fetch('https://www.9habu.com/wc2022/php/update-fixture-scores.php', {
                             
                             method: 'POST',
@@ -514,13 +526,58 @@
 
                 };
 
-                // event listeners for the goals update button
+                // event listeners for the update user points button
                 if (event.target.matches('#update-user-points-btn')) {
 
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Updating User Points Totals...please wait";
 
-                    // now process the goals array and save result to goals-scored table
+                    fetch('https://www.9habu.com/wc2022/php/update-user-points.php', {
+                            
+                            method: 'POST',
+                            mode: "same-origin",
+                            credentials: "same-origin",
+                            headers: {
+                                'Content-Type': 'text/html',
+                                'Accept': 'text/html'
+                                },
+                            body: "Dummy Data",
+
+                        }).then(function (response) {
+
+                            // If the response is successful, get the JSON
+                            if (response.ok) {
+                                return response.text();
+                            };
+
+                            // Otherwise, throw an error
+                            return response.text().then(function (msg) {
+                                // console.log(response.text());
+                                throw msg;
+                            });
+
+                        }).then(function (data) {
+
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = data;
+
+                        }).catch(function (error) {
+                            // There was an error
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = error;
+                            console.warn("Error : ", error);
+                        });
+
+                    return;
+
+                };  // end of click update-user-points-btn
+
+                // event listener for the top ten users btn
+                if (event.target.matches('#update-top-ten-btn')) {
+
+                    document.getElementById("update-msg").style.display = "block";
+                    document.getElementById("update-msg").innerHTML = "Updating User Points Totals...please wait";
+
                     fetch('https://www.9habu.com/wc2022/php/static-top-ten.php', {
                             
                             method: 'POST',
@@ -559,7 +616,7 @@
 
                     return;
 
-                };  // end of click update-user-points Btn
+                };  // end of click update-top-ten-btn
 
                 // event listener for the top goal scorer update button
                 if (event.target.matches('#update-top-scorer-btn')) {
@@ -567,7 +624,6 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Updating To Goal Scorer...Please Wait";
 
-                    // now process the goals array and save result to goals-scored table
                     fetch('https://www.9habu.com/wc2022/php/static-top-goal-scorer.php', {
                             
                             method: 'POST',
@@ -614,7 +670,6 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Updating Latest Results...Please Wait";
 
-                    // now process the goals array and save result to goals-scored table
                     fetch('https://www.9habu.com/wc2022/php/static-latest-results.php', {
                             
                             method: 'POST',
@@ -661,7 +716,6 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Updating Upcoming Fixtures...Please Wait";
 
-                    // now process the goals array and save result to goals-scored table
                     fetch('https://www.9habu.com/wc2022/php/static-upcoming-fixtures.php', {
                             
                             method: 'POST',
