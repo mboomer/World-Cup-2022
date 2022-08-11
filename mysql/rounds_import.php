@@ -1,31 +1,39 @@
 <?php
+
     // Include config file
     require_once "../../../.php/inc/db.worldcup.inc.php";
-         
-    // Create connection
-    $conn = mysqli_connect($servername, $username, $password, $db);
 
-    // Check connection
-    if (!$conn) {
-        die("Unable to connect to database : " . mysqli_connect_error()) . "<br>";
-    } else {
-        echo "Connected successfully" . "<br>";
+    // DB credentials as constants
+    define('DB_HOST', $servername);
+    define('DB_NAME', $db);
+    define('DB_USER', $username);
+    define('DB_PASS', $password);
+
+    // Try and establish the database connection.
+    try {
+        $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
     }
+    catch (PDOException $e) {
+        exit("Error: " . $e->getMessage());
+    };
 
+// dislay starting debug timestamp
+echo (date('l jS \of F Y h:i:s A') . "<br><br>");
+    
     // Prepare 
-    $insertQry = "INSERT INTO Rounds (Code, Description) VALUES (?, ?)";
+    $sql = "INSERT INTO Rounds (Code, Description) VALUES (:Code, :Description)";
 
-    $insertStatement = mysqli_prepare($conn, $insertQry);
+    //prepare the sql statement
+    $query = $dbh -> prepare($sql);
 
-    // Bind params
-    mysqli_stmt_bind_param($insertStatement, "ss", $code, $description);
- 
-    echo "Prepare and Bind completed" . "<br>";
+    // bind the paramaters to the sql statement
+    $query->bindParam(':Code',        $code,        PDO::PARAM_STR);
+    $query->bindParam(':Description', $description, PDO::PARAM_STR);
 
     $code = "GS";
     $description = "Group Stage";
     
-    if (mysqli_stmt_execute($insertStatement)) {
+    if ( $query -> execute() === TRUE ) {
         echo "New record " . $description . " created successfully" . "<br>";
     } else {
         echo "Failed to created record - " . $description . "<br>";
@@ -34,7 +42,7 @@
     $code = "LS";
     $description = "Last Sixteen";
     
-    if (mysqli_stmt_execute($insertStatement)) {
+    if ( $query -> execute() === TRUE ) {
         echo "New record " . $description . " created successfully" . "<br>";
     } else {
         echo "Failed to created record - " . $description . "<br>";
@@ -43,7 +51,7 @@
     $code = "QF";
     $description = "Quarter Final";
     
-    if (mysqli_stmt_execute($insertStatement)) {
+    if ( $query -> execute() === TRUE ) {
         echo "New record " . $description . " created successfully" . "<br>";
     } else {
         echo "Failed to created record - " . $description . "<br>";
@@ -52,7 +60,7 @@
     $code = "SF";
     $description = "Semi Final";
     
-    if (mysqli_stmt_execute($insertStatement)) {
+    if ( $query -> execute() === TRUE ) {
         echo "New record " . $description . " created successfully" . "<br>";
     } else {
         echo "Failed to created record - " . $description . "<br>";
@@ -61,7 +69,7 @@
     $code = "FI";
     $description = "Final";
     
-    if (mysqli_stmt_execute($insertStatement)) {
+    if ( $query -> execute() === TRUE ) {
         echo "New record " . $description . " created successfully" . "<br>";
     } else {
         echo "Failed to created record - " . $description . "<br>";
@@ -70,12 +78,16 @@
     $code = "PL";
     $description = "Play Off";
     
-    if (mysqli_stmt_execute($insertStatement)) {
+    if ( $query -> execute() === TRUE ) {
         echo "New record " . $description . " created successfully" . "<br>";
     } else {
         echo "Failed to created record - " . $description . "<br>";
     }
 
-    mysqli_close();
+    // Close the connection as soon as it's no longer needed
+    $dbh = null;
+
+// display closing debug timestamp
+echo ("<br>" . date('l jS \of F Y h:i:s A') . "<br>");
 
 ?>

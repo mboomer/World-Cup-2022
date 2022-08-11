@@ -113,19 +113,6 @@
             exit;
         } else {
 
-            // echo "  <div id='results-tbl'>";
-            // echo "      <table>";
-            // echo "          <thead class='greenheader'>";
-            // echo "              <tr>";
-            // echo "                  <th class='tbl-header' colspan='10'>FIXTURES / RESULTS</th>";
-            // echo "              </tr>";
-            // echo "              <tr>";
-            // echo "                  <th>No</th><th class='hidden'><th class='hidden'></th><th colspan='2'>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th>";
-            // echo "                  <th class='hidden'></th> <th colspan='2'>AWAY</th><th class='res-header'>Res</th>";
-            // echo "              </tr>";
-            // echo "          </thead>";
-            // echo "          <tbody>";
-
             // create the arrays to hold the arrays for each result
             // create an array for each result and push it to the results array
             $results = array();
@@ -158,33 +145,9 @@
 
                 array_push($results, $res);
 
-                // echo "  <tr>";
-                // echo "      <td class='predno'>" . $fixno . "</td>";
-                // echo "      <td class='stage hidden'>" . $rndcode . "</td>";                                // hidden cell for code of the tournament stage 
-                // echo "      <td class='homeid hidden'>" . $homeid . "</td>";                                // hidden cell for ID of home team
-                // echo "      <td class='results-home-flag'><img src='../img/teams/" . $hometeam . ".png' alt='" . $hometeam . " team flag'></td>";      
-                // echo "      <td class='home'>" . $hometeam . "</td>";
-                // echo "      <td class='h-rank'>" . $homerank . "</td>";
-                // echo "      <td>" . $homescore . "</td>";
-                // echo "      <td>" . $awayscore . "</td>";
-                // echo "      <td class='a-rank'>" . $awayrank . "</td>";
-                // echo "      <td class='awayid hidden'>" . $awayid . "</td>";        // hidden cell for ID of away team
-                // echo "      <td class='away'>" . $awayteam . "</td>";
-                // echo "      <td class='results-away-flag'><img src='../img/teams/" . $awayteam . ".png' alt='" . $awayteam . " team flag'></td>";      
-                // echo "      <td class='res'>" . $resultcode . "</td>";
-                // echo "  </tr>";
-
-            }; // end of results foreach 
-
-            // echo "          </tbody>";
-            // echo "      </table>";   
-            // echo "  </div>  <!-- end of results-tbl div -->";     
+            }; // end of results foreach     
 
         };  // end of $query->rowCount() else
-
-    // echo "</div> <!-- end of results -->";
-
-    // echo "<div id='predictions'>"; 
 
     $qry =   "SELECT \n"
         . "  	    pred.UserID     as userid, \n"
@@ -263,19 +226,6 @@
             echo "<div>NO PREDICTIONS RETURNED</div>";
             exit;
         } else {
-            // echo "  <div id='predictions-tbl'>";
-            // echo "      <table>";
-            // echo "          <thead class='blueheader'>";
-            // echo "              <tr>";
-            // echo "                  <th class='tbl-header' colspan='9'>PREDICTIONS / POINTS</th><th id='points-total' colspan='3'>Points : </th>";
-            // echo "              </tr>";
-            // echo "              <tr>";
-            // echo "              <tr>";
-            // echo "                  <th>No.</th><th class='hidden'><th class='hidden'></th><th colspan='2'>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th>";
-            // echo "                  <th class='hidden'></th> <th colspan='2'>AWAY</th><th class='res-header'>Res</th><th class='res-header'>Pts</th><th class='res-header'>Bonus</th>";
-            // echo "              </tr>";
-            // echo "          </thead>";
-            // echo "          <tbody>";
 
             // create the arrays to hold the arrays for each result
             // create an array for each result and push it to the results array
@@ -351,17 +301,17 @@
                     };
                 };
 
-                // echo "<script>console.log(" . $TotalPoints . " - " . $pts . " - " . $bonus . ");" . "</script>;";
-
-                // echo "<script>console.log('Points : '" . $pts . ',' . $bonus . ',' . $TotalPoints . "');</script>";
-
                 $TotalPoints = $TotalPoints + ($pts + $bonus);
 
-                // colorize the stages to identify the QF, SF and FI
-                if ($stage === "QF") {
+                // colorize the stages to identify the LS, QF, SF, PL and FI
+                if ($stage === "LS") {
+                    $rowclass = "  <tr class='ls-color'>";
+                } else if ($stage === "QF") {
                     $rowclass = "  <tr class='qf-color'>";
                 } else if ($stage === "SF") {
                     $rowclass = "  <tr class='sf-color'>";
+                } else if ($stage === "PL") {
+                    $rowclass = "  <tr class='pl-color'>";
                 } else if ($stage === "FI") {
                     $rowclass = "  <tr class='fi-color'>";
                 } else {
@@ -399,27 +349,7 @@
                         . "      <td class='res'>" . $resultcode . "</td>"
                         . "      " . $ptsclass . $pts . "</td>"
                         . "      " . $bonusclass . $bonus . "</td>"
-                        // . "      <td class='pts'>" . $pts . "</td>"
-                        // . "      <td class='bon'>" . $bonus . "</td>"
                         . "  </tr>";
-
-                // echo "  <tr>";
-                // echo "      <td class='predno'>" . $fixno . "</td>";
-                // echo "      <td class='stage hidden'>" . $rndcode . "</td>";                                // hidden cell for code of the tournament stage 
-                // echo "      <td class='homeid hidden'>" . $homeid . "</td>";                                // hidden cell for ID of home team
-                // echo "      <td class='predictions-home-flag'><img src='../img/teams/" . $hometeam . ".png' alt='" . $hometeam . " team flag'></td>";      
-                // echo "      <td class='home'>" . $hometeam . "</td>";
-                // echo "      <td class='h-rank'>" . $homerank . "</td>";
-                // echo "      <td class='pos'>" . $homescore . "</td>";
-                // echo "      <td class='pos'>" . $awayscore . "</td>";
-                // echo "      <td class='a-rank'>" . $awayrank . "</td>";
-                // echo "      <td class='awayid hidden'>" . $awayid . "</td>";        // hidden cell for ID of away team
-                // echo "      <td class='away'>" . $awayteam . "</td>";
-                // echo "      <td class='predictions-away-flag'><img src='../img/teams/" . $awayteam . ".png' alt='" . $awayteam . " team flag'></td>";      
-                // echo "      <td class='res'>" . $resultcode . "</td>";
-                // echo "      <td class='pts'>" . $pts . "</td>";
-                // echo "      <td class='bon'>" . $bonus . "</td>";
-                // echo "  </tr>";
             }
 
             $html = "  <div id='predictions-tbl'>"
@@ -440,17 +370,9 @@
                 . "      </table>"
                 . "  </div>  <!-- end of predictions-tbl div -->";     
 
-        // echo "          </tbody>";
-        // echo "      </table>";   
-        // echo "  </div>  <!-- end of predictions-tbl div -->";     
     };
-
-    // echo "<script>console.log(" . $TotalPoints . ");</script>;";
-    // echo "<script>document.getElementById('points-total').innerText = 'Points : " . $TotalPoints . "'</script>";
 
     // return the HTML back to the calling page
     echo $html;
-
-    // <!-- end of the predictions php -->
 
 ?>  
