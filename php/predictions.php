@@ -3,6 +3,20 @@
     // Include config file
     require_once "../../../.php/inc/db.worldcup.inc.php";
 
+    // DB credentials as constants
+    define('DB_HOST', $servername);
+    define('DB_NAME', $db);
+    define('DB_USER', $username);
+    define('DB_PASS', $password);
+
+    // Try and establish the database connection.
+    try {
+        $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+    }
+    catch (PDOException $e) {
+        exit("Error: " . $e->getMessage());
+    };
+    
     // checks if session exists
     session_start();
 
@@ -49,56 +63,37 @@
                 <div id="header-text">
                     <h1>World Cup 2022 Predictions</h1> 
                 </div>
-<!--                
-                <div id="logout">
-                    <a class="transparent-btn-blue" href="https://9habu.com/wc2022/php/logout.php">Logout</a>
-                </div>
--->
-                <div id="profile" class="dropdown">
+
+                <div id="hb-icon" class="dropdown">
 
                     <div class="bar1"></div>
                     <div class="bar2"></div>
                     <div class="bar3">
                         <div class="dropdown-content">
                             <a href="user-profile.php">User Profile</a>
-                            <a id="logout-lnk" href="logout.php">Logout</a>
+                            <a href="logout.php">Logout</a>
                         </div>
                     </div>
 
                 </div>
                 
             </header>
-            
-<!--    
-            <nav class="options">
-                 <a href="#" target="_blank" class="options-link">Home</a>
-                 <a href="#" target="_blank" class="options-link">Predictions</a>
-                 <a href="#" target="_blank" class="options-link">Fixtures / Results</a>
-                 <a href="logout.php" target="_blank" class="options-link">Logout</a>
-            </nav>
--->            
+                    
             <!-- Tab links -->
             <div id="tabs" class="tab">
-              <button id="group-stages"         name="GROUPS"           class="tablinks active">Group Stage</button>
-              <button id="knockout-stage"       name="KNOCKOUT-STAGE"   class="tablinks ">Knockout Stage</button>
-              <button id="top-scorer"           name="TOP-SCORER"       class="tablinks ">Top Goal Scorer</button>
+              <button id="groups-abcd-tab"      name="GROUPS-ABCD"      class="tablinks active">Groups A,B,C,D</button>
+              <button id="groups-efgh-tab"      name="GROUPS-EFGH"      class="tablinks ">Groups E,F,G,H</button>
+              <button id="knockout-stage-tab"   name="KNOCKOUT-STAGE"   class="tablinks ">Knockout Stage</button>
+              <button id="finals-stage-tab"     name="FINALS-STAGE"   class="tablinks ">Finals Stage</button>
+              <button id="top-scorer-tab"       name="TOP-SCORER"       class="tablinks ">Top Goal Scorer</button>
               <button id="save-predictions-tab" name="SAVE-PREDICTIONS" class="tablinks ">Save Predictions</button>
             </div>
 
-            <section id="tournment">
+            <section id="tournament">
                 
-                <div id="GROUPS" class="tabcontent">
+                <div id="GROUPS-ABCD" class="tabcontent">
 
                     <?php
-                        // Create database connection
-                        $conn = new mysqli($servername, $username, $password, $db);
-
-                        // Check connection
-                        if ($conn->connect_error) {
-                            die("Connection failed: " . $conn->connect_error . "<br");
-                        } else {
-                            // echo "<div>" . "Connection successful" . "</div>";
-                        }
 
                         $groupids     = array(1, 2, 3, 4);
                         $groupnames   = array("", "GroupA", "GroupB", "GroupC", "GroupD"); 
@@ -114,15 +109,15 @@
                             $tablename   = $tablenames[$groupid];
 
                             $qry =   "SELECT \n" 
-                                    . "  	fx.FixtureNo,  \n"
-                                    . "     rnd.Code as roundcode, \n"
+                                    . "  	fx.FixtureNo    as fixtureno, \n"
+                                    . "     rnd.Code        as roundcode, \n"
                                     . "     grp.Description as groupdesc, \n"
-                                    . "     hmt.ID as homeid, \n"
-                                    . "     hmt.Team as hometeam, \n"
-                                    . "     hmt.Ranking as homerank, \n"
-                                    . "     awt.Ranking as awayrank, \n"
-                                    . "     awt.Team as awayteam, \n"
-                                    . "     awt.ID as awayid \n"
+                                    . "     hmt.ID          as homeid, \n"
+                                    . "     hmt.Team        as hometeam, \n"
+                                    . "     hmt.Ranking     as homerank, \n"
+                                    . "     awt.Ranking     as awayrank, \n"
+                                    . "     awt.Team        as awayteam, \n"
+                                    . "     awt.ID          as awayid \n"
                                     . "  FROM  \n"
                                     . "  	Fixtures fx \n"
                                     . "  	INNER JOIN						# get the Code from Rounds table \n"
@@ -142,13 +137,27 @@
                                     . "  	ON \n"
                                     . "  		fx.AwayTeamID = awt.ID \n"
                                     . "  WHERE  \n"
-                                    . "  	fx.GroupID = " . $groupid . " \n"
+                                    . "  	fx.GroupID = :GroupID \n"
                                     . "  ORDER BY \n"
                                     . "  	fx.FixtureNo \n";
 
-                                $result = $conn->query($qry);
+                                // prepare the query for the database connection
+                                $query = $dbh -> prepare($qry);
 
-                                if ($result->num_rows == 0) {
+                                /** bind the parameters */
+                                $query->bindParam(':GroupID', $groupid, PDO::PARAM_INT);
+                                
+                                /** assign the values to the place holders - 
+                                $groupid already has a value 
+                                */
+
+                                // execute the sql query
+                                $query -> execute();
+                                                                
+                                // get all rows
+                                $rows = $query -> fetchAll(PDO::FETCH_OBJ);
+
+                                if ($query->rowCount() == 0) {
                                     echo "<div>NO RESULTS RETURNED</div>";
                                 } else {
                                     echo "<section id='" . $sectionname . "'>";
@@ -165,19 +174,18 @@
                                     echo "          </thead>";
                                     echo "          <tbody>";
                                   
-                                    while ($row = $result->fetch_assoc()) {
+                                    // loop through the rows
+                                    foreach($rows as $key => $row) {
 
-                                            // echo "<div> IN THE WHILE LOOP </div>";
-                                    
-                                            $fixno    = $row["FixtureNo"];
-                                            $homeid   = $row["homeid"];
-                                            $hometeam = $row["hometeam"];
-                                            $homerank = $row["homerank"];
-                                            $awayrank = $row["awayrank"];
-                                            $awayteam = $row["awayteam"];
-                                            $awayid   = $row["awayid"];
-                                            $grpdesc  = $row["groupdesc"];
-                                            $rndcode  = $row["roundcode"];
+                                            $fixno    = $row -> fixtureno;
+                                            $homeid   = $row -> homeid;
+                                            $hometeam = $row -> hometeam;
+                                            $homerank = $row -> homerank;
+                                            $awayrank = $row -> awayrank;
+                                            $awayteam = $row -> awayteam;
+                                            $awayid   = $row -> awayid;
+                                            $grpdesc  = $row -> groupdesc;
+                                            $rndcode  = $row -> roundcode;
 
                                                 echo "  <tr>";
                                                 echo "      <td class='fixno'>" . $fixno . "</td>";
@@ -197,7 +205,7 @@
 
                                     echo "          </tbody>";
                                     echo "      </table>";   
-                                    echo "  </div>  <!-- end of group div -->";     
+                                    echo "  </div>  <!-- end of group " . $groupid .  "div -->";     
 
                                 // Start SQL QRY FOR THE TABLES
                                 $qry =   "SELECT \n" 
@@ -207,17 +215,31 @@
                                         . "  FROM  \n"
                                         . "  	Teams \n"
                                         . "  WHERE  \n"
-                                        . "  	GroupID = " . $groupid . " \n"
+                                        . "  	GroupID = :GroupID \n"
                                         . "  ORDER BY \n"
                                         . "  	Team ASC \n";
 
-                                    $rowno = 0;     // Initialise row counter to identify league position
+                                $rowno = 0;     // Initialise row counter to identify league position
 
-                                    $result = $conn->query($qry);
+                                // prepare the query for the database connection
+                                $query = $dbh -> prepare($qry);
 
-                                    if ($result->num_rows == 0) {
-                                        echo "<div>NO RESULTS RETURNED FOR TEAMS QUERY</div>";
-                                    } else {
+                                /** bind the parameters */
+                                $query->bindParam(':GroupID', $groupid, PDO::PARAM_INT);
+                                
+                                /** assign the values to the place holders - 
+                                $groupid already has a value 
+                                */
+
+                                // execute the sql query
+                                $query -> execute();
+                                                                
+                                // get all rows
+                                $rows = $query -> fetchAll(PDO::FETCH_OBJ);
+
+                                if ($query->rowCount() == 0) {
+                                    echo "<div>NO RESULTS RETURNED</div>";
+                                } else {
                                         echo "  <div id='" . $tablename . "'>"; 
                                         echo "      <table>";
                                         echo "          <thead class='blueheader'>";
@@ -233,13 +255,14 @@
 
                                         $rowno = 1;         
 
-                                        while ($row = $result->fetch_assoc()) {
-                                        
+                                    // loop through the rows
+                                    foreach($rows as $key => $row) {
+
                                             echo "          <tr>";
                                             echo "              <td class='pos'>" . $rowno . "</td>";
-                                            echo "              <td class='home-flag'><img src='../img/teams/" . $row['Team'] . ".png'  alt='" . $row['Team'] . " team flag'></td>";
-                                            echo "              <td id=" . $tablename . "-pos" . $rowno . " class='team'>" . $row['Team'] . "</td>";
-                                            echo "              <td class='hidden team-id'>" . $row['ID'] . "</td> <td class='hidden team-rk'>" . $row['Ranking'] . "</td>";
+                                            echo "              <td class='home-flag'><img src='../img/teams/" . $row->Team . ".png'  alt='" . $row->Team . " team flag'></td>";
+                                            echo "              <td id=" . $tablename . "-pos" . $rowno . " class='team'>" . $row->Team . "</td>";
+                                            echo "              <td class='hidden team-id'>" . $row->ID . "</td> <td class='hidden team-rk'>" . $row->Ranking . "</td>";
                                             echo "              <td class='cols'>0</td> <td class='cols'>0</td><td class='cols'>0</td><td class='cols'>0</td><td class='cols'>0</td>";
                                             echo "              <td class='cols'>0</td> <td class='cols'>0</td><td class='cols'>0</td>";
                                             echo "          </tr>";
@@ -258,14 +281,337 @@
                                 } // end of else
 
                         }   // end of foreach    
-
-                        // Close database connection
-                        // $conn->close();                             
                     ?>
 
-                </div> <!-- end of GROUPS -->
+                </div> <!-- end of GROUPS ABCD -->
+
+                <div id="GROUPS-EFGH" class="tabcontent">
+
+                    <?php
+
+                        // as the group values start at 5, need to pad the arrays to have correct number of items 
+                        $groupids     = array(5, 6, 7, 8);
+                        $groupnames   = array("", "", "", "", "", "GroupE", "GroupF", "GroupG", "GroupH"); 
+                        $groupdescs   = array("", "", "", "", "", "Group E", "Group F", "Group G", "Group H"); 
+                        $sectionnames = array("", "", "", "", "", "SectionE", "SectionF", "SectionG", "SectionH"); 
+                        $tablenames   = array("", "", "", "", "", "TableE", "TableF", "TableG", "TableH");
+
+                        foreach ($groupids as $groupid) {
+
+                            $sectionname = $sectionnames[$groupid];
+                            $groupname   = $groupnames[$groupid];
+                            $groupdesc   = $groupdescs[$groupid];
+                            $tablename   = $tablenames[$groupid];
+
+                            $qry =   "SELECT \n" 
+                                    . "  	fx.FixtureNo    as fixtureno, \n"
+                                    . "     rnd.Code        as roundcode, \n"
+                                    . "     grp.Description as groupdesc, \n"
+                                    . "     hmt.ID          as homeid, \n"
+                                    . "     hmt.Team        as hometeam, \n"
+                                    . "     hmt.Ranking     as homerank, \n"
+                                    . "     awt.Ranking     as awayrank, \n"
+                                    . "     awt.Team        as awayteam, \n"
+                                    . "     awt.ID          as awayid \n"
+                                    . "  FROM  \n"
+                                    . "  	Fixtures fx \n"
+                                    . "  	INNER JOIN						# get the Code from Rounds table \n"
+                                    . "  		Rounds rnd \n"
+                                    . "  	ON \n"
+                                    . "  		fx.RoundID = rnd.ID \n"
+                                    . "  	INNER JOIN						# get the Group description from GroupStage table \n"
+                                    . "  		GroupStage grp \n"
+                                    . "  	ON \n"
+                                    . "  		fx.GroupID = grp.ID \n"
+                                    . "  	INNER JOIN						# get the Home Team from the Teams table \n"
+                                    . "  		Teams hmt \n"
+                                    . "  	ON \n"
+                                    . "  		fx.HomeTeamID = hmt.ID \n"
+                                    . "  	INNER JOIN						# get the Away Team from the Teams table \n"
+                                    . "  		Teams awt \n"
+                                    . "  	ON \n"
+                                    . "  		fx.AwayTeamID = awt.ID \n"
+                                    . "  WHERE  \n"
+                                    . "  	fx.GroupID = :GroupID \n"
+                                    . "  ORDER BY \n"
+                                    . "  	fx.FixtureNo \n";
+
+                                // prepare the query for the database connection
+                                $query = $dbh -> prepare($qry);
+
+                                /** bind the parameters */
+                                $query->bindParam(':GroupID', $groupid, PDO::PARAM_INT);
+                                
+                                /** assign the values to the place holders - 
+                                $groupid already has a value 
+                                */
+
+                                // execute the sql query
+                                $query -> execute();
+                                                                
+                                // get all rows
+                                $rows = $query -> fetchAll(PDO::FETCH_OBJ);
+
+                                if ($query->rowCount() == 0) {
+                                    echo "<div>NO RESULTS RETURNED</div>";
+                                } else {
+                                    echo "<section id='" . $sectionname . "'>";
+                                    echo "  <div id='" . $groupname . "'>";
+
+                                    echo "      <table>";
+                                    echo "          <thead class='greenheader'>";
+                                    echo "              <tr>";
+                                    echo "                  <th colspan='12'>" . $groupdesc .  "</th>";
+                                    echo "              </tr>";                                    echo "              <tr>";
+                                    echo "                  <th>No</th><th class='hidden'><th class='hidden'></th><th colspan='2'>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th>";
+                                    echo "                  <th class='hidden'></th> <th colspan='2'>AWAY</th>";
+                                    echo "              </tr>";
+                                    echo "          </thead>";
+                                    echo "          <tbody>";
+                                  
+                                    // loop through the rows
+                                    foreach($rows as $key => $row) {
+
+                                            $fixno    = $row -> fixtureno;
+                                            $homeid   = $row -> homeid;
+                                            $hometeam = $row -> hometeam;
+                                            $homerank = $row -> homerank;
+                                            $awayrank = $row -> awayrank;
+                                            $awayteam = $row -> awayteam;
+                                            $awayid   = $row -> awayid;
+                                            $grpdesc  = $row -> groupdesc;
+                                            $rndcode  = $row -> roundcode;
+
+                                                echo "  <tr>";
+                                                echo "      <td class='fixno'>" . $fixno . "</td>";
+                                                echo "      <td class='stage hidden'>" . $rndcode . "</td>";                      // hidden cell for code of the tournament stage 
+                                                echo "      <td class='homeid hidden'>" . $homeid . "</td>";        // hidden cell for ID of home team
+                                                echo "      <td class='home-flag'><img src='../img/teams/" . $hometeam . ".png' alt='" . $hometeam . " team flag'></td>";      
+                                                echo "      <td class='home'>" . $hometeam . "</td>";
+                                                echo "      <td class='h-rank'>" . $homerank . "</td>";
+                                                echo "      <td><input class='homescore' data-table='" . $tablename . "' type='number' value=0 min=0 placeholder=0></td>";
+                                                echo "      <td><input class='awayscore' data-table='" . $tablename . "' type='number' value=0 min=0 placeholder=0></td>";
+                                                echo "      <td class='a-rank'>" . $awayrank . "</td>";
+                                                echo "      <td class='awayid hidden'>" . $awayid . "</td>";        // hidden cell for ID of away team
+                                                echo "      <td class='away'>" . $awayteam . "</td>";
+                                                echo "      <td class='away-flag'><img src='../img/teams/" . $awayteam . ".png'  alt='" . $awayteam . " team flag'></td>";      
+                                                echo "  </tr>";
+                                    }
+
+                                    echo "          </tbody>";
+                                    echo "      </table>";   
+                                    echo "  </div>  <!-- end of group " . $groupid .  "div -->";     
+
+                                // Start SQL QRY FOR THE TABLES
+                                $qry =   "SELECT \n" 
+                                        . "  	ID,  \n"
+                                        . "  	Ranking,  \n"
+                                        . "  	Team  \n"
+                                        . "  FROM  \n"
+                                        . "  	Teams \n"
+                                        . "  WHERE  \n"
+                                        . "  	GroupID = :GroupID \n"
+                                        . "  ORDER BY \n"
+                                        . "  	Team ASC \n";
+
+                                $rowno = 0;     // Initialise row counter to identify league position
+
+                                // prepare the query for the database connection
+                                $query = $dbh -> prepare($qry);
+
+                                /** bind the parameters */
+                                $query->bindParam(':GroupID', $groupid, PDO::PARAM_INT);
+                                
+                                /** assign the values to the place holders - 
+                                $groupid already has a value 
+                                */
+
+                                // execute the sql query
+                                $query -> execute();
+                                                                
+                                // get all rows
+                                $rows = $query -> fetchAll(PDO::FETCH_OBJ);
+
+                                if ($query->rowCount() == 0) {
+                                    echo "<div>NO RESULTS RETURNED</div>";
+                                } else {
+                                        echo "  <div id='" . $tablename . "'>"; 
+                                        echo "      <table>";
+                                        echo "          <thead class='blueheader'>";
+                                        echo "              <tr>";
+                                        echo "                  <th colspan='11'>" . $groupdesc .  "</th>";
+                                        echo "              </tr>";
+                                        echo "              <tr>";
+                                        echo "                  <th>Pos</th><th colspan='2'>Team</th><th class='hidden'></th><th class='hidden'></th>";
+                                        echo "                  <th>P</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>GD</th><th>Pts</th>";
+                                        echo "              </tr>";
+                                        echo "          </thead>";
+                                        echo "          <tbody>";
+
+                                        $rowno = 1;         
+
+                                    // loop through the rows
+                                    foreach($rows as $key => $row) {
+
+                                            echo "          <tr>";
+                                            echo "              <td class='pos'>" . $rowno . "</td>";
+                                            echo "              <td class='home-flag'><img src='../img/teams/" . $row->Team . ".png'  alt='" . $row->Team . " team flag'></td>";
+                                            echo "              <td id=" . $tablename . "-pos" . $rowno . " class='team'>" . $row->Team . "</td>";
+                                            echo "              <td class='hidden team-id'>" . $row->ID . "</td> <td class='hidden team-rk'>" . $row->Ranking . "</td>";
+                                            echo "              <td class='cols'>0</td> <td class='cols'>0</td><td class='cols'>0</td><td class='cols'>0</td><td class='cols'>0</td>";
+                                            echo "              <td class='cols'>0</td> <td class='cols'>0</td><td class='cols'>0</td>";
+                                            echo "          </tr>";
+
+                                            $rowno = $rowno + 1;    // increment row counter
+                                        }
+                                        echo "          </tbody>";
+                                        echo "      </table> <!-- end of league table DIV -->"; 
+
+                                    } // end of nested else for Table        
+                                    
+                                    //     // END SQL QRY
+
+                                    echo "</section> <!-- end of section div -->";                         
+
+                                } // end of else
+
+                        }   // end of foreach    
+                    ?>
+
+                </div> <!-- end of GROUPS EFGH -->
 
                 <div id="KNOCKOUT-STAGE" class="tabcontent">
+
+                    <section id="LS">
+                        <div id="Last16">
+
+                            <table>
+                                <thead class="greenheader">
+                                    <tr>
+                                        <th colspan="9">Last 16</th>
+                                    </tr>
+                                    <tr>
+                                        <th>No</th> <th colspan='2'>HOME</th>  <th class="hidden"></th> <th class="hidden"></th> 
+                                        <th>Rk</th> <th colspan="2">SCORE</th> <th>Rk</th> <th class="hidden"></th> <th colspan='2'>AWAY</th>
+                                    </tr>
+                                </thead>
+                            <tbody>
+                                <tr>
+                                    <td class='fixno'>49</td> 
+                                    <td class='hidden stage'>LS</td> 
+                                    <td id='winnerAflag' class='home-flag'></td> 
+                                    <td id='winnerA' class='home'>Winner A</td> 
+                                    <td class='hidden homeid'></td> 
+                                    <td class='h-rank'></td> 
+                                    <td><input class='homescore' data-stage='LS' type='number' min=0 placeholder=0 value=0></td> 
+                                    <td><input class='awayscore' data-stage='LS' type='number' min=0 placeholder=0 value=0></td>
+                                    <td class='a-rank'></td> 
+                                    <td class='hidden awayid'></td> 
+                                    <td id='runnerupB' class='away'>Runner Up B</td>
+                                    <td id='runnerupBflag' class='away-flag'></td> 
+                                </tr>
+                                <tr>
+                                    <td class='fixno'>50</td> 
+                                    <td class='hidden stage'>LS</td> 
+                                    <td id='winnerCflag' class='home-flag'></td> 
+                                    <td id='winnerC' class='home'>Winner C</td> 
+                                    <td class='hidden homeid'></td> 
+                                    <td class='h-rank'></td> 
+                                    <td><input class='homescore' data-stage='LS' type='number' min=0 placeholder=0 value=0></td> 
+                                    <td><input class='awayscore' data-stage='LS' type='number' min=0 placeholder=0 value=0></td>
+                                    <td class='a-rank'></td> 
+                                    <td class='hidden awayid'></td> 
+                                    <td id='runnerupD' class='away'>Runner Up D</td>
+                                    <td id='runnerupDflag' class='away-flag'></td> 
+                                </tr>
+                                <tr>
+                                    <td class='fixno'>51</td>
+                                    <td class='hidden stage'>LS</td> 
+                                    <td id='winnerBflag' class='home-flag'></td> 
+                                    <td id='winnerB' class='home'>Winner B</td> 
+                                    <td class='hidden homeid'></td> 
+                                    <td class="h-rank"></td>
+                                    <td><input class='homescore' data-stage='LS' type='number' min=0 placeholder=0 value=0></td> 
+                                    <td><input class='awayscore' data-stage='LS' type='number' min=0 placeholder=0 value=0></td>                                
+                                    <td class='a-rank'></td> 
+                                    <td class='hidden awayid'></td> 
+                                    <td id='runnerupA' class='away'>Runner Up A</td>
+                                    <td id='runnerupAflag' class='away-flag'></td> 
+                                </tr>
+                                <tr>
+                                    <td class='fixno'>52</td> 
+                                    <td class='hidden stage'>LS</td> 
+                                    <td id='winnerDflag' class='home-flag'></td> 
+                                    <td id='winnerD' class='home'>Winner D</td> 
+                                    <td class='hidden homeid'></td> 
+                                    <td class='h-rank'></td> 
+                                    <td><input class='homescore' data-stage='LS' type='number' min=0 placeholder=0 value=0></td> 
+                                    <td><input class='awayscore' data-stage='LS' type='number' min=0 placeholder=0 value=0></td>
+                                    <td class='a-rank'></td> 
+                                    <td class='hidden awayid'></td> 
+                                    <td id='runnerupC' class='away'>Runner Up C</td>
+                                    <td id='runnerupCflag' class='away-flag'></td> 
+                                </tr>
+                                <tr>
+                                    <td class='fixno'>53</td> 
+                                    <td class='hidden stage'>LS</td> 
+                                    <td id='winnerEflag' class='home-flag'></td> 
+                                    <td id='winnerE' class='home'>Winner E</td> 
+                                    <td class='hidden homeid'></td> 
+                                    <td class='h-rank'></td> 
+                                    <td><input class='homescore' data-stage='LS' type='number' min=0 placeholder=0 value=0></td> 
+                                    <td><input class='awayscore' data-stage='LS' type='number' min=0 placeholder=0 value=0></td>
+                                    <td class='a-rank'></td> 
+                                    <td class='hidden awayid'></td> 
+                                    <td id='runnerupF' class='away'>Runner Up F</td>
+                                    <td id='runnerupFflag' class='away-flag'></td> 
+                                </tr>
+                                <tr>
+                                    <td class='fixno'>54</td> 
+                                    <td class='hidden stage'>LS</td> 
+                                    <td id='winnerGflag' class='home-flag'></td> 
+                                    <td id='winnerG' class='home'>Winner G</td> 
+                                    <td class='hidden homeid'></td> 
+                                    <td class='h-rank'></td> 
+                                    <td><input class='homescore' data-stage='LS' type='number' min=0 placeholder=0 value=0></td> 
+                                    <td><input class='awayscore' data-stage='LS' type='number' min=0 placeholder=0 value=0></td>
+                                    <td class='a-rank'></td> 
+                                    <td class='hidden awayid'></td> 
+                                    <td id='runnerupH' class='away'>Runner Up H</td>
+                                    <td id='runnerupHflag' class='away-flag'></td> 
+                                </tr>
+                                <tr>
+                                    <td class='fixno'>55</td>
+                                    <td class='hidden stage'>LS</td> 
+                                    <td id='winnerFflag' class='home-flag'></td> 
+                                    <td id='winnerF' class='home'>Winner F</td> 
+                                    <td class='hidden homeid'></td> 
+                                    <td class="h-rank"></td>
+                                    <td><input class='homescore' data-stage='LS' type='number' min=0 placeholder=0 value=0></td> 
+                                    <td><input class='awayscore' data-stage='LS' type='number' min=0 placeholder=0 value=0></td>                                
+                                    <td class='a-rank'></td> 
+                                    <td class='hidden awayid'></td> 
+                                    <td id='runnerupE' class='away'>Runner Up E</td>
+                                    <td id='runnerupEflag' class='away-flag'></td> 
+                                </tr>
+                                <tr>
+                                    <td class='fixno'>56</td> 
+                                    <td class='hidden stage'>LS</td> 
+                                    <td id='winnerHflag' class='home-flag'></td> 
+                                    <td id='winnerH' class='home'>Winner H</td> 
+                                    <td class='hidden homeid'></td> 
+                                    <td class='h-rank'></td> 
+                                    <td><input class='homescore' data-stage='LS' type='number' min=0 placeholder=0 value=0></td> 
+                                    <td><input class='awayscore' data-stage='LS' type='number' min=0 placeholder=0 value=0></td>
+                                    <td class='a-rank'></td> 
+                                    <td class='hidden awayid'></td> 
+                                    <td id='runnerupG' class='away'>Runner Up G</td>
+                                    <td id='runnerupGflag' class='away-flag'></td> 
+                                </tr>
+                            </tbody>
+                          </table>   
+                        </div>  <!-- end of Last 16 div -->
+                    </section> <!-- End of LS -->
 
                     <section id="QF">
                         <div id="QuarterFinal">
@@ -282,60 +628,60 @@
                                 </thead>
                               <tbody>
                                 <tr>
-                                    <td class='fixno'>25</td> 
+                                    <td class='fixno'>57</td> 
                                     <td class='hidden stage'>QF</td> 
-                                    <td id='winnerAflag' class='home-flag'></td> 
-                                    <td id='winnerA' class='home'>Winner A</td> 
-                                    <td class='hidden q-homeid'></td> 
+                                    <td id='winnerLS1flag' class='home-flag'><img src='../img/teams/Winner Match 49.png' alt='Winner of Match 49 flag'></td> 
+                                    <td id='winnerLS1' class='home'>Winner 49</td> 
+                                    <td class='hidden homeid'></td> 
                                     <td class='h-rank'></td> 
                                     <td><input class='homescore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td> 
                                     <td><input class='awayscore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td>
                                     <td class='a-rank'></td> 
-                                    <td class='hidden q-awayid'></td> 
-                                    <td id='runnerupB' class='away'>Runner Up B</td>
-                                    <td id='runnerupBflag' class='away-flag'></td> 
+                                    <td class='hidden awayid'></td> 
+                                    <td id='winnerLS2' class='away'>Winner 50</td>
+                                    <td id='winnerLS2flag' class='away-flag'><img src='../img/teams/Winner Match 50.png' alt='Winner of Match 50 flag'></td> 
                                 </tr>
                                 <tr>
-                                    <td class='fixno'>26</td> 
+                                    <td class='fixno'>58</td> 
                                     <td class='hidden stage'>QF</td> 
-                                    <td id='winnerBflag' class='home-flag'></td> 
-                                    <td id='winnerB' class='home'>Winner B</td> 
-                                    <td class='hidden q-homeid'></td> 
+                                    <td id='winnerLS5flag' class='home-flag'><img src='../img/teams/Winner Match 53.png' alt='Winner of Match 53 flag'></td> 
+                                    <td id='winnerLS5' class='home'>Winner 53</td> 
+                                    <td class='hidden homeid'></td> 
                                     <td class='h-rank'></td> 
                                     <td><input class='homescore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td> 
                                     <td><input class='awayscore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td>
                                     <td class='a-rank'></td> 
-                                    <td class='hidden q-awayid'></td> 
-                                    <td id='runnerupA' class='away'>Runner Up A</td>
-                                    <td id='runnerupAflag' class='away-flag'></td> 
+                                    <td class='hidden awayid'></td> 
+                                    <td id='winnerLS6' class='away'>Winner 54</td>
+                                    <td id='winnerLS6flag' class='away-flag'><img src='../img/teams/Winner Match 54.png' alt='Winner of Match 54 flag'></td> 
                                 </tr>
                                 <tr>
-                                    <td class='fixno'>27</td>
+                                    <td class='fixno'>59</td>
                                     <td class='hidden stage'>QF</td> 
-                                    <td id='winnerCflag' class='home-flag'></td> 
-                                    <td id='winnerC' class='home'>Winner C</td> 
-                                    <td class='hidden q-homeid'></td> 
+                                    <td id='winnerLS3flag' class='home-flag'><img src='../img/teams/Winner Match 51.png' alt='Winner of Match 51 flag'></td> 
+                                    <td id='winnerLS3' class='home'>Winner 51</td> 
+                                    <td class='hidden homeid'></td> 
                                     <td class="h-rank"></td>
                                     <td><input class='homescore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td> 
                                     <td><input class='awayscore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td>                                
                                     <td class='a-rank'></td> 
-                                    <td class='hidden q-awayid'></td> 
-                                    <td id='runnerupD' class='away'>Runner Up D</td>
-                                    <td id='runnerupDflag' class='away-flag'></td> 
+                                    <td class='hidden awayid'></td> 
+                                    <td id='winnerLS4' class='away'>Winner 52</td>
+                                    <td id='winnerLS4flag' class='away-flag'><img src='../img/teams/Winner Match 52.png' alt='Winner of Match 52 flag'></td> 
                                 </tr>
                                 <tr>
-                                    <td class='fixno'>28</td> 
+                                    <td class='fixno'>60</td> 
                                     <td class='hidden stage'>QF</td> 
-                                    <td id='winnerDflag' class='home-flag'></td> 
-                                    <td id='winnerD' class='home'>Winner D</td> 
-                                    <td class='hidden q-homeid'></td> 
+                                    <td id='winnerLS7flag' class='home-flag'><img src='../img/teams/Winner Match 49.png' alt='Winner of Match 55 flag'></td> 
+                                    <td id='winnerLS7' class='home'>Winner 55</td> 
+                                    <td class='hidden homeid'></td> 
                                     <td class='h-rank'></td> 
                                     <td><input class='homescore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td> 
                                     <td><input class='awayscore' data-stage='QF' type='number' min=0 placeholder=0 value=0></td>
                                     <td class='a-rank'></td> 
-                                    <td class='hidden q-awayid'></td> 
-                                    <td id='runnerupC' class='away'>Runner Up C</td>
-                                    <td id='runnerupCflag' class='away-flag'></td> 
+                                    <td class='hidden awayid'></td> 
+                                    <td id='winnerLS8' class='away'>Winner 56</td>
+                                    <td id='winnerLS8flag' class='away-flag'><img src='../img/teams/Winner Match 56.png' alt='Winner of Match 56 flag'></td> 
                                 </tr>
                               </tbody>
                             </table>        
@@ -357,38 +703,76 @@
                                 </thead>
                               <tbody>
                                 <tr>
-                                    <td class='fixno'>29</td> 
+                                    <td class='fixno'>61</td> 
                                     <td class='hidden stage'>SF</td> 
-                                    <td id='winnerQF1flag' class='home-flag'></td> 
-                                    <td id='winnerQF1' class='home'>Winner QF 1</td> 
-                                    <td class='hidden s-homeid'></td> 
+                                    <td id='winnerQF1flag' class='home-flag'><img src='../img/teams/Winner QF1.png' alt='Winner of Quarter Final 1 flag'></td> 
+                                    <td id='winnerQF1' class='home'>Winner 57</td> 
+                                    <td class='hidden homeid'></td> 
                                     <td class='h-rank'></td> 
                                     <td><input class='homescore' data-stage='SF' type='number' min=0 placeholder=0 value=0></td> 
                                     <td><input class='awayscore' data-stage='SF' type='number' min=0 placeholder=0 value=0></td>
                                     <td class='a-rank'></td> 
-                                    <td class='hidden s-awayid'></td> 
-                                    <td id='winnerQF3' class='away'>Winner QF 3</td>
-                                    <td id='winnerQF3flag' class='away-flag'></td> 
+                                    <td class='hidden awayid'></td> 
+                                    <td id='winnerQF2' class='away'>Winner 58</td>
+                                    <td id='winnerQF2flag' class='away-flag'><img src='../img/teams/Winner QF2.png' alt='Winner of Quarter Final 2 flag'></td> 
                                 </tr>
                                 <tr>
-                                    <td class='fixno'>30</td> 
+                                    <td class='fixno'>62</td> 
                                     <td class='hidden stage'>SF</td> 
-                                    <td id='winnerQF2flag' class='home-flag'></td> 
-                                    <td id='winnerQF2' class='home'>Winner QF 2</td> 
-                                    <td class='hidden s-homeid'></td> 
+                                    <td id='winnerQF3flag' class='home-flag'><img src='../img/teams/Winner QF3.png' alt='Winner of Quarter Final 3 flag'></td> 
+                                    <td id='winnerQF3' class='home'>Winner 59</td> 
+                                    <td class='hidden homeid'></td> 
                                     <td class='h-rank'></td> 
                                     <td><input class='homescore' data-stage='SF' type='number' min=0 placeholder=0 value=0></td> 
                                     <td><input class='awayscore' data-stage='SF' type='number' min=0 placeholder=0 value=0></td>
                                     <td class='a-rank'></td> 
-                                    <td class='hidden s-awayid'></td> 
-                                    <td id='winnerQF4' class='away'>Winner QF 4</td>
-                                    <td id='winnerQF4flag' class='away-flag'></td> 
+                                    <td class='hidden awayid'></td> 
+                                    <td id='winnerQF4' class='away'>Winner 60</td>
+                                    <td id='winnerQF4flag' class='away-flag'><img src='../img/teams/Winner QF4.png' alt='Winner of Quarter Final 4 flag'></td> 
                                 </tr>
                               </tbody>
                             </table>        
                         </div>
 
                     </section> <!-- End of Semi Final -->
+
+                </div> <!-- end of KNOCKOUT STAGES -->
+
+                <div id="FINALS-STAGE" class="tabcontent">
+
+                    <section id="PL">
+                        <div id="Playoff">
+                            <table>
+                                <thead class="blueheader">
+                                    <tr>
+                                        <th colspan="9">3RD PLACE PLAY-OFF</th>
+                                    </tr>
+                                    <tr>
+                                        <th>No</th> 
+                                        <th colspan='2'>HOME</th> <th class="hidden"></th> <th class="hidden"></th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th> <th class="hidden"></th> 
+                                        <th colspan='2'>AWAY</th>
+                                    </tr>
+                                </thead>
+                              <tbody>
+                                <tr>
+                                    <td class='fixno'>63</td> 
+                                    <td class='hidden stage'>PL</td> 
+                                    <td id='loserSF1flag' class='home-flag'><img src='../img/teams/Loser SF1.png' alt='Loser Of Semi Final 1 flag'></td> 
+                                    <td id='loserSF1' class='home'>Loser Semi-Final 1</td> 
+                                    <td class='hidden homeid'></td> 
+                                    <td class='h-rank'></td> 
+                                    <td><input class='homescore' data-stage='PL' type='number' min=0 placeholder=0 value=0></td> 
+                                    <td><input class='awayscore' data-stage='PL' type='number' min=0 placeholder=0 value=0></td>
+                                    <td class='a-rank'></td> 
+                                    <td class='hidden awayid'></td> 
+                                    <td id='loserSF2' class='away'>Loser Semi-Final 2</td>
+                                    <td id='loserSF2flag' class='away-flag'><img src='../img/teams/Loser SF2.png' alt='Loser Of Semi Final 2 flag'></td> 
+                                </tr>
+                              </tbody>
+                            </table>        
+                        </div>
+
+                    </section> <!-- End of 3rd Place Play Off -->
 
                     <section id="FL">
                         <div id="Final">
@@ -405,18 +789,18 @@
                                 </thead>
                               <tbody>
                                 <tr>
-                                    <td class='fixno'>31</td> 
+                                    <td class='fixno'>64</td> 
                                     <td class='hidden stage'>FI</td> 
-                                    <td id='winnerSF1flag' class='home-flag'></td> 
-                                    <td id='winnerSF1' class='home'>Winner SF 1</td> 
-                                    <td class='hidden f-homeid'></td> 
+                                    <td id='winnerSF1flag' class='home-flag'><img src='../img/teams/Winner SF1.png' alt='Winner Of Semi Final 1 flag'></td> 
+                                    <td id='winnerSF1' class='home'>Winner Semi-Final 1</td> 
+                                    <td class='hidden homeid'></td> 
                                     <td class='h-rank'></td> 
                                     <td><input class='homescore' data-stage='FL' type='number' min=0 placeholder=0 value=0></td> 
                                     <td><input class='awayscore' data-stage='FL' type='number' min=0 placeholder=0 value=0></td>
                                     <td class='a-rank'></td> 
-                                    <td class='hidden f-awayid'></td> 
-                                    <td id='winnerSF2' class='away'>Winner SF 2</td>
-                                    <td id='winnerSF2flag' class='away-flag'></td> 
+                                    <td class='hidden awayid'></td> 
+                                    <td id='winnerSF2' class='away'>Winner Semi-Final 2</td>
+                                    <td id='winnerSF2flag' class='away-flag'><img src='../img/teams/Winner SF2.png' alt='Winner Of Semi Final 2 flag'></td> 
                                 </tr>
                               </tbody>
                             </table>        
@@ -424,7 +808,7 @@
 
                     </section> <!-- End of Final -->
 
-                </div> <!-- end of KNOCKOUT STAGES -->
+                </div> <!-- end of FINALS STAGE -->
 
                 <div id="TOP-SCORER" class="tabcontent">
 
@@ -440,26 +824,48 @@
                                 . "  ORDER BY \n"
                                 . "  	GroupID \n";
 
-                        $result = $conn->query($qry);
+                            // prepare the query for the database connection
+                            $query = $dbh -> prepare($qry);
 
-                        if ($result->num_rows == 0) {
-                            echo "<div>NO RESULTS RETURNED</div>";
-                        } else {
+                            /** bind the parameters - NONE needed
+                            $query->bindParam(':GroupID', $groupid, PDO::PARAM_INT);
+                            */
 
-                            echo "<section id='team-flags'>";
-                                                
-                            while ($row = $result->fetch_assoc()) {
-                                
-                                if ($row["WikipediaLink"] > "") {
-                                    echo "<a target='_blank' href='" . $row["WikipediaLink"] . "'><img src='../img/flags/" . $row["Team"] . ".png'  alt='" . $row["Team"] . " team flag'></a>";
-                                };
+                            /** assign the values to the place holders */
 
-                            }
+                            // execute the sql query
+                            $query -> execute();
+                                                            
+                            // get all rows
+                            $rows = $query -> fetchAll(PDO::FETCH_OBJ);
 
-                            echo "</section>";
+                            if ($query->rowCount() == 0) {
+                                echo "<div>NO RESULTS RETURNED</div>";
+                            } else {
+                                echo "<section id='team-flags'>";
+                                                    
+                                // loop through the rows
+                                foreach($rows as $key => $row) {                                    
+
+                                    if ($row->WikipediaLink > "") {
+
+                                        // for some reason using IR Iran as the link text, causes the text to wrap round the right side of the image
+                                        if ($row->Team == "IR Iran") {
+                                            $teamlink = "Islamic Republic of Iran";       
+                                        } else {
+                                            $teamlink = $row->Team;
+                                        }
+
+                                        echo "<a target='_blank' href='" . $row->WikipediaLink . "'><img src='../img/flags/" . $row->Team . ".png'  alt='" . $row->Team . " team flag'>" . $teamlink . "</a>";
+
+                                    };
+
+                                }
+
+                                echo "</section>";
                         }
                         // Close database connection
-                        $conn->close();                             
+                        $dbh = null;                             
                     ?>
 
                     <section id='top-goal-scorer'>
@@ -520,7 +926,7 @@
 
                 </div>  <!-- end of SAVE PREDICTIONS -->
                 
-            </section> <!-- end of Tournment -->
+            </section> <!-- end of Tournament -->
 
             <footer id="social-media">
 
@@ -534,14 +940,15 @@
         <script type="text/javascript" >
 
             /** 
-                pass the php session variable, $userid, to a javascript variable 
-                this can then be used in the FETCH POST
+                pass the php session variable, $userid, to a javascript variable - this can then be used in the FETCH POST
             */ 
             var userID = "<?=$userid?>";
 
             // Change the display of the content tab from none to flex/grid to display content
-            // Hide the Knockout stage, Save Predictions and Top Scorer stage
+            // Hide Groups DEFG, Knockout stage, Save Predictions and Top Scorer stage
+            document.getElementById("GROUPS-EFGH").style.display = "none";
             document.getElementById("KNOCKOUT-STAGE").style.display = "none";
+            document.getElementById("FINALS-STAGE").style.display = "none";
             document.getElementById("SAVE-PREDICTIONS").style.display = "none";
             document.getElementById("TOP-SCORER").style.display = "none";
 
@@ -561,11 +968,14 @@
             let AllowPredictionsUpdate = false;
 
             /** set true if each of the fixtures in the stage are set as a home win or an away win */
+            let LastSixteenOK   = false;
             let QuarterFinalsOK = false;
-            let SemiFinalsOK = false;
-            let FinalsOK = false;
+            let SemiFinalsOK    = false;
+            let PlayoffOK       = false;
+            let FinalsOK        = false;
+            
             /** set true if each of the Top Goal Scorer and the Number of goals have been entered */
-            let TopScorerOK = false;
+            let TopScorerOK     = false;
             
             // **********************************************************************************************************
             // Display the content of the selected tab and highlight the tab
@@ -590,10 +1000,16 @@
                 }
                 
                 // Show the selected tab content and add an "active" class to the button that selected the tab
-                if (tabname == "GROUPS") {
+                if (tabname == "GROUPS-ABCD") {
                     document.getElementById(tabname).style.display = "grid";
                 }
+                else if (tabname == "GROUPS-EFGH") {
+                    document.getElementById(tabname).style.display = "grid";
+                } 
                 else if (tabname == "KNOCKOUT-STAGE") {
+                    document.getElementById(tabname).style.display = "grid";
+                } 
+                else if (tabname == "FINALS-STAGE") {
                     document.getElementById(tabname).style.display = "grid";
                 } 
                 else if (tabname == "SAVE-PREDICTIONS") {
@@ -605,7 +1021,7 @@
                      * and the top scorer has been selected
                     */ 
 
-                    AllowPredictionsUpdate = QuarterFinalsOK && SemiFinalsOK && FinalsOK;
+                    AllowPredictionsUpdate = LastSixteenOK && QuarterFinalsOK && SemiFinalsOK && FinalsOK;
 
                     if (TopScorerOK === false) {
                         document.getElementById(tabname).style.display = "block";
@@ -626,6 +1042,7 @@
                         document.getElementById(tabname).style.display = "block";
                         document.getElementById("confirm-btn").style.display = "grid";
                         document.getElementById("confirm-save").style.display = "block";
+                        document.getElementById("confirm-predictions").style.display = "none";
                     }
 
                 } else {
@@ -699,10 +1116,10 @@
                         // get the the results from the group tables 
                         fixtureids  = document.querySelectorAll('.fixno');            
                         stages      = document.querySelectorAll('.stage');            
-                        hometeamids = document.querySelectorAll('.homeid, .q-homeid, .s-homeid, .f-homeid');            
+                        hometeamids = document.querySelectorAll('.homeid');            
                         homescores  = document.querySelectorAll('.homescore') ;
                         awayscores  = document.querySelectorAll('.awayscore');
-                        awayteamids = document.querySelectorAll('.awayid, .q-awayid, .s-awayid, .f-awayid');
+                        awayteamids = document.querySelectorAll('.awayid');
 
                         // initialise the array to hold the predictions 
                         // UserID FixtureID HomeScore AwayScore HomeTeam AwayTeam ResultID Points Stage
@@ -761,7 +1178,9 @@
                         }; // end of FOR loop
                     
                         // now process the predictions array and save result to predictions table
-                        // console.log(JSON.stringify(predictions));
+                        //console.log(JSON.stringify(predictions));
+
+                        console.log(predictions);
 
                         fetch('https://www.9habu.com/wc2022/php/save-predictions-to-db.php', {
                                 
@@ -818,9 +1237,9 @@
                 }
 
                 // event listeners for the tab links
-                if (event.target.matches('#knockout-stage')) {
+                if (event.target.matches('#knockout-stage-tab')) {
 
-                    // GROUP STAGE WINNERS AND RUNNERS UP FROM EACH GROUP
+                    // GROUP STAGE WINNERS FROM GROUPS A,B,C,D
                     let winnergroupA   = document.getElementById("TableA-pos1").innerHTML;
                     let winnergroupAid = document.getElementById("TableA-pos1").nextElementSibling.innerHTML;
                     let winnergroupArk = document.getElementById("TableA-pos1").nextElementSibling.nextElementSibling.innerHTML;
@@ -853,7 +1272,40 @@
                     let runnerupgroupDid = document.getElementById("TableD-pos2").nextElementSibling.innerHTML;
                     let runnerupgroupDrk = document.getElementById("TableD-pos2").nextElementSibling.nextElementSibling.innerHTML;
 
-                    // Quarter Final 1
+                    // GROUP STAGE WINNERS FROM GROUPS E,F,G,H
+                    let winnergroupE   = document.getElementById("TableE-pos1").innerHTML;
+                    let winnergroupEid = document.getElementById("TableE-pos1").nextElementSibling.innerHTML;
+                    let winnergroupErk = document.getElementById("TableE-pos1").nextElementSibling.nextElementSibling.innerHTML;
+
+                    let runnerupgroupE   = document.getElementById("TableE-pos2").innerHTML;
+                    let runnerupgroupEid = document.getElementById("TableE-pos2").nextElementSibling.innerHTML;
+                    let runnerupgroupErk = document.getElementById("TableE-pos2").nextElementSibling.nextElementSibling.innerHTML;
+
+                    let winnergroupF    = document.getElementById("TableF-pos1").innerHTML;
+                    let winnergroupFid  = document.getElementById("TableF-pos1").nextElementSibling.innerHTML;
+                    let winnergroupFrk  = document.getElementById("TableF-pos1").nextElementSibling.nextElementSibling.innerHTML;
+
+                    let runnerupgroupF   = document.getElementById("TableF-pos2").innerHTML;
+                    let runnerupgroupFid = document.getElementById("TableF-pos2").nextElementSibling.innerHTML;
+                    let runnerupgroupFrk = document.getElementById("TableF-pos2").nextElementSibling.nextElementSibling.innerHTML;
+
+                    let winnergroupG    = document.getElementById("TableG-pos1").innerHTML;
+                    let winnergroupGid  = document.getElementById("TableG-pos1").nextElementSibling.innerHTML;
+                    let winnergroupGrk  = document.getElementById("TableG-pos1").nextElementSibling.nextElementSibling.innerHTML;
+
+                    let runnerupgroupG   = document.getElementById("TableG-pos2").innerHTML;
+                    let runnerupgroupGid = document.getElementById("TableG-pos2").nextElementSibling.innerHTML;
+                    let runnerupgroupGrk = document.getElementById("TableG-pos2").nextElementSibling.nextElementSibling.innerHTML;
+
+                    let winnergroupH    = document.getElementById("TableH-pos1").innerHTML;
+                    let winnergroupHid  = document.getElementById("TableH-pos1").nextElementSibling.innerHTML;
+                    let winnergroupHrk  = document.getElementById("TableH-pos1").nextElementSibling.nextElementSibling.innerHTML;
+
+                    let runnerupgroupH   = document.getElementById("TableH-pos2").innerHTML;
+                    let runnerupgroupHid = document.getElementById("TableH-pos2").nextElementSibling.innerHTML;
+                    let runnerupgroupHrk = document.getElementById("TableH-pos2").nextElementSibling.nextElementSibling.innerHTML;
+
+                    // UPDATE LAST SIXTEEN MATCH 49
                     document.getElementById("winnerAflag").innerHTML = "<img src='../img/teams/" + winnergroupA.trim() + ".png' alt='" + winnergroupA.trim() + " team flag'>";
                     document.getElementById("winnerA").innerHTML = winnergroupA;
                     document.getElementById("winnerA").nextElementSibling.innerHTML = winnergroupAid;
@@ -864,7 +1316,7 @@
                     document.getElementById("runnerupB").previousElementSibling.innerHTML = runnerupgroupBid;
                     document.getElementById("runnerupB").previousElementSibling.previousElementSibling.innerHTML = runnerupgroupBrk;
 
-                    // Quarter Final 2
+                    // UPDATE LAST SIXTEEN MATCH 50
                     document.getElementById("winnerBflag").innerHTML = "<img src='../img/teams/" + winnergroupB.trim() + ".png' alt='" + winnergroupB.trim() + " team flag'>";
                     document.getElementById("winnerB").innerHTML = winnergroupB;
                     document.getElementById("winnerB").nextElementSibling.innerHTML = winnergroupBid;
@@ -875,7 +1327,7 @@
                     document.getElementById("runnerupA").previousElementSibling.innerHTML = runnerupgroupAid;
                     document.getElementById("runnerupA").previousElementSibling.previousElementSibling.innerHTML = runnerupgroupArk;
 
-                    // Quarter Final 3
+                    // UPDATE LAST SIXTEEN MATCH 51
                     document.getElementById("winnerCflag").innerHTML = "<img src='../img/teams/" + winnergroupC.trim() + ".png' alt='" + winnergroupC.trim() + " team flag'>";
                     document.getElementById("winnerC").innerHTML = winnergroupC;
                     document.getElementById("winnerC").nextElementSibling.innerHTML = winnergroupCid;
@@ -886,7 +1338,7 @@
                     document.getElementById("runnerupD").previousElementSibling.innerHTML = runnerupgroupDid;
                     document.getElementById("runnerupD").previousElementSibling.previousElementSibling.innerHTML = runnerupgroupDrk;
 
-                    // Quarter Final 4
+                    // UPDATE LAST SIXTEEN MATCH 52
                     document.getElementById("winnerDflag").innerHTML = "<img src='../img/teams/" + winnergroupD.trim() + ".png' alt='" + winnergroupD.trim() + " team flag'>";
                     document.getElementById("winnerD").innerHTML = winnergroupD;
                     document.getElementById("winnerD").nextElementSibling.innerHTML = winnergroupDid;
@@ -897,6 +1349,50 @@
                     document.getElementById("runnerupC").previousElementSibling.innerHTML = runnerupgroupCid;
                     document.getElementById("runnerupC").previousElementSibling.previousElementSibling.innerHTML = runnerupgroupCrk;
                 
+                    // UPDATE LAST SIXTEEN MATCH 53
+                    document.getElementById("winnerEflag").innerHTML = "<img src='../img/teams/" + winnergroupE.trim() + ".png' alt='" + winnergroupE.trim() + " team flag'>";
+                    document.getElementById("winnerE").innerHTML = winnergroupE;
+                    document.getElementById("winnerE").nextElementSibling.innerHTML = winnergroupEid;
+                    document.getElementById("winnerE").nextElementSibling.nextElementSibling.innerHTML = winnergroupErk;
+
+                    document.getElementById("runnerupFflag").innerHTML = "<img src='../img/teams/" + runnerupgroupF.trim() + ".png' alt='" + runnerupgroupF.trim() + " team flag'>";
+                    document.getElementById("runnerupF").innerHTML = runnerupgroupF;
+                    document.getElementById("runnerupF").previousElementSibling.innerHTML = runnerupgroupFid;
+                    document.getElementById("runnerupF").previousElementSibling.previousElementSibling.innerHTML = runnerupgroupFrk;
+
+                    // UPDATE LAST SIXTEEN MATCH 54
+                    document.getElementById("winnerGflag").innerHTML = "<img src='../img/teams/" + winnergroupG.trim() + ".png' alt='" + winnergroupG.trim() + " team flag'>";
+                    document.getElementById("winnerG").innerHTML = winnergroupG;
+                    document.getElementById("winnerG").nextElementSibling.innerHTML = winnergroupGid;
+                    document.getElementById("winnerG").nextElementSibling.nextElementSibling.innerHTML = winnergroupGrk;
+
+                    document.getElementById("runnerupHflag").innerHTML = "<img src='../img/teams/" + runnerupgroupH.trim() + ".png' alt='" + runnerupgroupH.trim() + " team flag'>";
+                    document.getElementById("runnerupH").innerHTML = runnerupgroupH;
+                    document.getElementById("runnerupH").previousElementSibling.innerHTML = runnerupgroupHid;
+                    document.getElementById("runnerupH").previousElementSibling.previousElementSibling.innerHTML = runnerupgroupHrk;
+
+                    // UPDATE LAST SIXTEEN MATCH 55
+                    document.getElementById("winnerFflag").innerHTML = "<img src='../img/teams/" + winnergroupF.trim() + ".png' alt='" + winnergroupF.trim() + " team flag'>";
+                    document.getElementById("winnerF").innerHTML = winnergroupF;
+                    document.getElementById("winnerF").nextElementSibling.innerHTML = winnergroupFid;
+                    document.getElementById("winnerF").nextElementSibling.nextElementSibling.innerHTML = winnergroupFrk;
+
+                    document.getElementById("runnerupEflag").innerHTML = "<img src='../img/teams/" + runnerupgroupE.trim() + ".png' alt='" + runnerupgroupE.trim() + " team flag'>";
+                    document.getElementById("runnerupE").innerHTML = runnerupgroupE;
+                    document.getElementById("runnerupE").previousElementSibling.innerHTML = runnerupgroupEid;
+                    document.getElementById("runnerupE").previousElementSibling.previousElementSibling.innerHTML = runnerupgroupErk;
+
+                    // UPDATE LAST SIXTEEN MATCH 56
+                    document.getElementById("winnerHflag").innerHTML = "<img src='../img/teams/" + winnergroupH.trim() + ".png' alt='" + winnergroupH.trim() + " team flag'>";
+                    document.getElementById("winnerH").innerHTML = winnergroupH;
+                    document.getElementById("winnerH").nextElementSibling.innerHTML = winnergroupHid;
+                    document.getElementById("winnerH").nextElementSibling.nextElementSibling.innerHTML = winnergroupHrk;
+
+                    document.getElementById("runnerupGflag").innerHTML = "<img src='../img/teams/" + runnerupgroupG.trim() + ".png' alt='" + runnerupgroupG.trim() + " team flag'>";
+                    document.getElementById("runnerupG").innerHTML = runnerupgroupG;
+                    document.getElementById("runnerupG").previousElementSibling.innerHTML = runnerupgroupGid;
+                    document.getElementById("runnerupG").previousElementSibling.previousElementSibling.innerHTML = runnerupgroupGrk;
+
                 }
 
             }, false);   // end of CLICK event listener
@@ -922,6 +1418,146 @@
                     return;                
                 };
 
+                if (event.target.matches('[data-stage="LS"]')) {
+
+                    // will be set to false if any predictions are set as a draw
+                    LastSixteenOK = true;
+
+                    let LS = document.querySelector('#LS');
+                    
+                    // get the teams and the scores for the Quarter Finals
+                    homeIDs    = LS.querySelectorAll('.homeid');            
+                    homeRanks  = LS.querySelectorAll('.h-rank');            
+                    homeTeams  = LS.querySelectorAll('.home');            
+                    homeScores = LS.querySelectorAll('.homescore');
+                    awayScores = LS.querySelectorAll('.awayscore');
+                    awayTeams  = LS.querySelectorAll('.away');
+                    awayIDs    = LS.querySelectorAll('.awayid');            
+                    awayRanks  = LS.querySelectorAll('.a-rank');           
+
+                    // Last 16 Match 49 
+                    if (homeScores[0].value > awayScores[0].value) {
+                        document.getElementById('winnerLS1').innerHTML = homeTeams[0].innerHTML;
+                        document.getElementById('winnerLS1flag').innerHTML = "<img src='../img/teams/" + homeTeams[0].innerHTML.trim() + ".png' alt='" + homeTeams[0].innerHTML.trim() + " team flag'>";
+                        document.getElementById('winnerLS1').nextElementSibling.innerHTML = homeIDs[0].innerHTML;
+                        document.getElementById('winnerLS1').nextElementSibling.nextElementSibling.innerHTML = homeRanks[0].innerHTML;
+                    } else if (homeScores[0].value < awayScores[0].value) {
+                        document.getElementById('winnerLS1').innerHTML = awayTeams[0].innerHTML;
+                        document.getElementById('winnerLS1flag').innerHTML = "<img src='../img/teams/" + awayTeams[0].innerHTML.trim() + ".png' alt='" + awayTeams[0].innerHTML.trim() + " team flag'>";
+                        document.getElementById('winnerLS1').nextElementSibling.innerHTML = awayIDs[0].innerHTML;
+                        document.getElementById('winnerLS1').nextElementSibling.nextElementSibling.innerHTML = awayRanks[0].innerHTML;
+                    } else if (homeScores[0].value == awayScores[0].value) {
+                        LastSixteenOK = false;
+                    };
+                        
+                    // Last 16 Match 50 
+                    if (homeScores[1].value > awayScores[1].value) {
+                        document.getElementById('winnerLS2').innerHTML = homeTeams[1].innerHTML;
+                        document.getElementById('winnerLS2flag').innerHTML = "<img src='../img/teams/" + homeTeams[1].innerHTML.trim() + ".png' alt='" + homeTeams[1].innerHTML.trim() + " team flag'>";
+                        document.getElementById('winnerLS2').previousElementSibling.innerHTML = homeIDs[1].innerHTML;
+                        document.getElementById('winnerLS2').previousElementSibling.previousElementSibling.innerHTML = homeRanks[1].innerHTML;
+                    } else if (homeScores[1].value < awayScores[1].value) {
+                        document.getElementById('winnerLS2').innerHTML = awayTeams[1].innerHTML;
+                        document.getElementById('winnerLS2flag').innerHTML = "<img src='../img/teams/" + awayTeams[1].innerHTML.trim() + ".png' alt='" + awayTeams[1].innerHTML.trim() + " team flag'>";
+                        document.getElementById('winnerLS2').previousElementSibling.innerHTML = awayIDs[1].innerHTML;
+                        document.getElementById('winnerLS2').previousElementSibling.previousElementSibling.innerHTML = awayRanks[1].innerHTML;
+                    } else if (homeScores[1].value == awayScores[1].value) {
+                        LastSixteenOK = false;
+                    };
+ 
+                    // Last 16 Match 53
+                    if (homeScores[4].value > awayScores[4].value) {
+                        document.getElementById('winnerLS5').innerHTML = homeTeams[4].innerHTML;
+                        document.getElementById('winnerLS5flag').innerHTML = "<img src='../img/teams/" + homeTeams[4].innerHTML.trim() + ".png' alt='" + homeTeams[4].innerHTML.trim() + " team flag'>";
+                        document.getElementById('winnerLS5').nextElementSibling.innerText = homeIDs[4].innerHTML;
+                        document.getElementById('winnerLS5').nextElementSibling.nextElementSibling.innerText = homeRanks[4].innerHTML;
+                    } else if (homeScores[4].value < awayScores[4].value) {
+                        document.getElementById('winnerLS5').innerHTML = awayTeams[4].innerHTML;
+                        document.getElementById('winnerLS5flag').innerHTML = "<img src='../img/teams/" + awayTeams[4].innerHTML.trim() + ".png' alt='" + awayTeams[4].innerHTML.trim() + " team flag'>";
+                        document.getElementById('winnerLS5').nextElementSibling.innerText = awayIDs[4].innerHTML;
+                        document.getElementById('winnerLS5').nextElementSibling.nextElementSibling.innerText = awayRanks[4].innerHTML;
+                    } else if (homeScores[4].value == awayScores[4].value) {
+                        LastSixteenOK = false;
+                    };
+ 
+                    // Last 16 Match 54
+                    if (homeScores[5].value > awayScores[5].value) {
+                        document.getElementById('winnerLS6').innerHTML = homeTeams[5].innerHTML;
+                        document.getElementById('winnerLS6flag').innerHTML = "<img src='../img/teams/" + homeTeams[5].innerHTML.trim() + ".png' alt='" + homeTeams[5].innerHTML.trim() + " team flag'>";
+                        document.getElementById('winnerLS6').previousElementSibling.innerText = homeIDs[5].innerHTML;
+                        document.getElementById('winnerLS6').previousElementSibling.previousElementSibling.innerText = homeRanks[5].innerHTML;
+                    } else if (homeScores[5].value < awayScores[5].value) {
+                        document.getElementById('winnerLS6').innerHTML = awayTeams[5].innerHTML;
+                        document.getElementById('winnerLS6flag').innerHTML = "<img src='../img/teams/" + awayTeams[5].innerHTML.trim() + ".png' alt='" + awayTeams[5].innerHTML.trim() + " team flag'>";
+                        document.getElementById('winnerLS6').previousElementSibling.innerText = awayIDs[5].innerHTML;
+                        document.getElementById('winnerLS6').previousElementSibling.previousElementSibling.innerText = awayRanks[5].innerHTML;
+                    } else if (homeScores[5].value == awayScores[5].value) {
+                        LastSixteenOK = false;
+                    };
+                    
+                    // Last 16 Match 55
+                    if (homeScores[2].value > awayScores[2].value) {
+                        document.getElementById('winnerLS3').innerHTML = homeTeams[2].innerHTML;
+                        document.getElementById('winnerLS3flag').innerHTML = "<img src='../img/teams/" + homeTeams[2].innerHTML.trim() + ".png' alt='" + homeTeams[2].innerHTML.trim() + " team flag'>";
+                        document.getElementById('winnerLS3').nextElementSibling.innerHTML = homeIDs[2].innerHTML;
+                        document.getElementById('winnerLS3').nextElementSibling.nextElementSibling.innerHTML = homeRanks[2].innerHTML;
+                    } else if (homeScores[2].value < awayScores[2].value) {
+                        document.getElementById('winnerLS3').innerHTML = awayTeams[2].innerHTML;
+                        document.getElementById('winnerLS3flag').innerHTML = "<img src='../img/teams/" + awayTeams[2].innerHTML.trim() + ".png' alt='" + awayTeams[2].innerHTML.trim() + " team flag'>";
+                        document.getElementById('winnerLS3').nextElementSibling.innerHTML = awayIDs[2].innerHTML;
+                        document.getElementById('winnerLS3').nextElementSibling.nextElementSibling.innerHTML = awayRanks[2].innerHTML;
+                    } else if (homeScores[2].value == awayScores[2].value) {
+                        LastSixteenOK = false;
+                    };
+                        
+                    // Last 16 Match 56
+                    if (homeScores[3].value > awayScores[3].value) {
+                        document.getElementById('winnerLS4').innerHTML = homeTeams[3].innerHTML;
+                        document.getElementById('winnerLS4flag').innerHTML = "<img src='../img/teams/" + homeTeams[3].innerHTML.trim() + ".png' alt='" + homeTeams[3].innerHTML.trim() + " team flag'>";
+                        document.getElementById('winnerLS4').previousElementSibling.innerHTML = homeIDs[3].innerHTML;
+                        document.getElementById('winnerLS4').previousElementSibling.previousElementSibling.innerHTML = homeRanks[3].innerHTML;
+                    } else if (homeScores[3].value < awayScores[3].value) {
+                        document.getElementById('winnerLS4').innerHTML = awayTeams[3].innerHTML;
+                        document.getElementById('winnerLS4flag').innerHTML = "<img src='../img/teams/" + awayTeams[3].innerHTML.trim() + ".png' alt='" + awayTeams[3].innerHTML.trim() + " team flag'>";
+                        document.getElementById('winnerLS4').previousElementSibling.innerHTML = awayIDs[3].innerHTML;
+                        document.getElementById('winnerLS4').previousElementSibling.previousElementSibling.innerHTML = awayRanks[3].innerHTML;
+                    } else if (homeScores[3].value == awayScores[3].value) {
+                        LastSixteenOK = false;
+                    };
+ 
+                    // Last 16 Match 57
+                    if (homeScores[6].value > awayScores[6].value) {
+                        document.getElementById('winnerLS7').innerHTML = homeTeams[6].innerHTML;
+                        document.getElementById('winnerLS7flag').innerHTML = "<img src='../img/teams/" + homeTeams[6].innerHTML.trim() + ".png' alt='" + homeTeams[6].innerHTML.trim() + " team flag'>";
+                        document.getElementById('winnerLS7').nextElementSibling.innerText = homeIDs[6].innerHTML;
+                        document.getElementById('winnerLS7').nextElementSibling.nextElementSibling.innerText = homeRanks[6].innerHTML;
+                    } else if (homeScores[6].value < awayScores[6].value) {
+                        document.getElementById('winnerLS7').innerHTML = awayTeams[6].innerHTML;
+                        document.getElementById('winnerLS7flag').innerHTML = "<img src='../img/teams/" + awayTeams[6].innerHTML.trim() + ".png' alt='" + awayTeams[6].innerHTML.trim() + " team flag'>";
+                        document.getElementById('winnerLS7').nextElementSibling.innerText = awayIDs[6].innerHTML;
+                        document.getElementById('winnerLS7').nextElementSibling.nextElementSibling.innerText = awayRanks[6].innerHTML;
+                    } else if (homeScores[6].value == awayScores[6].value) {
+                        LastSixteenOK = false;
+                    };
+ 
+                    // Last 16 Match 58
+                   if (homeScores[7].value > awayScores[7].value) {
+                        document.getElementById('winnerLS8').innerHTML = homeTeams[7].innerHTML;
+                        document.getElementById('winnerLS8flag').innerHTML = "<img src='../img/teams/" + homeTeams[7].innerHTML.trim() + ".png' alt='" + homeTeams[7].innerHTML.trim() + " team flag'>";
+                        document.getElementById('winnerLS8').previousElementSibling.innerText = homeIDs[7].innerHTML;
+                        document.getElementById('winnerLS8').previousElementSibling.previousElementSibling.innerText = homeRanks[7].innerHTML;
+                    } else if (homeScores[3].value < awayScores[7].value) {
+                        document.getElementById('winnerLS8').innerHTML = awayTeams[7].innerHTML;
+                        document.getElementById('winnerLS8flag').innerHTML = "<img src='../img/teams/" + awayTeams[7].innerHTML.trim() + ".png' alt='" + awayTeams[7].innerHTML.trim() + " team flag'>";
+                        document.getElementById('winnerLS8').previousElementSibling.innerText = awayIDs[7].innerHTML;
+                        document.getElementById('winnerLS8').previousElementSibling.previousElementSibling.innerText = awayRanks[7].innerHTML;
+                    } else if (homeScores[3].value == awayScores[7].value) {
+                        LastSixteenOK = false;
+                    };
+                    
+                    return;
+                };
+
                 if (event.target.matches('[data-stage="QF"]')) {
 
                     // will be set to false if any predictions are set as a draw
@@ -930,13 +1566,14 @@
                     let QF = document.querySelector('#QF');
                     
                     // get the teams and the scores for the Quarter Finals
-                    homeIDs    = QF.querySelectorAll('.q-homeid');            
+                    // homeIDs    = QF.querySelectorAll('.q-homeid');            
+                    homeIDs    = QF.querySelectorAll('.homeid');            
                     homeRanks  = QF.querySelectorAll('.h-rank');            
                     homeTeams  = QF.querySelectorAll('.home');            
                     homeScores = QF.querySelectorAll('.homescore');
                     awayScores = QF.querySelectorAll('.awayscore');
                     awayTeams  = QF.querySelectorAll('.away');
-                    awayIDs    = QF.querySelectorAll('.q-awayid');            
+                    awayIDs    = QF.querySelectorAll('.awayid');            
                     awayRanks  = QF.querySelectorAll('.a-rank');           
 
                     if (homeScores[0].value > awayScores[0].value) {
@@ -956,13 +1593,13 @@
                     if (homeScores[1].value > awayScores[1].value) {
                         document.getElementById('winnerQF2').innerHTML = homeTeams[1].innerHTML;
                         document.getElementById('winnerQF2flag').innerHTML = "<img src='../img/teams/" + homeTeams[1].innerHTML.trim() + ".png' alt='" + homeTeams[1].innerHTML.trim() + " team flag'>";
-                        document.getElementById('winnerQF2').nextElementSibling.innerHTML = homeIDs[1].innerHTML;
-                        document.getElementById('winnerQF2').nextElementSibling.nextElementSibling.innerHTML = homeRanks[1].innerHTML;
+                        document.getElementById('winnerQF2').previousElementSibling.innerHTML = homeIDs[1].innerHTML;
+                        document.getElementById('winnerQF2').previousElementSibling.previousElementSibling.innerHTML = homeRanks[1].innerHTML;
                     } else if (homeScores[1].value < awayScores[1].value) {
                         document.getElementById('winnerQF2').innerHTML = awayTeams[1].innerHTML;
                         document.getElementById('winnerQF2flag').innerHTML = "<img src='../img/teams/" + awayTeams[1].innerHTML.trim() + ".png' alt='" + awayTeams[1].innerHTML.trim() + " team flag'>";
-                        document.getElementById('winnerQF2').nextElementSibling.innerHTML = awayIDs[1].innerHTML;
-                        document.getElementById('winnerQF2').nextElementSibling.nextElementSibling.innerHTML = awayRanks[1].innerHTML;
+                        document.getElementById('winnerQF2').previousElementSibling.innerHTML = awayIDs[1].innerHTML;
+                        document.getElementById('winnerQF2').previousElementSibling.previousElementSibling.innerHTML = awayRanks[1].innerHTML;
                     } else if (homeScores[1].value == awayScores[1].value) {
                         QuarterFinalsOK = false;
                     };
@@ -970,13 +1607,13 @@
                     if (homeScores[2].value > awayScores[2].value) {
                         document.getElementById('winnerQF3').innerHTML = homeTeams[2].innerHTML;
                         document.getElementById('winnerQF3flag').innerHTML = "<img src='../img/teams/" + homeTeams[2].innerHTML.trim() + ".png' alt='" + homeTeams[2].innerHTML.trim() + " team flag'>";
-                        document.getElementById('winnerQF3').previousElementSibling.innerText = homeIDs[2].innerHTML;
-                        document.getElementById('winnerQF3').previousElementSibling.previousElementSibling.innerText = homeRanks[2].innerHTML;
+                        document.getElementById('winnerQF3').nextElementSibling.innerText = homeIDs[2].innerHTML;
+                        document.getElementById('winnerQF3').nextElementSibling.nextElementSibling.innerText = homeRanks[2].innerHTML;
                     } else if (homeScores[2].value < awayScores[2].value) {
                         document.getElementById('winnerQF3').innerHTML = awayTeams[2].innerHTML;
                         document.getElementById('winnerQF3flag').innerHTML = "<img src='../img/teams/" + awayTeams[2].innerHTML.trim() + ".png' alt='" + awayTeams[2].innerHTML.trim() + " team flag'>";
-                        document.getElementById('winnerQF3').previousElementSibling.innerText = awayIDs[2].innerHTML;
-                        document.getElementById('winnerQF3').previousElementSibling.previousElementSibling.innerText = awayRanks[2].innerHTML;
+                        document.getElementById('winnerQF3').nextElementSibling.innerText = awayIDs[2].innerHTML;
+                        document.getElementById('winnerQF3').nextElementSibling.nextElementSibling.innerText = awayRanks[2].innerHTML;
                     } else if (homeScores[2].value == awayScores[2].value) {
                         QuarterFinalsOK = false;
                     };
@@ -1006,15 +1643,48 @@
                     let SF = document.querySelector('#SF');
                     
                     // get the teams and the scores for the Quarter Finals
-                    homeIDs    = SF.querySelectorAll('.s-homeid');            
+                    homeIDs    = SF.querySelectorAll('.homeid');            
                     homeRanks  = SF.querySelectorAll('.h-rank');            
                     homeTeams  = SF.querySelectorAll('.home');            
                     homeScores = SF.querySelectorAll('.homescore');
                     awayScores = SF.querySelectorAll('.awayscore');
                     awayTeams  = SF.querySelectorAll('.away');
-                    awayIDs    = SF.querySelectorAll('.s-awayid');            
-                    awayRanks  = SF.querySelectorAll('.a-rank');            
+                    awayIDs    = SF.querySelectorAll('.awayid');            
+                    awayRanks  = SF.querySelectorAll('.a-rank');        
 
+                    // Arg 3 - 0  Brazil
+                    // Aus 1 - 0 Ghana    
+
+                    // PLAYOFF POSITIONS                    
+                    if (homeScores[0].value < awayScores[0].value) {
+                        document.getElementById('loserSF1').innerHTML = homeTeams[0].innerHTML;
+                        document.getElementById('loserSF1flag').innerHTML = "<img src='../img/teams/" + homeTeams[0].innerHTML.trim() + ".png' alt='" + homeTeams[0].innerHTML.trim() + " team flag'>";
+                        document.getElementById('loserSF1').nextElementSibling.innerHTML = homeIDs[0].innerHTML;
+                        document.getElementById('loserSF1').nextElementSibling.nextElementSibling.innerHTML = homeRanks[0].innerHTML;
+                    } else if (homeScores[0].value > awayScores[0].value) {
+                        document.getElementById('loserSF1').innerHTML = awayTeams[0].innerHTML;
+                        document.getElementById('loserSF1flag').innerHTML = "<img src='../img/teams/" + awayTeams[0].innerHTML.trim() + ".png' alt='" + awayTeams[0].innerHTML.trim() + " team flag'>";
+                        document.getElementById('loserSF1').nextElementSibling.innerHTML = awayIDs[0].innerHTML;
+                        document.getElementById('loserSF1').nextElementSibling.nextElementSibling.innerHTML = awayRanks[0].innerHTML;
+                    } else if (homeScores[0].value == awayScores[0].value) {
+                        PlayoffOK = false;
+                    };
+                        
+                    if (homeScores[1].value < awayScores[1].value) {
+                        document.getElementById('loserSF2').innerHTML = homeTeams[1].innerHTML;
+                        document.getElementById('loserSF2flag').innerHTML = "<img src='../img/teams/" + homeTeams[1].innerHTML.trim() + ".png' alt='" + homeTeams[1].innerHTML.trim() + " team flag'>";
+                        document.getElementById('loserSF2').previousElementSibling.innerHTML = homeIDs[1].innerHTML;
+                        document.getElementById('loserSF2').previousElementSibling.previousElementSibling.innerHTML = homeRanks[1].innerHTML;
+                    } else if (homeScores[1].value > awayScores[1].value) {
+                        document.getElementById('loserSF2').innerHTML = awayTeams[1].innerHTML;
+                        document.getElementById('loserSF2flag').innerHTML = "<img src='../img/teams/" + awayTeams[1].innerHTML.trim() + ".png' alt='" + awayTeams[1].innerHTML.trim() + " team flag'>";
+                        document.getElementById('loserSF2').previousElementSibling.innerHTML = awayIDs[1].innerHTML;
+                        document.getElementById('loserSF2').previousElementSibling.previousElementSibling.innerHTML = awayRanks[1].innerHTML;
+                    } else if (homeScores[1].value == awayScores[1].value) {
+                        PlayoffOK = false;
+                    };
+
+                    // FINAL POSITIONS
                     if (homeScores[0].value > awayScores[0].value) {
                         document.getElementById('winnerSF1').innerHTML = homeTeams[0].innerHTML;
                         document.getElementById('winnerSF1flag').innerHTML = "<img src='../img/teams/" + homeTeams[0].innerHTML.trim() + ".png' alt='" + homeTeams[0].innerHTML.trim() + " team flag'>";
@@ -1026,7 +1696,7 @@
                         document.getElementById('winnerSF1').nextElementSibling.innerHTML = awayIDs[0].innerHTML;
                         document.getElementById('winnerSF1').nextElementSibling.nextElementSibling.innerHTML = awayRanks[0].innerHTML;
                     } else if (homeScores[0].value == awayScores[0].value) {
-                        SemiFinalsOK = false;
+                        FinalOK = false;
                     };
                         
                     if (homeScores[1].value > awayScores[1].value) {
@@ -1040,9 +1710,30 @@
                         document.getElementById('winnerSF2').previousElementSibling.innerHTML = awayIDs[1].innerHTML;
                         document.getElementById('winnerSF2').previousElementSibling.previousElementSibling.innerHTML = awayRanks[1].innerHTML;
                     } else if (homeScores[1].value == awayScores[1].value) {
-                        SemiFinalsOK = false;
+                        FinalOK = false;
                     };
                    
+                    return;
+
+                };
+
+                if (event.target.matches('[data-stage="PL"]')) {
+
+                    // will be set to false if any predictions are set as a draw
+                    PlayoffOK = true;
+
+                    let PL = document.querySelector('#PL');
+                    
+                    // get the teams and the scores for the Quarter Finals
+                    homeTeams  = PL.querySelectorAll('.home');            
+                    homeScores = PL.querySelectorAll('.homescore');
+                    awayScores = PL.querySelectorAll('.awayscore');
+                    awayTeams  = PL.querySelectorAll('.away');
+
+                    if (homeScores[0].value == awayScores[0].value) {
+                        PlayoffOK = false;
+                    }
+
                     return;
 
                 };
@@ -1083,7 +1774,7 @@
                     // get the ID of the table to update
                     currentTable     = document.getElementById("TableA");
                     currentTableID   = currentTable.id;
-                    currentTableName = "Table A";
+                    currentTableName = "Group A";
 
                 } else if (event.target.matches('[data-table="TableB"]')) {
 
@@ -1100,7 +1791,7 @@
                     // get the ID of the table to update
                     currentTable     = document.getElementById("TableB");
                     currentTableID   = currentTable.id;
-                    currentTableName = "Table B";
+                    currentTableName = "Group B";
 
                 } else if (event.target.matches('[data-table="TableC"]')) {
 
@@ -1117,7 +1808,7 @@
                     // get the ID of the table to update
                     currentTable     = document.getElementById("TableC");
                     currentTableID   = currentTable.id;
-                    currentTableName = "Table C";
+                    currentTableName = "Group C";        
 
                 } else if (event.target.matches('[data-table="TableD"]')) {
                     
@@ -1134,7 +1825,75 @@
                     // get the ID of the table to update
                     currentTable     = document.getElementById("TableD");
                     currentTableID   = currentTable.id;
-                    currentTableName = "Table D";
+                    currentTableName = "Group D";
+
+                } else if (event.target.matches('[data-table="TableE"]')) {
+                    
+                    SectE = document.querySelector('#SectionE');
+                    
+                    // get the teams and the scores for SectionE
+                    teamIds    = SectE.querySelectorAll('.homeid');
+                    teamRks    = SectE.querySelectorAll('.h-rank');
+                    homeTeams  = SectE.querySelectorAll('.home');            
+                    homeScores = SectE.querySelectorAll('.homescore');
+                    awayScores = SectE.querySelectorAll('.awayscore');
+                    awayTeams  = SectE.querySelectorAll('.away');
+
+                    // get the ID of the table to update
+                    currentTable     = document.getElementById("TableE");
+                    currentTableID   = currentTable.id;
+                    currentTableName = "Group E";
+
+                } else if (event.target.matches('[data-table="TableF"]')) {
+                    
+                    SectF = document.querySelector('#SectionF');
+                    
+                    // get the teams and the scores for SectionF
+                    teamIds    = SectF.querySelectorAll('.homeid');
+                    teamRks    = SectF.querySelectorAll('.h-rank');
+                    homeTeams  = SectF.querySelectorAll('.home');            
+                    homeScores = SectF.querySelectorAll('.homescore');
+                    awayScores = SectF.querySelectorAll('.awayscore');
+                    awayTeams  = SectF.querySelectorAll('.away');
+
+                    // get the ID of the table to update
+                    currentTable     = document.getElementById("TableF");
+                    currentTableID   = currentTable.id;
+                    currentTableName = "Group F";
+
+                } else if (event.target.matches('[data-table="TableG"]')) {
+                    
+                    SectG = document.querySelector('#SectionG');
+                    
+                    // get the teams and the scores for SectionG
+                    teamIds    = SectG.querySelectorAll('.homeid');
+                    teamRks    = SectG.querySelectorAll('.h-rank');
+                    homeTeams  = SectG.querySelectorAll('.home');            
+                    homeScores = SectG.querySelectorAll('.homescore');
+                    awayScores = SectG.querySelectorAll('.awayscore');
+                    awayTeams  = SectG.querySelectorAll('.away');
+
+                    // get the ID of the table to update
+                    currentTable     = document.getElementById("TableG");
+                    currentTableID   = currentTable.id;
+                    currentTableName = "Group G";
+
+                } else if (event.target.matches('[data-table="TableH"]')) {
+                    
+                    SectH = document.querySelector('#SectionH');
+                    
+                    // get the teams and the scores for SectionH
+                    teamIds    = SectH.querySelectorAll('.homeid');
+                    teamRks    = SectH.querySelectorAll('.h-rank');
+                    homeTeams  = SectH.querySelectorAll('.home');            
+                    homeScores = SectH.querySelectorAll('.homescore');
+                    awayScores = SectH.querySelectorAll('.awayscore');
+                    awayTeams  = SectH.querySelectorAll('.away');
+
+                    // get the ID of the table to update
+                    currentTable     = document.getElementById("TableH");
+                    currentTableID   = currentTable.id;
+                    currentTableName = "Group H";
 
                 };  
                 
@@ -1160,13 +1919,6 @@
                         teams.push(team);                        
                     };
                 };
-
-                // England	 2 1  Austria
-                // Norway	 1 2  N Ireland
-                // Austria	 2 1  N Ireland
-                // England	 1 2  Norway
-                // N Ireland 2 1  England
-                // Austria	 1 2  Norway
 
                 // Update the properties for each team object for each result
                 for (let f = 0; f < homeTeams.length; f++) {
@@ -1202,7 +1954,7 @@
                     teams[away].Points   = ((teams[away].Won * 3) + (teams[away].Drawn * 1));
 
                 };
-                
+
                 // sort the array of Team objects by points, goal diff, goals for
                 teams.sort(leaguePosition);
                 

@@ -2,678 +2,1467 @@
 
     // Include config file
     require_once "../../../.php/inc/db.worldcup.inc.php";
-         
-    echo (date('l jS \of F Y h:i:s A') . "<br><br>");
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $db);
+    // DB credentials as constants
+    define('DB_HOST', $servername);
+    define('DB_NAME', $db);
+    define('DB_USER', $username);
+    define('DB_PASS', $password);
 
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error . "<br");
-    } else {
-        echo ("Connection successful" . "<br><br>");
+    // Try and establish the database connection.
+    try {
+        $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
     }
+    catch (PDOException $e) {
+        exit("Error: " . $e->getMessage());
+    };
+
+// dislay starting debug timestamp
+echo (date('l jS \of F Y h:i:s A') . "<br><br>");
+    
+    // Prepare 
+    $sql = "INSERT 
+                INTO 
+                    Fixtures (FixtureNo, GroupID, RoundID, VenueID, HomeTeamID, AwayTeamID, DatePlayed, TimePlayed, HomeScore, AwayScore, ResultID) 
+            VALUES (:FixtureNo, :GroupID, :RoundID, :VenueID, :HomeTeamID, :AwayTeamID, :DatePlayed, :TimePlayed, :HomeScore, :AwayScore, :ResultID)";
 
     //prepare the sql statement
-    $stmt = $conn->prepare("INSERT INTO Fixtures (FixtureNo, GroupID, RoundID, VenueID, HomeTeamID, AwayTeamID, DatePlayed, TimePlayed, HomeScore, AwayScore, ResultID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $query = $dbh -> prepare($sql);
 
     // bind the paramaters to the sql statement
-    $stmt->bind_param('iiiiiissiii', $fixtureno, $groupid, $roundid, $venueid, $hometeamid, $awayteamid, $dateplayed, $timeplayed, $homescore, $awayscore, $resultid);
+    $query->bindParam(':FixtureNo',  $fixtureno,  PDO::PARAM_INT);
+    $query->bindParam(':GroupID',    $groupid,    PDO::PARAM_INT);
+    $query->bindParam(':RoundID',    $roundid,    PDO::PARAM_INT);
+    $query->bindParam(':VenueID',    $venueid,    PDO::PARAM_INT);
+    $query->bindParam(':HomeTeamID', $hometeamid, PDO::PARAM_INT);
+    $query->bindParam(':AwayTeamID', $awayteamid, PDO::PARAM_INT);
+    $query->bindParam(':DatePlayed', $dateplayed, PDO::PARAM_STR);
+    $query->bindParam(':TimePlayed', $timeplayed, PDO::PARAM_STR);
+    $query->bindParam(':HomeScore',  $homescore,  PDO::PARAM_INT);
+    $query->bindParam(':AwayScore',  $awayscore,  PDO::PARAM_INT);
+    $query->bindParam(':ResultID',   $resultid,   PDO::PARAM_INT);
+
 
     // ---------------------------------
-    //         FIXTURES - MATCH DAY 1
+    // Initialize the fixture number
     // ---------------------------------
     $fixtureno = 1;
 
-    $roundid = 1;                   // Group Stage 
+    // ----------------------------------------------
+    //  FIXTURES - GROUP STAGE - MATCH DAY 1
+    // ----------------------------------------------
 
-    $groupid = 1;                   // Group A
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 1;                 // Group A
+    $venueid   = 2;                 // Al Bayt Stadium
 
-    $venueid = 1;                   // Old Trafford
-    $hometeamid = 1;                // England
-    $awayteamid = 3;                // Austria
-    $dateplayed = "2022/07/06";
-    $timeplayed = "20:00";
+    $hometeamid = 3;                // Sengal 
+    $awayteamid = 4;                // Netherlands
+    $dateplayed = "2022/11/21";
+    $timeplayed = "10:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
                         
-    // Next Fixture
+    // Next Fixture - 2
     ++$fixtureno;
 
-    $groupid = 1;                   // Group A
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 2;                 // Group B
+    $venueid   = 4;                 // Khalifa International Stadium 
 
-    $venueid = 2;                   // St. Marys
-    $hometeamid = 2;                // Norway
-    $awayteamid = 4;                // Northern Ireland
-    $dateplayed = "2022/07/07";
-    $timeplayed = "20:00";
+    $hometeamid = 5;                // England
+    $awayteamid = 6;                // IR Iran
+    $dateplayed = "2022/11/21";
+    $timeplayed = "13:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
+    if ( $query -> execute() === TRUE ) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 3
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 1;                 // Group A
+    $venueid   = 2;                 // Al Bayt Stadium
+
+    $hometeamid = 1;                // Qatar 
+    $awayteamid = 2;                // Ecuador
+    $dateplayed = "2022/11/21";
+    $timeplayed = "16:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 4
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 2;                 // Group B
+    $venueid   = 6;                 // Ahmad Bin Ali Stadiun
+
+    $hometeamid = 7;                // USA
+    $awayteamid = 8;                // Wales
+    $dateplayed = "2022/11/21";
+    $timeplayed = "19:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // ----------------------------------------------
+    //  FIXTURES - GROUP STAGE - MATCH DAY 2
+    // ----------------------------------------------
+
+    // Next Fixture - 5
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 3;                 // Group C
+    $venueid   = 8;                 // Stadium 974
+
+    $hometeamid = 9;                // Argentina 
+    $awayteamid = 10;                // SAudi Arabia
+    $dateplayed = "2022/11/22";
+    $timeplayed = "10:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
                         
-    // Next Fixture
+    // Next Fixture - 6
     ++$fixtureno;
 
-    $groupid = 2;                   // Group B
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 4;                 // Group D
+    $venueid   = 5;                 // Education City Stadium 
 
-    $venueid = 3;                   // Stadium MK
-    $hometeamid = 6;                // Spain
-    $awayteamid = 8;                // Finland
-    $dateplayed = "2022/07/08";
-    $timeplayed = "17:00";
+    $hometeamid = 14;                // Denmark
+    $awayteamid = 15;                // Tunisia
+    $dateplayed = "2022/11/22";
+    $timeplayed = "13:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
+    if ( $query -> execute() === TRUE ) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
-    // Next Fixture
+    // Next Fixture = 7
     ++$fixtureno;
 
-    $groupid = 2;                   // Group B
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 3;                 // Group C
+    $venueid   = 8;                 // Stadium 974
 
-    $venueid = 4;                   // Brentford Community Stadium
-    $hometeamid = 5;                // Germany
-    $awayteamid = 7;                // Denmark
-    $dateplayed = "2022/07/08";
-    $timeplayed = "20:00";
+    $hometeamid = 11;                // Mexico 
+    $awayteamid = 12;                // Poland
+    $dateplayed = "2022/11/22";
+    $timeplayed = "16:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
-    // Next Fixture
+    // Next Fixture - 8
     ++$fixtureno;
 
-    $groupid = 3;                   // Group C
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 4;                 // Group D
+    $venueid   = 7;                 // Al Janoub Stadiun
 
-    $venueid = 5;                   // Leigh Sports Village
-    $hometeamid = 12;                // Russia
-    $awayteamid = 11;                // Switzerland
-    $dateplayed = "2022/07/09";
-    $timeplayed = "17:00";
-    $homescore = NULL;
-    $awayscore = NULL;
-    $resultid = 6;
-    
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
-    }
-
-    // Next Fixture
-    ++$fixtureno;
-
-    $groupid = 3;                   // Group C
-
-    $venueid = 6;                   // Bramall Lane
-    $hometeamid = 9;                // Netherlands
-    $awayteamid = 10;               // Sweden
-    $dateplayed = "2022/07/09";
-    $timeplayed = "17:00";
-    $homescore = NULL;
-    $awayscore = NULL;
-    $resultid = 6;
-    
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
-    }
-
-    // Next Fixture
-    ++$fixtureno;
-
-    $groupid = 4;                   // Group D
-
-    $venueid = 7;                   // Manchester City Academy Stadium
-    $hometeamid = 15;                // Belgium
-    $awayteamid = 16;                // Iceland
-    $dateplayed = "2022/07/10";
-    $timeplayed = "17:00";
-    $homescore = NULL;
-    $awayscore = NULL;
-    $resultid = 6;
-    
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
-    }
-
-    // Next Fixture
-    ++$fixtureno;
-
-    $groupid = 4;                   // Group D
-
-    $venueid = 8;                   // New York Stadium
     $hometeamid = 13;                // France
-    $awayteamid = 14;                // Italy
-    $dateplayed = "2022/07/10";
-    $timeplayed = "20:00";
+    $awayteamid = 16;                // Australia
+    $dateplayed = "2022/11/22";
+    $timeplayed = "19:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // ----------------------------------------------
+    //  FIXTURES - GROUP STAGE - MATCH DAY 3
+    // ----------------------------------------------
+
+    // Next Fixture - 9
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 6;                 // Group F
+    $venueid   = 2;                 // Al Bayt Stadium
+
+    $hometeamid = 23;               // Morocco
+    $awayteamid = 24;               // Croatia
+    $dateplayed = "2022/11/23";
+    $timeplayed = "10:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+                        
+    // Next Fixture - 10
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 5;                 // Group E
+    $venueid   = 4;                 // Khalifa International Stadium 
+
+    $hometeamid = 18;                // Germany
+    $awayteamid = 19;                // Japan
+    $dateplayed = "2022/11/23";
+    $timeplayed = "13:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
             echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 11
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 5;                 // Group E
+    $venueid   = 3;                 // Al Thumama Stadium
+
+    $hometeamid = 17;                // Spain 
+    $awayteamid = 20;                // Costa Rica
+    $dateplayed = "2022/11/23";
+    $timeplayed = "16:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 12
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 6;                 // Group F
+    $venueid   = 6;                 // Ahman Bin ALi Stadiun
+
+    $hometeamid = 21;                // Belgium
+    $awayteamid = 22;                // Canada
+    $dateplayed = "2022/11/23";
+    $timeplayed = "19:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // ----------------------------------------------
+    //  FIXTURES - GROUP STAGE - MATCH DAY 4
+    // ----------------------------------------------
+
+    // Next Fixture - 13
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 7;                 // Group G
+    $venueid   = 7;                 // Al Januob Stadium
+
+    $hometeamid = 27;               // Switzerland
+    $awayteamid = 28;               // Cameroon
+    $dateplayed = "2022/11/24";
+    $timeplayed = "10:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+                        
+    // Next Fixture - 14
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 8;                 // Group H
+    $venueid   = 5;                 // Eductaion Stadium 
+
+    $hometeamid = 31;                // Uruguay
+    $awayteamid = 32;                // Korea Republic
+    $dateplayed = "2022/11/24";
+    $timeplayed = "13:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 15
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 8;                 // Group H
+    $venueid   = 8;                 // Stadium 974
+
+    $hometeamid = 29;                // Portugal 
+    $awayteamid = 30;                // Ghana
+    $dateplayed = "2022/11/24";
+    $timeplayed = "16:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+ 
+    // Next Fixture - 16
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 7;                 // Group G
+    $venueid   = 1;                 // Lusail Stadiun
+
+    $hometeamid = 25;                // Brazil
+    $awayteamid = 26;                // Serbia
+    $dateplayed = "2022/11/24";
+    $timeplayed = "19:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // ----------------------------------------------
+    //  FIXTURES - GROUP STAGE - MATCH DAY 5
+    // ----------------------------------------------
+
+    // Next Fixture - 17
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 2;                 // Group B
+    $venueid   = 6;                 // Ahmad Bin Ali Stadium
+
+    $hometeamid = 8;                // Wales
+    $awayteamid = 6;                // IR Iran
+    $dateplayed = "2022/11/25";
+    $timeplayed = "10:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+                        
+    // Next Fixture - 18
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 1;                 // Group A
+    $venueid   = 3;                 // Al Thumoma Stadium 
+
+    $hometeamid = 1;                // Qatar
+    $awayteamid = 3;                // Senegal
+    $dateplayed = "2022/11/25";
+    $timeplayed = "13:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 19
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 1;                 // Group A
+    $venueid   = 4;                 // Khalifi International Stadium
+
+    $hometeamid = 4;                // Netherlands 
+    $awayteamid = 2;                // Ecuador
+    $dateplayed = "2022/11/25";
+    $timeplayed = "16:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 20
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 2;                 // Group B
+    $venueid   = 2;                 // Al Bayt Stadiun
+
+    $hometeamid = 5;                // England
+    $awayteamid = 7;                // USA
+    $dateplayed = "2022/11/25";
+    $timeplayed = "19:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // ----------------------------------------------
+    //  FIXTURES - GROUP STAGE - MATCH DAY 6
+    // ----------------------------------------------
+
+    // Next Fixture - 21
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 4;                 // Group D
+    $venueid   = 7;                 // Al Janoub Stadium
+
+    $hometeamid = 15;                // Tunisia
+    $awayteamid = 16;                // Australia
+    $dateplayed = "2022/11/26";
+    $timeplayed = "10:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+                        
+    // Next Fixture - 22
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 3;                 // Group C
+    $venueid   = 5;                 // Education City Stadium 
+
+    $hometeamid = 12;                // Poland
+    $awayteamid = 10;                // Saudi Arabia
+    $dateplayed = "2022/11/26";
+    $timeplayed = "13:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 23
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 4;                 // Group D
+    $venueid   = 8;                 // Stadium 974
+
+    $hometeamid = 13;                // France
+    $awayteamid = 14;                // Denmark
+    $dateplayed = "2022/11/26";
+    $timeplayed = "16:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 24
+    ++$fixtureno; 
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 3;                 // Group C
+    $venueid   = 1;                 // Lusain Stadiun
+
+    $hometeamid = 9;                // Argentina
+    $awayteamid = 11;                // Mexico
+    $dateplayed = "2022/11/26";
+    $timeplayed = "19:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // ----------------------------------------------
+    //  FIXTURES - GROUP STAGE - MATCH DAY 7
+    // ----------------------------------------------
+
+    // Next Fixture - 25
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 5;                 // Group E
+    $venueid   = 6;                 // Ahmad Bin Ali Stadium
+
+    $hometeamid = 19;                // Japan
+    $awayteamid = 20;                // Costa Rica
+    $dateplayed = "2022/11/27";
+    $timeplayed = "10:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+                        
+    // Next Fixture - 26
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 6;                 // Group F
+    $venueid   = 3;                 // Al Thumama Stadium 
+
+    $hometeamid = 21;                // Belgium
+    $awayteamid = 23;                // Morocco
+    $dateplayed = "2022/11/27";
+    $timeplayed = "13:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 27
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 6;                 // Group F
+    $venueid   = 4;                 // Khalifa Stadium
+
+    $hometeamid = 24;                // Croatia
+    $awayteamid = 22;                // Canada
+    $dateplayed = "2022/11/27";
+    $timeplayed = "16:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 28
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 5;                 // Group E
+    $venueid   = 2;                 // Al Bayt Stadiun
+
+    $hometeamid = 17;               // Spain
+    $awayteamid = 18;               // Germany
+    $dateplayed = "2022/11/27";
+    $timeplayed = "19:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // ----------------------------------------------
+    //  FIXTURES - GROUP STAGE - MATCH DAY 8
+    // ----------------------------------------------
+ 
+    // Next Fixture - 29
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 7;                 // Group G
+    $venueid   = 7;                 // Al Janoub Stadium
+
+    $hometeamid = 28;                // Cameroon
+    $awayteamid = 26;                // Serbia
+    $dateplayed = "2022/11/28";
+    $timeplayed = "10:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+                        
+    // Next Fixture - 30
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 8;                 // Group H
+    $venueid   = 5;                 // Education City Stadium 
+
+    $hometeamid = 32;                // Korea Republic
+    $awayteamid = 30;                // Ghana
+    $dateplayed = "2022/11/28";
+    $timeplayed = "13:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 31
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 7;                 // Group G
+    $venueid   = 8;                 // Stadium 974
+
+    $hometeamid = 25;                // Brazil
+    $awayteamid = 27;                // Switzerland
+    $dateplayed = "2022/11/28";
+    $timeplayed = "16:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 32
+    ++$fixtureno; 
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 8;                 // Group H
+    $venueid   = 1;                 // Lusail Stadiun
+
+    $hometeamid = 29;               // Portugal
+    $awayteamid = 31;               // Uruguay
+    $dateplayed = "2022/11/28";
+    $timeplayed = "19:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // ----------------------------------------------
+    //  FIXTURES - GROUP STAGE - MATCH DAY 9
+    // ----------------------------------------------
+ 
+    // Next Fixture - 33
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 1;                 // Group A
+    $venueid   = 2;                 // Al Bayt Stadium
+
+    $hometeamid = 4;                // Netherlands
+    $awayteamid = 1;                // Qatar
+    $dateplayed = "2022/11/29";
+    $timeplayed = "15:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+                        
+    // Next Fixture - 34
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 1;                 // Group A
+    $venueid   = 4;                 // Khalifa Stadium 
+
+    $hometeamid = 2;                // Ecuador
+    $awayteamid = 3;                // Senegal
+    $dateplayed = "2022/11/29";
+    $timeplayed = "15:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 35
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 2;                 // Group B
+    $venueid   = 6;                 // Ahmad Bin Ali Stadium
+
+    $hometeamid = 8;                // Wales
+    $awayteamid = 5;                // England
+    $dateplayed = "2022/11/29";
+    $timeplayed = "19:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 36
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 2;                 // Group B
+    $venueid   = 3;                 // Al Thumama Stadiun
+
+    $hometeamid = 6;                // IR Iran
+    $awayteamid = 7;                // USA
+    $dateplayed = "2022/11/29";
+    $timeplayed = "19:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // ----------------------------------------------
+    //  FIXTURES - GROUP STAGE - MATCH DAY 10
+    // ----------------------------------------------
+
+    // Next Fixture - 37
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 4;                 // Group D
+    $venueid   = 7;                 // Al Janoub Stadium
+
+    $hometeamid = 16;               // Australia
+    $awayteamid = 14;               // Denmark
+    $dateplayed = "2022/11/30";
+    $timeplayed = "15:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+                        
+    // Next Fixture - 38
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 4;                 // Group D
+    $venueid   = 5;                 // Education City Stadium 
+
+    $hometeamid = 15;                // Tunisia
+    $awayteamid = 13;                // France
+    $dateplayed = "2022/11/30";
+    $timeplayed = "15:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 39
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 3;                 // Group C
+    $venueid   = 8;                 // Stadium 974
+
+    $hometeamid = 12;               // Poland
+    $awayteamid = 9;                // Argentina
+    $dateplayed = "2022/11/30";
+    $timeplayed = "19:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 40
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 3;                 // Group C
+    $venueid   = 1;                 // Lusail Stadiun
+
+    $hometeamid = 6;                // Saudia Arabia
+    $awayteamid = 7;                // Mexico
+    $dateplayed = "2022/11/30";
+    $timeplayed = "19:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // ----------------------------------------------
+    //  FIXTURES - GROUP STAGE - MATCH DAY 11
+    // ----------------------------------------------
+
+    // Next Fixture - 41
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 6;                 // Group F
+    $venueid   = 6;                 // Ahmad Bin Ali Stadium
+
+    $hometeamid = 24;               // Croatia
+    $awayteamid = 21;               // Belgium
+    $dateplayed = "2022/12/01";
+    $timeplayed = "15:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+                        
+    // Next Fixture - 42
+    ++$fixtureno; 
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 6;                 // Group F
+    $venueid   = 3;                 // Al Thumama Stadium 
+
+    $hometeamid = 22;                // Canada
+    $awayteamid = 23;                // Morocco
+    $dateplayed = "2022/12/01";
+    $timeplayed = "15:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 43
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 5;                 // Group E
+    $venueid   = 4;                 // KHalifa Stadium
+
+    $hometeamid = 19;               // Japan
+    $awayteamid = 17;               // Spain
+    $dateplayed = "2022/12/01";
+    $timeplayed = "19:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 44
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 5;                 // Group E
+    $venueid   = 2;                 // Al Bayt Stadiun
+
+    $hometeamid = 20;               // Costa Rica
+    $awayteamid = 18;               // Germany
+    $dateplayed = "2022/12/01";
+    $timeplayed = "19:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // ----------------------------------------------
+    //  FIXTURES - GROUP STAGE - MATCH DAY 12
+    // ----------------------------------------------
+
+    // Next Fixture - 45
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 8;                 // Group H
+    $venueid   = 7;                 // Al Janoub Stadium
+
+    $hometeamid = 30;               // Ghana
+    $awayteamid = 31;               // Uruguay
+    $dateplayed = "2022/12/02";
+    $timeplayed = "15:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+                        
+    // Next Fixture - 46
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 8;                 // Group H
+    $venueid   = 3;                 // Al Thumama Stadium 
+
+    $hometeamid = 32;                // Korean Republic
+    $awayteamid = 29;                // Portugal
+    $dateplayed = "2022/12/02";
+    $timeplayed = "15:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 47
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 7;                 // Group G
+    $venueid   = 8;                 // Stadium 974
+
+    $hometeamid = 26;               // Serbia
+    $awayteamid = 27;               // Switzerland
+    $dateplayed = "2022/12/02";
+    $timeplayed = "19:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // Next Fixture - 48
+    ++$fixtureno;
+
+    $roundid   = 1;                 // Group Stage 
+    $groupid   = 7;                 // Group G
+    $venueid   = 1;                 // Lusail Stadiun
+
+    $hometeamid = 28;               // Cameroon
+    $awayteamid = 25;               // Brazil
+    $dateplayed = "2022/12/02";
+    $timeplayed = "19:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
     // ---------------------------------
-    //         FIXTURES - MATCH DAY 2
+    //  FIXTURES - LAST 16
     // ---------------------------------
 
-    // Next Fixture
+    // Next Fixture - 49
     ++$fixtureno;
 
-    $groupid = 1;                   // Group A
+    $roundid = 2;                  // Last 16 
+    $groupid = 9;                  // Last 16
+    $venueid = 4;                  // Khalifa Stadium
 
-    $venueid = 2;                   // St Marys
-    $hometeamid = 3;               // Austria
-    $awayteamid = 4;               // Northern Ireland
-    $dateplayed = "2022/07/11";
-    $timeplayed = "17:00";
+    $hometeamid = 33;              // Winner Group A
+    $awayteamid = 36;              // Runner Up Group B
+    $dateplayed = "2022/12/03";
+    $timeplayed = "18:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
-    // Next Fixture
+    // Next Fixture - 50
     ++$fixtureno;
 
-    $groupid = 1;                   // Group A
+    $roundid = 2;                  // Last 16 
+    $groupid = 9;                  // Last 16
+    $venueid = 6;                  // Ahmad Bin Ali Stadium
 
-    $venueid = 10;                 // Brighton & Hove Community Stadium
-    $hometeamid = 1;               // England
-    $awayteamid = 2;               // Norway
-    $dateplayed = "2022/07/11";
-    $timeplayed = "20:00";
+    $hometeamid = 37;              // Winner Group C
+    $awayteamid = 40;              // Runner Up Group D
+    $dateplayed = "2022/12/03";
+    $timeplayed = "22:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
-    // Next Fixture
+    // Next Fixture - 51
     ++$fixtureno;
 
-    $groupid = 2;                  // Group B
+    $roundid = 2;                  // Last 16 
+    $groupid = 9;                  // Last 16
+    $venueid = 3;                  // Al Thumama Stadium
 
-    $venueid = 3;                  // Stadium MK
-    $hometeamid = 7;               // Denmark
-    $awayteamid = 8;               // Finland
-    $dateplayed = "2022/07/12";
-    $timeplayed = "17:00";
+    $hometeamid = 39;              // Winner Group D
+    $awayteamid = 38;              // Runner Up Group C
+    $dateplayed = "2022/12/04";
+    $timeplayed = "18:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
-    // Next Fixture
+    // Next Fixture - 52
     ++$fixtureno;
 
-    $groupid = 2;                  // Group B
+    $roundid = 2;                  // Last 16 
+    $groupid = 9;                  // Last 16
+    $venueid = 2;                  // Al Bayt Stadium
 
-    $venueid = 4;                  // Brentford Community Stadium - 4
-    $hometeamid = 5;               // Germany
-    $awayteamid = 6;               // Spain
-    $dateplayed = "2022/07/12";
-    $timeplayed = "20:00";
+    $hometeamid = 35;              // Winner Group B
+    $awayteamid = 34;              // Runner Up Group A
+    $dateplayed = "2022/12/04";
+    $timeplayed = "22:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
-    // Next Fixture
+    // Next Fixture - 53
     ++$fixtureno;
 
-    $groupid = 3;                  // Group C
+    $roundid = 2;                  // Last 16 
+    $groupid = 9;                  // Last 16
+    $venueid = 7;                  // Al Janoub Stadium
 
-    $venueid = 6;                  // Bramall Lane
-    $hometeamid = 10;               // Sweden
-    $awayteamid = 11;               // Switzerland
-    $dateplayed = "2022/07/13";
-    $timeplayed = "17:00";
+    $hometeamid = 41;              // Winner Group E
+    $awayteamid = 44;              // Runner Up Group F
+    $dateplayed = "2022/12/05";
+    $timeplayed = "18:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
-    // Next Fixture
+    // Next Fixture - 54
     ++$fixtureno;
 
-    $groupid = 3    ;                  // Group C
+    $roundid = 2;                  // Last 16 
+    $groupid = 9;                  // Last 16
+    $venueid = 8;                  // Stadium 974
 
-    $venueid = 5;                  // Leigh Sports Village
-    $hometeamid = 9;               // Netherlands
-    $awayteamid = 12;               // Russia
-    $dateplayed = "2022/07/13";
-    $timeplayed = "20:00";
+    $hometeamid = 45;              // Winner Group G
+    $awayteamid = 48;              // Runner Up Group H
+    $dateplayed = "2022/12/05";
+    $timeplayed = "22:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
-    // Next Fixture
+    // Next Fixture - 55
     ++$fixtureno;
 
-    $groupid = 4    ;              // Group D
+    $roundid = 2;                  // Last 16 
+    $groupid = 9;                  // Last 16
+    $venueid = 5;                  // Education City Stadium
 
-    $venueid = 7;                  // Manchester City Academy Stadium
-    $hometeamid = 14;               // Netherlands
-    $awayteamid = 16;               // Russia
-    $dateplayed = "2022/07/14";
-    $timeplayed = "17:00";
+    $hometeamid = 43;              // Winner Group F
+    $awayteamid = 42;              // Runner Up Group E
+    $dateplayed = "2022/12/06";
+    $timeplayed = "18:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
-    // Next Fixture
+    // Next Fixture - 56
     ++$fixtureno;
 
-    $groupid = 4    ;              // Group D
+    $roundid = 2;                  // Last 16 
+    $groupid = 9;                  // Last 16
+    $venueid = 1;                  // Lusail Stadium
 
-    $venueid = 8;                  // New York Stadium
-    $hometeamid = 13;               // Netherlands
-    $awayteamid = 15;               // Russia
-    $dateplayed = "2022/07/14";
-    $timeplayed = "20:00";
+    $hometeamid = 47;              // Winner Group H
+    $awayteamid = 46;              // Runner Up Group G
+    $dateplayed = "2022/12/06";
+    $timeplayed = "22:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
-    }
-
-    // ---------------------------------
-    //         FIXTURES - MATCH DAY 3
-    // ---------------------------------
-
-    // Next Fixture
-    ++$fixtureno;
-
-    $groupid = 1;                   // Group A
-
-    $venueid = 2;                   // St Marys
-    $hometeamid = 4;               // Northern Ireland
-    $awayteamid = 1;               // England
-    $dateplayed = "2022/07/15";
-    $timeplayed = "20:00";
-    $homescore = NULL;
-    $awayscore = NULL;
-    $resultid = 6;
-    
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
-    }
-
-    // Next Fixture
-    ++$fixtureno;
-
-    $groupid = 1;                   // Group A
-
-    $venueid = 10;                 // Brighton & Hove Community Stadium
-    $hometeamid = 3;               // Austria
-    $awayteamid = 2;               // Norway
-    $dateplayed = "2022/07/15";
-    $timeplayed = "20:00";
-    $homescore = NULL;
-    $awayscore = NULL;
-    $resultid = 6;
-    
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
-    }
-
-    // Next Fixture
-    ++$fixtureno;
-
-    $groupid = 2;                  // Group B
-
-    $venueid = 3;                  // Stadium MK
-    $hometeamid = 8;               // Finland
-    $awayteamid = 5;               // Germany
-    $dateplayed = "2022/07/16";
-    $timeplayed = "20:00";
-    $homescore = NULL;
-    $awayscore = NULL;
-    $resultid = 6;
-    
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
-    }
-
-    // Next Fixture
-    ++$fixtureno;
-
-    $groupid = 2;                  // Group B
-
-    $venueid = 4;                  // Brentford Community Stadium - 4
-    $hometeamid = 7;               // Denmark
-    $awayteamid = 6;               // Spain
-    $dateplayed = "2022/07/16";
-    $timeplayed = "20:00";
-    $homescore = NULL;
-    $awayscore = NULL;
-    $resultid = 6;
-    
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
-    }
-
-    // Next Fixture
-    ++$fixtureno;
-
-    $groupid = 3;                  // Group C
-
-    $venueid = 6;                  // Bramall Lane
-    $hometeamid = 11;               // Switzerland
-    $awayteamid = 9;               // Netherlands 
-    $dateplayed = "2022/07/17";
-    $timeplayed = "17:00";
-    $homescore = NULL;
-    $awayscore = NULL;
-    $resultid = 6;
-    
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
-    }
-
-    // Next Fixture
-    ++$fixtureno;
-
-    $groupid = 3    ;                  // Group C
-
-    $venueid = 5;                  // Leigh Sports Village
-    $hometeamid = 10;               // Sweden
-    $awayteamid = 12;               // Russia
-    $dateplayed = "2022/07/17";
-    $timeplayed = "17:00";
-    $homescore = NULL;
-    $awayscore = NULL;
-    $resultid = 6;
-    
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
-    }
-
-    // Next Fixture
-    ++$fixtureno;
-
-    $groupid = 4    ;              // Group D
-
-    $venueid = 7;                  // Manchester City Academy Stadium
-    $hometeamid = 16;               // Iceland
-    $awayteamid = 13;               // France
-    $dateplayed = "2022/07/18";
-    $timeplayed = "20:00";
-    $homescore = NULL;
-    $awayscore = NULL;
-    $resultid = 6;
-    
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
-    }
-
-    // Next Fixture
-    ++$fixtureno;
-
-    $groupid = 4    ;              // Group D
-
-    $venueid = 8;                  // New York Stadium
-    $hometeamid = 14;               // Italy
-    $awayteamid = 15;               // Belgium
-    $dateplayed = "2022/07/18";
-    $timeplayed = "20:00";
-    $homescore = NULL;
-    $awayscore = NULL;
-    $resultid = 6;
-    
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
     // ---------------------------------
-    //         FIXTURES - QUARTER FINALS
+    //  FIXTURES - QUARTER FINALS
+    // --------------------------------
+    // For some reason the QF match at 22:00 is listed as the fixture no before the match at 18:00 
     // ---------------------------------
 
-    // Next Fixture
+    // Next Fixture - 57
     ++$fixtureno;
 
     $roundid = 3;                  // Quarter Final QF 
+    $groupid = 10;                 // Quarter Finals
+    $venueid = 1;                  // Lusail Stadium
 
-    $groupid = 8;                  // Quarter Finals
-
-    $venueid = 10;                  // Brighton & Hove Community Stadium
-    $hometeamid = 17;              // Winner Group A
-    $awayteamid = 20;               // Runner Up Group B
-    $dateplayed = "2022/07/20";
-    $timeplayed = "20:00";
+    $hometeamid = 49;              // Winner Match 49
+    $awayteamid = 50;              // Winner Match 50
+    $dateplayed = "2022/12/09";
+    $timeplayed = "22:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
-    // Next Fixture
+    // Next Fixture - 58
     ++$fixtureno;
 
-    $groupid = 8;                  // Quarter Finals
+    $roundid = 3;                  // Quarter Final QF 
+    $groupid = 10;                 // Quarter Finals
+    $venueid = 5;                  // Education City Stadium
 
-    $venueid = 4;                  // Brentford Community Stadium 
-    $hometeamid = 19;               // Winner Group B
-    $awayteamid = 18;               // Runner Up Group A
-    $dateplayed = "2022/07/21";
-    $timeplayed = "20:00";
+    $hometeamid = 53;              // Winner Match 53
+    $awayteamid = 54;              // Winner Match 54
+    $dateplayed = "2022/12/09";
+    $timeplayed = "18:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
-    // Next Fixture
+    // Next Fixture - 59
     ++$fixtureno;
 
-    $groupid = 8;                  // Quarter Finals
+    $roundid = 3;                  // Quarter Final QF 
+    $groupid = 10;                 // Quarter Finals
+    $venueid = 2;                  // Al Bayt Stadium
 
-    $venueid = 5;                  // Leigh Sports Village 
-    $hometeamid = 21;               // Winner Group C
-    $awayteamid = 24;               // Runner Up Group D
-    $dateplayed = "2022/07/22";
-    $timeplayed = "20:00";
+    $hometeamid = 51;              // Winner Match 51
+    $awayteamid = 52;              // Winner Match 52
+    $dateplayed = "2022/12/10";
+    $timeplayed = "22:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
-    // Next Fixture
+    // Next Fixture - 60
     ++$fixtureno;
 
-    $groupid = 8;                  // Quarter Finals
+    $roundid = 3;                  // Quarter Final QF 
+    $groupid = 10;                 // Quarter Finals
+    $venueid = 3;                  // Al Thumama Stadium
 
-    $venueid = 8;                  // New York Stadium
-    $hometeamid = 23;               // Winner Group D
-    $awayteamid = 22;               // Runner Up Group C
-    $dateplayed = "2022/07/23";
-    $timeplayed = "20:00";
+    $hometeamid = 55;              // Winner Match 55
+    $awayteamid = 56;              // Winner Match 56
+    $dateplayed = "2022/12/10";
+    $timeplayed = "18:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
     // ---------------------------------
-    //         FIXTURES - SEMI FINALS
+    //  FIXTURES - SEMI FINALS
     // ---------------------------------
 
-    // Next Fixture
+    // Next Fixture - 61
     ++$fixtureno;
 
     $roundid = 4;                  // Semi Final SF 
+    $groupid = 11;                 // Semi Finals
+    $venueid = 1;                  // Lusail Stadium 
 
-    $groupid = 9;                  // Semi Finals
-
-    $venueid = 6;                  // Bramall Lane 
-    $hometeamid = 25;               // Winner QF 1 
-    $awayteamid = 27;               // Winner QF 3
-    $dateplayed = "2022/07/26";
-    $timeplayed = "20:00";
+    $hometeamid = 57;              // Winner QF 1 
+    $awayteamid = 58;              // Winner QF 2
+    $dateplayed = "2022/12/13";
+    $timeplayed = "22:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
-    // Next Fixture
+    // Next Fixture - 62
     ++$fixtureno;
 
-    $groupid = 9;                  // Semi Finals
+    $roundid = 4;                  // Semi Final SF 
+    $groupid = 11;                 // Semi Finals
+    $venueid = 2;                  // Al Bayt Stadium 
 
-    $venueid = 3;                  // Stadium MK 
-    $hometeamid = 26;               // Winner QF 2
-    $awayteamid = 28;               // Winner QF 4
-    $dateplayed = "2022/07/27";
-    $timeplayed = "20:00";
+    $hometeamid = 59;              // Winner QF 3 
+    $awayteamid = 60;              // Winner QF 4
+    $dateplayed = "2022/12/14";
+    $timeplayed = "22:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    }
+
+    // ---------------------------------
+    //   FIXTURES - 3RD PLACE PLAY-OFF
+    // ---------------------------------
+
+    // Next Fixture - 63
+    ++$fixtureno;
+
+    $roundid = 6;                  // Play Off
+    $groupid = 12;                 // 3rd Place Play Off
+    $venueid = 4;                  // Khalifa Stadium 
+
+    $hometeamid = 62;              // Losers SF1 
+    $awayteamid = 64;              // Losers SF2
+    $dateplayed = "2022/12/17";
+    $timeplayed = "18:00";
+    $homescore = NULL;
+    $awayscore = NULL;
+    $resultid = 6;
+    
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    } else {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
     // ---------------------------------
     //         FIXTURES - FINAL
     // ---------------------------------
 
-    // Next Fixture
+    // Next Fixture - 64
     ++$fixtureno;
 
     $roundid = 5;                  // Final FI 
+    $groupid = 13;                 // Final
+    $venueid = 1;                  // Lusail Stadium 
 
-    $groupid = 10;                  // Finals
-
-    $venueid = 9;                  // Wembley Stadium
-    $hometeamid = 29;               // Winner SF 1 
-    $awayteamid = 30;               // Winner SF 2
-    $dateplayed = "2022/07/31";
-    $timeplayed = "17:00";
+    $hometeamid = 61;              // Winner QF 1 
+    $awayteamid = 63;              // Winner QF 2
+    $dateplayed = "2022/12/18";
+    $timeplayed = "18:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ($stmt->execute()) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
+    if ( $query -> execute() === TRUE ) {
+        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
     } else {
-            echo ("Error: " . $stmt . "<br>" . $conn->error . "<br>");
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
     }
 
     // Close the connection as soon as it's no longer needed
-    $conn->close();
+    $dbh = null;
 
-    echo ("<br>" . date('l jS \of F Y h:i:s A') . "<br>");
+// display closing debug timestamp
+echo ("<br>" . date('l jS \of F Y h:i:s A') . "<br>");
 
 ?>

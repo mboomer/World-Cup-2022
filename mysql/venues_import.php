@@ -1,118 +1,112 @@
 <?php
+
     // Include config file
     require_once "../../../.php/inc/db.worldcup.inc.php";
-         
-    // Create connection
-    $conn = mysqli_connect($servername, $username, $password, $db);
 
-    // Check connection
-    if (!$conn) {
-        die("Unable to connect to database : " . mysqli_connect_error()) . "<br>";
-    } else {
-        echo "Connected successfully" . "<br>";
+    // DB credentials as constants
+    define('DB_HOST', $servername);
+    define('DB_NAME', $db);
+    define('DB_USER', $username);
+    define('DB_PASS', $password);
+
+    // Try and establish the database connection.
+    try {
+        $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
     }
+    catch (PDOException $e) {
+        exit("Error: " . $e->getMessage());
+    };
 
-    // Prepare 
-    $insertQry = "INSERT INTO Venues (City, Stadium) VALUES (?, ?)";
-
-    $insertStatement = mysqli_prepare($conn, $insertQry);
-
-    // Bind params
-    mysqli_stmt_bind_param($insertStatement, "ss", $city, $stadium);
- 
-    echo "Prepare and Bind completed" . "<br>";
-
-    $city = "Trafford";
-    $stadium = "Old Trafford";
+// dislay starting debug timestamp
+echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     
-    if (mysqli_stmt_execute($insertStatement)) {
+    // Prepare 
+    $sql = "INSERT INTO Venues (City, Stadium) VALUES (:City, :Stadium)";
+
+    //prepare the sql statement
+    $query = $dbh -> prepare($sql);
+
+    // bind the paramaters to the sql statement
+    $query->bindParam(':City',    $city,    PDO::PARAM_STR);
+    $query->bindParam(':Stadium', $stadium, PDO::PARAM_STR);
+
+    $city = "Lusail";
+    $stadium = "Lusail Iconic Stadium";
+    
+    if ( $query -> execute() === TRUE ) {
         echo "New record " . $stadium . " created successfully" . "<br>";
     } else {
         echo "Failed to created record - " . $stadium . "<br>";
     }
 
-    $city = "Southampton";
-    $stadium = "St. Marys";
-
-    if (mysqli_stmt_execute($insertStatement)) {
+    $city = "Al Khor";
+    $stadium = "Al Bayt Stadium";
+    
+    if ( $query -> execute() === TRUE ) {
         echo "New record " . $stadium . " created successfully" . "<br>";
     } else {
         echo "Failed to created record - " . $stadium . "<br>";
     }
 
-
-    $city = "Milton Keynes";
-    $stadium = "Stadium MK";
-
-    if (mysqli_stmt_execute($insertStatement)) {
+    $city = "Doha";
+    $stadium = "Al Thumama Stadium";
+    
+    if ( $query -> execute() === TRUE ) {
         echo "New record " . $stadium . " created successfully" . "<br>";
     } else {
         echo "Failed to created record - " . $stadium . "<br>";
     }
 
-    $city = "London";
-    $stadium = "Brentford Community Stadium";
-
-    if (mysqli_stmt_execute($insertStatement)) {
+    $city = "Al Rayyan";
+    $stadium = "Khalifa International Stadium";
+    
+    if ( $query -> execute() === TRUE ) {
         echo "New record " . $stadium . " created successfully" . "<br>";
     } else {
         echo "Failed to created record - " . $stadium . "<br>";
     }
 
-    $city = "Wigan & Leigh";
-    $stadium = "Leigh Sports Village";
-
-    if (mysqli_stmt_execute($insertStatement)) {
+    $city = "Al Rayyan";
+    $stadium = "Education City Stadium";
+    
+    if ( $query -> execute() === TRUE ) {
         echo "New record " . $stadium . " created successfully" . "<br>";
     } else {
         echo "Failed to created record - " . $stadium . "<br>";
     }
 
-    $city = "Sheffield";
-    $stadium = "Bramall Lane";
-
-    if (mysqli_stmt_execute($insertStatement)) {
+    $city = "Al Wakrah";
+    $stadium = "Ahmad Bin Ali Stadium";
+    
+    if ( $query -> execute() === TRUE ) {
         echo "New record " . $stadium . " created successfully" . "<br>";
     } else {
         echo "Failed to created record - " . $stadium . "<br>";
     }
 
-    $city = "Manchester";
-    $stadium = "Manchester City Academy Stadium";
-
-    if (mysqli_stmt_execute($insertStatement)) {
+    $city = "Al Wakrah";
+    $stadium = "Al Janoub Stadium";
+    
+    if ( $query -> execute() === TRUE ) {
         echo "New record " . $stadium . " created successfully" . "<br>";
     } else {
         echo "Failed to created record - " . $stadium . "<br>";
     }
 
-    $city = "Rotherham";
-    $stadium = "New York Stadium";
-
-    if (mysqli_stmt_execute($insertStatement)) {
+    $city = "Doha";
+    $stadium = "Stadium 974";
+    
+    if ( $query -> execute() === TRUE ) {
         echo "New record " . $stadium . " created successfully" . "<br>";
     } else {
         echo "Failed to created record - " . $stadium . "<br>";
-    }
+    }    
 
-    $city = "London";
-    $stadium = "Wembley Stadium";
+    // Close the connection as soon as it's no longer needed
+    $dbh = null;
 
-    if (mysqli_stmt_execute($insertStatement)) {
-        echo "New record " . $stadium . " created successfully" . "<br>";
-    } else {
-        echo "Failed to created record - " . $stadium . "<br>";
-    }
+// display closing debug timestamp
+echo ("<br>" . date('l jS \of F Y h:i:s A') . "<br>");
 
-    $city = "Brighton & Hove";
-    $stadium = "Brighton & Hove Community Stadium";
-
-    if (mysqli_stmt_execute($insertStatement)) {
-        echo "New record " . $stadium . " created successfully" . "<br>";
-    } else {
-        echo "Failed to created record - " . $stadium . "<br>";
-    }
-
-    mysqli_close();
 
 ?>
