@@ -8,6 +8,12 @@
     define('DB_USER', $username);
     define('DB_PASS', $password);
 
+    // if you didnt get here from a update-a-fixture POST then return to home page
+    if ( $_SERVER['REQUEST_METHOD'] != "POST" ) {
+        header("Location: ../index.php");
+        exit();
+    }
+
     // Try and establish the database connection.
     try {
         $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
@@ -55,23 +61,30 @@
         // get all rows
         $users = $query -> fetchAll(PDO::FETCH_OBJ);
 
+        $fh = fopen("top-ten-users.html", "w"); 
+        
+        $html = "  <div id='user-tbl'>"
+              . "      <table>"
+              . "          <thead class='blueheader'>"
+              . "              <tr>"
+              . "                  <th class='align-left'>User Name</th><th class='cols'>Points</th><th class='align-left'>Top Scorer</th><th class='cols'>Goals</th>"
+              . "              </tr>"
+              . "          </thead>"
+              . "          <tbody>";
+
         if ($query->rowCount() == 0) {
-            echo "<div>NO USERS RETURNED</div>";
-            exit;
+
+            // return failure message
+            echo "Failure - No Top Ten Users Returned";
+
+            $html .= "  <tr>"
+                  . "      <td>Error</td>"
+                  . "      <td>No User Returned</td>"
+                  . "      <td></td>" 
+                  . "      <td></td>" 
+                  . "   </tr>";
+
         } else {
-
-                $html = "";
-
-                $fh = fopen("top-ten-users.html", "w"); 
-                
-                $html = "  <div id='user-tbl'>"
-                        . "      <table>"
-                        . "          <thead class='blueheader'>"
-                        . "              <tr>"
-                        . "                  <th class='align-left'>User Name</th><th class='cols'>Points</th><th class='align-left'>Top Scorer</th><th class='cols'>Goals</th>"
-                        . "              </tr>"
-                        . "          </thead>"
-                        . "          <tbody>";
 
                 foreach($users as $key => $user) {
 
@@ -81,26 +94,26 @@
                     $goals     = $user -> GoalsScored;
 
                     $html .= "  <tr>"
-                             . "      <td class='align-left'>" . $username . "</td>"
-                             . "      <td class='cols'>" . $points . "</td>"
-                             . "      <td class='align-left'>" . $topscorer . "</td>" 
-                             . "      <td class='cols'>" . $goals . "</td>" 
-                             . "  </tr>";
+                          . "      <td class='align-left'>" . $username . "</td>"
+                          . "      <td class='cols'>" . $points . "</td>"
+                          . "      <td class='align-left'>" . $topscorer . "</td>" 
+                          . "      <td class='cols'>" . $goals . "</td>" 
+                          . "  </tr>";
 
                 }; // end of users foreach 
 
-                    $html .= "          </tbody>"
-                          .  "      </table>"   
-                          . "  </div>  <!-- end of users-tbl div -->"; 
+            // return success message
+            echo "Success - Top Ten Users Updated";
 
         };  // end of $query->rowCount() else
+
+        $html .= "          </tbody>"
+              .  "      </table>"   
+              . "  </div>  <!-- end of users-tbl div -->"; 
 
     // write the HTML to the file
     fwrite($fh, $html);
     // close the file handle
     fclose($fh);
-
-    // return success message
-    echo "Success - Top Ten Users updated";
 
 ?>  

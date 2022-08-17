@@ -13,7 +13,9 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
         <link rel="stylesheet" href="css/styles.css">
-                
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.js"> </script>                
+
     </head>
     
     <body>
@@ -29,12 +31,7 @@
                 <div id="header-text">
                     <h1>World Cup 2022 Predictions</h1> 
                 </div>
-<!--                
-                <div id="login-register">
-                    <a class="transparent-btn-blue" href="https://9habu.com/wc2022/php/login.php">Login</a>
-                    <a class="transparent-btn-blue" href="https://9habu.com/wc2022/php/sign-up.php">Register</a>
-                </div>
--->            
+          
                 <div id="profile" class="dropdown">
 
                     <div class="bar1"></div>
@@ -70,11 +67,15 @@
                 <?php include 'php/upcoming-fixtures.html';?>
             </div>
 
-            <div class="card" id="venues">
-                <h2 class="card-title">Statistics</h2>
+            <div class="card" id="competition-stats">
+                <h2 class="card-title">Competiton Statistics</h2>
+                <div id="goal-stats">
+                    <?php include 'php/competition-stats.html';?>
+                </div>
+
             </div>
             
-            <div class="card" id="about">
+            <div class="card" id="competition-rules">
                 <h2 class="card-title">Competition Rules</h2>
             </div>
 
@@ -84,7 +85,7 @@
             </footer>
             
         </main>
-    
+
     </body>
 
 </html>
