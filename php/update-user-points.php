@@ -9,6 +9,12 @@
     define('DB_USER', $username);
     define('DB_PASS', $password);
 
+    // if you didnt get here from a update-a-fixture POST then return to home page
+    if ( $_SERVER['REQUEST_METHOD'] != "POST" ) {
+        header("Location: ../index.php");
+        exit();
+    }
+
     try {
         // Try and establish the database connection.
         try {

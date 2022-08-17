@@ -35,7 +35,7 @@ header {
     
     display: grid;
     grid-area: header;
-    grid-template-columns: 1fr 10fr 2fr;
+    grid-template-columns: 1fr 10fr 1fr;
     grid-template-rows: auto;
     grid-gap: 10px;
     
@@ -79,14 +79,62 @@ nav {
     /* background-color: navy; */
 }
 
-#venues {
-    grid-area: venues;
-    background-color: chocolate;
+#competition-stats {
+    grid-area: competition-stats;
 }
 
-#about {
-    grid-area: about;
-    background-color: mediumaquamarine;
+    #goal-stats {
+        grid-area: goal-stats;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+
+    }
+
+        #games-played {
+            grid-area: games-played;
+        }
+
+        #total-goals {
+            grid-area: total-goals;
+        }
+
+        #goals-per-game {
+            grid-area: goals-per-game;
+        }
+
+        #top-team {
+            grid-area: top-team;
+        }
+
+        #top-game {
+            grid-area: top-game;
+        }
+
+        #penalties {
+            grid-area: penalties;
+        }
+
+
+        .stat-title {
+            text-align: center;
+            font-size: 0.9em;
+            background-color: navy;
+            color: white;
+        }
+
+        .stat-value {
+            text-align: center;
+            background-color: lightgreen;
+            color: green;
+            font-size: 2em;
+            border: 1px dotted black;
+        }
+
+#competition-rules {
+    grid-area: competition-rules;
 }
 
 .card-title {
@@ -348,7 +396,7 @@ th, td {
 }
 
 .team {
-    font-size: 2em;
+    font-size: 1.5em;
     width: 30%;
     text-align: center;
     color: navy;
@@ -359,6 +407,72 @@ th, td {
     width: 55%;
     text-align: center;
 }
+
+    /* 
+    ----------------------------------------------------------------------------------
+    Hamburger Drop Down Menu
+    ----------------------------------------------------------------------------------
+    */
+    #profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .bar1, .bar2, .bar3 {
+            width: 30px;
+            height: 4px;
+            background-color: #333;
+            margin: 2px 0;
+        }
+
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdown {
+            font-size: 14px;  
+            border: none;
+            outline: none;
+            color: white;
+            padding: 10px 10px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .dropdown:hover {
+            /* background-color: red; */
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 75px;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 10px 10px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
 
 /* ******************************************************************************************   */
 
@@ -397,7 +511,7 @@ th, td {
         grid-template-areas:
             "header header header"
             "lastest-results top-ten-users golden-boot"
-            "upcoming-fixtures venues about"
+            "upcoming-fixtures competition-stats competition-rules"
             "footer footer footer";
     }
  
@@ -405,6 +519,13 @@ th, td {
         grid-template-areas:
             "logo header-text";
     }
+
+    #goal-stats {
+        grid-template-areas:
+            "games-played total-goals goals-per-game"
+            "top-team top-game penalties";
+    }
+
 }
 
 /* ******************************************************************************************   */
@@ -443,7 +564,7 @@ th, td {
             "header header"
             "lastest-results top-ten-users"
             "golden-boot upcoming-fixtures"
-            "venues about"
+            "competition-stats competition-rules"
             "footer footer";
     }
  
@@ -485,7 +606,7 @@ th, td {
             "header header"
             "lastest-results top-ten-users"
             "golden-boot upcoming-fixtures"
-            "venues about"
+            "competition-stats competition-rules"
             "footer footer";
     }
  
@@ -528,8 +649,8 @@ th, td {
             "top-ten-users"
             "golden-boot" 
             "upcoming-fixtures"
-            "venues" 
-            "about"
+            "competition-stats" 
+            "competition-rules"
             "footer";
     }
  

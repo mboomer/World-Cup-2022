@@ -17,8 +17,10 @@
         exit("Error: " . $e->getMessage());
     };
 
+    $recordcount = 0;
+
 // dislay starting debug timestamp
-echo (date('l jS \of F Y h:i:s A') . "<br><br>");
+// echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     
     // Prepare 
     $sql = "INSERT INTO Venues (City, Stadium) VALUES (:City, :Stadium)";
@@ -33,80 +35,96 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $city = "Lusail";
     $stadium = "Lusail Iconic Stadium";
     
-    if ( $query -> execute() === TRUE ) {
-        echo "New record " . $stadium . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $stadium . "<br>";
-    }
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
 
     $city = "Al Khor";
     $stadium = "Al Bayt Stadium";
     
-    if ( $query -> execute() === TRUE ) {
-        echo "New record " . $stadium . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $stadium . "<br>";
-    }
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
 
     $city = "Doha";
     $stadium = "Al Thumama Stadium";
     
-    if ( $query -> execute() === TRUE ) {
-        echo "New record " . $stadium . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $stadium . "<br>";
-    }
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
 
     $city = "Al Rayyan";
     $stadium = "Khalifa International Stadium";
     
-    if ( $query -> execute() === TRUE ) {
-        echo "New record " . $stadium . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $stadium . "<br>";
-    }
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
 
     $city = "Al Rayyan";
     $stadium = "Education City Stadium";
     
-    if ( $query -> execute() === TRUE ) {
-        echo "New record " . $stadium . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $stadium . "<br>";
-    }
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
 
     $city = "Al Wakrah";
     $stadium = "Ahmad Bin Ali Stadium";
     
-    if ( $query -> execute() === TRUE ) {
-        echo "New record " . $stadium . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $stadium . "<br>";
-    }
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
 
     $city = "Al Wakrah";
     $stadium = "Al Janoub Stadium";
     
-    if ( $query -> execute() === TRUE ) {
-        echo "New record " . $stadium . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $stadium . "<br>";
-    }
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
 
     $city = "Doha";
     $stadium = "Stadium 974";
     
-    if ( $query -> execute() === TRUE ) {
-        echo "New record " . $stadium . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $stadium . "<br>";
-    }    
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
 
     // Close the connection as soon as it's no longer needed
     $dbh = null;
 
-// display closing debug timestamp
-echo ("<br>" . date('l jS \of F Y h:i:s A') . "<br>");
-
+// return the closing debug timestamp and the number of records imported
+echo ( date('l jS \of F Y h:i:s A') . "<br>");
+echo "Total Venues Imported : " . $recordcount;
 
 ?>
