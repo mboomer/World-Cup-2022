@@ -8,6 +8,12 @@
     define('DB_USER', $username);
     define('DB_PASS', $password);
 
+    // if you didnt get here from a update-a-fixture POST then return to home page
+    if ( $_SERVER['REQUEST_METHOD'] != "POST" ) {
+        header("Location: ../index.php");
+        exit();
+    }
+
     // Try and establish the database connection.
     try {
         $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
@@ -83,11 +89,33 @@
         // get all rows
         $results = $query -> fetchAll(PDO::FETCH_OBJ);
 
-        if ($query->rowCount() == 0) {
-            "<div class='latest-results-tbl'>NO RESULTS RETURNED</div>";
-            exit;
-        } else {
+        // open the file for writing
+        $fh = fopen("latest-results.html", "w");
 
+        if ($query->rowCount() == 0) {
+
+            $html .= "  <div class='latest-results-tbl'>"
+                    . "      <table>"
+                    . "          <thead class='blueheader'>"
+                    . "              <tr>"
+                    . "                  <th class='align-center' colspan='7'>Error - Error</th>"
+                    . "              </tr>"
+                    . "              <tr>"
+                    . "                  <th class='align-center' colspan='7'>Error - Error - Error</th>"
+                    . "              </tr>"
+                    . "          </thead>"
+                    . "          <tbody>"
+                    . "              <tr>"
+                    . "                  <td>No Recent Fixtures Returned</td>"
+                    . "              </tr>"
+                    . "          </tbody>"
+                    . "      </table>"   
+                    . "  </div>  <!-- end of latest-results-tbl div -->"; 
+
+            echo "Failure - No Results Updated";
+
+        } else {
+            // initial the string to hold the HTML
             $html = "";
 
             foreach($results as $key => $result) {
@@ -102,8 +130,6 @@
                 $awayteam   = $result -> awayteam;
                 $homescore  = $result -> homescore;
                 $awayscore  = $result -> awayscore;
-
-                $fh = fopen("latest-results.html", "w");
 
                 $html .= "  <div class='latest-results-tbl'>"
                       . "      <table>"
@@ -129,13 +155,13 @@
 
             }; // end of users foreach 
 
+            echo "Success - Latest Results Updated";
+
         };  // end of $query->rowCount() else
 
     // write the HTML to the file
     fwrite($fh, $html);
     // close the file handle
     fclose($fh);
-
-    echo "Success - Latest Results Updated";
     
 ?>  

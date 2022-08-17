@@ -8,6 +8,12 @@
     define('DB_USER', $username);
     define('DB_PASS', $password);
 
+    // if you didnt get here from a update-a-fixture POST then return to home page
+    if ( $_SERVER['REQUEST_METHOD'] != "POST" ) {
+        header("Location: ../index.php");
+        exit();
+    }
+
     // Try and establish the database connection.
     try {
         $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
@@ -59,23 +65,29 @@
         // get all rows
         $goals = $query -> fetchAll(PDO::FETCH_OBJ);
 
+        // open fiel for writing
+        $fh = fopen("top-goal-scorers.html", "w"); 
+
+        $html = "";
+
+        $html = "  <div id='goal-tbl'>"
+                . "    <table>"
+                . "        <thead class='blueheader'>"
+                . "            <tr>"
+                . "                <th class='team-flag'>Team</th><th class='align-left'>Player</th><th class='cols'>Scored</th><th class='cols'>Penalties</th>"
+                . "             </tr>"
+                . "        </thead>"
+                . "    <tbody>";
+
         if ($query->rowCount() == 0) {
-            echo "<div>NO GOAL SCORERS RETURNED</div>";
-            exit;
+
+            echo "Failure - No Goal Scorers Returned";
+
+            $html .= "       <tr>"
+                  .  "          <td>Error</th><th>no goal scorers returned</th><th></th><th></th>"
+                  .  "       </tr>";
+
         } else {
-
-            $html = "";
-
-            $fh = fopen("top-goal-scorers.html", "w"); 
-
-            $html = "  <div id='goal-tbl'>"
-                  . "      <table>"
-                  . "          <thead class='blueheader'>"
-                  . "              <tr>"
-                  . "                  <th class='team-flag'>Team</th><th class='align-left'>Player</th><th class='cols'>Scored</th><th class='cols'>Penalties</th>"
-                  . "              </tr>"
-                  . "          </thead>"
-                  . "          <tbody>";
 
             foreach($goals as $key => $goal) {
 
@@ -93,17 +105,17 @@
 
             }; // end of users foreach 
 
-            $html .= "          </tbody>"
-                  .  "      </table>"
-                  .  "  </div>  <!-- end of goals-tbl div -->"; 
+            echo "Success - Top Goal Scorer Updated";
 
         };  // end of $query->rowCount() else
+
+        $html .= "          </tbody>"
+              .  "      </table>"
+              .  "  </div>  <!-- end of goals-tbl div -->"; 
 
     // write the HTML to the file
     fwrite($fh, $html);
     // close the file handle
     fclose($fh);
-
-    echo "Success - Top Goal Scorer Updated";
     
 ?>  

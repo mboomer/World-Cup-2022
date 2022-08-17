@@ -90,11 +90,34 @@
         // open file for writing
         $fh = fopen("upcoming-fixtures.html", "w");
 
-        if ($query->rowCount() == 0) {
-            $html = "<div class='upcoming-fixtures-tbl'>No upcoming fixtures</div>";
-        } else {
+        $html = "";
 
-            $html = "";
+        if ($query->rowCount() == 0) {
+            
+            // return Failure message
+            echo "Failure - No Upcoming Fixtures Found";
+
+            $html = "<div class='upcoming-fixtures-tbl'>No upcoming fixtures</div>";
+
+            $html .= "  <div class='upcoming-fixtures-tbl'>"
+                    .  "      <table>"
+                    . "          <thead class='blueheader'>"
+                    . "              <tr>"
+                    . "                  <th class='align-center' colspan='7'>Error - Error</th>"
+                    . "              </tr>"
+                    . "              <tr>"
+                    . "                  <th class='align-center' colspan='7'>Error - Error - Error</th>"
+                    . "              </tr>"
+                    . "          </thead>"
+                    . "          <tbody>"
+                    . "              <tr>"
+                    . "                  <td>No Upcoming Fixtures Found</td>"
+                    . "              </tr>"
+                    . "          </tbody>"
+                    . "      </table>"   
+                    . "  </div>  <!-- end of goals-tbl div -->"; 
+
+        } else {
 
             foreach($results as $key => $result) {
             
@@ -131,13 +154,14 @@
 
             }; // end of users foreach 
 
+            // return Success message
+            echo "Success - Upcoming Fixtures Updated";
+
         };  // end of $query->rowCount() else
 
     // write the HTML to the file
     fwrite($fh, $html);
     // close the file handle
     fclose($fh);
-
-    echo "Success - Upcoming Fixtures Updated";
 
 ?>  
