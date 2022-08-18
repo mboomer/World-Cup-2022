@@ -241,24 +241,34 @@
 
                             if ( ($r["hometeamid"] == $p["hometeamid"]) ) {
 
-                                if ($p["stage"] == "QF") {                                
+                                if ($p["stage"] == "LS") {                                
                                     $bonus = $bonus + 1;
-                                } if ($p["stage"] == "SF") {
+                                } else if ($p["stage"] == "QF") {                                
+                                    $bonus = $bonus + 1;
+                                } else if ($p["stage"] == "SF") {
                                     $bonus = $bonus + 2;
-                                } if ($p["stage"] == "FI") {
+                                } else if ($p["stage"] == "PL") {                                
+                                    $bonus = $bonus + 1;
+                                } else if ($p["stage"] == "FI") {
                                     $bonus = $bonus + 3;
                                 };
+
                             };
 
                             if ( ($r["awayteamid"] == $p["awayteamid"]) ) {
 
-                                if ($p["stage"] == "QF") {                                
+                                if ($p["stage"] == "LS") {                                
                                     $bonus = $bonus + 1;
-                                } if ($p["stage"] == "SF") {
+                                } else if ($p["stage"] == "QF") {                                
+                                    $bonus = $bonus + 1;
+                                } else if ($p["stage"] == "SF") {
                                     $bonus = $bonus + 2;
-                                } if ($p["stage"] == "FI") {
+                                } else if ($p["stage"] == "PL") {                                
+                                    $bonus = $bonus + 1;
+                                } else if ($p["stage"] == "FI") {
                                     $bonus = $bonus + 3;
                                 };
+
                             };
 
                         }; // end of predictions foreach

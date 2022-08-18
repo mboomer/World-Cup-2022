@@ -77,6 +77,12 @@
             
             <div class="card" id="competition-rules">
                 <h2 class="card-title">Competition Rules</h2>
+
+                <div id="rules">
+                    Predictions must be completed before the start of the first match on November 20th 2022.
+                    <button id='display-all-rules-btn' name='display-all-rules-btn' class='transparent-btn-blue'>Full Competition Rules</button>
+                </div> 
+
             </div>
 
             <footer id="social-media">
@@ -85,6 +91,25 @@
             </footer>
             
         </main>
+
+        <script type="text/javascript">
+
+            // ==================================================================
+            // add CLICK event listener for the DOM
+            // ==================================================================
+            document.addEventListener('click', function (event) {
+
+                // event listeners for the competition rules button
+                if (event.target.matches('#display-all-rules-btn')) {
+
+                    window.location.href="competition-rules.html";
+
+                }
+
+            }, false);   // end of CLICK event listener
+                
+
+        </script>
 
     </body>
 
