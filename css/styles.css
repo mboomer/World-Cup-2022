@@ -137,6 +137,33 @@ nav {
     grid-area: competition-rules;
 }
 
+    #rules {
+        display: flex;
+        flex-direction: column;
+
+        font-size: 0.9em;
+        padding: 10px;
+    }
+
+    ol {
+        padding: 20px;
+    }
+
+    .rules-heading {
+        border: 1px solid black;
+        background-color: lightgreen;
+        padding: 5px;
+        margin: 10px;
+        font-weight: bold;
+    }
+
+    .rules-content {
+        border: 1px solid black;
+        background-color: lightgray;
+        padding: 5px;
+        margin: 10px;
+    }
+
 .card-title {
     color:white;
     background-color: #4f97d5;
