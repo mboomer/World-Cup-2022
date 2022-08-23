@@ -1,0 +1,255 @@
+/* 
+----------------------------------------------------------------------------------
+Each section has a GRID-AREA named after the section ID
+----------------------------------------------------------------------------------
+*/
+
+#container {
+    grid-area: container;
+    margin-top: 5px;
+}
+
+header {
+    margin-bottom: 5px;    
+} 
+
+#login-details {
+    grid-area: login-details;
+}
+
+#personal-details {
+    grid-area: personal-details;
+}
+
+#payment-details {
+    grid-area: payment-details;
+}
+
+#competition-details {
+    grid-area: competition-details;
+}
+
+#team-details {
+    grid-area: team-details;
+}
+
+#update-profile {
+    grid-area: update-profile;
+}
+
+    #update-profile div {
+        display: flex;
+        justify-content: center;
+    }
+
+    #update-messages {
+        border: 1px solid green;
+        background-color: aliceblue;
+    }
+
+    .profile-info {
+        padding: 5px;
+        background-color: beige;
+    }
+
+input {
+    width: 94%;
+    color: darkblue;
+    background-color: aliceblue;
+    font-size: 1em;
+    padding: 5px;
+    margin: auto 5px;
+    text-align: left;
+}
+section {
+    padding: 5px;
+    text-align: center;
+}
+
+#login-register {
+    text-align: center;
+}
+
+/* ---------------------------------- END OF DEFAULT MEDIA RULE FOR 576 --------------------------------------------------------- */
+
+
+/* ******************************************************************************************   */
+/*                       MEDIA RULES 1200px 992ox 768px 552px                                   */
+/* ******************************************************************************************   */
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 1200px or higher                              */
+/* ******************************************************************************************   */
+
+@media screen and (min-width:1200px){                   
+    
+    main {
+        width: 98%;
+ 
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto auto auto auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+ 
+    /* 
+    ----------------------------------------------------------------------------------
+    Grid is three columns - specify what is in each column on each row
+    header, navigation, and footer span across the 3 colums
+    content is spaced into each column as seen below.
+    ----------------------------------------------------------------------------------
+    */
+    #container{
+        grid-template-areas:
+            "header header header"
+            "login-details personal-details payment-details"
+            "competition-details team-details update-profile"
+            "footer footer footer";
+    }
+ 
+    header {
+        grid-template-areas:
+            "logo qatar-flag-l header-text qatar-flag-r hb-icon";
+    }
+
+}
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 992px or higher                              */
+/* ******************************************************************************************   */
+
+@media screen and (max-width:1200px){                   
+    
+    body {
+        background-color: antiquewhite;
+    }
+    main{
+        width: 90%;
+ 
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto auto auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+ 
+    .transparent-btn-blue {
+        margin: 2px;
+    }
+    
+    /* 
+    ----------------------------------------------------------------------------------
+    Grid is three columns - specify what is in each column on each row
+    header, navigation, and footer span across the 3 colums
+    content is spaced into each column as seen below.
+    ----------------------------------------------------------------------------------
+    */
+    #container{
+        grid-template-areas:
+            "header header"
+            "login-details personal-details" 
+            "payment-details competition-details"
+            "team-details update-profile"
+            "footer footer";
+    }
+ 
+}
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 768px or higher                              */
+/* ******************************************************************************************   */
+
+@media screen and (max-width:992px){                   
+    
+    body {
+        background-color: burlywood;
+    }
+    main{
+        width: 90%;
+/*        max-width: 800px;*/
+ 
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 10vh auto auto auto auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+ 
+    .transparent-btn-blue {
+        margin: 2px;
+    }
+    
+    /* 
+    ----------------------------------------------------------------------------------
+    Grid is three columns - specify what is in each column on each row
+    header, navigation, and footer span across the 3 colums
+    content is spaced into each column as seen below.
+    ----------------------------------------------------------------------------------
+    */
+    #container{
+        grid-template-areas:
+            "header header"
+            "login-details personal-details" 
+            "payment-details competition-details"
+            "team-details update-profile"
+            "footer footer";
+    }
+ 
+}
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 552px or higher                              */
+/* ******************************************************************************************   */
+
+@media screen and (max-width:768px){                   
+    
+    body {
+/*        background-color: yellow;*/
+    }
+    main{
+        width: 90%;
+/*        max-width: 800px;*/
+ 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto auto auto auto auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+ 
+    header h1 {
+     font-size: 2em;
+}
+    /* 
+    ----------------------------------------------------------------------------------
+    Grid is three columns - specify what is in each column on each row
+    header, navigation, and footer span across the 3 colums
+    content is spaced into each column as seen below.
+    ----------------------------------------------------------------------------------
+    */
+    #container{
+        grid-template-areas:
+            "header"
+            "login-details"
+            "personal-details" 
+            "payment-details"
+            "competition-details"
+            "team-details"
+            "update-profile"
+            "footer";
+    }
+ 
+    #footer p {
+        font-size: 10px;
+        margin-bottom: 5px;
+    }
+
+    #footer ul li {
+        margin: 0 10px;                     /* spreads out the line items containing the social media icons */
+    }
+
+    #footer ul li a {
+        font-size: 30px;                    /* makes the icons bigger and ensure the cursor is always the pointer */
+    }
+}

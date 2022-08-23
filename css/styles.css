@@ -65,6 +65,7 @@ header {
     }
 
     #logo {
+        grid-area: logo;
         text-align: center;
         display: none;              /* hide this until a new logo is created */
     }
@@ -151,7 +152,7 @@ input {
     text-align: center;
 }
 section {
-    padding:10px;
+    padding:5px;
     text-align: center;
 }
 
