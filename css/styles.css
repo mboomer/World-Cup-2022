@@ -67,7 +67,8 @@ header {
     #logo {
         grid-area: logo;
         text-align: center;
-        display: none;              /* hide this until a new logo is created */
+        /* display: none;               */
+        /* hide this until a new logo is created */
     }
 
 #latest-results    { grid-area: lastest-results; }
@@ -250,18 +251,19 @@ section {
     display: inline-block; 
     padding: 5px 10px; 
     margin: 10px;
-    color: #FFF; 
+    color: navy;                    /* #FFF; */ 
     border: 1px solid #00F; 
     text-decoration: none; 
     font-size: 14px; 
     line-height: 120%; 
-    background-color: rgba(0,0,255, 0.6); 
-    border-radius: 4px; 
+    /* background-color: rgba(0,0,255, 0.6);  */
+    border-radius: 2px; 
     transition: background-color 300ms ease; 
     cursor: pointer; 
 }
 .transparent-btn-blue:hover { 
-    background-color: rgba(0,0,255, 0.2); 
+    /* background-color: rgba(0,0,255, 0.2);  */
+    box-shadow: 5px 5px 5px lightblue;
     color: #000; 
 }
 

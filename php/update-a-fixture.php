@@ -3,14 +3,26 @@
     // Include config file
     require_once "../../../.php/inc/db.worldcup.inc.php";
 
+    // to aviod any confusion with the login username
+    $DBusername = $username;
+
     // DB credentials as constants
     define('DB_HOST', $servername);
     define('DB_NAME', $db);
-    define('DB_USER', $username);
+    define('DB_USER', $DBusername);
     define('DB_PASS', $password);
 
+    // Try and establish the database connection.
+    try {
+        $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+    }
+    catch (PDOException $e) {
+        echo("Error: " . $e->getMessage());
+        exit("Error: " . $e->getMessage());
+    };
+
     // checks if session exists
-    // session_start();
+    session_start();
 
     // these are the session variables
     // $_SESSION["worldcup"]  = true;
@@ -20,9 +32,10 @@
     // $_SESSION["useremail"] = $email;
 
     // If user is logged in, store the userid from session variable 
-    // if ( isset($_SESSION['userid']) ) {
-    //     $userid = $_SESSION["userid"];    
-    // }; 
+    if ( isset($_SESSION['userid']) ) {
+        $userid   = $_SESSION["userid"];    
+        $username = $_SESSION["username"];    
+    }; 
     
 ?>
 
@@ -34,8 +47,9 @@
 
         <title>Update Fixture Scores</title>
         
-        <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
+        <link rel="stylesheet" href="../css/styles.css">
         <link rel="stylesheet" href="../css/styles-update-fixtures.css">
         
     </head>
@@ -44,20 +58,13 @@
         
         <main id="container">
             
-            <header>
-                <div id="logo">
-                    <img src="../img/logo.png" alt="World Cup Fortune Teller logo">
-                </div>
-
-                <div id="header-text">
-                    <h1>World Cup 2022 Predictions</h1> 
-                </div>
-                
+            <header>        
+                <?php include "../include/header3.inc.php"; ?>
             </header>
-                        
+
             <!-- Tab links -->
             <div id="tabs" class="tab">
-                <button id="fixtures-btn" name="FIXTURES" class="tablinks">Fixtures / Goals Scored</button>
+                <button id="fixtures-btn" name="FIXTURES" class="tablinks">Fixtures | Goals Scored | Statistics | Data Import</button>
             </div>
 
             <section id="tournament">
@@ -80,16 +87,7 @@
 
                                 <?php
 
-                                // Try and establish the database connection.
-                                try {
-                                    $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
-                                }
-                                catch (PDOException $e) {
-                                    echo("Error: " . $e->getMessage());
-                                    exit("Error: " . $e->getMessage());
-                                };
-
-                                $sql =    "SELECT \n" 
+                                $qry =    "SELECT \n" 
                                         . "  	FixtureNo		as fixtureno, \n"
                                         . "  	DatePlayed		as dateplayed, \n"
                                         . "  	TimePlayed		as timeplayed, \n"
@@ -136,7 +134,7 @@
                                         . "ORDER BY \n"
                                         . "  	FixtureNo \n";
 
-                                        $query = $dbh -> prepare($sql);
+                                        $query = $dbh -> prepare($qry);
 
                                         /**
                                             no need to bind params as we are retrieving all results
@@ -171,11 +169,15 @@
                                                 $rndcode    = $fixture -> roundcode;
                                                 $resultcode = $fixture -> resultcode;
                                             
-                                                // colorize the stages to identify the QF, SF and FI
-                                                if ($stage === "QF") {
+                                                // colorize the stages to identify the LS, QF, SF, PL and FI
+                                                if ($stage === "LS") {
+                                                    echo "  <tr class='ls-color'>";
+                                                } if ($stage === "QF") {
                                                     echo "  <tr class='qf-color'>";
                                                 } else if ($stage === "SF") {
                                                     echo "  <tr class='sf-color'>";
+                                                } else if ($stage === "PL") {
+                                                    echo "  <tr class='pl-color'>";
                                                 } else if ($stage === "FI") {
                                                     echo "  <tr class='fi-color'>";
                                                 } else {
@@ -322,8 +324,6 @@
 
                     <section id="update-user-points">
 
-                        <!-- <div><button id='update-user-points-btn' class='goal-btn-blue'>Update User Points</button></div> -->
-
                         <div id='statistics-update'>
 
                             <table id='stats-update-tbl'>
@@ -348,6 +348,64 @@
                                     <tr>
                                         <td><button id='update-upcoming-fixtures-btn' name='update-upcoming-fixtures-btn' class='stats-update-btn'>Upcoming Fixtures</button></td>
                                     </tr>
+                                    <tr>
+                                        <td><button id='update-comp-stats-btn' name='update-comp-stats-btn' class='stats-update-btn'>Competition Stats</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>      
+                        </div>
+
+                        <div id='data-import'>
+
+                            <table id='data-import-tbl'>
+                                <thead class='blueheader'>
+                                    <tr>                  
+                                        <th class="tbl-header">Import Data</th>              
+                                    </tr>              
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class='confirm-import'>
+                                            <button id='import-fixtures-btn'     class='stats-update-btn'>Import Fixtures</button>
+                                            <button id='import-fixtures-no-btn'  class='stats-update-btn'>Cancel</button>
+                                            <button id='import-fixtures-yes-btn' class='stats-update-btn'>Continue</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class='confirm-import'>
+                                            <button id='import-groups-btn'     class='stats-update-btn'>Import groups</button>
+                                            <button id='import-groups-no-btn'  class='stats-update-btn'>Cancel</button>
+                                            <button id='import-groups-yes-btn' class='stats-update-btn'>Continue</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class='confirm-import'>
+                                            <button id='import-results-btn'     class='stats-update-btn'>Import Results</button>
+                                            <button id='import-results-no-btn'  class='stats-update-btn'>Cancel</button>
+                                            <button id='import-results-yes-btn' class='stats-update-btn'>Continue</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class='confirm-import'>
+                                            <button id='import-rounds-btn'     class='stats-update-btn'>Import Rounds</button>
+                                            <button id='import-rounds-no-btn'  class='stats-update-btn'>Cancel</button>
+                                            <button id='import-rounds-yes-btn' class='stats-update-btn'>Continue</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class='confirm-import'>
+                                            <button id='import-teams-btn'     class='stats-update-btn'>Import Teams</button>
+                                            <button id='import-teams-no-btn'  class='stats-update-btn'>Cancel</button>
+                                            <button id='import-teams-yes-btn' class='stats-update-btn'>Continue</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class='confirm-import'>
+                                            <button id='import-venues-btn'     class='stats-update-btn'>Import Venues</button>
+                                            <button id='import-venues-no-btn'  class='stats-update-btn'>Cancel</button>
+                                            <button id='import-venues-yes-btn' class='stats-update-btn'>Continue</button>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>      
                         </div>
@@ -358,9 +416,8 @@
 
             </section> <!-- end of Tournament -->
 
-            <footer id="social-media">
-                <p>&copy; <script>document.write(new Date().getFullYear());</script> World Cup Predictor</p>
-                <p>All Rights Reserved — Designed by Mark Boomer</p>
+            <footer id="footer">
+                <?php include "../include/footer.inc.php"; ?>
             </footer>
             
         </main>
@@ -368,6 +425,24 @@
         <script type="text/javascript">
 
             document.getElementById("update-msg").style.display = "none";
+
+            document.getElementById("import-fixtures-no-btn").style.display = "none";
+            document.getElementById("import-fixtures-yes-btn").style.display = "none";
+
+            document.getElementById("import-groups-no-btn").style.display = "none";
+            document.getElementById("import-groups-yes-btn").style.display = "none";
+
+            document.getElementById("import-results-no-btn").style.display = "none";
+            document.getElementById("import-results-yes-btn").style.display = "none";
+
+            document.getElementById("import-rounds-no-btn").style.display = "none";
+            document.getElementById("import-rounds-yes-btn").style.display = "none";
+
+            document.getElementById("import-teams-no-btn").style.display = "none";
+            document.getElementById("import-teams-yes-btn").style.display = "none";
+
+            document.getElementById("import-venues-no-btn").style.display = "none";
+            document.getElementById("import-venues-yes-btn").style.display = "none";
 
             // ==================================================================
             // add CLICK event listener for the DOM
@@ -754,7 +829,473 @@
 
                     return;
 
-                };  // end of click update-upcoming-fixtures-btn
+                };  // end of click update-competition-stats-btn
+
+                // event listeners for the update competition Statistics button
+                if (event.target.matches('#update-comp-stats-btn')) {
+
+                    document.getElementById("update-msg").style.display = "block";
+                    document.getElementById("update-msg").innerHTML = "Updating Competition Statistics Fixtures...Please Wait";
+
+                    fetch('https://www.9habu.com/wc2022/php/static-statistics.php', {
+                            
+                            method: 'POST',
+                            mode: "same-origin",
+                            credentials: "same-origin",
+                            headers: {
+                                'Content-Type': 'text/html',
+                                'Accept': 'text/html'
+                                },
+                            body: "Dummy Data",
+
+                        }).then(function (response) {
+
+                            // If the response is successful, get the JSON
+                            if (response.ok) {
+                                return response.text();
+                            };
+
+                            // Otherwise, throw an error
+                            return response.text().then(function (msg) {
+                                // console.log(response.text());
+                                throw msg;
+                            });
+
+                        }).then(function (data) {
+
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = data;
+
+                        }).catch(function (error) {
+                            // There was an error
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = error;
+                            console.warn("Error : ", error);
+                        });
+
+                    return;
+
+                };  // end of click update-competition-stats-btn
+
+                // ------------------------------------------------
+                // event listeners for the import Fixtures button
+                // ------------------------------------------------
+                if (event.target.matches('#import-fixtures-btn')) {
+
+                    document.getElementById("import-fixtures-btn").style.display = "none";
+                    document.getElementById("import-fixtures-no-btn").style.display = "block";
+                    document.getElementById("import-fixtures-yes-btn").style.display = "block";
+
+                };  // end of click import-fixtures-btn
+
+                // event listeners for the import fixtures button
+                if (event.target.matches('#import-fixtures-no-btn')) {
+
+                    document.getElementById("import-fixtures-btn").style.display = "block";
+                    document.getElementById("import-fixtures-no-btn").style.display = "none";
+                    document.getElementById("import-fixtures-yes-btn").style.display = "none";
+
+                };  // end of click import-fixtures-no-btn
+
+                // event listeners for the import Venues button
+                if (event.target.matches('#import-fixtures-yes-btn')) {
+
+                    document.getElementById("import-fixtures-btn").style.display = "block";
+                    document.getElementById("import-fixtures-no-btn").style.display = "none";
+                    document.getElementById("import-fixtures-yes-btn").style.display = "none";
+
+                    document.getElementById("update-msg").style.display = "block";
+                    document.getElementById("update-msg").innerHTML = "Importing Fixtures...Please Wait";
+
+                    fetch('https://www.9habu.com/wc2022/mysql/fixtures_import.php', {
+                            
+                            method: 'POST',
+                            mode: "same-origin",
+                            credentials: "same-origin",
+                            headers: {
+                                'Content-Type': 'text/html',
+                                'Accept': 'text/html'
+                                },
+                            body: "Dummy Data",
+
+                        }).then(function (response) {
+
+                            // If the response is successful, get the JSON
+                            if (response.ok) {
+                                return response.text();
+                            };
+
+                            // Otherwise, throw an error
+                            return response.text().then(function (msg) {
+                                // console.log(response.text());
+                                throw msg;
+                            });
+
+                        }).then(function (data) {
+
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = data;
+
+                        }).catch(function (error) {
+                            // There was an error
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = error;
+                            console.warn("Error : ", error);
+                        });
+
+                    return;
+
+                };  // end of click import-fixtures-yes-btn
+
+                // ------------------------------------------------
+                // event listeners for the import groups button
+                // ------------------------------------------------
+                if (event.target.matches('#import-groups-btn')) {
+
+                    document.getElementById("import-groups-btn").style.display = "none";
+                    document.getElementById("import-groups-no-btn").style.display = "block";
+                    document.getElementById("import-groups-yes-btn").style.display = "block";
+
+                };  // end of click import-groups-btn
+
+                // event listeners for the import groups button
+                if (event.target.matches('#import-groups-no-btn')) {
+
+                    document.getElementById("import-groups-btn").style.display = "block";
+                    document.getElementById("import-groups-no-btn").style.display = "none";
+                    document.getElementById("import-groups-yes-btn").style.display = "none";
+
+                };  // end of click import-groups-no-btn
+
+                // event listeners for the import Venues button
+                if (event.target.matches('#import-groups-yes-btn')) {
+
+                    document.getElementById("import-groups-btn").style.display = "block";
+                    document.getElementById("import-groups-no-btn").style.display = "none";
+                    document.getElementById("import-groups-yes-btn").style.display = "none";
+
+                    document.getElementById("update-msg").style.display = "block";
+                    document.getElementById("update-msg").innerHTML = "Importing groups...Please Wait";
+
+                    fetch('https://www.9habu.com/wc2022/mysql/groups_import.php', {
+                            
+                            method: 'POST',
+                            mode: "same-origin",
+                            credentials: "same-origin",
+                            headers: {
+                                'Content-Type': 'text/html',
+                                'Accept': 'text/html'
+                                },
+                            body: "Dummy Data",
+
+                        }).then(function (response) {
+
+                            // If the response is successful, get the JSON
+                            if (response.ok) {
+                                return response.text();
+                            };
+
+                            // Otherwise, throw an error
+                            return response.text().then(function (msg) {
+                                // console.log(response.text());
+                                throw msg;
+                            });
+
+                        }).then(function (data) {
+
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = data;
+
+                        }).catch(function (error) {
+                            // There was an error
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = error;
+                            console.warn("Error : ", error);
+                        });
+
+                    return;
+
+                };  // end of click import-groups-yes-btn
+
+                // ------------------------------------------------
+                // event listeners for the import results button
+                // ------------------------------------------------
+                if (event.target.matches('#import-results-btn')) {
+
+                    document.getElementById("import-results-btn").style.display = "none";
+                    document.getElementById("import-results-no-btn").style.display = "block";
+                    document.getElementById("import-results-yes-btn").style.display = "block";
+
+                };  // end of click import-results-btn
+
+                // event listeners for the import results button
+                if (event.target.matches('#import-results-no-btn')) {
+
+                    document.getElementById("import-results-btn").style.display = "block";
+                    document.getElementById("import-results-no-btn").style.display = "none";
+                    document.getElementById("import-results-yes-btn").style.display = "none";
+
+                };  // end of click import-results-no-btn
+
+                // event listeners for the import Venues button
+                if (event.target.matches('#import-results-yes-btn')) {
+
+                    document.getElementById("import-results-btn").style.display = "block";
+                    document.getElementById("import-results-no-btn").style.display = "none";
+                    document.getElementById("import-results-yes-btn").style.display = "none";
+
+                    document.getElementById("update-msg").style.display = "block";
+                    document.getElementById("update-msg").innerHTML = "Importing results...Please Wait";
+
+                    fetch('https://www.9habu.com/wc2022/mysql/results_import.php', {
+                            
+                            method: 'POST',
+                            mode: "same-origin",
+                            credentials: "same-origin",
+                            headers: {
+                                'Content-Type': 'text/html',
+                                'Accept': 'text/html'
+                                },
+                            body: "Dummy Data",
+
+                        }).then(function (response) {
+
+                            // If the response is successful, get the JSON
+                            if (response.ok) {
+                                return response.text();
+                            };
+
+                            // Otherwise, throw an error
+                            return response.text().then(function (msg) {
+                                // console.log(response.text());
+                                throw msg;
+                            });
+
+                        }).then(function (data) {
+
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = data;
+
+                        }).catch(function (error) {
+                            // There was an error
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = error;
+                            console.warn("Error : ", error);
+                        });
+
+                    return;
+
+                };  // end of click import-results-yes-btn
+
+                // ------------------------------------------------
+                // event listeners for the import rounds button
+                // ------------------------------------------------
+                if (event.target.matches('#import-rounds-btn')) {
+
+                    document.getElementById("import-rounds-btn").style.display = "none";
+                    document.getElementById("import-rounds-no-btn").style.display = "block";
+                    document.getElementById("import-rounds-yes-btn").style.display = "block";
+
+                };  // end of click import-rounds-btn
+
+                // event listeners for the import rounds button
+                if (event.target.matches('#import-rounds-no-btn')) {
+
+                    document.getElementById("import-rounds-btn").style.display = "block";
+                    document.getElementById("import-rounds-no-btn").style.display = "none";
+                    document.getElementById("import-rounds-yes-btn").style.display = "none";
+
+                };  // end of click import-rounds-no-btn
+
+                // event listeners for the import Venues button
+                if (event.target.matches('#import-rounds-yes-btn')) {
+
+                    document.getElementById("import-rounds-btn").style.display = "block";
+                    document.getElementById("import-rounds-no-btn").style.display = "none";
+                    document.getElementById("import-rounds-yes-btn").style.display = "none";
+
+                    document.getElementById("update-msg").style.display = "block";
+                    document.getElementById("update-msg").innerHTML = "Importing rounds...Please Wait";
+
+                    fetch('https://www.9habu.com/wc2022/mysql/rounds_import.php', {
+                            
+                            method: 'POST',
+                            mode: "same-origin",
+                            credentials: "same-origin",
+                            headers: {
+                                'Content-Type': 'text/html',
+                                'Accept': 'text/html'
+                                },
+                            body: "Dummy Data",
+
+                        }).then(function (response) {
+
+                            // If the response is successful, get the JSON
+                            if (response.ok) {
+                                return response.text();
+                            };
+
+                            // Otherwise, throw an error
+                            return response.text().then(function (msg) {
+                                // console.log(response.text());
+                                throw msg;
+                            });
+
+                        }).then(function (data) {
+
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = data;
+
+                        }).catch(function (error) {
+                            // There was an error
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = error;
+                            console.warn("Error : ", error);
+                        });
+
+                    return;
+
+                };  // end of click import-rounds-yes-btn
+
+                // ------------------------------------------------
+                // event listeners for the import teams button
+                // ------------------------------------------------
+                if (event.target.matches('#import-teams-btn')) {
+
+                    document.getElementById("import-teams-btn").style.display = "none";
+                    document.getElementById("import-teams-no-btn").style.display = "block";
+                    document.getElementById("import-teams-yes-btn").style.display = "block";
+
+                };  // end of click import-teams-btn
+
+                // event listeners for the import teams button
+                if (event.target.matches('#import-teams-no-btn')) {
+
+                    document.getElementById("import-teams-btn").style.display = "block";
+                    document.getElementById("import-teams-no-btn").style.display = "none";
+                    document.getElementById("import-teams-yes-btn").style.display = "none";
+
+                };  // end of click import-teams-no-btn
+
+                // event listeners for the import Venues button
+                if (event.target.matches('#import-teams-yes-btn')) {
+
+                    document.getElementById("import-teams-btn").style.display = "block";
+                    document.getElementById("import-teams-no-btn").style.display = "none";
+                    document.getElementById("import-teams-yes-btn").style.display = "none";
+
+                    document.getElementById("update-msg").style.display = "block";
+                    document.getElementById("update-msg").innerHTML = "Importing teams...Please Wait";
+
+                    fetch('https://www.9habu.com/wc2022/mysql/teams_import.php', {
+                            
+                            method: 'POST',
+                            mode: "same-origin",
+                            credentials: "same-origin",
+                            headers: {
+                                'Content-Type': 'text/html',
+                                'Accept': 'text/html'
+                                },
+                            body: "Dummy Data",
+
+                        }).then(function (response) {
+
+                            // If the response is successful, get the JSON
+                            if (response.ok) {
+                                return response.text();
+                            };
+
+                            // Otherwise, throw an error
+                            return response.text().then(function (msg) {
+                                // console.log(response.text());
+                                throw msg;
+                            });
+
+                        }).then(function (data) {
+
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = data;
+
+                        }).catch(function (error) {
+                            // There was an error
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = error;
+                            console.warn("Error : ", error);
+                        });
+
+                    return;
+
+                };  // end of click import-teams-yes-btn
+
+                // ------------------------------------------------
+                // event listeners for the import Venues button
+                // ------------------------------------------------
+                if (event.target.matches('#import-venues-btn')) {
+
+                    document.getElementById("import-venues-btn").style.display = "none";
+                    document.getElementById("import-venues-no-btn").style.display = "block";
+                    document.getElementById("import-venues-yes-btn").style.display = "block";
+
+                };  // end of click import-venues-btn
+
+                // event listeners for the import Venues button
+                if (event.target.matches('#import-venues-no-btn')) {
+
+                    document.getElementById("import-venues-btn").style.display = "block";
+                    document.getElementById("import-venues-no-btn").style.display = "none";
+                    document.getElementById("import-venues-yes-btn").style.display = "none";
+
+                };  // end of click import-venues-no-btn
+
+                // event listeners for the import Venues button
+                if (event.target.matches('#import-venues-yes-btn')) {
+
+                    document.getElementById("import-venues-no-btn").style.display = "none";
+                    document.getElementById("import-venues-yes-btn").style.display = "none";
+                    document.getElementById("import-venues-btn").style.display = "block";
+
+                    document.getElementById("update-msg").style.display = "block";
+                    document.getElementById("update-msg").innerHTML = "Importing Venues...Please Wait";
+
+                    fetch('https://www.9habu.com/wc2022/mysql/venues_import.php', {
+                            
+                            method: 'POST',
+                            mode: "same-origin",
+                            credentials: "same-origin",
+                            headers: {
+                                'Content-Type': 'text/html',
+                                'Accept': 'text/html'
+                                },
+                            body: "Dummy Data",
+
+                        }).then(function (response) {
+
+                            // If the response is successful, get the JSON
+                            if (response.ok) {
+                                return response.text();
+                            };
+
+                            // Otherwise, throw an error
+                            return response.text().then(function (msg) {
+                                // console.log(response.text());
+                                throw msg;
+                            });
+
+                        }).then(function (data) {
+
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = data;
+
+                        }).catch(function (error) {
+                            // There was an error
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = error;
+                            console.warn("Error : ", error);
+                        });
+
+                    return;
+
+                };  // end of click import-venues-yes-btn
 
             }, false);   // end of CLICK event listener
             
