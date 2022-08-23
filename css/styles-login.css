@@ -1,45 +1,30 @@
-* { box-sizing: border-box; margin: 0px; padding: 0px; }
-
-html { 
-    font-family: 'Raleway' , sans-serif; 
-    font-size: 16px; 
-    color: #555; 
-}
-
-body {
-    font-family: 'Raleway', sans-serif;
-    font-size: 16px;
-    color: #555;                            /* this is a grey */
-}
-
-/* RED-ish*/
-#body-top { 
-/*    background: rgba(255,0,0, 0.5);                   */
-}
-
-.margin-75  { margin-top:  75px; }
-.margin-85  { margin-top:  85px; }
-.margin-95  { margin-top:  95px; }
-.margin-105 { margin-top: 105px; }
-.margin-115 { margin-top: 115px; }
-.margin-125 { margin-top: 125px; }
-
-.hidden {
-    display: none;
-}
-header nav img {
-    display: flex;
-}
-
-.container { 
-    height: 100%;
-    background-color: white;
+#body-top {
+    grid-area: body-top;
 
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 100px auto 60px;
+    grid-template-rows: auto 70vh auto;
+
 }
-.wrapper { 
+
+header {
+    margin-top: 5px;
+}
+
+#login-container { 
+
+    grid-area: login-container;
+
+    display: flex;
+    flex-direction: column;
+    margin: auto 0;
+    
+}
+
+#wrapper { 
+    
+    grid-area: wrapper;
+
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -53,26 +38,24 @@ header nav img {
     border: 1px solid #0E6EB8;
     border-radius: 10px;
 }
-.wrapper > * {
+#wrapper > * {
     margin: 10px;
     text-align: center;
 }
-.wrapper > h2 {
+
+#wrapper > h2 {
     padding-top: 10px;
 }
-.centered { 
-    grid-column: 1;
-    grid-row: 2;
-}
+
 .button-group input, button { 
     margin: 5px;
     padding: 5px;
-    width: 100%;
+    /* width: 100%; */
 }
 .input-group * { 
     margin: 5px;
     padding: 5px;
-    width: 100%;
+    /* width: 100%; */
 }
 .help-block-failure {
     /* display: none; */
@@ -82,6 +65,7 @@ header nav img {
     border: 1px solid black;
     width: 95%;
 }
+
 .help-block-success {
     /* display: none; */
     color: green;
@@ -91,86 +75,8 @@ header nav img {
     width: 95%;
 }
 
-#menu-items {
-    grid-template-columns: 1fr;
-    width: 70%;
-}
-/* ------------------ Transparent Buttons ------------------------- */
-
-/* white text white border                                          */
-.transparent-btn { 
-    display: inline-block; 
-    padding: 5px 10px; 
-    color: #FFF; 
-    border: 1px solid #FFF; 
-    text-decoration: none; 
-    font-size: 16px; 
-    line-height: 120%; 
-    background-color: rgba(255,255,255, 0); 
-    border-radius: 4px; transition: background-color 300ms ease; 
-    cursor: pointer; 
-}
-.transparent-btn:hover { 
-    background-color: rgba(255,255,255, 0.2); 
-    color: #000; 
-}
-
-/* white text blue background                                      */
-.transparent-btn-blue { 
-    display: inline-block; 
-    padding: 5px 10px; 
-    color: #FFF; 
-    border: 1px solid #00F; 
-    text-decoration: none; 
-    font-size: 16px; 
-    line-height: 120%; 
-    background-color: rgba(0,0,255, 0.6); 
-    border-radius: 4px; 
-    transition: background-color 300ms ease; 
-    cursor: pointer; 
-}
-.transparent-btn-blue:hover { 
-    background-color: rgba(0,0,255, 0.2); 
-    color: #000; 
-}
-
-/* smaller blue text white background                                      */
-.transparent-btn-white { 
-    display: inline-block; 
-    padding: 3px 5px; 
-    color: #00F; 
-    border: 1px solid #00F; 
-    text-decoration: none; 
-    font-size: 12px; 
-    line-height: 120%; 
-    background-color: rgba(255,255,255, 0); 
-    border-radius: 4px; 
-    transition: background-color 300ms ease; 
-    cursor: pointer; 
-}
-
-.transparent-btn-white:hover { 
-    background-color: rgba(0,0,255, 0.3); 
-    color: #000; 
-}
-
-/* smaller blue border text white                                       */
-.transparent-btn-blue-small { 
-    display: inline-block; 
-    padding: 3px 5px; 
-    color: #FFF; 
-    border: 2px solid #00F; 
-    text-decoration: none; 
-    font-size: 12px; 
-    line-height: 120%; 
-    background-color: rgba(0,123,255, 1); 
-    border-radius: 4px; 
-    transition: background-color 300ms ease; 
-    cursor: pointer; 
-}
-.transparent-btn-blue-small:hover { 
-    background-color: rgba(0,123,255, 0.2); 
-    color: #FFF; 
+#footer {
+    grid-area: footer;
 }
 
 /* ---------------------------------- END OF DEFAULT MEDIA RULE FOR 576 --------------------------------------------------------- */
@@ -182,6 +88,29 @@ header nav img {
 /* apply to any device that has a screen width of 576px or higher                               */
 /* ******************************************************************************************   */
 @media screen and (min-width: 576px) {
+    #body-top {
+
+        grid-template-areas:
+            "header"
+            "login-container"
+            "footer";
+    }
+
+}
+ 
+    /* 
+    ----------------------------------------------------------------------------------
+    Grid is 1 column - specify what is in each column on each row
+    header, login form and footer
+    content is spaced into each column as below.
+    ----------------------------------------------------------------------------------
+    */
+    #login-container {
+        grid-template-areas:
+            "wrapper";
+    }
+
+}  
 }
 /* ******************************************************************************************   */
 /* apply to any device that has a screen width of 768px or higher                               */
@@ -196,5 +125,28 @@ header nav img {
 /* ******************************************************************************************   */
 /* apply to any device that has a screen width of 1200px or higher                              */
 /* ******************************************************************************************   */
-@media screen and (min-width: 1200px) {    
+@media screen and (min-width: 1200px) {   
+
+    #body-top {
+
+        grid-template-areas:
+            "header"
+            "login-container"
+            "footer";
+    }
+
+}
+ 
+    /* 
+    ----------------------------------------------------------------------------------
+    Grid is 1 column - specify what is in each column on each row
+    header, login form and footer
+    content is spaced into each column as below.
+    ----------------------------------------------------------------------------------
+    */
+    #login-container {
+        grid-template-areas:
+            "wrapper";
+    }
+
 }  
