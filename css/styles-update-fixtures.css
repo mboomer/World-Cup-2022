@@ -1,16 +1,3 @@
-*{                                  /* Override browsers default CSS rules  */
-    margin:0;
-    padding:0;
-    box-sizing: content-box;
-}
-
-body {
-     font-family: 'Open Sans', sans-serif;
-     /* background-color: #131633; */
-     background-color: white;
-     color: #34495e;
-}
-
 /* ******************************************************************************************   */
 /*                                          TABS                                                */
 /* ******************************************************************************************   */
@@ -62,39 +49,36 @@ header {
     
     display: grid;
     grid-area: header;
-    grid-template-columns: 1fr 10fr 2fr;
+    grid-template-columns: 1fr 1fr 10fr 1fr 1fr 1fr;
     grid-template-rows: auto;
     grid-gap: 10px;
-    
-    width: 100%;
-    background-color: lightgray;
-    align-items: center;
-    justify-content: center;    
-/*    margin: auto auto;*/
+    margin-bottom: 5px;
 } 
 
-header h1 {
-     font-size: 2.5em;
-     text-align: center;
-     color: white;
-     margin-bottom: 20px;
-     text-shadow: 2px 2px #22638E;
-}
+#username {
+    
+    grid-area: username;
 
-header img {
-    width: 75px;
+    display: flex;
+    align-items: center;        
+    text-align: center;
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 3px;
+    border: 1px solid darkgray;
+    background-color: rgba(141,27,61, 0.5);    
 }
 
 #logo {
+
+    grid-area: logo;
     text-align: center;
 }
 
-nav {
-    grid-area: nav;
-}
 
 #tabs {
     grid-area: tabs;
+    margin-top: 5px;
 }
 
 #tournment {
@@ -127,65 +111,25 @@ nav {
         margin: 20px;
     }
 
-footer {
-    grid-area: footer;
+    .confirm-import {
+        display: flex;
+        align-content: space-between;
+        justify-content: space-around;
+    }
 
-    display: flex;                                  /* display UL, P & P elements vertically and center them */
-    flex-direction: column;
-    align-items: center;
-
-    background: linear-gradient(to bottom, lightgrey, #000 100%);
-    color: white;
-    padding-top: 10px;
-}
-
-/* ******************************************************************************************   */
-/*                                          IMAGES                                              */
-/* ******************************************************************************************   */
-
-
-/* ******************************************************************************************   */
-/*                                          TABLES                                              */
-/* ******************************************************************************************   */
-
-.greenheader {
-    background-color: green;
-    color: white;
-}
-
-.blueheader {
-    background-color: navy;
-    color: white;
-}
-
-tbody {
-    background-color: white;
-    color: black;
-}
-
-table {
-    font-size: 0.75em;
-    width: 95%;
-    padding: 2px;
-    text-align: center;    
-    border: 1px dotted black;
-    margin: auto auto;
-}
-
-th, td {
-    border-left: 1px dotted black;
-    border-right: 1px dotted black;
-    border-bottom: 1px dotted black;
-}
 
 .pos, .fixno, .predno {
     width: 6%;
     background-color: gainsboro;
 }
 
-.home {
+.home, .away {
     width: 20%;
     padding-right: 5px;
+    font-size: 1.1em;
+}
+
+.home {
     text-align: right;
 }
 
@@ -200,8 +144,6 @@ th, td {
 }
 
 .away {
-    width: 20%;
-    padding-left: 5px;
     text-align: left;
 }
 
@@ -247,21 +189,17 @@ th, td {
     padding: 2px;
 }
 
-.results-home-flag, .results-away-flag {
-    width: 6.5%
-}
-
 .predictions-home-flag, .predictions-away-flag {
     width: 4%
 }
 
 .results-home-flag img, .results-away-flag img {
-    width: 55%;
+    width: 82%;
     text-align: center;
 }
 
 .predictions-home-flag img, .predictions-away-flag img {
-    width: 55%;
+    width: 82%;
     text-align: center;
 }
 
@@ -278,19 +216,33 @@ th, td {
     width: 80%;
 }
 
-#update-user-points-btn, #update-upcoming-fixtures-btn, #update-top-scorer-btn, #update-latest-results-btn {
+.stats-update-btn {
     width: 40%;
 }
 
-#stats-update-tbl {
+#stats-update-tbl, #data-import-tbl {
     width: 50%;
 }
 
-#stats-update-tbl td, th {
-    padding: 5px;
+#stats-update-tbl, td, th #data-import-tbl td, th {
+    padding: 2px;
 }
 
-/* ******************************************************************************************   */
+.ls-color {
+    background: lightpink;
+}
+.qf-color {
+    background: lightcyan;
+}
+.sf-color {
+    background: lightblue;
+}
+.pl-color {
+    background: lightgoldenrodyellow;
+}
+.fi-color {
+    background: lightgreen;
+}
 
 /* ******************************************************************************************   */
 /*                                          ERROR MESSAGE                                       */
@@ -308,135 +260,27 @@ th, td {
     padding: 5px;
 }
 
-
-/* ******************************************************************************************   */
-/*                                          FOOTER SECTION                                      */
-/* ******************************************************************************************   */
-
-footer p {
-    text-transform: uppercase;          /* change text in para tags to uppercase */
-    font-size: 14px;
-    color: rgba(255,255,255,0.6);       /* add a transparent overlay of white - 0.6 = 60% opacity */
-    margin-bottom: 10px;
-}
-
-footer ul {
-    display: flex;                      /* display child items of parent element, ie the ul, into a row */
-    flex-direction: row;
-    list-style: none;
-    margin-bottom: 5px;
-}
-
-footer ul li {
-    margin: 0 20px;                     /* spreads out the line items containing the social media icons */
-}
-
-footer ul li a {
-    font-size: 36px;                    /* makes the icons bigger and ensure the cursor is always the pointer */
-    cursor: pointer;
-    color: white;
-}
-/* ------------------ Transparent Buttons ------------------------- */
-
-/* white text white border                                          */
-.transparent-btn { 
-    display: inline-block; 
-    padding: 5px 10px; 
-    color: #FFF; 
-    border: 1px solid #FFF; 
-    text-decoration: none; 
-    font-size: 16px; 
-    line-height: 120%; 
-    background-color: rgba(255,255,255, 0); 
-    border-radius: 4px; transition: background-color 300ms ease; 
-    cursor: pointer; 
-}
-.transparent-btn:hover { 
-    background-color: rgba(255,255,255, 0.2); 
-    color: #000; 
-}
-
-/* white text blue background                                      */
-.transparent-btn-blue { 
-    display: inline-block; 
-    padding: 5px 5px; 
-    margin: 5px;
-    color: #FFF; 
-    border: 1px solid #00F; 
-    text-decoration: none; 
-    font-size: 12px; 
-    line-height: 120%; 
-    background-color: rgba(0,0,255, 0.6); 
-    border-radius: 4px; 
-    transition: background-color 300ms ease; 
-    cursor: pointer; 
-}
-
-.transparent-btn-blue:hover { 
-    background-color: rgba(0,0,255, 0.2); 
-    color: #000; 
-}
-
-/* smaller blue text white background                                      */
-.transparent-btn-white { 
-    display: inline-block; 
-    padding: 3px 5px; 
-    color: #00F; 
-    border: 1px solid #00F; 
-    text-decoration: none; 
-    font-size: 12px; 
-    line-height: 120%; 
-    background-color: rgba(255,255,255, 0); 
-    border-radius: 4px; 
-    transition: background-color 300ms ease; 
-    cursor: pointer; 
-}
-
-.transparent-btn-white:hover { 
-    background-color: rgba(0,0,255, 0.3); 
-    color: #000; 
-}
-
-/* smaller blue border text white                                       */
-.transparent-btn-blue-small { 
-    display: inline-block; 
-    padding: 3px 5px; 
-    color: #FFF; 
-    border: 2px solid #00F; 
-    text-decoration: none; 
-    font-size: 12px; 
-    line-height: 120%; 
-    background-color: rgba(0,123,255, 1); 
-    border-radius: 4px; 
-    transition: background-color 300ms ease; 
-    cursor: pointer; 
-}
-.transparent-btn-blue-small:hover { 
-    background-color: rgba(0,123,255, 0.2); 
-    color: #FFF; 
-}
-
 /* white text blue background                                      */
 .goal-btn-blue { 
     display: inline-block; 
     padding: 5px 5px; 
     margin: 5px;
-    color: #FFF; 
+    color: navy; 
     border: 1px solid #00F; 
     text-decoration: none; 
     font-size: 12px; 
     line-height: 120%; 
-    background-color: rgba(0,0,255, 0.6); 
-    border-radius: 4px; 
+    /* background-color: rgba(0,0,255, 0.6);  */
+    border-radius: 2px; 
     transition: background-color 300ms ease; 
     cursor: pointer; 
 }
 
 .goal-btn-blue:hover { 
-    background-color: rgba(0,0,255, 0.2); 
+    /* background-color: rgba(0,0,255, 0.2);  */
+    box-shadow: 5px 5px 5px lightblue;
     color: #000; 
 }
-
 
 #logout {
     text-align: center;
@@ -451,8 +295,10 @@ input {
     width: 85%;
     color: darkblue;
     background-color: aliceblue;
-    font-size: 0.9em;
+    font-size: 1em;
     text-align: center;
+    padding: 0px;
+    margin: 0px;
 }
 
 input[id="goal-scorer"] {
@@ -493,9 +339,9 @@ input[id="goal-scorer"] {
 
     header {
         grid-template-areas:
-            "logo header-text";
+            "logo qatar-flag-l header-text qatar-flag-r username hb-icon";
     }
- 
+
     #tournament {
         width: 98%;
         display: grid;
