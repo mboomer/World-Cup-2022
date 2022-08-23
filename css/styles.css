@@ -1,4 +1,5 @@
-*{                                  /* Override browsers default CSS rules  */
+/* Override browsers default CSS rules  */
+*{                                  
     margin:0;
     padding:0;
     box-sizing: content-box;
@@ -6,10 +7,8 @@
 
 body {
      font-family: 'Open Sans', sans-serif;
-/*     background-color: #131633;*/
      background-color: white;
      color: #34495e;
-/*     color:white;*/
      line-height: 1.5;
 }
 
@@ -22,66 +21,59 @@ header h1 {
 }
 
 /* 
-----------------------------------------------------------------------------------
-Each section has a GRID-AREA named after the section ID
-----------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------
+  Each section has a GRID-AREA named after the section ID
+  ---------------------------------------------------------------------------------- 
 */
 
-#container {
+#container {  
     margin-top: 5px;
-}
+} 
 
 header {
     
     display: grid;
     grid-area: header;
-    grid-template-columns: 1fr 10fr 1fr;
+    grid-template-columns: 1fr 1fr 10fr 1fr 1fr;
     grid-template-rows: auto;
     grid-gap: 10px;
     
-    width: 100%;
-    background-color: lightgray;
-    align-items: center;
     justify-content: center;    
-/*    margin: auto auto;*/
+
 } 
+    #qatar-flag-l {
+        display: flex;
+        grid-area: qatar-flag-l;
+    }
 
-header img {
-    width: 75px;
-}
+    #qatar-flag-r {
+        display: flex;
+        grid-area: qatar-flag-r;
+    }
 
-#logo {
-    text-align: center;
-}
+    #qatar-flag-l img, #qatar-flag-r img {
+        width: 110px;
+    }
 
-nav {
-    grid-area: nav;
-    background-color: darkviolet;
-}
+    header img {
+        width: 75px;
+    }
 
-#latest-results {
-    grid-area: lastest-results;
-    /* background-color: red;  */
-}
+    #header-text {
+        grid-area: header-text;
+        background-color: rgb(141,27,61);
+    }
 
-#top-ten-users {
-    grid-area: top-ten-users;
-    /* background-color: blue;  */
-}
+    #logo {
+        text-align: center;
+        display: none;              /* hide this until a new logo is created */
+    }
 
-#golden-boot {
-    grid-area: golden-boot;
-    /* background-color: green;  */
-}
-
-#upcoming-fixtures {
-    grid-area: upcoming-fixtures;
-    /* background-color: navy; */
-}
-
-#competition-stats {
-    grid-area: competition-stats;
-}
+#latest-results    { grid-area: lastest-results; }
+#top-ten-users     { grid-area: top-ten-users;  }
+#golden-boot       { grid-area: golden-boot; }
+#upcoming-fixtures { grid-area: upcoming-fixtures; }
+#competition-stats { grid-area: competition-stats; }
 
     #goal-stats {
         grid-area: goal-stats;
@@ -92,31 +84,13 @@ nav {
         grid-gap: 5px;
 
     }
-
-        #games-played {
-            grid-area: games-played;
-        }
-
-        #total-goals {
-            grid-area: total-goals;
-        }
-
-        #goals-per-game {
-            grid-area: goals-per-game;
-        }
-
-        #top-team {
-            grid-area: top-team;
-        }
-
-        #top-game {
-            grid-area: top-game;
-        }
-
-        #penalties {
-            grid-area: penalties;
-        }
-
+        #games-played      { grid-area: games-played; }
+        #total-goals       { grid-area: total-goals;  }
+        #goals-per-game    { grid-area: goals-per-game; }
+        #top-team          { grid-area: top-team; }
+        #top-game          { grid-area: top-game; }
+        #penalties         { grid-area: penalties; }
+        #competition-rules { grid-area: competition-rules; }
 
         .stat-title {
             text-align: center;
@@ -127,15 +101,11 @@ nav {
 
         .stat-value {
             text-align: center;
-            background-color: lightgreen;
-            color: green;
+            color: rgb(141,27,61);
             font-size: 2em;
             border: 1px dotted black;
         }
 
-#competition-rules {
-    grid-area: competition-rules;
-}
 
     #rules {
         display: flex;
@@ -153,7 +123,6 @@ nav {
         border: 1px solid black;
         background-color: lightgreen;
         padding: 5px;
-        margin: 10px;
         font-weight: bold;
     }
 
@@ -161,7 +130,6 @@ nav {
         border: 1px solid black;
         background-color: lightgray;
         padding: 5px;
-        margin: 10px;
     }
 
 .card-title {
@@ -191,37 +159,37 @@ section {
 /*                                          FOOTER SECTION                                      */
 /* ******************************************************************************************   */
 
-#social-media {
+#footer {
     grid-area: footer;
 
     display: flex;                                  /* display UL, P & P elements vertically and center them */
     flex-direction: column;
     align-items: center;
 
-    background: linear-gradient(to bottom, lightgray, #000 100%);
+    background: linear-gradient(to bottom, rgb(141,27,61), #000 100%);
     color: white;
     padding-top: 10px;
 }
 
-#social-media p {
+#footer p {
     text-transform: uppercase;          /* change text in para tags to uppercase */
     font-size: 14px;
-    color: rgba(255,255,255,0.6);       /* add a transparent overlay of white - 0.6 = 60% opacity */
+    /* color: rgba(255,255,255,0.6);       add a transparent overlay of white - 0.6 = 60% opacity */
     margin-bottom: 10px;
 }
 
-#social-media ul {
+#footer ul {
     display: flex;                      /* display child items of parent element, ie the ul, into a row */
     flex-direction: row;
     list-style: none;
     margin-bottom: 5px;
 }
 
-#social-media ul li {
+#footer ul li {
     margin: 0 20px;                     /* spreads out the line items containing the social media icons */
 }
 
-#social-media ul li a {
+#footer ul li a {
     font-size: 36px;                    /* makes the icons bigger and ensure the cursor is always the pointer */
     cursor: pointer;
     color: white;
@@ -391,12 +359,6 @@ th, td {
     display: none;
 }
 
-/* .upcoming-fixtures-tbl table {
-    width: 98%;
-    margin: 5px auto;
-    border-collapse: collapse;
-} */
-
 .align-right {
     width: 40%;
     padding-right: 5px;
@@ -440,7 +402,10 @@ th, td {
     Hamburger Drop Down Menu
     ----------------------------------------------------------------------------------
     */
-    #profile {
+    #hb-icon {
+        
+        grid-area: hb-icon;
+
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -471,7 +436,7 @@ th, td {
         }
 
         .dropdown:hover {
-            /* background-color: red; */
+            background-color: rgba(141,27,61, 0.5);
         }
 
         .dropdown-content {
@@ -518,11 +483,10 @@ th, td {
     
     main {
         width: 98%;
-/*        max-width: 800px;*/
  
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 10vh auto auto auto;
+        grid-template-rows: auto auto auto auto;
         grid-gap: 5px;
         margin: 0 auto;
     }
@@ -544,7 +508,7 @@ th, td {
  
     header {
         grid-template-areas:
-            "logo header-text";
+            "logo qatar-flag-l header-text qatar-flag-r hb-icon";
     }
 
     #goal-stats {
@@ -564,13 +528,12 @@ th, td {
     body {
         background-color: antiquewhite;
     }
-    main{
-        width: 90%;
-/*        max-width: 800px; */
+    main {
+        width: 98%;
  
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 10vh auto auto auto auto;
+        grid-template-rows: auto auto auto auto auto;
         grid-gap: 5px;
         margin: 0 auto;
     }
@@ -581,9 +544,7 @@ th, td {
     
     /* 
     ----------------------------------------------------------------------------------
-    Grid is three columns - specify what is in each column on each row
-    header, navigation, and footer span across the 3 colums
-    content is spaced into each column as seen below.
+    Grid is 2 columns - specify what is in each column on each row
     ----------------------------------------------------------------------------------
     */
     #container{
@@ -607,12 +568,11 @@ th, td {
         background-color: burlywood;
     }
     main{
-        width: 90%;
-/*        max-width: 800px;*/
+        width: 98%;
  
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 10vh auto auto auto auto;
+        grid-template-rows: auto auto auto auto auto;
         grid-gap: 5px;
         margin: 0 auto;
     }
@@ -623,9 +583,7 @@ th, td {
     
     /* 
     ----------------------------------------------------------------------------------
-    Grid is three columns - specify what is in each column on each row
-    header, navigation, and footer span across the 3 colums
-    content is spaced into each column as seen below.
+    Grid is 2 columns - specify what is in each column on each row
     ----------------------------------------------------------------------------------
     */
     #container{
@@ -645,12 +603,8 @@ th, td {
 
 @media screen and (max-width:768px){                   
     
-    body {
-/*        background-color: yellow;*/
-    }
     main{
-        width: 90%;
-/*        max-width: 800px;*/
+        width: 98%;
  
         display: grid;
         grid-template-columns: 1fr;
@@ -660,13 +614,11 @@ th, td {
     }
  
     header h1 {
-     font-size: 2em;
+     font-size: 1.5em;
 }
     /* 
     ----------------------------------------------------------------------------------
-    Grid is three columns - specify what is in each column on each row
-    header, navigation, and footer span across the 3 colums
-    content is spaced into each column as seen below.
+    Grid is 1 column - specify what is in each column on each row
     ----------------------------------------------------------------------------------
     */
     #container{
@@ -681,16 +633,16 @@ th, td {
             "footer";
     }
  
-    #social-media p {
+    #footer p {
         font-size: 10px;
         margin-bottom: 5px;
     }
 
-    #social-media ul li {
+    #footer ul li {
         margin: 0 10px;                     /* spreads out the line items containing the social media icons */
     }
 
-    #social-media ul li a {
+    #footer ul li a {
         font-size: 30px;                    /* makes the icons bigger and ensure the cursor is always the pointer */
     }
 }
