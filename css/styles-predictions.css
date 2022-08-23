@@ -1,4 +1,6 @@
-*{                                  /* Override browsers default CSS rules  */
+/* Override browsers default CSS rules  */
+/* 
+* {                                  
     margin:0;
     padding:0;
     box-sizing: content-box;
@@ -6,10 +8,10 @@
 
 body {
      font-family: 'Open Sans', sans-serif;
-     /* background-color: #131633; */
      background-color: white;
      color: #34495e;
 }
+*/
 
 /* ******************************************************************************************   */
 /*                                          TABS                                                */
@@ -89,19 +91,16 @@ Each section has a GRID-AREA named after the section ID
 
 header {
     
-    display: grid;
-    grid-area: header;
-    grid-template-columns: 1fr 12fr 1fr;
-    grid-template-rows: auto;
+    /* display: grid;
+    grid-area: header; */
+    grid-template-columns: 1fr 1fr 10fr 1fr 1fr 1fr;
+    margin-bottom: 5px;
+    /* grid-template-rows: auto;
     grid-gap: 10px;
-    
-    width: 100%;
-    background-color: lightgray;
-    align-items: center;
-    justify-content: center;    
+    justify-content: center;     */
 
 } 
-
+/* 
     header h1 {
         font-size: 2.5em;
         text-align: center;
@@ -113,17 +112,33 @@ header {
     header img {
         width: 75px;
     }
+ */
+
+    #username {
+        grid-area: username;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+        font-size: 0.8em;
+        font-weight: bold;
+        padding: 3px;
+        border: 1px solid darkgray;
+        background-color: rgba(141,27,61, 0.5);
+    }
 
     #logo {
         text-align: center;
     }
 
-    /* 
+    /* /* 
     ----------------------------------------------------------------------------------
     Hamburger Drop Down Menu
     ----------------------------------------------------------------------------------
     */
-    #hb-icon {
+    /* #hb-icon {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -183,7 +198,7 @@ header {
 
         .dropdown:hover .dropdown-content {
             display: block;
-        }
+        } */
 
 nav {
     grid-area: nav;
@@ -191,6 +206,12 @@ nav {
 
 #tabs {
     grid-area: tabs;
+    width: 86%;
+    margin: 5px auto;
+}
+
+#logout {
+    text-align: center;
 }
 
 #tournament {
@@ -332,30 +353,7 @@ nav {
             text-align: center;
             padding:15px;
         }
-
-        #save-btn {
-
-            grid-area: confirm-btn;            
-
-            border: 0;
-            line-height: 2.5;
-            padding: 0 20px;
-            font-size: 1rem;
-            text-align: center;
-            color: #fff;
-            text-shadow: 1px 1px 1px #000;
-            border-radius: 10px;
-            background-color: #3498db;
-        }
-
-        #save-btn:hover {
-            background-color: cadetblue;
-        }
-
-        #save-btn:active {
-            border-color: black;           
-        }
-            
+           
 #UPDATE-PREDICTIONS {
     
     grid-area: UPDATE-PREDICTIONS;
@@ -396,11 +394,11 @@ nav {
             justify-content: center;
 
         }    
-        #update-btn {
+        #update-btn, #save-btn {
 
             grid-area: update-btn;            
 
-            border: 0;
+            /* border: 0;
             line-height: 2.5;
             padding: 0 20px;
             font-size: 1rem;
@@ -408,14 +406,28 @@ nav {
             color: #fff;
             text-shadow: 1px 1px 1px #000;
             border-radius: 10px;
-            background-color: #3498db;
+            background-color: #3498db; */
+
+            padding: 10px 10px; 
+            margin: 10px;
+            color: navy;                     
+            border: 1px solid #00F; 
+            text-decoration: none; 
+            font-size: 14px; 
+            line-height: 120%; 
+            /* background-color: rgba(0,0,255, 0.6);  */
+            border-radius: 2px; 
+            transition: background-color 300ms ease; 
+            cursor: pointer; 
         }
 
-        #update-btn:hover {
-            background-color: cadetblue;
+        #update-btn:hover, #save-btn:hover {
+            /* background-color: cadetblue; */
+            box-shadow: 5px 5px 5px lightblue;
+            color: #000; 
         }
 
-        #update-btn:active {
+        #update-btn:active, #save-btn:active {
             border-color: black;           
         }
 
@@ -505,19 +517,19 @@ tbody {
 }
 
 table {
-    font-size: 0.75em;
+    /* font-size: 0.75em; */
     width: 98%;
-    padding: 2px;
+    /* padding: 2px;
     text-align: center;    
     border: 1px dotted black;
-    margin: auto auto;
+    margin: auto auto; */
 }
 
-th, td {
+/* th, td {
     border-left: 1px dotted black;
     border-right: 1px dotted black;
     border-bottom: 1px dotted black;
-}
+} */
 
 .pos, .fixno, .predno {
     width: 6%;
@@ -616,140 +628,6 @@ th, td {
 /* ******************************************************************************************   */
 
 /* ******************************************************************************************   */
-/*                                          NAV SECTION                                         */
-/* ******************************************************************************************   */
-
-.options {    
-    display:flex;
-    align-items: center;
-    justify-content: space-around;
-    
-    background-color: white;
-    padding: 10px;
-}
-
-.options-link {
-    text-decoration: none;
-    font-size: 0.9em;
-    color: #3498db;
-}
-
-.options-link:hover {
-    color: darkgreen;
-    text-decoration: underline;
-}
-
-/* ******************************************************************************************   */
-/*                                          FOOTER SECTION                                      */
-/* ******************************************************************************************   */
-
-footer p {
-    text-transform: uppercase;          /* change text in para tags to uppercase */
-    font-size: 14px;
-    color: rgba(255,255,255,0.6);       /* add a transparent overlay of white - 0.6 = 60% opacity */
-    margin-bottom: 10px;
-}
-
-footer ul {
-    display: flex;                      /* display child items of parent element, ie the ul, into a row */
-    flex-direction: row;
-    list-style: none;
-    margin-bottom: 5px;
-}
-
-footer ul li {
-    margin: 0 20px;                     /* spreads out the line items containing the social media icons */
-}
-
-footer ul li a {
-    font-size: 36px;                    /* makes the icons bigger and ensure the cursor is always the pointer */
-    cursor: pointer;
-    color: white;
-}
-/* ------------------ Transparent Buttons ------------------------- */
-
-/* white text white border                                          */
-.transparent-btn { 
-    display: inline-block; 
-    padding: 5px 10px; 
-    color: #FFF; 
-    border: 1px solid #FFF; 
-    text-decoration: none; 
-    font-size: 16px; 
-    line-height: 120%; 
-    background-color: rgba(255,255,255, 0); 
-    border-radius: 4px; transition: background-color 300ms ease; 
-    cursor: pointer; 
-}
-.transparent-btn:hover { 
-    background-color: rgba(255,255,255, 0.2); 
-    color: #000; 
-}
-
-/* white text blue background                                      */
-.transparent-btn-blue { 
-    display: inline-block; 
-    padding: 5px 10px; 
-    margin: 10px;
-    color: #FFF; 
-    border: 1px solid #00F; 
-    text-decoration: none; 
-    font-size: 14px; 
-    line-height: 120%; 
-    background-color: rgba(0,0,255, 0.6); 
-    border-radius: 4px; 
-    transition: background-color 300ms ease; 
-    cursor: pointer; 
-}
-.transparent-btn-blue:hover { 
-    background-color: rgba(0,0,255, 0.2); 
-    color: #000; 
-}
-
-/* smaller blue text white background                                      */
-.transparent-btn-white { 
-    display: inline-block; 
-    padding: 3px 5px; 
-    color: #00F; 
-    border: 1px solid #00F; 
-    text-decoration: none; 
-    font-size: 12px; 
-    line-height: 120%; 
-    background-color: rgba(255,255,255, 0); 
-    border-radius: 4px; 
-    transition: background-color 300ms ease; 
-    cursor: pointer; 
-}
-
-.transparent-btn-white:hover { 
-    background-color: rgba(0,0,255, 0.3); 
-    color: #000; 
-}
-
-/* smaller blue border text white                                       */
-.transparent-btn-blue-small { 
-    display: inline-block; 
-    padding: 3px 5px; 
-    color: #FFF; 
-    border: 2px solid #00F; 
-    text-decoration: none; 
-    font-size: 12px; 
-    line-height: 120%; 
-    background-color: rgba(0,123,255, 1); 
-    border-radius: 4px; 
-    transition: background-color 300ms ease; 
-    cursor: pointer; 
-}
-.transparent-btn-blue-small:hover { 
-    background-color: rgba(0,123,255, 0.2); 
-    color: #FFF; 
-}
-
-#logout {
-    text-align: center;
-}
-
-/* ******************************************************************************************   */
 /*                                          FORM FIELDS                                         */
 /* ******************************************************************************************   */
 
@@ -760,6 +638,8 @@ input {
     background-color: aliceblue;
     font-size: 1em;
     text-align: center;
+    padding: 0px;
+    margin-bottom: 0px;
 }
 
 #scorer-input {
@@ -814,7 +694,7 @@ input {
 
     header {
         grid-template-areas:
-            "logo header-text hb-icon";
+            "logo qatar-flag-l header-text qatar-flag-r username hb-icon";
     }
  
     #GROUPS-ABCD, #GROUPS-EFGH {
@@ -941,6 +821,7 @@ input {
             }
 
             #confirm-predictions {
+                margin-top: 10px;
                 box-shadow: 5px 5px 5px lightblue;
                 border: 1px solid green;
             }
@@ -957,9 +838,10 @@ input {
                 justify-content: center;
                 
             }    
+            
             #save-btn {
 
-                grid-area: confirm-btn;            
+                /* grid-area: confirm-btn;            
 
                 border: 0;
                 line-height: 2.5;
@@ -969,16 +851,16 @@ input {
                 color: #fff;
                 text-shadow: 1px 1px 1px #000;
                 border-radius: 10px;
-                background-color: #3498db;
+                background-color: #3498db; */
             }
 
             #save-btn:hover {
-                background-color: cadetblue;
+                /* background-color: cadetblue; */
             }
 
             #save-btn:active {
-                border-color: black;           
-            }
+                /* border-color: black;            */
+            } 
 
     #RESULTS-PREDICTIONS {
         display: flex;

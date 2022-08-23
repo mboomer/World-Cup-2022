@@ -29,6 +29,7 @@
     // If logged in store the userid from session 
     if ( isset($_SESSION['userid']) ) {
         $userid      = $_SESSION["userid"];    
+        $username    = $_SESSION["username"]    ; 
         $predictions = $_SESSION["predictions"];    
     }; 
 
@@ -44,6 +45,7 @@
         
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
+        <link rel="stylesheet" href="../css/styles.css">
         <link rel="stylesheet" href="../css/styles-predictions.css">
         
         <script>
@@ -767,30 +769,10 @@
         
         <main id="container">
             
-            <header>
-                <div id="logo">
-                    <img src='../img/logo.png' alt='World Cup Fortune Teller logo'>
-                </div>
-
-                <div id="header-text">
-                    <h1>World Cup 2022 Predictions</h1> 
-                </div>
-
-                <div id="hb-icon" class="dropdown">
-
-                    <div class="bar1"></div>
-                    <div class="bar2"></div>
-                    <div class="bar3">
-                        <div class="dropdown-content">
-                            <a href="user-profile.php">User Profile</a>
-                            <a href="logout.php">Logout</a>
-                        </div>
-                    </div>
-
-                </div>
-
+            <header>        
+                <?php include "../include/header4.inc.php"; ?>
             </header>
-            
+
             <!-- Tab links -->
             <div id="tabs" class="tab">
               <button id="groups-abcd-tab"          name="GROUPS-ABCD"          class="tablinks active">Groups A,B,C,D</button>
@@ -1912,7 +1894,7 @@
                                     foreach ($rows as $key => $row) {
                                         
                                         // top scorer has been saved previously, so set flag to true
-                                        echo "<script>TopScorerOK = true</script>;";
+                                        echo "<script>TopScorerOK = true</script>";
 
                                         echo "      <tr>";
                                         echo "          <td id='scorer'>";
@@ -1928,6 +1910,7 @@
                                     echo "</table>";        
                                 }
                             ?>
+
                         </div> <!-- end of TOP SCORER SELECTIONS div -->
 
                     </section> <!-- end of TOP SCORER section -->
@@ -2132,12 +2115,10 @@
 
             </section> <!-- end of Tournament -->
 
-            
-            <footer id="social-media">
-                <p>&copy; <script>document.write(new Date().getFullYear());</script> World Cup 2022 Predictor</p>
-                <p>All Rights Reserved &mdash; Designed by Mark Boomer</p>
+            <footer id="footer">        
+                <?php include "../include/footer.inc.php"; ?>
             </footer>
-            
+
         </main>
     
         <script type="text/javascript" >
@@ -2157,6 +2138,13 @@
             document.getElementById("UPDATE-PREDICTIONS").style.display = "none";
             document.getElementById("RESULTS-PREDICTIONS").style.display = "none";
           
+            // **********************************************************************************************************
+            // Timeout function to wait 3 seconds before clearing the update message
+            // **********************************************************************************************************
+            function clearConfirmationMessage() {
+                document.getElementById("confirm-predictions").style.display = "none";
+            }
+            
             // **********************************************************************************************************
             // Display the content of the selected tab and highlight the tab
             // **********************************************************************************************************
@@ -2205,10 +2193,11 @@
 
                     AllowPredictionsUpdate = LastSixteenOK && QuarterFinalsOK && SemiFinalsOK && PlayoffOK && FinalOK;
 
-                    console.log(AllowPredictionsUpdate, " ", LastSixteenOK, " ", QuarterFinalsOK, " ", SemiFinalsOK, " ", PlayoffOK, " ", FinalOK)
+                   console.log(AllowPredictionsUpdate + " " + LastSixteenOK + " " + QuarterFinalsOK + " " + SemiFinalsOK + " " + PlayoffOK + " " + FinalOK);
 
                     if (TopScorerOK === false) {
                         document.getElementById(tabname).style.display = "block";
+                        document.getElementById("confirm-predictions").style.display = "block";
                         document.getElementById("confirm-predictions").innerHTML  = "You haven't selected a Top Goal Scorer and the number of goals scored.<br>";
                         document.getElementById("confirm-predictions").innerHTML += "Select the player you think will be the top scorer in the tournament<br>";
                         document.getElementById("confirm-predictions").innerHTML += "and enter the number of goals you think they will score.";
@@ -2216,6 +2205,7 @@
                         document.getElementById("confirm-save").style.display = "none";
                     } else if (AllowPredictionsUpdate === false) {
                         document.getElementById(tabname).style.display = "block";
+                        document.getElementById("confirm-predictions").style.display = "block";
                         document.getElementById("confirm-predictions").innerHTML  = "Please review your predictions in the Knockout stages.<br>";
                         document.getElementById("confirm-predictions").innerHTML += "One or more of the games are predicted to be a draw.<br>";
                         document.getElementById("confirm-predictions").innerHTML += "Every game in the knockout stages must be set as either a home win or an away win.";
@@ -2223,10 +2213,10 @@
                         document.getElementById("confirm-save").style.display = "none";
                     } else {
                         document.getElementById(tabname).style.display = "block";
-                        document.getElementById("confirm-btn").style.display = "grid";
-                        document.getElementById("confirm-save").style.display = "block";
                         document.getElementById("confirm-predictions").innerText = "";
                         document.getElementById("confirm-predictions").style.display = "none";
+                        document.getElementById("confirm-btn").style.display = "grid";
+                        document.getElementById("confirm-save").style.display = "block";
                     }
                 }                    
 
@@ -2242,6 +2232,9 @@
                     if (!document.getElementById("confirm-chkbox").checked) {
                         document.getElementById("chkbox-error").style.display = "block";
                     } else {
+                        
+                        document.getElementById("confirm-predictions").style.display = "block";
+                        document.getElementById("confirm-predictions").innerHTML = "Updating Predictions...please wait";
                         
                         // get the pedictions for who will be top scorer and the number of goals scored
                         topgoalscorer = document.getElementById('scorer-input').value; 
@@ -2340,6 +2333,8 @@
                             }).then(function (data) {
 
                                 document.getElementById("confirm-predictions").innerHTML = data;
+                                setTimeout(clearConfirmationMessage, 3000);
+                                // document.getElementById("confirm-predictions").innerHTML = data;
                                 
                                 // call the function to re-build the predictions content
                                 buildPredictionsTable();
@@ -2916,7 +2911,7 @@
                         document.getElementById("loser61").nextElementSibling.innerHTML = matchHID;
                         document.getElementById("loser61").nextElementSibling.nextElementSibling.innerHTML = matchHRk;
                     } else {
-                        PlayoffOK = false;
+                        SemiFinalsOK = false;
                     };
 
                     // WINNERS / RUNNERS UP - SEMI FINAL MATCH 62
@@ -2943,7 +2938,7 @@
                         document.getElementById("loser62").previousElementSibling.innerHTML = matchHID;
                         document.getElementById("loser62").previousElementSibling.previousElementSibling.innerHTML = matchHRk;
                     } else {
-                        PlayoffOK = false;
+                        SemiFinalsOK = false;
                     };
 
                     // WINNERS / RUNNERS UP - SEMI FINAL MATCH 61
@@ -2970,7 +2965,7 @@
                         document.getElementById("winner61").nextElementSibling.innerHTML = matchAID;
                         document.getElementById("winner61").nextElementSibling.nextElementSibling.innerHTML = matchARk;
                     } else {
-                        FinalOK = false;
+                        PlayoffOK = false;
                     };
 
                     // WINNERS / RUNNERS UP - SEMI FINAL MATCH 62
