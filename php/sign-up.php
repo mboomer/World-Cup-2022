@@ -65,8 +65,7 @@
          <!-- sets initial scale to 100% -->
         <meta name="viewport" content="width=device-width initial-scale=1">
         
-        <script src="https://kit.fontawesome.com/130d5316ba.js" crossorigin="anonymous"></script>
-
+         <link rel="stylesheet" href="../css/styles.css"> 
          <link rel="stylesheet" href="../css/styles-login.css"> 
         
         <style type="text/css">
@@ -99,23 +98,16 @@
 
     <body id="body-top">
 
-        <header>
-        
-            <!-- ------------------------------------------------------ -->
-            <!-- INCLUDE THE PHP CODE FOR THE NAV MENU                  -->
-            <!-- ------------------------------------------------------ -->            
-            <!-- <?php include "../inc/nav.level1.inc.php"; ?>          -->
-            
+        <header>        
+            <?php include "../include/header2.inc.php"; ?>
         </header>
 
-        <div class="container">
-        
-            <div class="wrapper centered">
+        <div id="login-container">
+            
+            <div id="wrapper" class="centered">
 
                 <h2>Create New Account</h2>
                 
-                <!-- <span class="help-block" <?php echo (!empty($error_msg)) ? 'style="display:block;"' : ''; ?> ><?php echo $error_msg; ?></span> -->
-
                 <?php
                     if ($error_code == "success") {
                         echo "<span class='help-block-success'>" . $error_msg . "</span>";
@@ -156,16 +148,12 @@
 
             </div>  <!--  end of form wrapper div -->  
 
-        </div>  <!--  end of container div -->
+        </div>  <!--  end of login-container div -->
 
-        <!-- ------------------------------------------------------ -->
-        <!-- INCLUDE THE PHP CODE FOR THE FOOTER                    -->
-        <!-- ------------------------------------------------------ -->            
-        <!-- <?php include "../inc/footer.inc.php"; ?>              -->
-            
-<!-- ------------------------------------------------------------------------------------------- -->        
-<!-- Javascript                                                                                  -->        
-<!-- ------------------------------------------------------------------------------------------- -->        
+        <footer id="footer">        
+            <?php include "../include/footer.inc.php"; ?>
+        </footer>
+
 
         <script type="text/javascript">
             
