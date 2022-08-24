@@ -126,7 +126,7 @@ header {
 .home, .away {
     width: 20%;
     padding-right: 5px;
-    font-size: 1.1em;
+    font-size: 1.2em;
 }
 
 .home {
@@ -261,6 +261,12 @@ header {
 }
 
 /* white text blue background                                      */
+.transparent-btn-blue {
+    padding: 5px 5px;
+    margin: 5px; 
+}
+
+/* white text blue background                                      */
 .goal-btn-blue { 
     display: inline-block; 
     padding: 5px 5px; 
@@ -292,11 +298,7 @@ header {
 
 
 input {
-    width: 85%;
-    color: darkblue;
-    background-color: aliceblue;
-    font-size: 1em;
-    text-align: center;
+    font-size: 1.1em;
     padding: 0px;
     margin: 0px;
 }

@@ -21,7 +21,6 @@
                     <div class="bar3">
                         <div class="dropdown-content">
                             <a href="../">Home</a>
-                            <a href="sign-up.php">Register</a>
                         </div>
                     </div>
 

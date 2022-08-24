@@ -50,12 +50,12 @@ header {
 .button-group input, button { 
     margin: 5px;
     padding: 5px;
-    /* width: 100%; */
 }
 .input-group * { 
     margin: 5px;
     padding: 5px;
-    /* width: 100%; */
+    text-align: left;
+    font-size: 1em;
 }
 .help-block-failure {
     /* display: none; */
