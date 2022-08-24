@@ -264,6 +264,7 @@ section {
 .transparent-btn-blue:hover { 
     /* background-color: rgba(0,0,255, 0.2);  */
     box-shadow: 5px 5px 5px lightblue;
+    border: 1px solid black; 
     color: #000; 
 }
 

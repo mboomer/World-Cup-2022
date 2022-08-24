@@ -46,6 +46,7 @@ body {
     /* Create an active/current tablink class */
     .tab button.active {
         background-color: #ccc;
+        border: 1px solid navy
     }
 
     /* Style the tab content */
@@ -206,7 +207,7 @@ nav {
 
 #tabs {
     grid-area: tabs;
-    width: 86%;
+    width: 100%;
     margin: 5px auto;
 }
 
@@ -543,7 +544,7 @@ table {
     width: 26%;
     padding-right: 5px ;
     padding-left: 5px ;
-    font-size: 1.1em;
+    font-size: 1.2em;
 }
 
 .h-rank, .a-rank {
@@ -633,11 +634,11 @@ table {
 
 
 input {
-    width: 85%;
+    /* width: 85%;
     color: darkblue;
-    background-color: aliceblue;
+    background-color: aliceblue; */
     font-size: 1em;
-    text-align: center;
+    /* text-align: center; */
     padding: 0px;
     margin-bottom: 0px;
 }
@@ -797,6 +798,10 @@ input {
 
         #team-flags img {
             width: 75%;
+        }
+
+        #team-flags img:hover {
+            box-shadow: 5px 5px 5px lightgreen;
         }
 
     #SAVE-PREDICTIONS {
