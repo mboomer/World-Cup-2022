@@ -34,6 +34,7 @@
         
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
+        <link rel="stylesheet" href="../css/styles.css">
         <link rel="stylesheet" href="../css/styles-user-profile.css">
                 
     </head>
@@ -42,32 +43,8 @@
         
         <main id="container">
             
-            <header>
-                <div id="logo">
-                    <img src='../img/logo.png' alt='World Cup Fortune Teller logo'>
-                </div>
-
-                <div id="header-text">
-                    <h1>User Profile</h1> 
-                </div>
-<!--                
-                <div id="logout">
-                    <a class="transparent-btn-blue" href="https://9habu.com/wc2022/php/logout.php">Logout</a>
-                </div>
--->
-                <div id="profile" class="dropdown">
-
-                    <div class="bar1"></div>
-                    <div class="bar2"></div>
-                    <div class="bar3">
-                        <div class="dropdown-content">
-                            <a id="predictions-lnk" href="#">Predictions</a>
-                            <a id="logout-lnk" href="logout.php">Logout</a>
-                        </div>
-                    </div>
-
-                </div>
-                
+            <header>        
+                <?php include "../include/header5.inc.php"; ?>
             </header>
 
             <?php
@@ -273,9 +250,8 @@
 
                 ?>
 
-            <footer id="social-media">
-                <p>&copy; <script>document.write(new Date().getFullYear());</script> World Cup 2022 Predictor</p>
-                <p>All Rights Reserved &mdash; Designed by Mark Boomer</p>
+            <footer id="footer">        
+                <?php include "../include/footer.inc.php"; ?>
             </footer>
             
         </main>
