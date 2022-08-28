@@ -28,8 +28,7 @@
     //     $error_email = "";
     // }
 
-    $post_url  = "reset-request.php";
-
+    $post_url  = "../inc/reset-request.php";
 
 ?>
  <!DOCTYPE html>
@@ -44,6 +43,7 @@
         
         <script src="https://kit.fontawesome.com/130d5316ba.js" crossorigin="anonymous"></script>
 
+         <link rel="stylesheet" href="../css/styles.css"> 
          <link rel="stylesheet" href="../css/styles-login.css"> 
         
         <style type="text/css">
@@ -69,25 +69,27 @@
             /* apply to any device that has a screen width of 1200px or higher                              */
             /* ******************************************************************************************   */
             @media screen and (min-width: 1200px) {
-            }
+
+                #container {
+                    grid-template-areas:
+                            "header"
+                            "wrapper"
+                            "footer";
+                }
+
         </style>
     
     </head>
 
     <body id="body-top">
 
-        <header>
-        
-            <!-- ------------------------------------------------------ -->
-            <!-- INCLUDE THE PHP CODE FOR THE NAV MENU                  -->
-            <!-- ------------------------------------------------------ -->            
-            <!-- <?php include "../inc/nav.level1.inc.php"; ?>          -->
-            
+        <header>        
+            <?php include "../include/header1.inc.php"; ?>
         </header>
 
-        <div class="container">
+        <div id="login-container">
         
-            <div class="wrapper centered">
+            <div id="wrapper" class="centered">
 
                 <h2>Reset Your Password</h2>
                 <p>Enter your email address and click the "Reset Password" button.<br> You will receive an email with instructions to reset your password.</p> 
@@ -102,8 +104,12 @@
                     }
                 ?>
 
-                <form action="<?php echo $post_url; ?>" method="POST">
+                <form action="<?php echo htmlspecialchars($post_url); ?>" method="POST">
                 
+                    <div class="input-group">
+                        <input type="text" id="username" name="username" placeholder="Enter your username" >
+                    </div>    
+
                     <div class="input-group">
                         <input type="text" id="emailaddress" name="emailaddress" placeholder="Enter you email address" >
                     </div>    
@@ -124,15 +130,10 @@
             </div>  <!--  end of form wrapper div -->  
 
         </div>  <!--  end of container div -->
-
-        <!-- ------------------------------------------------------ -->
-        <!-- INCLUDE THE PHP CODE FOR THE FOOTER                    -->
-        <!-- ------------------------------------------------------ -->            
-        <!-- <?php include "../inc/footer.inc.php"; ?>              -->
             
-<!-- ------------------------------------------------------------------------------------------- -->        
-<!-- Javascript                                                                                  -->        
-<!-- ------------------------------------------------------------------------------------------- -->        
+        <footer id="footer">        
+            <?php include "../include/footer.inc.php"; ?>
+        </footer>
 
         <script type="text/javascript">
             
@@ -142,4 +143,5 @@
         </script>
         
     </body>
+
 </html>
