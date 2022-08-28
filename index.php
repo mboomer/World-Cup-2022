@@ -14,8 +14,6 @@
 
         <link rel="stylesheet" href="css/styles.css">
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.js"> </script>                
-
     </head>
     
     <body>
@@ -23,28 +21,7 @@
         <main id="container">
             
             <header>
-                
-                <div id="logo">
-                    <img src='img/logo.png' alt='World Cup Fortune Teller logo'>
-                </div>
-
-                <div id="header-text">
-                    <h1>World Cup 2022 Predictions</h1> 
-                </div>
-          
-                <div id="profile" class="dropdown">
-
-                    <div class="bar1"></div>
-                    <div class="bar2"></div>
-                    <div class="bar3">
-                        <div class="dropdown-content">
-                            <a href="php/login.php">Login</a>
-                            <a href="php/sign-up.php">Register</a>
-                        </div>
-                    </div>
-
-                </div>
-
+                <?php include 'include/header.inc.php';?>
             </header>
 
             <div class="card" id="latest-results">
@@ -85,9 +62,8 @@
 
             </div>
 
-            <footer id="social-media">
-                <p>&copy; <script>document.write(new Date().getFullYear());</script> World Cup 2022 Predictor</p>
-                <p>All Rights Reserved &mdash; Designed by Mark Boomer</p>
+            <footer id="footer">
+                    <?php include 'include/footer.inc.php';?>
             </footer>
             
         </main>
@@ -102,7 +78,7 @@
                 // event listeners for the competition rules button
                 if (event.target.matches('#display-all-rules-btn')) {
 
-                    window.location.href="competition-rules.html";
+                    window.location.href="php/competition-rules.php";
 
                 }
 
