@@ -121,7 +121,7 @@
                     <input type="hidden" name="username"  value="<?php echo $user;?>">
                     
                     <div>
-                        <?php echo 'User Name : ' . $user; ?>
+                        <?php echo 'User Name : ' . htmlspecialchars($user); ?>
                     </div>
 
                     <div class="input-group">
