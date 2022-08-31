@@ -72,9 +72,9 @@
             // **********************************************************************************************************
             function buildPredictionsTable() {
 
-                var userID = "<?=$userid?>";
+                var userID = "<?=htmlspecialchars($userid)?>";
 
-                fetch('https://www.9habu.com/wc2022/php/build-results-predictions.php', {
+                fetch('https://www.9habu.com/wc2022/inc/build-results-predictions.php', {
                         
                         method: 'POST',
                         mode: "same-origin",
@@ -2084,8 +2084,8 @@
                                                 echo "      <td class='results-home-flag'><img src='../img/teams/" . $hometeam . ".png' alt='" . $hometeam . " team flag'></td>";      
                                                 echo "      <td class='home'>" . $hometeam . "</td>";
                                                 echo "      <td class='h-rank'>" . $homerank . "</td>";
-                                                echo "      <td>" . $homescore . "</td>";
-                                                echo "      <td>" . $awayscore . "</td>";
+                                                echo "      <td class='pos'>" . $homescore . "</td>";
+                                                echo "      <td class='pos'>" . $awayscore . "</td>";
                                                 echo "      <td class='a-rank'>" . $awayrank . "</td>";
                                                 echo "      <td class='awayid hidden'>" . $awayid . "</td>";        // hidden cell for ID of away team
                                                 echo "      <td class='away'>" . $awayteam . "</td>";
@@ -2307,7 +2307,7 @@
                         // now process the predictions array and save result to predictions table
                         // console.log(JSON.stringify(predictions));
 
-                        fetch('https://www.9habu.com/wc2022/php/update-predictions.php', {
+                        fetch('https://www.9habu.com/wc2022/inc/update-predictions.php', {
                                 
                                 method: 'POST',
                                 mode: "same-origin",
