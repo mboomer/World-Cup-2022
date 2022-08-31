@@ -30,6 +30,7 @@
     // If user is logged in, store the session variables 
     if ( isset($_SESSION['userid']) ) {
         $userid      = $_SESSION["userid"];    
+        $username    = $_SESSION["username"]; 
         $predictions = $_SESSION["predictions"];
     }; 
     
@@ -45,9 +46,8 @@
         
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
         
+        <link rel="stylesheet" href="../css/styles.css">
         <link rel="stylesheet" href="../css/styles-predictions.css">
-        
-        <script src="https://kit.fontawesome.com/130d5316ba.js" crossorigin="anonymous"></script>
         
     </head>
     
@@ -55,28 +55,8 @@
         
         <main id="container">
             
-            <header>
-                <div id="logo">
-                    <img src='../img/logo.png' alt='World Cup Fortune Teller logo'>
-                </div>
-
-                <div id="header-text">
-                    <h1>World Cup 2022 Predictions</h1> 
-                </div>
-
-                <div id="hb-icon" class="dropdown">
-
-                    <div class="bar1"></div>
-                    <div class="bar2"></div>
-                    <div class="bar3">
-                        <div class="dropdown-content">
-                            <a href="user-profile.php">User Profile</a>
-                            <a href="logout.php">Logout</a>
-                        </div>
-                    </div>
-
-                </div>
-                
+            <header>        
+                <?php include "../include/header4.inc.php"; ?>
             </header>
                     
             <!-- Tab links -->
@@ -928,11 +908,8 @@
                 
             </section> <!-- end of Tournament -->
 
-            <footer id="social-media">
-
-                <p>&copy; <script>document.write(new Date().getFullYear());</script> World Cup 2022 Predictor</p>
-                <p>All Rights Reserved &mdash; Designed by Mark Boomer</p>
-
+            <footer id="footer">        
+                <?php include "../include/footer.inc.php"; ?>
             </footer>
 
         </main>
@@ -942,7 +919,7 @@
             /** 
                 pass the php session variable, $userid, to a javascript variable - this can then be used in the FETCH POST
             */ 
-            var userID = "<?=$userid?>";
+            var userID = "<?=htmlspecialchars($userid)?>";
 
             // Change the display of the content tab from none to flex/grid to display content
             // Hide Groups DEFG, Knockout stage, Save Predictions and Top Scorer stage
@@ -972,11 +949,18 @@
             let QuarterFinalsOK = false;
             let SemiFinalsOK    = false;
             let PlayoffOK       = false;
-            let FinalsOK        = false;
+            let FinalOK         = false;
             
             /** set true if each of the Top Goal Scorer and the Number of goals have been entered */
             let TopScorerOK     = false;
             
+            // **********************************************************************************************************
+            // Timeout function to wiat 3 seconds before loading the saved-predictions page
+            // **********************************************************************************************************
+            function loadSavedPredictions() {
+                window.location.href = "https://www.9habu.com/wc2022/php/saved-predictions.php";
+            }
+
             // **********************************************************************************************************
             // Display the content of the selected tab and highlight the tab
             // **********************************************************************************************************
@@ -1021,7 +1005,9 @@
                      * and the top scorer has been selected
                     */ 
 
-                    AllowPredictionsUpdate = LastSixteenOK && QuarterFinalsOK && SemiFinalsOK && FinalsOK;
+                    AllowPredictionsUpdate = LastSixteenOK && QuarterFinalsOK && SemiFinalsOK && PlayoffOK && FinalOK;
+
+                    console.log(AllowPredictionsUpdate + " " + LastSixteenOK + " " + QuarterFinalsOK + " " + SemiFinalsOK + " " + PlayoffOK + " " + FinalOK);
 
                     if (TopScorerOK === false) {
                         document.getElementById(tabname).style.display = "block";
@@ -1032,17 +1018,18 @@
                         document.getElementById("confirm-save").style.display = "none";
                     } else if (AllowPredictionsUpdate === false) {
                         document.getElementById(tabname).style.display = "block";
+                        document.getElementById("confirm-predictions").style.display = "block";
                         document.getElementById("confirm-predictions").innerHTML  = "Please review your predictions in the Knockout stages.<br>";
                         document.getElementById("confirm-predictions").innerHTML += "One or more of the games are predicted to be a draw.<br>";
                         document.getElementById("confirm-predictions").innerHTML += "Every game in the knockout stages must be set as either a home win or an away win.";
                         document.getElementById("confirm-btn").style.display = "none";
                         document.getElementById("confirm-save").style.display = "none";
                     } else {
-                        document.getElementById("confirm-predictions").innerText = "";
                         document.getElementById(tabname).style.display = "block";
+                        document.getElementById("confirm-predictions").innerText = "";
+                        document.getElementById("confirm-predictions").style.display = "none";
                         document.getElementById("confirm-btn").style.display = "grid";
                         document.getElementById("confirm-save").style.display = "block";
-                        document.getElementById("confirm-predictions").style.display = "none";
                     }
 
                 } else {
@@ -1109,6 +1096,9 @@
                         document.getElementById("chkbox-error").style.display = "block";
                     } else {
                         
+                        document.getElementById("confirm-predictions").style.display = "block";
+                        document.getElementById("confirm-predictions").innerHTML = "Saving Predictions...please wait";
+
                         // get the pedictions for who will be top scorer and the number of goals scored
                         topgoalscorer = document.getElementById('scorer-input').value; 
                         nogoalsscored = document.getElementById('goals-input').value; 
@@ -1182,7 +1172,7 @@
 
                         console.log(predictions);
 
-                        fetch('https://www.9habu.com/wc2022/php/save-predictions-to-db.php', {
+                        fetch('https://www.9habu.com/wc2022/inc/save-predictions-to-db.php', {
                                 
                                 method: 'POST',
                                 mode: "same-origin",
@@ -1209,7 +1199,8 @@
                             }).then(function (data) {
 
                                 document.getElementById("confirm-predictions").innerHTML = data;
-                                window.location.href = "https://www.9habu.com/wc2022/php/saved-predictions.php";
+                                setTimeout(loadSavedPredictions, 3000);
+                                // window.location.href = "https://www.9habu.com/wc2022/php/saved-predictions.php";
 
                             }).catch(function (error) {
                                 // There was an error
@@ -1652,9 +1643,6 @@
                     awayIDs    = SF.querySelectorAll('.awayid');            
                     awayRanks  = SF.querySelectorAll('.a-rank');        
 
-                    // Arg 3 - 0  Brazil
-                    // Aus 1 - 0 Ghana    
-
                     // PLAYOFF POSITIONS                    
                     if (homeScores[0].value < awayScores[0].value) {
                         document.getElementById('loserSF1').innerHTML = homeTeams[0].innerHTML;
@@ -1667,7 +1655,7 @@
                         document.getElementById('loserSF1').nextElementSibling.innerHTML = awayIDs[0].innerHTML;
                         document.getElementById('loserSF1').nextElementSibling.nextElementSibling.innerHTML = awayRanks[0].innerHTML;
                     } else if (homeScores[0].value == awayScores[0].value) {
-                        PlayoffOK = false;
+                        SemiFinalsOK = false;
                     };
                         
                     if (homeScores[1].value < awayScores[1].value) {
@@ -1681,7 +1669,7 @@
                         document.getElementById('loserSF2').previousElementSibling.innerHTML = awayIDs[1].innerHTML;
                         document.getElementById('loserSF2').previousElementSibling.previousElementSibling.innerHTML = awayRanks[1].innerHTML;
                     } else if (homeScores[1].value == awayScores[1].value) {
-                        PlayoffOK = false;
+                        SemiFinalsOK = false;
                     };
 
                     // FINAL POSITIONS
@@ -1696,7 +1684,7 @@
                         document.getElementById('winnerSF1').nextElementSibling.innerHTML = awayIDs[0].innerHTML;
                         document.getElementById('winnerSF1').nextElementSibling.nextElementSibling.innerHTML = awayRanks[0].innerHTML;
                     } else if (homeScores[0].value == awayScores[0].value) {
-                        FinalOK = false;
+                        SemiFinalsOK = false;
                     };
                         
                     if (homeScores[1].value > awayScores[1].value) {
@@ -1710,7 +1698,7 @@
                         document.getElementById('winnerSF2').previousElementSibling.innerHTML = awayIDs[1].innerHTML;
                         document.getElementById('winnerSF2').previousElementSibling.previousElementSibling.innerHTML = awayRanks[1].innerHTML;
                     } else if (homeScores[1].value == awayScores[1].value) {
-                        FinalOK = false;
+                        SemiFinalsOK = false;
                     };
                    
                     return;
@@ -1741,7 +1729,7 @@
                 if (event.target.matches('[data-stage="FL"]')) {
 
                     // will be set to false if any predictions are set as a draw
-                    FinalsOK = true;
+                    FinalOK = true;
 
                     let FL = document.querySelector('#FL');
                     
@@ -1752,7 +1740,7 @@
                     awayTeams  = FL.querySelectorAll('.away');
 
                     if (homeScores[0].value == awayScores[0].value) {
-                        FinalsOK = false;
+                        FinalOK = false;
                     }
 
                     return;

@@ -85,7 +85,6 @@
 
                     /** assign the values to the place holders */ 
                     $id = $userid;
-                    // $id = 2;
 
                     // execute the sql query
                     $query -> execute();
@@ -126,7 +125,7 @@
                                 echo "          <tbody>";
                                 echo "              <tr>";
                                 echo "                  <td>Login Name</td>";
-                                echo "                  <td><input id='upd-user-name' type='text' value='" . $username  . "' placeholder='User Login Name'></td>";
+                                echo "                  <td><input id='upd-user-name' type='text' value='" . htmlspecialchars($username)  . "' placeholder='User Login Name'></td>";
                                 echo "              </tr>";
                                 echo "              <tr>";
                                 echo "                  <th class='profile-info' colspan='2'>";
@@ -163,19 +162,19 @@
                                 echo "          <tbody>";
                                 echo "              <tr>";
                                 echo "                  <td>First Name</td>";
-                                echo "                  <td><input id='upd-first-name' type='text' value='" . $firstname  . "' placeholder='Enter First Name'></td>";
+                                echo "                  <td><input id='upd-first-name' type='text' value='" . htmlspecialchars($firstname)  . "' placeholder='Enter First Name'></td>";
                                 echo "              </tr>";
                                 echo "              <tr>";
                                 echo "                  <td>Last Name</td>";
-                                echo "                  <td><input id='upd-last-name' type='text' value='" . $lastname . "' placeholder='Enter Last Name'></td>";
+                                echo "                  <td><input id='upd-last-name' type='text' value='" . htmlspecialchars($lastname) . "' placeholder='Enter Last Name'></td>";
                                 echo "              </tr>";
                                 echo "              <tr>";
                                 echo "                  <td>Email Address</td>";
-                                echo "                  <td><input id='upd-email' type='text' value='" . $useremail . "' placeholder='Enter Email Address'></td>";
+                                echo "                  <td><input id='upd-email' type='text' value='" . htmlspecialchars($useremail) . "' placeholder='Enter Email Address'></td>";
                                 echo "              </tr>";
                                 echo "              <tr>";
                                 echo "                  <td>Contact Phone</td>";
-                                echo "                  <td><input id='upd-phone' type='text' value='" . $phone . "' placeholder='Enter Contact Telephone Number'></td>";
+                                echo "                  <td><input id='upd-phone' type='text' value='" . htmlspecialchars($phone) . "' placeholder='Enter Contact Telephone Number'></td>";
                                 echo "              </tr>";
                                 echo "          </tbody>";
                                 echo "      </table>";   
@@ -198,15 +197,15 @@
                                 echo "          <tbody>";
                                 echo "              <tr>";
                                 echo "                  <td>Points Scored</td>";
-                                echo "                  <td>" . $points  . " pts</td>";
+                                echo "                  <td>" . htmlspecialchars($points)  . " pts</td>";
                                 echo "              </tr>";
                                 echo "              <tr>";
                                 echo "                  <td>Predicted Top Goal Scorer</td>";
-                                echo "                  <td>" . $topscorer . "</td>";
+                                echo "                  <td>" . htmlspecialchars($topscorer) . "</td>";
                                 echo "              </tr>";
                                 echo "              <tr>";
                                 echo "                  <td>Predicted Goals Scored</td>";
-                                echo "                  <td>" . $goalsscored . "</td>";
+                                echo "                  <td>" . htmlspecialchars($goalsscored) . "</td>";
                                 echo "              </tr>";
                                 echo "          </tbody>";
                                 echo "      </table>";   
@@ -225,7 +224,7 @@
                                 echo "          <tbody>";
                                 echo "              <tr>";
                                 echo "                  <td>Team Name</td>";
-                                echo "                  <td><input id='upd-team-name' type='text' value='" . $teamname  . "' placeholder='Enter A Team Name'></td>";
+                                echo "                  <td><input id='upd-team-name' type='text' value='" . htmlspecialchars($teamname)  . "' placeholder='Enter A Team Name'></td>";
                                 echo "              </tr>";
                                 echo "          </tbody>";
                                 echo "      </table>";   
@@ -233,7 +232,7 @@
                             echo "</div>";
                             
                             echo "<div class='card' id='update-profile'>";
-                                echo "   <h2 class='card-title'>Profile Created : " . date_format(date_create($createddate), 'd/m/Y') . "</h2>";
+                                echo "   <h2 class='card-title'>Profile Created : " . date_format(date_create(htmlspecialchars($createddate)), 'd/m/Y') . "</h2>";
 
                                 echo "   <div id='update-messages'>";
                                 echo "   </div>";
@@ -268,7 +267,7 @@
                 if (event.target.matches('#predictions-lnk')) {
 
                     // pass php session variable to JS variable
-                    PredictionsLink = "<?=$predictions?>";                                             
+                    PredictionsLink = "<?=htmlspecialchars($predictions)?>";                                             
 
                     if (PredictionsLink == 1) {
                         window.location.href = "saved-predictions.php";
@@ -321,9 +320,9 @@
                     // add the profile object to the Profiles Array                                                                
                     profiles.push(profile);
 
-                    console.log(profiles);
+                    // console.log(profiles);
 
-                    fetch('https://www.9habu.com/wc2022/php/update-user-profile.php', {
+                    fetch('https://www.9habu.com/wc2022/inc/update-user-profile.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
