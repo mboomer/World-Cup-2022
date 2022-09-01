@@ -1,17 +1,40 @@
 #body-top {
     grid-area: body-top;
 
+    /* display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 70vh auto; */
+
+}
+
+#login-container { 
+
+    grid-area: login-container;
+
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 70vh auto;
+
+    width: 98%;
+    margin: 0 auto;
 
 }
 
 header {
     margin-top: 5px;
+    grid-area: header;
 }
 
-#login-container { 
+#header-text div {
+    grid-area: header-text;
+
+    font-size: 2.5em;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px #e900ffd1;
+}
+
+/* #login-container { 
 
     grid-area: login-container;
 
@@ -19,7 +42,7 @@ header {
     flex-direction: column;
     margin: auto 0;
     
-}
+} */
 
 #wrapper { 
     
@@ -33,7 +56,7 @@ header {
     min-width: 300px;
 
     padding: 10px;
-    margin: 0px auto;
+    margin: auto auto;
 
     border: 1px solid #0E6EB8;
     border-radius: 10px;
@@ -57,22 +80,23 @@ header {
     text-align: left;
     font-size: 1em;
 }
+
+.help-block-nodisplay {
+    display: none; 
+}
+
 .help-block-failure {
-    /* display: none; */
     color: red;
     background: lightgrey;
     padding: 10px;
     border: 1px solid black;
-    width: 95%;
 }
 
 .help-block-success {
-    /* display: none; */
     color: green;
     background: lightgrey;
     padding: 10px;
     border: 1px solid black;
-    width: 95%;
 }
 
 #footer {
@@ -88,29 +112,27 @@ header {
 /* apply to any device that has a screen width of 576px or higher                               */
 /* ******************************************************************************************   */
 @media screen and (min-width: 576px) {
-    #body-top {
+    /* #body-top {
 
         grid-template-areas:
             "header"
             "login-container"
             "footer";
-    }
+    } */
 
-}
- 
     /* 
     ----------------------------------------------------------------------------------
     Grid is 1 column - specify what is in each column on each row
     header, login form and footer
     content is spaced into each column as below.
     ----------------------------------------------------------------------------------
-    */
+    /* 
     #login-container {
         grid-template-areas:
-            "wrapper";
-    }
-
-}  
+            "header"
+            "wrapper"
+            "footer";
+    } */
 }
 /* ******************************************************************************************   */
 /* apply to any device that has a screen width of 768px or higher                               */
@@ -130,13 +152,8 @@ header {
     #body-top {
 
         grid-template-areas:
-            "header"
-            "login-container"
-            "footer";
+            "login-container";
     }
-
-}
- 
     /* 
     ----------------------------------------------------------------------------------
     Grid is 1 column - specify what is in each column on each row
@@ -146,7 +163,9 @@ header {
     */
     #login-container {
         grid-template-areas:
-            "wrapper";
+            "header"
+            "wrapper"
+            "footer";
     }
 
 }  

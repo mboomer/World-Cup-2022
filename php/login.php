@@ -11,33 +11,37 @@
 //        $error_name = "";
 //    }
 
-    $post_url  = "validate-login.php";
+    
+    //initialise the error code, if nodisplay, dont displat an error message
+    $error_code = "nodisplay";
+
+    $post_url  = "../inc/validate-login.php";
 
     // Processing form data when form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
         // GET error code from the URL
-        $error_msg = $_GET['error'];
+        $error_code = $_GET['error'];
         // GET error name from the URL
         $error_name = $_GET['name'];
         
         // Set the error message to be displayed
-        if ($error_msg == "accessdenied") {
+        if ($error_code == "accessdenied") {
             $error_msg = "Invalid Access Detected";
-        } else if ($error_msg == "nousernopw") {
+        } else if ($error_code == "nousernopw") {
             $error_msg = "Please enter a username & password";
-        } else if ($error_msg == "nousername") {
+        } else if ($error_code == "nousername") {
             $error_msg = "Please enter a username";
-        } else if ($error_msg == "nopassword") {
+        } else if ($error_code == "nopassword") {
             $error_msg = "Please enter a password";
-        } else if ($error_msg == "dbconnecterror") {
+        } else if ($error_code == "dbconnecterror") {
             $error_msg = "Database connection failed";
-        } else if ($error_msg == "sqlexecerror") {
+        } else if ($error_code == "sqlexecerror") {
             $error_msg = "Error retrieving login details";
-        } else if ($error_msg == "invalidpassword") {
-            $error_msg = "Password entered is incorrect";
-        } else if ($error_msg == "invalidusername") {
-            $error_msg = "Username entered is incorrect";
+        } else if ($error_code == "invalidpassword") {
+            $error_msg = "Password or Username entered is incorrect";
+        } else if ($error_code == "invalidusername") {
+            $error_msg = "Password or Username entered is incorrect";
         }
     } 
 ?>
@@ -51,6 +55,8 @@
          <!-- sets initial scale to 100% -->
         <meta name="viewport" content="width=device-width initial-scale=1">
                 
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
         <link rel="stylesheet" href="../css/styles.css">
         <link rel="stylesheet" href="../css/styles-login.css">
 
@@ -61,22 +67,22 @@
             /* ******************************************************************************************   */
             /* apply to any device that has a screen width of 576px or higher                               */
             /* ******************************************************************************************   */
-            @media screen and (min-width: 576px) {
+            /* @media screen and (min-width: 576px) { */
             }
             /* ******************************************************************************************   */
             /* apply to any device that has a screen width of 768px or higher                               */
             /* ******************************************************************************************   */
-            @media screen and (min-width: 768px) {
+            /* @media screen and (min-width: 768px) { */
             }
             /* ******************************************************************************************   */
             /* apply to any device that has a screen width of 992px or higher                               */
             /* ******************************************************************************************   */
-            @media screen and (min-width: 992px) {
+            /* @media screen and (min-width: 992px) { */
             }
             /* ******************************************************************************************   */
             /* apply to any device that has a screen width of 1200px or higher                              */
             /* ******************************************************************************************   */
-            @media screen and (min-width: 1200px) {
+            /* @media screen and (min-width: 1200px) { */
 
             }
 
@@ -86,17 +92,25 @@
 
     <body id="body-top">
         
-        <header>        
-            <?php include "../include/header1.inc.php"; ?>
-        </header>
-
         <div id="login-container">
             
+            <header>        
+                <?php include "../include/header1.inc.php"; ?>
+            </header>
+
             <div id="wrapper" class="centered">
 
                 <h2>Login to your account</h2>
                 
-                <span class="help-block" <?php echo (!empty($error_msg)) ? 'style="display:block;"' : ''; ?> ><?php echo $error_msg; ?></span>
+                <!-- <span class="help-block" <?php echo (!empty($error_msg)) ? 'style="display:block;"' : ''; ?> ><?php echo $error_msg; ?></span> -->
+
+                <?php
+                    if (empty($error_code) == "nodisplay") {
+                        echo "<span class='help-block-nodisplay'></span>";
+                    } else {
+                        echo "<span class='help-block-failure'>" . $error_msg . "</span>";
+                    } 
+                ?>
 
                 <form action="<?php echo $post_url; ?>" method="POST">
 
@@ -126,11 +140,11 @@
 
             </div>  <!--  end of form wrapper div -->  
 
-        </div>  <!--  end of login-container div -->
+            <footer id="footer">        
+                <?php include "../include/footer.inc.php"; ?>
+            </footer>
 
-        <footer id="footer">        
-            <?php include "../include/footer.inc.php"; ?>
-        </footer>
+        </div>  <!--  end of login-container div -->
 
         <script type="text/javascript">
             
