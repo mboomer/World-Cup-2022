@@ -12,9 +12,10 @@
     //     $error_email = "";
     // }
 
-    $post_url  = "validate-registration.php";
+    $post_url  = "../inc/validate-registration.php";
 
-    $error_code = "";
+    // default to not displaying an error message block
+    $error_code = "nodisplay";
 
     // Processing form data when form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -65,6 +66,8 @@
          <!-- sets initial scale to 100% -->
         <meta name="viewport" content="width=device-width initial-scale=1">
         
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
          <link rel="stylesheet" href="../css/styles.css"> 
          <link rel="stylesheet" href="../css/styles-login.css"> 
         
@@ -98,12 +101,12 @@
 
     <body id="body-top">
 
-        <header>        
-            <?php include "../include/header2.inc.php"; ?>
-        </header>
-
         <div id="login-container">
             
+            <header>        
+                <?php include "../include/header2.inc.php"; ?>
+            </header>
+
             <div id="wrapper" class="centered">
 
                 <h2>Create New Account</h2>
@@ -148,12 +151,11 @@
 
             </div>  <!--  end of form wrapper div -->  
 
+            <footer id="footer">        
+                <?php include "../include/footer.inc.php"; ?>
+            </footer>
+
         </div>  <!--  end of login-container div -->
-
-        <footer id="footer">        
-            <?php include "../include/footer.inc.php"; ?>
-        </footer>
-
 
         <script type="text/javascript">
             
