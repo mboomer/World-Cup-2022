@@ -66,6 +66,9 @@
             /** set true if each of the Top Goal Scorer and the Number of goals have been entered */
             let TopScorerOK = false;
 
+            /* will be set true when the first fixture has started  */
+            let TournamentStarted = false;
+            
             // **********************************************************************************************************
             // Helper function needed to buld the predictions table  
             // needed as the predictions table needs rebulit after the saved predictions are updated
@@ -789,6 +792,41 @@
                 <div id="GROUPS-ABCD" class="tabcontent">
 
                     <?php
+
+                        /* query to get the resultid of the first fixture
+                           if this is anything other than 6 (Not Played Yet) then the tournament has started
+                           and you can no longer save predictions */
+
+                        $qry =   "SELECT \n" 
+                                . "  	ResultID \n"
+                                . "  FROM  \n"
+                                . "  	Fixtures fx \n"
+                                . "  WHERE \n"
+                                . "  	fx.FixtureNo = :FixtureNo \n";
+
+                        // prepare the query for the database connection
+                        $query = $dbh -> prepare($qry);
+
+                        /** bind the parameters */
+                        $query->bindParam(':FixtureNo', $fixtureno, PDO::PARAM_INT);
+                        
+                        /* assign the values to the place holders */ 
+                        $fixtureno = 1;  
+
+                        // execute the sql query
+                        $query -> execute();
+                                                        
+                        // get all rows
+                        $rows = $query -> fetchAll(PDO::FETCH_OBJ);
+
+                        if ($query->rowCount() == 0) {
+                            echo "<div>Fixture No. 1 not returned</div>";
+                        } else {
+                            // loop through the rows - there just be 1 row
+                            foreach($rows as $key => $row) {
+                                $fixture1resultid = $row -> ResultID;
+                            }
+                        }
 
                         $groupids     = array(1, 2, 3, 4);
                         $groupnames   = array("", "GroupA", "GroupB", "GroupC", "GroupD"); 
@@ -2123,11 +2161,12 @@
     
         <script type="text/javascript" >
 
-            /** 
-                pass the php session variable, $userid, to a javascript variable 
-                this can then be used in the FETCH POST
-            */ 
+            /* pass the php session variable, $userid, to a javascript variable 
+                this can then be used in the FETCH POST */ 
             var userID = "<?=$userid?>";
+
+            /* pass the php session variable, $fixture1resultid, to a javascript variable - this can then be used to stop updating predictions */ 
+            var Fixture1ResultID = "<?=$fixture1resultid?>";
 
             // Change the display of the content tab from none to flex to display content
             // Hide the Groups EFGH, Knockout stage and the Update Predictions stage
@@ -2193,9 +2232,20 @@
 
                     AllowPredictionsUpdate = LastSixteenOK && QuarterFinalsOK && SemiFinalsOK && PlayoffOK && FinalOK;
 
-                   console.log(AllowPredictionsUpdate + " " + LastSixteenOK + " " + QuarterFinalsOK + " " + SemiFinalsOK + " " + PlayoffOK + " " + FinalOK);
+                   // console.log(AllowPredictionsUpdate + " " + LastSixteenOK + " " + QuarterFinalsOK + " " + SemiFinalsOK + " " + PlayoffOK + " " + FinalOK);
 
-                    if (TopScorerOK === false) {
+                    /* anything other than 6 (NPY) means the first game has started */
+                    if (Fixture1ResultID != 6) {
+                        TournamentStarted = true;
+                    }  
+
+                    if (TournamentStarted === true) {
+                        document.getElementById(tabname).style.display = "block";
+                        document.getElementById("confirm-predictions").innerHTML  = "The tournament has now begun.<br>";
+                        document.getElementById("confirm-predictions").innerHTML += "In accordance with the rules no updates to your predictions can now be accepted.<br>";
+                        document.getElementById("confirm-btn").style.display = "none";
+                        document.getElementById("confirm-save").style.display = "none";
+                    } else if (TopScorerOK === false) {
                         document.getElementById(tabname).style.display = "block";
                         document.getElementById("confirm-predictions").style.display = "block";
                         document.getElementById("confirm-predictions").innerHTML  = "You haven't selected a Top Goal Scorer and the number of goals scored.<br>";
