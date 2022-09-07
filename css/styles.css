@@ -12,14 +12,6 @@ body {
      line-height: 1.5;
 }
 
-header h1 {
-     font-size: 2.5em;
-     text-align: center;
-     color: white;
-     margin-bottom: 20px;
-     text-shadow: 2px 2px #22638E;
-}
-
 /* 
   ----------------------------------------------------------------------------------
   Each section has a GRID-AREA named after the section ID
@@ -30,46 +22,50 @@ header h1 {
     margin-top: 5px;
 } 
 
-header {
-    
-    display: grid;
+#header {
     grid-area: header;
-    grid-template-columns: 1fr 1fr 10fr 1fr 1fr;
-    grid-template-rows: auto;
-    grid-gap: 10px;
-    
-    justify-content: center;    
+}
 
-} 
-    #qatar-flag-l {
-        display: flex;
-        grid-area: qatar-flag-l;
-    }
+#header-text {
+    grid-area: header-text;
+}
 
-    #qatar-flag-r {
-        display: flex;
-        grid-area: qatar-flag-r;
-    }
+#header-text h1 {
+    color: white;
+    text-shadow: 2px 2px #e900ffd1;
+}
 
-    #qatar-flag-l img, #qatar-flag-r img {
-        width: 110px;
-    }
+#rules-container header {
 
-    header img {
-        width: 75px;
-    }
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
-    #header-text {
-        grid-area: header-text;
-        background-color: rgb(141,27,61);
-    }
+#qatar-flag-l {
+    display: flex;
+    grid-area: qatar-flag-l;
+}
 
-    #logo {
-        grid-area: logo;
-        text-align: center;
-        /* display: none;               */
-        /* hide this until a new logo is created */
-    }
+#qatar-flag-r {
+    display: flex;
+    grid-area: qatar-flag-r;
+}
+
+#qatar-flag-l img, #qatar-flag-r img {
+    width: 110px;
+}
+
+header img {
+    width: 75px;
+}
+
+#logo {
+    /* display: flex; */
+    grid-area: logo;
+    text-align: center;
+    display: none;              
+    /* hide this until a new logo is created */
+}
 
 #latest-results    { grid-area: lastest-results; }
 #top-ten-users     { grid-area: top-ten-users;  }
@@ -77,15 +73,6 @@ header {
 #upcoming-fixtures { grid-area: upcoming-fixtures; }
 #competition-stats { grid-area: competition-stats; }
 
-    #goal-stats {
-        grid-area: goal-stats;
-
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: auto;
-        grid-gap: 5px;
-
-    }
         #games-played      { grid-area: games-played; }
         #total-goals       { grid-area: total-goals;  }
         #goals-per-game    { grid-area: goals-per-game; }
@@ -132,6 +119,7 @@ header {
         border: 1px solid black;
         background-color: lightgray;
         padding: 5px;
+        margin-bottom: 10px;
     }
 
 .card-title {
@@ -339,6 +327,10 @@ table {
     margin: auto auto;
 }
 
+#user-tbl table, #goal-tbl table, .upcoming-fixtures-tbl table, .latest-results-tbl table  {
+    font-size: 0.9em;
+}
+
 th, td {
     border-left: 1px dotted black;
     border-right: 1px dotted black;
@@ -416,7 +408,7 @@ th, td {
         justify-content: center;
     }
 
-        .bar1, .bar2, .bar3 {
+        #bar1, #bar2, #bar3 {
             width: 30px;
             height: 4px;
             background-color: #333;
@@ -443,7 +435,7 @@ th, td {
             background-color: rgba(141,27,61, 0.5);
         }
 
-        .dropdown-content {
+        #dropdown-content {
             display: none;
             position: absolute;
             right: 75px;
@@ -453,7 +445,7 @@ th, td {
             z-index: 1;
         }
 
-        .dropdown-content a {
+        #dropdown-content a {
             float: none;
             color: black;
             padding: 10px 10px;
@@ -462,30 +454,493 @@ th, td {
             text-align: left;
         }
 
-        .dropdown-content a:hover {
+        #dropdown-content a:hover {
             background-color: #ddd;
         }
 
-        .dropdown:hover .dropdown-content {
+        /* .dropdown:hover .dropdown-content {
             display: block;
+        } */
+
+/* ******************************************************************************************   */
+/*                       MEDIA RULES 1200px 992ox 768px 576px                                   */
+/* ******************************************************************************************   */
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 400px or higher                               */
+/* ******************************************************************************************   */
+/*    Grid is 1 column - specify what is in each column on each row                             */
+/*    header, navigation, and footer span across 1 columns                                      */
+/*    content is spaced into each column as seen below.                                         */
+/* ******************************************************************************************   */
+/* @media screen and (max-width:552px) {                                                        */
+/* ******************************************************************************************   */
+   
+@media screen and (max-width:576px) {                   
+    
+    main {
+
+        /* background-color: lightskyblue; */
+
+        width: 98%;
+ 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto auto auto auto auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+ 
+        #qatar-flag-r {
+            display: none;
         }
 
+        header {
+            
+            display: grid;
+            grid-area: header;
+            grid-template-columns: 0.5fr 10fr 1fr 1fr;
+            grid-template-rows: auto;
+            grid-gap: 2px;
+            
+            justify-content: center;    
+
+        } 
+
+        /* header {
+            grid-template-areas:
+                "logo qatar-flag-l header-text qatar-flag-r hb-icon";
+        } */
+
+        header {
+            grid-template-areas:
+                "qatar-flag-l header-text qatar-flag-r hb-icon";
+        }
+        
+        #header-text {
+            background-color: rgb(141,27,61);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+        }
+    
+            #header-text h1 {
+                font-size: 1em;
+            }
+
+            #qatar-flag-l img, #qatar-flag-r img {
+                width: 55px;
+            }
+
+        #container {
+            grid-template-areas:
+                "header"
+                "lastest-results"
+                "upcoming-fixtures"
+                "top-ten-users"
+                "golden-boot"
+                "competition-stats"
+                "competition-rules"
+                "footer";
+        }
+     
+    #dropdown-content {
+        right: 20px;
+    }
+
+    .team, .versus {
+        font-size: 0.9em;
+    }
+
+    #goal-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        width: 96%;
+        margin: 0 auto;
+    }
+
+    #goal-stats {
+        grid-template-areas:
+            "games-played total-goals"
+            "goals-per-game top-team"
+            "top-game penalties";
+    }
+
+    #rules-container {
+        
+        grid-template-areas:
+            "header"
+            "competition-rules"
+            "footer"; 
+
+    }
+
+    #footer p {
+        font-size: 10px;
+        margin-bottom: 5px;
+    }
+
+    #footer ul li {
+        margin: 0 10px;                     /* spreads out the line items containing the social media icons */
+    }
+
+    #footer ul li a {
+        font-size: 30px;                    /* makes the icons bigger and ensure the cursor is always the pointer */
+    }
+}
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 552px or higher                               */
+/* ******************************************************************************************   */
+/*    Grid is 1 column - specify what is in each column on each row                             */
+/*    header, navigation, and footer span across 1 columns                                      */
+/*    content is spaced into each column as seen below.                                         */
+/* ******************************************************************************************   */
+/* @media screen and (max-width:768px) {                                                        */
+/* ******************************************************************************************   */
+    
+@media screen and (min-width:576px) {                   
+    
+    main {
+
+        /* background-color: yellow; */
+
+        width: 98%;
+ 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto auto auto auto auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+ 
+        header {
+            
+            display: grid;
+            grid-area: header;
+            grid-template-columns: 1fr 1fr 10fr 1fr 1fr;
+            grid-template-rows: auto;
+            grid-gap: 10px;
+            
+            justify-content: center;    
+
+        } 
+
+        #header-text {
+            background-color: rgb(141,27,61);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+        }
+        #header-text h1 {
+            font-size: 1em;
+        }
+
+        #qatar-flag-l img, #qatar-flag-r img {
+            width: 80px;
+        }
+
+    #container {
+        grid-template-areas:
+            "header"
+            "lastest-results"
+            "upcoming-fixtures"
+            "top-ten-users"
+            "golden-boot"
+            "competition-stats"
+            "competition-rules"
+            "footer";
+    }
+ 
+    header {
+        grid-template-areas:
+            "logo qatar-flag-l header-text qatar-flag-r hb-icon";
+    }
+
+    #header-text h1 {
+        font-size: 1.5em;
+    }
+
+    #dropdown-content {
+        right: 30px;
+    }
+
+    #goal-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        width: 96%;
+        margin: 0 auto;
+    }
+
+    #goal-stats {
+        grid-template-areas:
+            "games-played total-goals"
+            "goals-per-game top-team"
+            "top-game penalties";
+    }
+
+    #rules-container {
+        
+        grid-template-areas:
+            "header"
+            "competition-rules"
+            "footer"; 
+
+    }
+
+    #footer p {
+        font-size: 10px;
+        margin-bottom: 5px;
+    }
+
+    #footer ul li {
+        margin: 0 10px;                     /* spreads out the line items containing the social media icons */
+    }
+
+    #footer ul li a {
+        font-size: 30px;                    /* makes the icons bigger and ensure the cursor is always the pointer */
+    }
+}
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 768px or higher                               */
+/* ******************************************************************************************   */
+/*    Grid is 2 columns - specify what is in each column on each row                            */
+/*    header, navigation, and footer span across the 2 colums                                   */
+/*    content is spaced into each column as seen below.                                         */
+/* ******************************************************************************************   */
+/* @media screen and (max-width:992px) {                                                        */
 /* ******************************************************************************************   */
 
-/* ---------------------------------- END OF DEFAULT MEDIA RULE FOR 576 --------------------------------------------------------- */
+@media screen and (min-width:768px) {                   
+    
+    main {
 
+        /* background-color: lightblue; */
+
+        width: 98%;
+ 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+
+        header {
+            
+            display: grid;
+            grid-area: header;
+            grid-template-columns: 1fr 1fr 10fr 1fr 1fr;
+            grid-template-rows: auto;
+            grid-gap: 10px;
+            
+            justify-content: center;    
+
+        } 
+
+        #header-text {
+            background-color: rgb(141,27,61);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+        }
+        #header-text h1 {
+            font-size: 2.0em;
+        }
+
+        #qatar-flag-l img, #qatar-flag-r img {
+            width: 100px;
+        }
+
+    #dropdown-content {
+        right: 50px;
+    }
+
+    #goal-stats {
+        grid-area: goal-stats;
+        width: 98%;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+
+    }
+
+    .team, .versus {
+        font-size: 1.3em;
+    }
+
+    #footer p {
+        font-size: 13px;
+    }
+ 
+    #container{
+        grid-template-areas:
+            "header header"
+            "lastest-results upcoming-fixtures"
+            "top-ten-users golden-boot"
+            "competition-stats competition-rules"
+            "footer footer";
+    }
+ 
+    header {
+        grid-template-areas:
+            "logo qatar-flag-l header-text qatar-flag-r hb-icon";
+    }
+
+    #goal-stats {
+        grid-template-areas:
+            "games-played total-goals"
+            "goals-per-game top-team"
+            "top-game penalties";
+    }
+
+    #rules-container {
+        
+        grid-template-areas:
+            "header"
+            "competition-rules"
+            "footer"; 
+
+    }
+
+}
 
 /* ******************************************************************************************   */
-/*                       MEDIA RULES 1200px 992ox 768px 552px                                   */
+/* apply to any device that has a screen width of 992px or higher                               */
 /* ******************************************************************************************   */
+/*    Grid is 2 columns - specify what is in each column on each row                            */
+/*    header, navigation, and footer span across the 2 colums                                   */
+/*    content is spaced into each column as seen below.                                         */
+/* ******************************************************************************************   */
+/* @media screen and (max-width:1200px) {                                                       */
+/* ******************************************************************************************   */
+
+@media screen and (min-width:992px) {                   
+    
+    main {
+
+        /* background-color: lightgreen; */
+
+        width: 98%;
+ 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+ 
+        header {            
+            display: grid;
+            grid-area: header;
+            grid-template-columns: 1fr 1fr 10fr 1fr 1fr;
+            grid-template-rows: auto;
+            grid-gap: 10px;
+            justify-content: center;    
+        } 
+
+        #header-text {
+            background-color: rgb(141,27,61);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+        }
+        #header-text h1 {
+            font-size: 2.0em;
+        }
+
+        #qatar-flag-l img, #qatar-flag-r img {
+            width: 100px;
+        }
+
+    #goal-stats {
+        grid-area: goal-stats;
+        width: 98%;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+
+    }
+
+    #dropdown-content {
+        right: 50px;
+    }
+
+    #header-text h1 {
+        font-size: 2.3em;
+    }
+
+    #goal-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .team, .versus {
+        font-size: 1.3em;
+    }
+
+    #footer p {
+        font-size: 13px;
+    }
+ 
+    #container{
+        grid-template-areas:
+            "header header"
+            "lastest-results upcoming-fixtures"
+            "top-ten-users golden-boot"
+            "competition-stats competition-rules"
+            "footer footer";
+    }
+ 
+    header {
+        grid-template-areas:
+            "logo qatar-flag-l header-text qatar-flag-r hb-icon";
+    }
+
+    #goal-stats {
+        grid-template-areas:
+            "games-played total-goals"
+            "goals-per-game top-team"
+            "top-game penalties";
+    }
+
+    #rules-container {
+        
+        grid-template-areas:
+            "header"
+            "competition-rules"
+            "footer"; 
+
+    }
+
+}
 
 /* ******************************************************************************************   */
 /* apply to any device that has a screen width of 1200px or higher                              */
+/* ******************************************************************************************   */
+/*    Grid is three columns - specify what is in each column on each row                        */
+/*    header, navigation, and footer span across the 3 colums                                   */
+/*    content is spaced into each column as seen below.                                         */
 /* ******************************************************************************************   */
 
 @media screen and (min-width:1200px){                   
     
     main {
+
+        /* background-color: lightpink; */
+
         width: 98%;
  
         display: grid;
@@ -495,13 +950,51 @@ th, td {
         margin: 0 auto;
     }
  
-    /* 
-    ----------------------------------------------------------------------------------
-    Grid is three columns - specify what is in each column on each row
-    header, navigation, and footer span across the 3 colums
-    content is spaced into each column as seen below.
-    ----------------------------------------------------------------------------------
-    */
+        header {
+            
+            display: grid;
+            grid-area: header;
+            grid-template-columns: 1fr 1fr 10fr 1fr 1fr;
+            grid-template-rows: auto;
+            grid-gap: 10px;
+            
+            justify-content: center;    
+
+        } 
+
+        #header-text {
+            background-color: rgb(141,27,61);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+        }
+        #header-text h1 {
+            font-size: 2.5em;
+        }
+
+        #qatar-flag-l img, #qatar-flag-r img {
+            width: 110px;
+        }
+
+    #goal-stats {
+        grid-area: goal-stats;
+        width: 100%;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+
+    }
+
+    #rules-container {
+
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+
+    }
+
     #container{
         grid-template-areas:
             "header header header"
@@ -515,138 +1008,23 @@ th, td {
             "logo qatar-flag-l header-text qatar-flag-r hb-icon";
     }
 
+    #header-text h1 {
+        font-size: 2.5em;
+    }
+
     #goal-stats {
         grid-template-areas:
             "games-played total-goals goals-per-game"
             "top-team top-game penalties";
     }
 
-}
-
-/* ******************************************************************************************   */
-/* apply to any device that has a screen width of 992px or higher                              */
-/* ******************************************************************************************   */
-
-@media screen and (max-width:1200px){                   
-    
-    body {
-        background-color: antiquewhite;
-    }
-    main {
-        width: 98%;
- 
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto auto auto auto;
-        grid-gap: 5px;
-        margin: 0 auto;
-    }
- 
-    .transparent-btn-blue {
-        margin: 2px;
-    }
-    
-    /* 
-    ----------------------------------------------------------------------------------
-    Grid is 2 columns - specify what is in each column on each row
-    ----------------------------------------------------------------------------------
-    */
-    #container{
-        grid-template-areas:
-            "header header"
-            "lastest-results top-ten-users"
-            "golden-boot upcoming-fixtures"
-            "competition-stats competition-rules"
-            "footer footer";
-    }
- 
-}
-
-/* ******************************************************************************************   */
-/* apply to any device that has a screen width of 768px or higher                              */
-/* ******************************************************************************************   */
-
-@media screen and (max-width:992px){                   
-    
-    body {
-        background-color: burlywood;
-    }
-    main{
-        width: 98%;
- 
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto auto auto auto;
-        grid-gap: 5px;
-        margin: 0 auto;
-    }
- 
-    .transparent-btn-blue {
-        margin: 2px;
-    }
-    
-    /* 
-    ----------------------------------------------------------------------------------
-    Grid is 2 columns - specify what is in each column on each row
-    ----------------------------------------------------------------------------------
-    */
-    #container{
-        grid-template-areas:
-            "header header"
-            "lastest-results top-ten-users"
-            "golden-boot upcoming-fixtures"
-            "competition-stats competition-rules"
-            "footer footer";
-    }
- 
-}
-
-/* ******************************************************************************************   */
-/* apply to any device that has a screen width of 552px or higher                              */
-/* ******************************************************************************************   */
-
-@media screen and (max-width:768px){                   
-    
-    main{
-        width: 98%;
- 
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto auto auto auto auto auto;
-        grid-gap: 5px;
-        margin: 0 auto;
-    }
- 
-    header h1 {
-     font-size: 1.5em;
-}
-    /* 
-    ----------------------------------------------------------------------------------
-    Grid is 1 column - specify what is in each column on each row
-    ----------------------------------------------------------------------------------
-    */
-    #container{
+    #rules-container {
+        
         grid-template-areas:
             "header"
-            "lastest-results"
-            "top-ten-users"
-            "golden-boot" 
-            "upcoming-fixtures"
-            "competition-stats" 
             "competition-rules"
-            "footer";
-    }
- 
-    #footer p {
-        font-size: 10px;
-        margin-bottom: 5px;
+            "footer"; 
+
     }
 
-    #footer ul li {
-        margin: 0 10px;                     /* spreads out the line items containing the social media icons */
-    }
-
-    #footer ul li a {
-        font-size: 30px;                    /* makes the icons bigger and ensure the cursor is always the pointer */
-    }
 }

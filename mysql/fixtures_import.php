@@ -17,8 +17,11 @@
         exit("Error: " . $e->getMessage());
     };
 
+    // initialise the no of records imported
+    $recordcount = 0;
+
 // dislay starting debug timestamp
-echo (date('l jS \of F Y h:i:s A') . "<br><br>");
+// echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     
     // Prepare 
     $sql = "INSERT 
@@ -56,18 +59,17 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $groupid   = 1;                 // Group A
     $venueid   = 2;                 // Al Bayt Stadium
 
-    $hometeamid = 3;                // Sengal 
-    $awayteamid = 4;                // Netherlands
-    $dateplayed = "2022/11/21";
-    $timeplayed = "10:00";
+    $hometeamid = 1;                // Sengal 
+    $awayteamid = 2;                // Netherlands
+    $dateplayed = "2022/11/20";
+    $timeplayed = "16:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
                         
     // Next Fixture - 2
@@ -85,10 +87,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    if ( $query -> execute() === FALSE ) {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 3
@@ -98,18 +99,17 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $groupid   = 1;                 // Group A
     $venueid   = 2;                 // Al Bayt Stadium
 
-    $hometeamid = 1;                // Qatar 
-    $awayteamid = 2;                // Ecuador
+    $hometeamid = 3;                // Senegal
+    $awayteamid = 4;                // Netherlands
     $dateplayed = "2022/11/21";
     $timeplayed = "16:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 4
@@ -127,10 +127,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // ----------------------------------------------
@@ -152,12 +151,11 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
-                        
+
     // Next Fixture - 6
     ++$fixtureno;
 
@@ -173,10 +171,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    if ( $query -> execute() === FALSE ) {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture = 7
@@ -194,10 +191,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 8
@@ -215,10 +211,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // ----------------------------------------------
@@ -240,10 +235,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
                         
     // Next Fixture - 10
@@ -261,10 +255,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    if ( $query -> execute() === FALSE ) {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 11
@@ -282,10 +275,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 12
@@ -303,10 +295,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // ----------------------------------------------
@@ -328,10 +319,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
                         
     // Next Fixture - 14
@@ -349,10 +339,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    if ( $query -> execute() === FALSE ) {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 15
@@ -370,10 +359,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
  
     // Next Fixture - 16
@@ -391,10 +379,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // ----------------------------------------------
@@ -416,10 +403,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
                         
     // Next Fixture - 18
@@ -437,10 +423,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    if ( $query -> execute() === FALSE ) {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 19
@@ -458,10 +443,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 20
@@ -479,10 +463,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // ----------------------------------------------
@@ -504,10 +487,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
                         
     // Next Fixture - 22
@@ -525,10 +507,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    if ( $query -> execute() === FALSE ) {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 23
@@ -546,10 +527,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 24
@@ -567,10 +547,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // ----------------------------------------------
@@ -592,10 +571,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
                         
     // Next Fixture - 26
@@ -613,10 +591,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    if ( $query -> execute() === FALSE ) {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 27
@@ -634,10 +611,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 28
@@ -655,10 +631,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // ----------------------------------------------
@@ -680,10 +655,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
                         
     // Next Fixture - 30
@@ -701,10 +675,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    if ( $query -> execute() === FALSE ) {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 31
@@ -722,10 +695,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 32
@@ -743,10 +715,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // ----------------------------------------------
@@ -768,10 +739,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
                         
     // Next Fixture - 34
@@ -789,10 +759,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    if ( $query -> execute() === FALSE ) {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 35
@@ -810,10 +779,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 36
@@ -831,10 +799,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // ----------------------------------------------
@@ -856,10 +823,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
                         
     // Next Fixture - 38
@@ -877,10 +843,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    if ( $query -> execute() === FALSE ) {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 39
@@ -898,10 +863,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 40
@@ -911,18 +875,17 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $groupid   = 3;                 // Group C
     $venueid   = 1;                 // Lusail Stadiun
 
-    $hometeamid = 6;                // Saudia Arabia
-    $awayteamid = 7;                // Mexico
+    $hometeamid = 10;                // Saudia Arabia
+    $awayteamid = 11;                // Mexico
     $dateplayed = "2022/11/30";
-    $timeplayed = "19:00";
+    $timeplayed = "22:00";
     $homescore = NULL;
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // ----------------------------------------------
@@ -944,10 +907,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
                         
     // Next Fixture - 42
@@ -965,10 +927,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    if ( $query -> execute() === FALSE ) {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 43
@@ -986,10 +947,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 44
@@ -1007,10 +967,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // ----------------------------------------------
@@ -1032,10 +991,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
                         
     // Next Fixture - 46
@@ -1053,10 +1011,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-            echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
-            echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+    if ( $query -> execute() === FALSE ) {
+        echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 47
@@ -1074,10 +1031,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 48
@@ -1095,10 +1051,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // ---------------------------------
@@ -1120,10 +1075,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 50
@@ -1141,10 +1095,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 51
@@ -1162,10 +1115,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 52
@@ -1183,10 +1135,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 53
@@ -1204,10 +1155,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 54
@@ -1225,10 +1175,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 55
@@ -1246,10 +1195,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 56
@@ -1267,10 +1215,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // ---------------------------------
@@ -1294,10 +1241,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 58
@@ -1315,10 +1261,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 59
@@ -1336,10 +1281,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 60
@@ -1357,10 +1301,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // ---------------------------------
@@ -1382,10 +1325,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Next Fixture - 62
@@ -1403,10 +1345,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // ---------------------------------
@@ -1428,10 +1369,9 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // ---------------------------------
@@ -1453,16 +1393,16 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $awayscore = NULL;
     $resultid = 6;
     
-    if ( $query -> execute() === TRUE ) {
-        echo ("New record created - " . $fixtureno . " - " . $dateplayed . "-" . $timeplayed . "<br>");
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $query . "<br>" . " Fixture No. : " . $fixtureno . "<br>");
+        exit;
     }
 
     // Close the connection as soon as it's no longer needed
     $dbh = null;
 
 // display closing debug timestamp
-echo ("<br>" . date('l jS \of F Y h:i:s A') . "<br>");
+echo ( date('l jS \of F Y h:i:s A') . "<br>" );
+echo "Total Fixtures Imported : " . $fixtureno;
 
 ?>

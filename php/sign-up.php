@@ -103,8 +103,11 @@
 
         <div id="login-container">
             
-            <header>        
-                <?php include "../include/header2.inc.php"; ?>
+            <header>
+                <?php 
+                    $menuitems = array("Home");
+                    include '../include/header1.inc.php';
+                ?>
             </header>
 
             <div id="wrapper" class="centered">
@@ -156,6 +159,8 @@
             </footer>
 
         </div>  <!--  end of login-container div -->
+
+        <script type="text/javascript" src="../js/header1.js"></script>
 
         <script type="text/javascript">
             

@@ -371,7 +371,7 @@
                 . "              <tr>"
                 . "              <tr>"
                 . "                  <th>No.</th><th class='hidden'><th class='hidden'></th><th colspan='2'>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th>"
-                . "                  <th class='hidden'></th> <th colspan='2'>AWAY</th><th class='res-header'>Res</th><th class='res-header'>Pts</th><th class='res-header'>Bonus</th>"
+                . "                  <th class='hidden'></th> <th colspan='2'>AWAY</th><th class='res-header'>Res</th><th class='res-header'>Pts</th><th class='res-header'>Bon</th>"
                 . "              </tr>"
                 . "          </thead>"
                 . "          <tbody>" 

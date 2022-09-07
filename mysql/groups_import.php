@@ -1,117 +1,182 @@
 <?php
+
     // Include config file
     require_once "../../../.php/inc/db.worldcup.inc.php";
-         
-    // Create connection
-    $conn = mysqli_connect($servername, $username, $password, $db);
 
-    // Check connection
-    if (!$conn) {
-        die("Unable to connect to database : " . mysqli_connect_error()) . "<br>";
-    } else {
-        echo "Connected successfully" . "<br>";
+    // DB credentials as constants
+    define('DB_HOST', $servername);
+    define('DB_NAME', $db);
+    define('DB_USER', $username);
+    define('DB_PASS', $password);
+
+    // Try and establish the database connection.
+    try {
+        $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
     }
+    catch (PDOException $e) {
+        exit("Error: " . $e->getMessage());
+    };
 
-    // Prepare 
-    $insertQry = "INSERT INTO GroupStage (Code, Description) VALUES (?, ?)";
+    echo (date('l jS \of F Y h:i:s A') . "<br><br>");
 
-    $insertStatement = mysqli_prepare($conn, $insertQry);
+    // define the SQL INSERT Statement
+    $sql = "INSERT INTO GroupStage (Code, Description) VALUES (:Code, :Description)";
 
-    // Bind params
-    mysqli_stmt_bind_param($insertStatement, "ss", $code, $description);
- 
-    echo "Prepare and Bind completed" . "<br>";
+    //prepare the sql statement
+    $query = $dbh -> prepare($sql);
+
+    // bind the paramaters to the sql statement
+    $query->bindParam(':Code',        $code,        PDO::PARAM_STR);
+    $query->bindParam(':Description', $description, PDO::PARAM_STR);
 
     $code = "A";
     $description = "Group A";
     
-    if (mysqli_stmt_execute($insertStatement)) {
-        echo "New record " . $description . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $description . "<br>";
-    }
+        exit;
+    } 
 
+    // increment the recordcount
+    ++$recordcount;
+    
     $code = "B";
     $description = "Group B";
     
-    if (mysqli_stmt_execute($insertStatement)) {
-        echo "New record " . $description . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $description . "<br>";
-    }
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
 
     $code = "C";
     $description = "Group C";
     
-    if (mysqli_stmt_execute($insertStatement)) {
-        echo "New record " . $description . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $description . "<br>";
-    }
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
 
     $code = "D";
     $description = "Group D";
     
-    if (mysqli_stmt_execute($insertStatement)) {
-        echo "New record " . $description . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $description . "<br>";
-    }
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
 
     $code = "E";
     $description = "Group E";
     
-    if (mysqli_stmt_execute($insertStatement)) {
-        echo "New record " . $description . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $description . "<br>";
-    }
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
 
     $code = "F";
     $description = "Group F";
     
-    if (mysqli_stmt_execute($insertStatement)) {
-        echo "New record " . $description . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $description . "<br>";
-    }
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
+
+    $code = "G";
+    $description = "Group G";
+    
+    if ( $query -> execute() === FALSE ) {
+        echo "Failed to created record - " . $description . "<br>";
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
+
+    $code = "H";
+    $description = "Group H";
+    
+    if ( $query -> execute() === FALSE ) {
+        echo "Failed to created record - " . $description . "<br>";
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
 
     $code = "L";
     $description = "Last 16";
     
-    if (mysqli_stmt_execute($insertStatement)) {
-        echo "New record " . $description . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $description . "<br>";
-    }
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
 
     $code = "Q";
     $description = "Quarter Final";
     
-    if (mysqli_stmt_execute($insertStatement)) {
-        echo "New record " . $description . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $description . "<br>";
-    }
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
 
     $code = "S";
     $description = "Semi Final";
     
-    if (mysqli_stmt_execute($insertStatement)) {
-        echo "New record " . $description . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $description . "<br>";
-    }
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
+
+    $code = "P";
+    $description = "3rd Place Play-Off";
+    
+    if ( $query -> execute() === FALSE ) {
+        echo "Failed to created record - " . $description . "<br>";
+        exit;
+    } 
+
+    // increment the recordcount
+    ++$recordcount;
 
     $code = "N";
     $description = "Final";
     
-    if (mysqli_stmt_execute($insertStatement)) {
-        echo "New record " . $description . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $description . "<br>";
-    }
+        exit;
+    } 
 
-    mysqli_close();
+    // increment the recordcount
+    ++$recordcount;
+
+    // Close the connection as soon as it's no longer needed
+    $dbh = null;
+
+// display closing debug timestamp
+echo ( date('l jS \of F Y h:i:s A') . "<br>");
+echo "Total Groups Imported : " . $recordcount;
 
 ?>

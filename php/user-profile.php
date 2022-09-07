@@ -15,6 +15,7 @@
     // If logged in store the userid from session 
     if ( isset($_SESSION['userid']) ) {
         $userid      = $_SESSION["userid"];    
+        $username    = $_SESSION["username"]; 
         $predictions = $_SESSION["predictions"];    
     }; 
 
@@ -43,8 +44,12 @@
         
         <main id="container">
             
-            <header>        
-                <?php include "../include/header5.inc.php"; ?>
+            <header>
+                <?php 
+                    $headeritems = "username";
+                    $menuitems = array("Predictions", "Logout");
+                    include '../include/header1.inc.php';
+                ?>
             </header>
 
             <?php
@@ -255,28 +260,24 @@
             
         </main>
 
+        <script type="text/javascript" src="../js/header1.js"></script>
+
         <script>
 
+            /*  
+                pass php session variable to JS variable
+                have to pass this varaiable here as it is not recognised if it is
+                included in the header1.js file
+            */            
+            PredictionsLink = "<?=$predictions?>";                                             
+
+            /* hide any message that is displayed */
             document.getElementById("update-messages").style.display = "None";
 
             // ==================================================================
             // add CLICK event listener for the DOM
             // ==================================================================
             document.addEventListener('click', function (event) {
-
-                if (event.target.matches('#predictions-lnk')) {
-
-                    // pass php session variable to JS variable
-                    PredictionsLink = "<?=htmlspecialchars($predictions)?>";                                             
-
-                    if (PredictionsLink == 1) {
-                        window.location.href = "saved-predictions.php";
-                    } else {
-                        window.location.href = "predictions.php";
-                    }
-
-                };
-
 
                 if (event.target.matches('#update-profile-btn')) {
 

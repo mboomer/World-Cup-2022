@@ -1,24 +1,10 @@
-/* Override browsers default CSS rules  */
-/* 
-* {                                  
-    margin:0;
-    padding:0;
-    box-sizing: content-box;
-}
-
-body {
-     font-family: 'Open Sans', sans-serif;
-     background-color: white;
-     color: #34495e;
-}
-*/
-
 /* ******************************************************************************************   */
 /*                                          TABS                                                */
 /* ******************************************************************************************   */
 
     .tab {
         display: flex;
+        flex-wrap: nowrap;
         justify-content: center;
 
         overflow: hidden;
@@ -29,13 +15,10 @@ body {
 
     /* Style the buttons that are used to open the tab content */
     .tab button {
-      background-color: inherit;
-      float: left;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      padding: 10px 8px;
-      transition: 0.3s;
+        border: none;
+        padding: 10px 8px;
+        transition: 0.1s;
+        margin: 1px;
     }
 
     /* Change background color of buttons on hover */
@@ -46,21 +29,13 @@ body {
     /* Create an active/current tablink class */
     .tab button.active {
         background-color: #ccc;
-        border: 1px solid navy
+        border: 1px solid navy;
+        margin: 1px;
     }
 
     /* Style the tab content */
     .tabcontent {
         display: none;
-/*
-        flex-flow: row wrap;
-        justify-content: space-around;  
-        background: #5f9fff;
-        margin:5px 2px 15px 2px;
-        padding: 5px 5px;
-        border: 1px solid #ccc;
-        border-top: none;
-*/
     }
 
 /* 
@@ -86,211 +61,91 @@ Each section has a GRID-AREA named after the section ID
 ----------------------------------------------------------------------------------
 */
 
-#container {
-    margin-top: 5px;
-}
-
-header {
-    
-    /* display: grid;
-    grid-area: header; */
-    grid-template-columns: 1fr 1fr 10fr 1fr 1fr 1fr;
-    margin-bottom: 5px;
-    /* grid-template-rows: auto;
-    grid-gap: 10px;
-    justify-content: center;     */
-
-} 
-/* 
-    header h1 {
-        font-size: 2.5em;
-        text-align: center;
-        color: white;
-        margin-bottom: 20px;
-        text-shadow: 2px 2px #22638E;
-    }
-
-    header img {
-        width: 75px;
-    }
- */
-
-    #username {
-        grid-area: username;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        text-align: center;
-        font-size: 0.8em;
-        font-weight: bold;
-        padding: 3px;
-        border: 1px solid darkgray;
-        background-color: rgba(141,27,61, 0.5);
-    }
-
-    #logo {
-        text-align: center;
-    }
-
-    /* /* 
-    ----------------------------------------------------------------------------------
-    Hamburger Drop Down Menu
-    ----------------------------------------------------------------------------------
-    */
-    /* #hb-icon {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 40%;
-    }
-
-        #hb-icon:hover {
-            background-color: white;
-        }
-
-        .bar1, .bar2, .bar3 {
-            width: 30px;
-            height: 4px;
-            background-color: #333;
-            margin: 2px 0;
-        }
-
-        .dropdown {
-            float: left;
-            overflow: hidden;
-        }
-
-        .dropdown {
-            font-size: 14px;  
-            border: none;
-            outline: none;
-            color: white;
-            padding: 10px 10px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 75px;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            float: none;
-            color: black;
-            padding: 10px 10px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        } */
-
-nav {
-    grid-area: nav;
-}
-
-#tabs {
-    grid-area: tabs;
-    width: 100%;
-    margin: 5px auto;
+#logo {
+    text-align: center;
 }
 
 #logout {
     text-align: center;
 }
 
-#tournament {
-    grid-area: tournament;
+#username {
+    grid-area: username;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 3px;
+    border: 1px solid darkgray;
+    background-color: rgba(141,27,61, 0.5);
 }
 
-#GROUPS-ABCD {
-    grid-area: GROUPS-ABCD;
-}
-#GROUPS-EFGH {
-    grid-area: GROUPS-EFGH;
-}
-
-        #team-header {
-            grid-area: team-header;
-            background-color: white;
-        }
-
-        #GroupA, #GroupB, #GroupC, #GroupD, #GroupE, #GroupF, #GroupG, #GroupH  { width: 50%; }    
-        #TableA, #TableB, #TableC, #TableD, #TableE, #TableF, #TableG, #TableH  { width: 50%; }    
-    
-        #GroupA { grid-area: GroupA; }
-        #TableA { grid-area: TableA; }
-
-        #GroupB { grid-area: GroupB; }
-        #TableB { grid-area: TableB; }
-
-        #GroupC { grid-area: GroupC; }
-        #TableC { grid-area: Tablec; }
-
-        #GroupD { grid-area: GroupD; }
-        #TableD { grid-area: TableD; }
-
-        #GroupE { grid-area: GroupE; }
-        #TableE { grid-area: TableE; }
-
-        #GroupF { grid-area: GroupF; }
-        #TableF { grid-area: TableF; }
-
-        #GroupG { grid-area: GroupG; }
-        #TableG { grid-area: TableG; }
-
-        #GroupH { grid-area: GroupH; }
-        #TableH { grid-area: TableH; }
-
-#KNOCKOUT-STAGE {    
-    grid-area: KNOCKOUT-STAGE;
-    }    
-        #Last16 {
-            grid-area: Last16;
-        }
-        #QuarterFinal {
-            grid-area: QuarterFinal;
-        }
-        #SemiFinal {
-            grid-area: SemiFinal;
-        }
-
-#FINALS-STAGE {    
-    grid-area: FINALS-STAGE;
-    }    
-        #Playoff {
-            grid-area: Playoff;
-        }
-        #Final {
-            grid-area: Final;
-        }
-
-#TOP-SCORER {
-    grid-area: TOP-SCORER;
+#tabs {
+    grid-area: tabs;
+    width: 98%;
+    margin: 5px auto;
 }
 
-    #top-goal-scorer {
-        display: grid;
-        grid-template-columns: 3fr 2fr;
-        grid-template-rows: auto;
-        margin: 1% 2%;
+#tournament { grid-area: tournament; }
+
+    #GROUPS-ABCD { grid-area: GROUPS-ABCD; }
+
+        #SectionA { grid-area: SectionA; }
+            #GroupA { grid-area: GroupA; }
+            #TableA { grid-area: TableA; }
+
+        #SectionB { grid-area: SectionB; }
+            #GroupB { grid-area: GroupB; }
+            #TableB { grid-area: TableB; }
+
+        #SectionC { grid-area: SectionC; }
+            #GroupC { grid-area: GroupC; }
+            #TableC { grid-area: TableC; }
+
+        #SectionD { grid-area: SectionD; }
+            #GroupD { grid-area: GroupD; }
+            #TableD { grid-area: TableD; }
+
+    #GROUPS-EFGH { grid-area: GROUPS-EFGH; }
+
+        #SectionE { grid-area: SectionE; }
+            #GroupE { grid-area: GroupE; }
+            #TableE { grid-area: TableE; }
+
+        #SectionF { grid-area: SectionF; }
+            #GroupF { grid-area: GroupF; }
+            #TableF { grid-area: TableF; }
+
+        #SectionG { grid-area: SectionG; }
+            #GroupG { grid-area: GroupG; }
+            #TableG { grid-area: TableG; }
+
+        #SectionH { grid-area: SectionH; }
+            #GroupH { grid-area: GroupH; }
+            #TableH { grid-area: TableH; }
+
+            #GroupA, #GroupB, #GroupC, #GroupD, #GroupE, #GroupF, #GroupG, #GroupH  { width: 50%; }    
+            #TableA, #TableB, #TableC, #TableD, #TableE, #TableF, #TableG, #TableH  { width: 50%; }    
+
+    #team-header {
+        grid-area: team-header;
+        background-color: white;
     }
+
+#KNOCKOUT-STAGE { grid-area: KNOCKOUT-STAGE; }    
+        #Last16       {grid-area: Last16;}
+        #QuarterFinal {grid-area: QuarterFinal;}
+        #SemiFinal    {grid-area: SemiFinal;}
+
+#FINALS-STAGE {grid-area: FINALS-STAGE;}    
+        #Playoff {grid-area: Playoff;}
+        #Final {grid-area: Final;}
+
+#TOP-SCORER {grid-area: TOP-SCORER;}
 
     #top-scorer-instructions {
         padding: 10px;
@@ -399,16 +254,6 @@ nav {
 
             grid-area: update-btn;            
 
-            /* border: 0;
-            line-height: 2.5;
-            padding: 0 20px;
-            font-size: 1rem;
-            text-align: center;
-            color: #fff;
-            text-shadow: 1px 1px 1px #000;
-            border-radius: 10px;
-            background-color: #3498db; */
-
             padding: 10px 10px; 
             margin: 10px;
             color: navy;                     
@@ -416,14 +261,12 @@ nav {
             text-decoration: none; 
             font-size: 14px; 
             line-height: 120%; 
-            /* background-color: rgba(0,0,255, 0.6);  */
             border-radius: 2px; 
             transition: background-color 300ms ease; 
             cursor: pointer; 
         }
 
         #update-btn:hover, #save-btn:hover {
-            /* background-color: cadetblue; */
             box-shadow: 5px 5px 5px lightblue;
             color: #000; 
         }
@@ -432,35 +275,20 @@ nav {
             border-color: black;           
         }
 
-#RESULTS-PREDICTIONS {
-    grid-area: RESULTS-PREDICTIONS;
-}
-    #results-predictions {
-        grid-area: results-predictions;
-    }
+#RESULTS-PREDICTIONS {grid-area: RESULTS-PREDICTIONS;}
+    #results-predictions {grid-area: results-predictions;}
+        #results {grid-area : results;}
 
-        #results {
-            grid-area : results;
-        }
+            #results-tbl       {width: 100%;}
+            #results-tbl table {width: 99%;}
 
-            #results-tbl {
-                width: 100%;
-                /* background-color: skyblue; */
+        #predictions {grid-area : predictions;}
+            #predictions-tbl table {width: 99%;}
+            #predictions-tbl table .home, #predictions-tbl table .away {
+                width: 24%;
             }
 
-            #results-tbl table {
-                width: 99%;
-            }
-
-        #predictions {
-            grid-area : predictions;
-
-        }
-            #predictions-tbl table {
-                width: 99%;
-                /* background-color: skyblue; */
-            }
-
+    /* define colors to identify the different tournament stages */
     .ls-color {
         background: lightpink;
     }
@@ -476,18 +304,6 @@ nav {
     .fi-color {
         background: lightgreen;
     }
-
-footer {
-    grid-area: footer;
-
-    display: flex;                                  /* display UL, P & P elements vertically and center them */
-    flex-direction: column;
-    align-items: center;
-
-    background: linear-gradient(to bottom, lightgrey, #000 100%);
-    color: white;
-    padding-top: 10px;
-}
 
 /* ******************************************************************************************   */
 /*                                          IMAGES                                              */
@@ -518,19 +334,8 @@ tbody {
 }
 
 table {
-    /* font-size: 0.75em; */
     width: 98%;
-    /* padding: 2px;
-    text-align: center;    
-    border: 1px dotted black;
-    margin: auto auto; */
 }
-
-/* th, td {
-    border-left: 1px dotted black;
-    border-right: 1px dotted black;
-    border-bottom: 1px dotted black;
-} */
 
 .pos, .fixno, .predno {
     width: 6%;
@@ -596,21 +401,23 @@ table {
 }
 
 .results-home-flag, .results-away-flag {
-    width: 6.5%
+    width: 85%;
+    display: flex;
+    justify-content: center;
 }
 
 .predictions-home-flag, .predictions-away-flag {
-    width: 4%
+    width: 85%;
+    display: flex;
+    justify-content: center;
 }
 
 .results-home-flag img, .results-away-flag img {
     width: 82%;
-    text-align: center;
 }
 
 .predictions-home-flag img, .predictions-away-flag img {
     width: 82%;
-    text-align: center;
 }
 
 #playerheader {
@@ -662,27 +469,339 @@ input {
 }
 
 
-/* ---------------------------------- END OF DEFAULT MEDIA RULE FOR 576 --------------------------------------------------------- */
-
-
 /* ******************************************************************************************   */
-/*                       MEDIA RULES 1200px 992ox 768px 552px                                   */
+/*                       MEDIA RULES 1200px 992ox 768px 576px                                   */
 /* ******************************************************************************************   */
 
 /* ******************************************************************************************   */
-/* apply to any device that has a screen width of 1200px or higher                              */
+/* apply to any device that has a screen width of 576px or higher                               */
 /* ******************************************************************************************   */
 
-@media screen and (min-width:1200px) {                   
+@media screen and (max-width:576px) {                   
     
+
     main {
-        width: 96%;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+    }
+  
+    #tournament {
+        width: 98%;
+        margin: 0 auto;        
+    }
+
+    #container {
+        grid-template-areas:
+            "header"
+            "tabs"
+            "tournament"
+            "footer";
+    }
+
+    .tab {
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    /* Style the buttons that are used to open the tab content */
+    .tab button {
+        padding: 4px 4px;
+    }
+    
+    #qatar-flag-r {
+        display: none;
+    }
+
+    header {
+        grid-template-areas:
+            "qatar-flag-l header-text username hb-icon";
+    }
  
+    header {
+        
+        display: grid;
+        grid-area: header;
+        grid-template-columns: 1fr 10fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 2px;
+        justify-content: center;    
+
+    } 
+        header h1 {
+            font-size: 1.2em;
+            text-align: center;
+            color: white;
+            /* margin-bottom: 10px; */
+            text-shadow: 2px 2px #22638E;
+        }
+        header img {
+            width: 75px;
+        }
+ 
+    .home, .away {
+        width: 20%;
+        padding-right: 2px;
+        padding-left: 2px;
+        font-size: 1em;
+    }
+
+    .team {
+        width: 25%;
+        padding-left: 2px;
+        text-align: left;
+        font-size: 1em; 
+    }
+
+    section {
+        padding: 0px;
+    }
+    
+    #GROUPS-ABCD {
+
+        grid-template-areas:
+            "SectionA"
+            "SectionB"
+            "SectionC"
+            "SectionD"
+    }
+        #SectionA {
+            grid-template-areas:
+                "GroupA"
+                "TableA";
+        }
+        #SectionB {
+            grid-template-areas:
+                "GroupB"
+                "TableB";
+        }
+        #SectionC {
+            grid-template-areas:
+                "GroupC"
+                "TableC";
+        }
+        #SectionD {
+            grid-template-areas:
+                "GroupD"
+                "TableD";
+        }
+
+    #GROUPS-EFGH {
+
+        grid-template-areas:
+            "SectionE"
+            "SectionF"
+            "SectionG"
+            "SectionH"
+    }
+        #SectionE {
+            grid-template-areas:
+                "GroupE"
+                "TableE";
+        }
+        #SectionF {
+            grid-template-areas:
+                "GroupF"
+                "TableF";
+        }
+        #SectionG {
+            grid-template-areas:
+                "GroupG"
+                "TableG";
+        }
+        #SectionH {
+            grid-template-areas:
+                "GroupH"
+                "TableH";
+        }
+
+    #GROUPS-ABCD, #GROUPS-EFGH {
+
+        width: 100%;
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 10vh auto auto;
+        grid-template-rows: auto;
         grid-gap: 5px;
         margin: 0 auto;
+    }
+
+        #TableA, #TableB, #TableC, #TableD, #TableE, #TableF, #TableG, #TableH {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #SectionA, #SectionB, #SectionC, #SectionD, #SectionE, #SectionF, #SectionG, #SectionH {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #GroupA, #GroupB, #GroupC, #GroupD, #GroupE, #GroupF, #GroupG, #GroupH  { width: 100%; margin-bottom: 5px;}    
+        #TableA, #TableB, #TableC, #TableD, #TableE, #TableF, #TableG, #TableH  { width: 100%; }    
+
+    #KNOCKOUT-STAGE {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 3px;
+        margin: 0 auto;
+
+        grid-template-areas:
+            "LS"
+            "QF"
+            "SF";
+    }
+
+        #LS, #QF, #SF {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+    #FINALS-STAGE {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 3px;
+        margin: 0 auto;
+        width: 98%;
+
+        grid-template-areas:
+            "PL"
+            "FL";
+    }
+
+        #PL, #FL {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+    #top-scorer-instructions {
+        padding: 4px;
+        font-size: 0.8em;
+    }
+
+    #top-scorer-selections table {
+        width: 100%;
+    }
+
+    #team-flags {
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+
+        text-align: center;
+        font-size: 0.7em;
+
+    }
+        #team-flags div {
+            text-align: center;
+        }
+
+        #team-flags a {
+            text-decoration: none;
+        }
+
+        #team-flags img {
+            width: 75%;
+        }
+
+        #team-flags img:hover {
+            box-shadow: 5px 5px 5px lightgreen;
+        }
+
+    #UPDATE-PREDICTIONS, #SAVE-PREDICTIONS {
+
+        display: block;
+        width: 100%;
+        padding: 0px;
+    }
+
+        #chkbox-error {
+            display: none;
+            font-style: italic;
+            text-align: center;
+            padding: 10px;
+            color: red;
+        }
+
+        input[type="checkbox"] {
+                width: 5%;
+            }
+
+        #save-predictions {
+                padding: 10px;
+            }
+
+            #confirm-predictions {
+                margin-top: 10px;
+                box-shadow: 5px 5px 5px lightblue;
+                border: 1px solid green;
+            }
+
+            #confirm-save {
+
+                grid-area: confirm-save;            
+                padding: 10px;
+                text-align: center;
+            }    
+            #confirm-btn {
+
+                display: flex;
+                justify-content: center;
+                
+            }    
+            
+    #RESULTS-PREDICTIONS {
+        display: flex;
+    }
+
+        #results-predictions {
+
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            grid-gap: 5px;
+            margin: 0 auto;
+
+            grid-template-areas:
+                "predictions"
+                "results";
+        }
+
+        #predictions-tbl table {
+            width: 100%;
+            font-size: 0.65em;
+        }
+
+        #predictions-tbl table .home, #predictions-tbl table .away {
+            width: 20%;
+        }
+
+} 
+/** end of @media screen and (max-width:576px) */
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 576px or higher                               */
+/* ******************************************************************************************   */
+
+@media screen and (min-width:576px) {                   
+    
+    #tournament {
+        width: 98%;
+        margin: 0 auto;        
+    }
+
+    main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
     }
   
     #container {
@@ -693,14 +812,702 @@ input {
             "footer";
     }
 
+    .tab {
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    /* Style the buttons that are used to open the tab content */
+    .tab button {
+        padding: 4px 4px;
+    }
+    
+    #qatar-flag-r {
+        display: none;
+    }
+
+    header {
+        grid-template-areas:
+            "qatar-flag-l header-text username hb-icon";
+    }
+ 
+    header {
+        
+        display: grid;
+        grid-area: header;
+        grid-template-columns: 1fr 10fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 2px;
+        justify-content: center;    
+
+    } 
+        header h1 {
+            font-size: 1.2em;
+            text-align: center;
+            color: white;
+            /* margin-bottom: 10px; */
+            text-shadow: 2px 2px #22638E;
+        }
+        header img {
+            width: 75px;
+        }
+ 
+    .home, .away {
+        width: 20%;
+        padding-right: 2px;
+        padding-left: 2px;
+        font-size: 1em;
+    }
+
+    .team {
+        width: 25%;
+        padding-left: 2px;
+        text-align: left;
+        font-size: 1em; 
+    }
+
+    section {
+        padding: 0px;
+    }
+    
+    #GROUPS-ABCD {
+
+        grid-template-areas:
+            "SectionA"
+            "SectionB"
+            "SectionC"
+            "SectionD"
+    }
+        #SectionA {
+            grid-template-areas:
+                "GroupA"
+                "TableA";
+        }
+        #SectionB {
+            grid-template-areas:
+                "GroupB"
+                "TableB";
+        }
+        #SectionC {
+            grid-template-areas:
+                "GroupC"
+                "TableC";
+        }
+        #SectionD {
+            grid-template-areas:
+                "GroupD"
+                "TableD";
+        }
+
+    #GROUPS-EFGH {
+
+        grid-template-areas:
+            "SectionE"
+            "SectionF"
+            "SectionG"
+            "SectionH"
+    }
+        #SectionE {
+            grid-template-areas:
+                "GroupE"
+                "TableE";
+        }
+        #SectionF {
+            grid-template-areas:
+                "GroupF"
+                "TableF";
+        }
+        #SectionG {
+            grid-template-areas:
+                "GroupG"
+                "TableG";
+        }
+        #SectionH {
+            grid-template-areas:
+                "GroupH"
+                "TableH";
+        }
+
+    #GROUPS-ABCD, #GROUPS-EFGH {
+
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+
+        #TableA, #TableB, #TableC, #TableD, #TableE, #TableF, #TableG, #TableH {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #SectionA, #SectionB, #SectionC, #SectionD, #SectionE, #SectionF, #SectionG, #SectionH {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #GroupA, #GroupB, #GroupC, #GroupD, #GroupE, #GroupF, #GroupG, #GroupH  { width: 100%; margin-bottom: 5px;}    
+        #TableA, #TableB, #TableC, #TableD, #TableE, #TableF, #TableG, #TableH  { width: 100%; }    
+
+    #KNOCKOUT-STAGE {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 3px;
+        margin: 0 auto;
+
+        grid-template-areas:
+            "LS"
+            "QF"
+            "SF";
+    }
+
+        #LS, #QF, #SF {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+    #FINALS-STAGE {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 3px;
+        margin: 0 auto;
+        width: 98%;
+
+        grid-template-areas:
+            "PL"
+            "FL";
+    }
+
+        #PL, #FL {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+    #top-scorer-instructions {
+        padding: 4px;
+        font-size: 0.8em;
+    }
+
+    #top-scorer-selections table {
+        width: 100%;
+    }
+
+    #team-flags {
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+
+        text-align: center;
+        font-size: 0.7em;
+
+    }
+        #team-flags div {
+            text-align: center;
+        }
+
+        #team-flags a {
+            text-decoration: none;
+        }
+
+        #team-flags img {
+            width: 75%;
+        }
+
+        #team-flags img:hover {
+            box-shadow: 5px 5px 5px lightgreen;
+        }
+
+    #UPDATE-PREDICTIONS, #SAVE-PREDICTIONS {
+        width: 98%;        
+        display: block;
+        padding: 0px;
+    }
+
+        #chkbox-error {
+            display: none;
+            font-style: italic;
+            text-align: center;
+            padding: 10px;
+            color: red;
+        }
+
+        input[type="checkbox"] {
+                width: 5%;
+            }
+
+        #save-predictions {
+                padding: 10px;
+            }
+
+            #confirm-predictions {
+                margin-top: 10px;
+                box-shadow: 5px 5px 5px lightblue;
+                border: 1px solid green;
+            }
+
+            #confirm-save {
+
+                grid-area: confirm-save;            
+                padding: 10px;
+                text-align: center;
+            }    
+            #confirm-btn {
+
+                display: flex;
+                justify-content: center;
+                
+            }    
+            
+    #RESULTS-PREDICTIONS {
+        display: flex;
+    }
+
+        #results-predictions {
+
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            grid-gap: 5px;
+            margin: 0 auto;
+
+            grid-template-areas:
+                "predictions"
+                "results";
+        }
+
+        #predictions-tbl table {
+            width: 100%;
+            font-size: 0.65em;
+        }
+
+        #predictions-tbl table .home, #predictions-tbl table .away {
+            width: 20%;
+        }
+
+} 
+/** end of @media screen and (min-width:576px) */
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 768px or higher                               */
+/* ******************************************************************************************   */
+
+@media screen and (min-width:768px) {                   
+    
+    main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+    }
+  
+    #tournament {
+        width: 80%;
+        margin: 0 auto;        
+    }
+    
+    #container {
+        grid-template-areas:
+            "header"
+            "tabs"
+            "tournament"
+            "footer";
+    }
+
+    .tab {
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    /* Style the buttons that are used to open the tab content */
+    .tab button {
+        padding: 8px 6px;
+    }
+    
+    #qatar-flag-r {
+        display: none;
+    }
+
+    header {
+        grid-template-areas:
+            "qatar-flag-l header-text username hb-icon";
+    }
+ 
+    header {
+        
+        display: grid;
+        grid-area: header;
+        grid-template-columns: 1fr 10fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 2px;
+        justify-content: center;    
+
+    } 
+        header h1 {
+            font-size: 1.2em;
+            text-align: center;
+            color: white;
+            /* margin-bottom: 10px; */
+            text-shadow: 2px 2px #22638E;
+        }
+        header img {
+            width: 75px;
+        }
+ 
+    .home, .away {
+        width: 26%;
+        padding-right: 4px;
+        padding-left: 4px;
+        font-size: 1.1em;
+    }
+
+    .team {
+        width: 25%;
+        padding-left: 2px;
+        text-align: left;
+        font-size: 1em; 
+    }
+
+    section {
+        padding: 0px;
+    }
+    
+    #GROUPS-ABCD {
+
+        grid-template-areas:
+            "SectionA"
+            "SectionB"
+            "SectionC"
+            "SectionD"
+    }
+        #SectionA {
+            grid-template-areas:
+                "GroupA"
+                "TableA";
+        }
+        #SectionB {
+            grid-template-areas:
+                "GroupB"
+                "TableB";
+        }
+        #SectionC {
+            grid-template-areas:
+                "GroupC"
+                "TableC";
+        }
+        #SectionD {
+            grid-template-areas:
+                "GroupD"
+                "TableD";
+        }
+
+    #GROUPS-EFGH {
+
+        grid-template-areas:
+            "SectionE"
+            "SectionF"
+            "SectionG"
+            "SectionH"
+    }
+        #SectionE {
+            grid-template-areas:
+                "GroupE"
+                "TableE";
+        }
+        #SectionF {
+            grid-template-areas:
+                "GroupF"
+                "TableF";
+        }
+        #SectionG {
+            grid-template-areas:
+                "GroupG"
+                "TableG";
+        }
+        #SectionH {
+            grid-template-areas:
+                "GroupH"
+                "TableH";
+        }
+
+    #GROUPS-ABCD, #GROUPS-EFGH {
+
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+
+        #TableA, #TableB, #TableC, #TableD, #TableE, #TableF, #TableG, #TableH {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #SectionA, #SectionB, #SectionC, #SectionD, #SectionE, #SectionF, #SectionG, #SectionH {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #GroupA, #GroupB, #GroupC, #GroupD, #GroupE, #GroupF, #GroupG, #GroupH  { width: 100%; margin-bottom: 5px;}    
+        #TableA, #TableB, #TableC, #TableD, #TableE, #TableF, #TableG, #TableH  { width: 100%; }    
+
+    #KNOCKOUT-STAGE {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 3px;
+        margin: 0 auto;
+
+        grid-template-areas:
+            "LS"
+            "QF"
+            "SF";
+    }
+
+        #LS, #QF, #SF {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+    #FINALS-STAGE {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 3px;
+        margin: 0 auto;
+        width: 98%;
+
+        grid-template-areas:
+            "PL"
+            "FL";
+    }
+
+        #PL, #FL {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+    #top-scorer-instructions {
+        padding: 4px;
+        font-size: 0.8em;
+    }
+
+    #top-scorer-selections {
+        margin: 10px;
+    }
+
+    #top-scorer-selections table {
+        width: 100%;
+    }
+
+    #team-flags {
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+
+        text-align: center;
+        font-size: 0.7em;
+
+    }
+        #team-flags div {
+            text-align: center;
+        }
+
+        #team-flags a {
+            text-decoration: none;
+        }
+
+        #team-flags img {
+            width: 75%;
+        }
+
+        #team-flags img:hover {
+            box-shadow: 5px 5px 5px lightgreen;
+        }
+
+    #UPDATE-PREDICTIONS, #SAVE-PREDICTIONS {
+        width: 98%;        
+        display: block;
+        padding: 0px;
+    }
+
+        #chkbox-error {
+            display: none;
+            font-style: italic;
+            text-align: center;
+            padding: 10px;
+            color: red;
+        }
+
+        input[type="checkbox"] {
+                width: 5%;
+            }
+
+        #save-predictions {
+                padding: 10px;
+            }
+
+            #confirm-predictions {
+                margin-top: 10px;
+                box-shadow: 5px 5px 5px lightblue;
+                border: 1px solid green;
+            }
+
+            #confirm-save {
+
+                grid-area: confirm-save;            
+                padding: 10px;
+                text-align: center;
+            }    
+            #confirm-btn {
+
+                display: flex;
+                justify-content: center;
+                
+            }    
+            
+    #RESULTS-PREDICTIONS {
+        display: flex;
+    }
+
+        #results-predictions {
+
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            grid-gap: 5px;
+            margin: 0 auto;
+
+            grid-template-areas:
+                "predictions"
+                "results";
+        }
+
+        #predictions-tbl table {
+            width: 100%;
+            font-size: 0.65em;
+        }
+
+        #predictions-tbl table .home, #predictions-tbl table .away {
+            width: 24%;
+            font-size: 1.2em;
+        }
+
+} 
+/** end of @media screen and (min-width:768px) */
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 992px or higher                              */
+/* ******************************************************************************************   */
+
+@media screen and (min-width:992px) {                   
+
+    main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+    }
+  
+    #tournament {
+        width: 98%;
+        margin: 0 auto;        
+    }
+
+    #container {
+        grid-template-areas:
+            "header"
+            "tabs"
+            "tournament"
+            "footer";
+    }
+
+    .tab {
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+
+    .tab button {
+        border: none;
+        padding: 10px 8px;
+        transition: 0.1s;
+        margin: 1px;
+    }
+
     header {
         grid-template-areas:
             "logo qatar-flag-l header-text qatar-flag-r username hb-icon";
     }
  
+    header {
+        
+        display: grid;
+        grid-area: header;
+        grid-template-columns: 1fr 1fr 10fr 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 10px;
+        justify-content: center;    
+
+    } 
+        #qatar-flag-r {
+            display: flex;
+        }
+        header h1 {
+            font-size: 2.5em;
+            text-align: center;
+            color: white;
+            /* margin-bottom: 20px; */
+            text-shadow: 2px 2px #22638E;
+        }
+        header img {
+            width: 75px;
+        }
+
+        #KNOCKOUT-STAGE .home, #KNOCKOUT-STAGE .away {
+            width: 20%;
+            padding-right: 3px;
+            padding-left: 3px;
+            font-size: 0.9em;
+        }  
+
+        .home, .away {
+            width: 24%;
+            padding-right: 3px;
+            padding-left: 3px;
+            /* font-size: 1.1em; */
+        }
+
+        .team {
+            width: 30%;
+            padding-left: 3px;
+            text-align: left;
+            font-size: 1.1em;
+        }
+
     #GROUPS-ABCD, #GROUPS-EFGH {
 
-        width: 90%;
+        width: 98%;
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: auto;
@@ -763,7 +1570,7 @@ input {
         grid-template-rows: 25vh;
         grid-gap: 3px;
         margin: 0 auto;
-        width: 90%;
+        width: 98%;
 
         grid-template-areas:
             "PL FL"
@@ -775,6 +1582,15 @@ input {
             justify-content: space-between;
             align-items: center;
         }
+
+    #top-scorer-instructions {
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    #top-scorer-selections table {
+        width: 90%;
+    }
 
     #team-flags {
 
@@ -804,7 +1620,19 @@ input {
             box-shadow: 5px 5px 5px lightgreen;
         }
 
-    #SAVE-PREDICTIONS {
+    #top-goal-scorer {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        grid-template-rows: auto;
+        margin: 1% 2%;
+    }
+
+
+#UPDATE-PREDICTIONS, #SAVE-PREDICTIONS {
+    width: 50%;        
+}
+
+#SAVE-PREDICTIONS {
 
         display: block;
     }
@@ -844,29 +1672,304 @@ input {
                 
             }    
             
-            #save-btn {
+    #RESULTS-PREDICTIONS {
+        display: flex;
+    }
 
-                /* grid-area: confirm-btn;            
+        #results-predictions {
 
-                border: 0;
-                line-height: 2.5;
-                padding: 0 20px;
-                font-size: 1rem;
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            grid-template-rows: auto;
+            grid-gap: 5px;
+            margin: 0 auto;
+
+            grid-template-areas:
+                "results predictions";
+        }
+
+        #predictions-tbl table {
+            width: 100%;
+            font-size: 0.63em;
+        }
+
+        #predictions-tbl table .home, #predictions-tbl table .away {
+            width: 24%;
+        }
+
+        #predictions-home-flag img,  #predictions-away-flag img {
+            width: 79%;
+        }        
+
+        .results-home-flag img, .results-away-flag img {
+            width: 78%;
+        }
+
+        .results-home-flag, .results-away-flag {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+} 
+/** end of @media screen and (min-width:992px) */
+
+
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 1200px or higher                              */
+/* ******************************************************************************************   */
+
+@media screen and (min-width:1200px) {                   
+    
+    main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+    }
+  
+    #tournament {
+        width: 98%;
+        margin: 0 auto;        
+    }
+
+    #container {
+        grid-template-areas:
+            "header"
+            "tabs"
+            "tournament"
+            "footer";
+    }
+
+    .tab {
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+
+    .tab button {
+        border: none;
+        padding: 10px 8px;
+        transition: 0.1s;
+        margin: 1px;
+    }
+
+    header {
+        grid-template-areas:
+            "logo qatar-flag-l header-text qatar-flag-r username hb-icon";
+    }
+ 
+    header {
+        
+        display: grid;
+        grid-area: header;
+        grid-template-columns: 1fr 1fr 10fr 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 10px;
+        justify-content: center;    
+
+    } 
+        #qatar-flag-r {
+            display: flex;
+        }
+        header h1 {
+            font-size: 2.5em;
+            text-align: center;
+            color: white;
+            /* margin-bottom: 20px; */
+            text-shadow: 2px 2px #22638E;
+        }
+        header img {
+            width: 75px;
+        }
+
+        .home, .away {
+            width: 26%;
+            padding-right: 5px;
+            padding-left: 5px;
+            font-size: 1.2em;
+        }
+
+        .team {
+            width: 30%;
+            padding-left: 5px;
+            text-align: left;
+            font-size: 1.2em;
+        }
+
+    #GROUPS-ABCD, #GROUPS-EFGH {
+
+        width: 98%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+
+    #GROUPS-ABCD {
+
+        grid-template-areas:
+            "SectionA"
+            "SectionB"
+            "SectionC"
+            "SectionD"
+    }
+
+    #GROUPS-EFGH {
+
+        grid-template-areas:
+            "SectionE"
+            "SectionF"
+            "SectionG"
+            "SectionH"
+    }
+    
+        #TableA, #TableB, #TableC, #TableD, #TableE, #TableF, #TableG, #TableH {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #SectionA, #SectionB, #SectionC, #SectionD, #SectionE, #SectionF, #SectionG, #SectionH {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+    #KNOCKOUT-STAGE {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 3px;
+        margin: 0 auto;
+
+        grid-template-areas:
+            "LS QF SF"
+    }
+
+        #KNOCKOUT-STAGE .home, #KNOCKOUT-STAGE .away {
+            width: 26%;
+            padding-right: 5px;
+            padding-left: 5px;
+            font-size: 1.2em;
+        }
+
+        #LS, #QF, #SF {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+    #FINALS-STAGE {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 25vh;
+        grid-gap: 3px;
+        margin: 0 auto;
+        width: 98%;
+
+        grid-template-areas:
+            "PL FL"
+    }
+
+        #PL, #FL {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+    #top-scorer-instructions {
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    #top-scorer-selections table {
+        width: 60%;
+    }
+
+    #team-flags {
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+
+        text-align: center;
+        font-size: 0.7em;
+
+    }
+        #team-flags div {
+            text-align: center;
+        }
+
+        #team-flags a {
+            text-decoration: none;
+        }
+
+        #team-flags img {
+            width: 75%;
+        }
+
+        #team-flags img:hover {
+            box-shadow: 5px 5px 5px lightgreen;
+        }
+
+    #top-goal-scorer {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        grid-template-rows: auto;
+        margin: 1% 2%;
+    }
+
+
+#UPDATE-PREDICTIONS, #SAVE-PREDICTIONS {
+    width: 50%;        
+}
+
+#SAVE-PREDICTIONS {
+
+        display: block;
+    }
+
+        #chkbox-error {
+            display: none;
+            font-style: italic;
+            text-align: center;
+            padding: 10px;
+            color: red;
+        }
+
+        input[type="checkbox"] {
+                width: 5%;
+            }
+
+        #save-predictions {
+                padding: 10px;
+            }
+
+            #confirm-predictions {
+                margin-top: 10px;
+                box-shadow: 5px 5px 5px lightblue;
+                border: 1px solid green;
+            }
+
+            #confirm-save {
+
+                grid-area: confirm-save;            
+                padding: 10px;
                 text-align: center;
-                color: #fff;
-                text-shadow: 1px 1px 1px #000;
-                border-radius: 10px;
-                background-color: #3498db; */
-            }
+            }    
+            #confirm-btn {
 
-            #save-btn:hover {
-                /* background-color: cadetblue; */
-            }
-
-            #save-btn:active {
-                /* border-color: black;            */
-            } 
-
+                display: flex;
+                justify-content: center;
+                
+            }    
+            
     #RESULTS-PREDICTIONS {
         display: flex;
     }
@@ -883,5 +1986,15 @@ input {
                 "results predictions";
         }
 
-} /** end of @media screen and (min-width:1200px) */
+        #predictions-tbl table {
+            width: 100%;
+            font-size: 0.75em;
+        }
+
+        #predictions-tbl table .home, #predictions-tbl table .away {
+            width: 24%;
+        }
+
+} 
+/** end of @media screen and (min-width:1200px) */
 
