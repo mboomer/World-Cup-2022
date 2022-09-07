@@ -6,12 +6,26 @@ Each section has a GRID-AREA named after the section ID
 
 #container {
     grid-area: container;
-    margin-top: 5px;
 }
 
 header {
     margin-bottom: 5px;    
 } 
+
+#username {
+    grid-area: username;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 3px;
+    border: 1px solid darkgray;
+    background-color: rgba(141,27,61, 0.5);
+
+}
 
 #login-details {
     grid-area: login-details;
@@ -82,16 +96,6 @@ section {
 /* ******************************************************************************************   */
 
 @media screen and (min-width:1200px){                   
-    
-    main {
-        width: 98%;
- 
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: auto auto auto auto;
-        grid-gap: 5px;
-        margin: 0 auto;
-    }
  
     /* 
     ----------------------------------------------------------------------------------
@@ -109,21 +113,43 @@ section {
     }
  
     header {
-        grid-template-areas:
-            "logo qatar-flag-l header-text qatar-flag-r hb-icon";
+        grid-template-areas: "logo qatar-flag-l header-text qatar-flag-r username hb-icon";
+    }
+
+    header {
+        display: grid;
+        grid-area: header;
+        grid-template-columns: 1fr 1fr 10fr 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 10px;
+        justify-content: center;
     }
 
 }
 
 /* ******************************************************************************************   */
-/* apply to any device that has a screen width of 992px or higher                              */
+/* apply to any device that has a screen width of 992px or higher                               */
+/* ******************************************************************************************   */
+/*  Grid is three columns - specify what is in each column on each row                          */
+/*  header, navigation, and footer span across the 3 colums                                     */
+/*  content is spaced into each column as seen below.                                           */
 /* ******************************************************************************************   */
 
 @media screen and (max-width:1200px){                   
     
-    body {
+    /* body {
         background-color: antiquewhite;
+    } */
+
+    #container{
+        grid-template-areas:
+            "header header"
+            "login-details personal-details" 
+            "payment-details competition-details"
+            "team-details update-profile"
+            "footer footer";
     }
+    
     main{
         width: 90%;
  
@@ -134,24 +160,21 @@ section {
         margin: 0 auto;
     }
  
+    header {
+        grid-template-areas: "logo qatar-flag-l header-text qatar-flag-r username hb-icon";
+    }
+
+    header {
+        display: grid;
+        grid-area: header;
+        grid-template-columns: 1fr 1fr 10fr 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 10px;
+        justify-content: center;
+    }
+
     .transparent-btn-blue {
         margin: 2px;
-    }
-    
-    /* 
-    ----------------------------------------------------------------------------------
-    Grid is three columns - specify what is in each column on each row
-    header, navigation, and footer span across the 3 colums
-    content is spaced into each column as seen below.
-    ----------------------------------------------------------------------------------
-    */
-    #container{
-        grid-template-areas:
-            "header header"
-            "login-details personal-details" 
-            "payment-details competition-details"
-            "team-details update-profile"
-            "footer footer";
     }
  
 }
@@ -159,34 +182,17 @@ section {
 /* ******************************************************************************************   */
 /* apply to any device that has a screen width of 768px or higher                              */
 /* ******************************************************************************************   */
+/*  Grid is three columns - specify what is in each column on each row                          */
+/*  header, navigation, and footer span across the 3 colums                                     */
+/*  content is spaced into each column as seen below.                                           */
+/* ******************************************************************************************   */
 
 @media screen and (max-width:992px){                   
     
-    body {
+    /* body {
         background-color: burlywood;
-    }
-    main{
-        width: 90%;
-/*        max-width: 800px;*/
- 
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 10vh auto auto auto auto;
-        grid-gap: 5px;
-        margin: 0 auto;
-    }
- 
-    .transparent-btn-blue {
-        margin: 2px;
-    }
-    
-    /* 
-    ----------------------------------------------------------------------------------
-    Grid is three columns - specify what is in each column on each row
-    header, navigation, and footer span across the 3 colums
-    content is spaced into each column as seen below.
-    ----------------------------------------------------------------------------------
-    */
+    } */
+
     #container{
         grid-template-areas:
             "header header"
@@ -195,39 +201,45 @@ section {
             "team-details update-profile"
             "footer footer";
     }
- 
-}
 
-/* ******************************************************************************************   */
-/* apply to any device that has a screen width of 552px or higher                              */
-/* ******************************************************************************************   */
-
-@media screen and (max-width:768px){                   
-    
-    body {
-/*        background-color: yellow;*/
-    }
     main{
-        width: 90%;
-/*        max-width: 800px;*/
- 
+        width: 90%; 
         display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto auto auto auto auto auto;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 10vh auto auto auto auto;
         grid-gap: 5px;
         margin: 0 auto;
     }
  
-    header h1 {
-     font-size: 2em;
+    header {
+        grid-template-areas: "logo qatar-flag-l header-text qatar-flag-r username hb-icon";
+    }
+
+    header {
+        display: grid;
+        grid-area: header;
+        grid-template-columns: 1fr 1fr 10fr 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 10px;
+        justify-content: center;
+    }
+
+    .transparent-btn-blue {
+        margin: 2px;
+    }
+ 
 }
-    /* 
-    ----------------------------------------------------------------------------------
-    Grid is three columns - specify what is in each column on each row
-    header, navigation, and footer span across the 3 colums
-    content is spaced into each column as seen below.
-    ----------------------------------------------------------------------------------
-    */
+
+/* ******************************************************************************************   */
+/*  Grid is 1 column - specify what is in each column on each row                               */
+/*  header, navigation, and footer span across the 3 colums                                     */
+/*  content is spaced into each column as seen below.                                           */
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 552px or higher                               */
+/* ******************************************************************************************   */
+
+@media screen and (max-width:768px){                   
+
     #container{
         grid-template-areas:
             "header"
@@ -240,6 +252,96 @@ section {
             "footer";
     }
  
+    main{
+        width: 90%;
+ 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+ 
+    header {
+        grid-template-areas: "qatar-flag-l header-text qatar-flag-r username hb-icon";
+    }
+
+    header {
+        display: grid;
+        grid-area: header;
+        grid-template-columns: 1fr 10fr 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 4px;
+        justify-content: center;
+    }
+
+    header h1 {
+     font-size: 2em;
+    }
+
+    #footer p {
+        font-size: 10px;
+        margin-bottom: 5px;
+    }
+
+    #footer ul li {
+        margin: 0 10px;                     /* spreads out the line items containing the social media icons */
+    }
+
+    #footer ul li a {
+        font-size: 30px;                    /* makes the icons bigger and ensure the cursor is always the pointer */
+    }
+}
+
+/* ******************************************************************************************   */
+/*  Grid is 1 column - specify what is in each column on each row                               */
+/*  header, navigation, and footer span across the 3 colums                                     */
+/*  content is spaced into each column as seen below.                                           */
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 576px or higher                               */
+/* ******************************************************************************************   */
+
+@media screen and (max-width:576px){                   
+
+    #container{
+        grid-template-areas:
+            "header"
+            "login-details"
+            "personal-details" 
+            "payment-details"
+            "competition-details"
+            "team-details"
+            "update-profile"
+            "footer";
+    }
+ 
+    main{
+        width: 90%;
+ 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+ 
+    header {
+        grid-template-areas: "qatar-flag-l header-text username hb-icon";
+    }
+
+    header {
+        display: grid;
+        grid-area: header;
+        grid-template-columns: 0.5fr 11fr 1fr 1.5fr;
+        grid-template-rows: auto;
+        grid-gap: 4px;
+        justify-content: center;
+    }
+
+    header h1 {
+     font-size: 2em;
+    }
+
     #footer p {
         font-size: 10px;
         margin-bottom: 5px;

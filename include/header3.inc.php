@@ -3,7 +3,8 @@
                 </div>
 
                 <div id="qatar-flag-l">
-                    <img src='../img/flags/Qatar.png' alt='Qatar Country Flag'>
+<!--                    <img src='../img/flags/Qatar.png' alt='Qatar Country Flag'> -->
+                    <img src='../img/flags/fifa-world-cup.png' alt='FIFA World Cup Trophy'>
                 </div>
 
                 <div id="header-text">
@@ -15,7 +16,8 @@
                 </div>
                 
                 <div id="qatar-flag-r">
-                    <img src='../img/flags/Qatar-rev.png' alt='Qatar Country Flag'>
+<!--                    <img src='../img/flags/Qatar-rev.png' alt='Qatar Country Flag'> -->
+                    <img src='../img/flags/fifa-world-cup.png' alt='FIFA World Cup Trophy'>
                 </div>
 
                 <div id="hb-icon" class="dropdown">
@@ -24,7 +26,7 @@
                     <div class="bar2"></div>
                     <div class="bar3">
                         <div class="dropdown-content">
-                            <a href="logout.php">Logout</a>
+                            <a href="../inc/logout.php">Logout</a>
                         </div>
                     </div>
 

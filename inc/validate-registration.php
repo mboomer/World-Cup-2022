@@ -33,35 +33,35 @@
 
     // Processing form data when form is submitted by a POST and using correct button
     if ( ($_SERVER["REQUEST_METHOD"] !== "POST") || (!isset($_POST["create-account-btn"])) ) {
-        header("location: sign-up.php?error=accessdenied");
+        header("location: ../php/sign-up.php?error=accessdenied");
         exit();
     } else {
         // Check if any fields are not completed
         if ( empty(trim($_POST["username"])) || empty(trim($_POST["email"])) || empty(trim($_POST["password"])) || empty(trim($_POST["repeat-password"])) ) {
-            header("location: sign-up.php?error=incomplete&name=".$login_name."&email=".$login_email);
+            header("location: ../php/sign-up.php?error=incomplete&name=".$login_name."&email=".$login_email);
             exit();
         } 
 
         // Check if both email and username are invalid
         if ( !filter_var($login_email, FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z0-9]*$/", $login_name) ) {
-            header("location: sign-up.php?error=invaliduseremail");
+            header("location: ../php/sign-up.php?error=invaliduseremail");
             exit();
         } 
         // Check if email is valid
         if (!filter_var($login_email, FILTER_VALIDATE_EMAIL)) {
-            header("location: sign-up.php?error=invalidemail&name=".$login_name);
+            header("location: ../php/sign-up.php?error=invalidemail&name=".$login_name);
             exit();
         } 
         
         // check if username only has valid characters
         if (!preg_match("/^[a-zA-Z0-9]*$/", $login_name)) {
-            header("location: sign-up.php?error=invalidname&email=".$login_email);
+            header("location: ../php/sign-up.php?error=invalidname&email=".$login_email);
             exit();
         }
         
         // check if passwords match
         if ($login_password !== $login_repeat_pwd) {
-            header("location: sign-up.php?error=passwordmatch&name=".$login_name."&email=".$login_email);
+            header("location: ../php/sign-up.php?error=passwordmatch&name=".$login_name."&email=".$login_email);
             exit();
         }
 
@@ -70,7 +70,7 @@
     /** 
         PDO Database connection
         Check if username already exists
-        If username doesnt exist, insert user in database
+        If username doesnt exist, insert as new user in database
     */
 
     try {
@@ -79,7 +79,7 @@
             $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
         }
         catch (PDOException $e) {
-            header("location: sign-up.php?error=dbconnecterror&errormsg=".$e->getMessage());
+            header("location: ../php/sign-up.php?error=dbconnecterror&errormsg=".$e->getMessage());
             exit();
         };
 
@@ -97,46 +97,48 @@
 
         // Execute prepared SELECT statement
         if ($query -> execute() === FALSE) {    
-            header("location: sign-up.php?error=sqlexecerror");
+            header("location: ../php/sign-up.php?error=sqlexecerror");
             exit();
         } else {
-                // Store the result of the query
+                // Store the results of the query
                 $results = $query -> fetchAll(PDO::FETCH_OBJ);
                 
                 // if a matching row is retrieved then the user exists 
                 if($query -> rowCount() > 0) {
-                    header("location: sign-up.php?error=userexists");
+                    header("location: ../php/sign-up.php?error=userexists");
                     exit();
                 } 
 
-                //prepare the sql statement
+                //if no matching row is found, prepare the sql statement to insert the user
                 $sql = "INSERT INTO Users 
-	                        (UserName, UserEmail, UserPassword, UserTeam) 
+	                        (UserName, UserEmail, UserPass, UserTeam, Predictions) 
                         VALUES 
-                            (:UserName, :UserEmail, :UserPassword, :UserTeam)";
+                            (:UserName, :UserEmail, :UserPass, :UserTeam, :Predictions)";
 
                 // prepare the INSERT SQL query for the database connection
                 $query = $dbh -> prepare($sql);
 
                 // bind the parameters
-                $query->bindParam(':UserName',     $username,      PDO::PARAM_STR);
-                $query->bindParam(':UserEmail',    $emailaddress,  PDO::PARAM_STR);
-                $query->bindParam(':UserPassword', $hashedpwd,     PDO::PARAM_STR);
-                $query->bindParam(':UserTeam',     $teamname,      PDO::PARAM_STR);
+                $query->bindParam(':UserName',    $username,     PDO::PARAM_STR);
+                $query->bindParam(':UserEmail',   $emailaddress, PDO::PARAM_STR);
+                $query->bindParam(':UserPass',    $hashedpwd,    PDO::PARAM_STR);
+                $query->bindParam(':UserTeam',    $teamname,     PDO::PARAM_STR);
+                $query->bindParam(':Predictions', $predictions,  PDO::PARAM_INT);
 
                 // assign values to the parameters
-                $username       = $login_name;
-                $emailaddress   = $login_email;
-                $hashedpwd      = password_hash(trim($login_password), PASSWORD_DEFAULT);   // encrypt the password before storing
-                $teamname       = "Norn Ireland";                                           // dont fill in a Team Name yet
+                $username     = $login_name;
+                $emailaddress = $login_email;
+                $hashedpwd    = password_hash(trim($login_password), PASSWORD_DEFAULT);     // encrypt the password before storing
+                $teamname     = "";                                                         // default to no team                                           
+                $predictions  = 0;                                                          // default to false - no predictions made for new user
 
                 /** 
                     execute the query and if it fails return to sign-up with the error message
                 */
                 if ($query -> execute() === false) {    
-                    header("location: sign-up.php?error=inserterror&name=".$username."-".$emailaddress."-".$hashedpwd."-".$teamname);
+                    header("location: ../php/sign-up.php?error=inserterror&name=".$username."-".$emailaddress);
                 } else {
-                    header("location: sign-up.php?error=success");
+                    header("location: ../php/sign-up.php?error=success");
                 }; 
 
         }; // end of else

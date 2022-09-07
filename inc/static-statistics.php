@@ -23,7 +23,7 @@
     };
                     
     // open fiel for writing
-    $fh = fopen("competition-stats.html", "w"); 
+    $fh = fopen("../static/competition-stats.html", "w"); 
 
     // ---------------------------------------------------------------
     // GAMES PLAYED SO FAR, ResultID = 6 (NP Not Played)
@@ -50,12 +50,12 @@
     $rows = $query -> fetchAll(PDO::FETCH_OBJ);
 
     // initialise the HTML string
-    $html  = "  <div id='games-played'>"
-           . "      <div class='stat-title'>Games Played So Far</div>";
+    $html  = "  <div id='games-played'> \n"
+           . "      <div class='stat-title'>Games Played So Far</div> \n";
 
     if ($query->rowCount() == 0) {
 
-        $html .= "      <div class='stat-value'>No Value Found</div>";
+        $html .= "      <div class='stat-value'>No Value Found</div> \n";
 
     } else {
 
@@ -63,13 +63,13 @@
 
             $gamesplayed = $row -> PlayedSoFar;
         
-            $html .= "      <div class='stat-value'>" . $row -> PlayedSoFar . "</div>";
+            $html .= "      <div class='stat-value'>" . $row -> PlayedSoFar . "</div> \n";
 
         }; // end of foreach 
 
     };  // end of $query->rowCount() else    
 
-    $html .= "  </div><br>";
+    $html .= "  </div>\n";
 
     // ---------------------------------------------------------------
     // END OF GAMES PLAYED SO FAR
@@ -108,12 +108,12 @@
         // get all rows
         $rows = $query -> fetchAll(PDO::FETCH_OBJ);
 
-        $html .= "  <div id='total-goals'>"
-               . "      <div class='stat-title'>Total Goals</div>";
+        $html .= "  <div id='total-goals'> \n"
+               . "      <div class='stat-title'>Total Goals</div> \n";
 
         if ($query->rowCount() == 0) {
 
-              $html .= "      <div class='stat-value'>No Value Found</div>";
+              $html .= "      <div class='stat-value'>No Value Found</div> \n";
 
         } else {
 
@@ -121,13 +121,13 @@
         
             $totalgoals = $row -> TotalGoals;
 
-            $html .= "      <div class='stat-value'>" . $row -> TotalGoals . "</div>";
+            $html .= "      <div class='stat-value'>" . $row -> TotalGoals . "</div> \n";
 
         }; // end of foreach 
 
         };  // end of $query->rowCount() else    
 
-        $html .= "  </div><br>";
+        $html .= "  </div> \n";
 
     // ---------------------------------------------------------------
     // END OF TOTAL GOALS SO FAR
@@ -139,10 +139,10 @@
 
     $gameaverage = number_format( ($totalgoals / $gamesplayed), 2); 
 
-    $html .= "  <div id='goals-per-game'>"
-           . "      <div class='stat-title'>Goals Per Game</div>"
-           . "      <div class='stat-value'>" . $gameaverage . "</div>"
-           . "  </div><br>";
+    $html .= "  <div id='goals-per-game'> \n"
+           . "      <div class='stat-title'>Goals Per Game</div> \n"
+           . "      <div class='stat-value'>" . $gameaverage . "</div> \n"
+           . "  </div> \n";
 
     // ---------------------------------------------------------------
     // END OF AVERAGE GOALS PER GAME
@@ -193,24 +193,24 @@
         // get all rows
         $rows = $query -> fetchAll(PDO::FETCH_OBJ);
 
-        $html .= "  <div id='top-team'>"
-               . "      <div class='stat-title'>Most Goals By Team</div>";
+        $html .= "  <div id='top-team'> \n"
+               . "      <div class='stat-title'>Most Goals By Team</div> \n";
 
         if ($query->rowCount() == 0) {
 
-              $html .= "      <div class='stat-value'>No Value Found</div>";
+              $html .= "      <div class='stat-value'>No Value Found</div> \n";
 
         } else {
 
         foreach($rows as $key => $row) {
         
-            $html .= "      <div class='stat-value'>" . $row -> GoalsPerTeam . "</div>";
+            $html .= "      <div class='stat-value'>" . $row -> GoalsPerTeam . "</div> \n";
 
         }; // end of foreach 
 
         };  // end of $query->rowCount() else    
 
-        $html .= "  </div><br>";
+        $html .= "  </div> \n";
 
     // ---------------------------------------------------------------
     // END OF TEAM WITH MOST GOALS
@@ -252,24 +252,24 @@
         // get all rows
         $rows = $query -> fetchAll(PDO::FETCH_OBJ);
 
-        $html .= "  <div id='top-game'>"
-               . "      <div class='stat-title'>Most Goals In A Game</div>";
+        $html .= "  <div id='top-game'> \n"
+               . "      <div class='stat-title'>Most Goals In A Game</div> \n";
 
         if ($query->rowCount() == 0) {
 
-              $html .= "      <div class='stat-value'>No Value Found</div>";
+              $html .= "      <div class='stat-value'>No Value Found</div> \n";
 
         } else {
 
         foreach($rows as $key => $row) {
         
-            $html .= "      <div class='stat-value'>" . $row -> TotalScore . "</div>";
+            $html .= "      <div class='stat-value'>" . $row -> TotalScore . "</div> \n";
 
         }; // end of foreach 
 
         };  // end of $query->rowCount() else    
 
-        $html .= "  </div><br>";
+        $html .= "  </div> \n";
 
     // ---------------------------------------------------------------
     // END OF GAME WITH MOST GOALS
@@ -310,24 +310,24 @@
         // get all rows
         $rows = $query -> fetchAll(PDO::FETCH_OBJ);
 
-        $html .= "  <div id='penalties'>"
-               . "      <div class='stat-title'>Penalties</div>";
+        $html .= "  <div id='penalties'> \n"
+               . "      <div class='stat-title'>Penalties</div> \n";
 
         if ($query->rowCount() == 0) {
 
-              $html .= "      <div class='stat-value'>0</div>";
+              $html .= "      <div class='stat-value'>0</div> \n";
 
         } else {
 
         foreach($rows as $key => $row) {
         
-            $html .= "      <div class='stat-value'>" . $row -> Penalties . "</div>";
+            $html .= "      <div class='stat-value'>" . $row -> Penalties . "</div> \n";
 
         }; // end of foreach 
 
         };  // end of $query->rowCount() else    
 
-        $html .= "  </div>";
+        $html .= "  </div> \n";
 
     // ---------------------------------------------------------------
     // PENALTIES SO FAR

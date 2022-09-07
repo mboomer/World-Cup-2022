@@ -26,8 +26,6 @@
             . "     FixtureNo		as fixtureno, \n"
             . "    	DatePlayed		as dateplayed, \n"
             . "    	TimePlayed		as timeplayed, \n"
-            . "    	HomeScore		as homescore, \n"
-            . "    	AwayScore		as awayscore, \n"
             . "    	ResultID		as resultid, \n"
             . "    	grp.Description as groupdesc, \n"
             . "    	rnd.Description as rounddesc,  \n"
@@ -58,12 +56,12 @@
             . "    ON \n"
             . "    	fx.AwayTeamID = awt.ID \n"
             . "    WHERE \n"
-            . "     resultid <> 6 \n"
+            . "     resultid = 6 \n"
             . "    ORDER BY \n"  
             . "     fixtureNo \n"  
-            . "    DESC \n"
+            . "    ASC \n"
             . "    LIMIT 2";
-
+            
         // prepare the query for the database connection
         $query = $dbh -> prepare($qry);
 
@@ -89,13 +87,18 @@
         // get all rows
         $results = $query -> fetchAll(PDO::FETCH_OBJ);
 
-        // open the file for writing
-        $fh = fopen("latest-results.html", "w");
+        // open file for writing
+        $fh = fopen("../static/upcoming-fixtures.html", "w");
+
+        $html = "";
 
         if ($query->rowCount() == 0) {
+            
+            // return Failure message
+            echo "Failure - No Upcoming Fixtures Found";
 
-            $html .= "  <div class='latest-results-tbl'>"
-                    . "      <table>"
+            $html .= "  <div class='upcoming-fixtures-tbl'>"
+                    .  "      <table>"
                     . "          <thead class='blueheader'>"
                     . "              <tr>"
                     . "                  <th class='align-center' colspan='7'>Error - Error</th>"
@@ -106,17 +109,13 @@
                     . "          </thead>"
                     . "          <tbody>"
                     . "              <tr>"
-                    . "                  <td>No Recent Fixtures Returned</td>"
+                    . "                  <td>No Upcoming Fixtures Found</td>"
                     . "              </tr>"
                     . "          </tbody>"
                     . "      </table>"   
-                    . "  </div>  <!-- end of latest-results-tbl div -->"; 
-
-            echo "Failure - No Results Updated";
+                    . "  </div>  <!-- end of goals-tbl div -->"; 
 
         } else {
-            // initial the string to hold the HTML
-            $html = "";
 
             foreach($results as $key => $result) {
             
@@ -128,34 +127,33 @@
                 $city       = $result -> city;
                 $hometeam   = $result -> hometeam;
                 $awayteam   = $result -> awayteam;
-                $homescore  = $result -> homescore;
-                $awayscore  = $result -> awayscore;
 
-                $html .= "  <div class='latest-results-tbl'>"
-                      . "      <table>"
-                      . "          <thead class='blueheader'>"
-                      . "              <tr>"
-                      . "                  <th class='align-center' colspan='7'>" . $stadium . " - ". $city . "</th>"
-                      . "              </tr>"
-                      . "              <tr>"
-                      . "                  <th class='align-center' colspan='7'>" . $group . " - " . $dateplayed . " - " . $timeplayed . "</th>"
-                      . "              </tr>"
-                      . "          </thead>"
-                      . "          <tbody>"
-                      . "              <tr>"
-                      . "                  <td class='team'>" . $hometeam . "</td>"
-                      . "                  <td class='country-flag'><img src='img/flags/" . $hometeam . ".png' alt='" . $hometeam . " team flag'></td>"
-                      . "                  <td class='versus'>" . $homescore . " - " . $awayscore . "</td>" 
-                      . "                  <td class='country-flag'><img src='img/flags/" . $awayteam . ".png' alt='" . $awayteam . " team flag'></td>"
-                      . "                  <td class='team'>" . $awayteam . "</td>"
-                      . "              </tr>"
-                      . "          </tbody>"
-                      . "      </table>"   
-                      . "  </div>  <!-- end of latest-results-tbl div -->"; 
+                $html .= "  <div class='upcoming-fixtures-tbl'>"
+                     .  "      <table>"
+                     . "          <thead class='blueheader'>"
+                     . "              <tr>"
+                     . "                  <th class='align-center' colspan='7'>" . $stadium . " - ". $city . "</th>"
+                     . "              </tr>"
+                     . "              <tr>"
+                     . "                  <th class='align-center' colspan='7'>" . $group . " - " . $dateplayed . " - ". $timeplayed . "</th>"
+                     . "              </tr>"
+                     . "          </thead>"
+                     . "          <tbody>"
+                     . "              <tr>"
+                     . "                  <td class='team'>" . $hometeam . "</td>"
+                     . "                  <td class='country-flag'><img src='img/flags/" . $hometeam . ".png' alt='" . $hometeam . " team flag'></td>"
+                     . "                  <td class='versus'>" . $timeplayed . "</td>"
+                     . "                  <td class='country-flag'><img src='img/flags/" . $awayteam . ".png' alt='" . $awayteam . " team flag'></td>"
+                     . "                  <td class='team'>" . $awayteam . "</td>"
+                     . "              </tr>"
+                     . "          </tbody>"
+                     . "      </table>"   
+                     . "  </div>  <!-- end of goals-tbl div -->"; 
 
             }; // end of users foreach 
 
-            echo "Success - Latest Results Updated";
+            // return Success message
+            echo "Success - Upcoming Fixtures Updated";
 
         };  // end of $query->rowCount() else
 
@@ -163,5 +161,5 @@
     fwrite($fh, $html);
     // close the file handle
     fclose($fh);
-    
+
 ?>  

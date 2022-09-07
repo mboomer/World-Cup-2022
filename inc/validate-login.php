@@ -40,19 +40,19 @@
     } else {
         // Check if both username and password are empty
         if ( empty(trim($_POST["username"])) && empty(trim($_POST["password"])) ) {
-            header("location: login.php?error=nousernopw");
+            header("location: ../php/login.php?error=nousernopw");
             exit();
         };
 
         // Check if username is empty
         if ( empty(trim($_POST["username"])) ) {
-            header("location: login.php?error=nousername");
+            header("location: ../php/login.php?error=nousername");
             exit();
         };
 
         // Check if password is empty
         if ( empty(trim($_POST["password"])) ) {
-            header("location: login.php?error=nopassword&name=".$login_name);
+            header("location: ../php/login.php?error=nopassword&name=".$login_name);
             exit();
         };
     };
@@ -63,7 +63,7 @@
             $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
         }
         catch (PDOException $e) {
-            header("location: login.php?error=dbconnecterror&errormsg=".$e->getMessage());
+            header("location: ../php/login.php?error=dbconnecterror&errormsg=".$e->getMessage());
             exit();
         };
 
@@ -81,7 +81,7 @@
 
         // Execute prepared SELECT statement
         if ($query -> execute() === FALSE) {    
-            header("location: login.php?error=sqlexecerror");
+            header("location: ../php/login.php?error=sqlexecerror");
             exit();
         } else {
                 // Store the result of the query
@@ -107,7 +107,7 @@
 
                 // check the password matches the encrypted password - if not return to login.php
                 if (password_verify($login_password, $hashedPassword) === false) {
-                    header("location: login.php?error=invalidpassword");
+                    header("location: ../php/login.php?error=invalidpassword");
                     exit();
                 } else {
                     // Password is correct, Start a new session
@@ -120,17 +120,24 @@
                     $_SESSION["useremail"]   = $email;
                     $_SESSION["predictions"] = $predictions;
 
+
+                    // Redirect admin user to admin page
+                    if ($username == "wcadmin") {
+                        header("location: update-a-fixture.php");
+                        exit;
+                    };
+
                     // Redirect user to Predictions page
                     if ($predictions) {
-                        header("location: saved-predictions.php");
+                        header("location: ../php/saved-predictions.php");
                     } else {
-                        header("location: predictions.php");
+                        header("location: ../php/predictions.php");
                     };
 
                 } // end of check passwords    
 
             } else {
-                header("location: login.php?error=invalidusername");
+                header("location: ../php/login.php?error=invalidusername");
                 exit();
             }                       // end of query -< rowCount
 

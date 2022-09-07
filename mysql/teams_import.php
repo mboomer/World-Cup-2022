@@ -187,7 +187,7 @@
     $code     = "MEX";
     $teamname = "Mexico";
     $ranking  = 12;
-    $wikilink = "https://en.wikipedia.org/wiki/https://en.wikipedia.org/wiki/Mexico_national_soccer_team#Current_squad";
+    $wikilink = "https://en.wikipedia.org/wiki/Mexico_national_soccer_team#Current_squad";
 
     if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $code . "-" . $teamname . "<br>");
@@ -242,7 +242,7 @@
     $code     = "TUN";
     $teamname = "Tunisia";
     $ranking  = 30;
-    $wikilink = "https://en.wikipedia.org/wiki/https://en.wikipedia.org/wiki/Tunisia_national_soccer_team#Current_squad";
+    $wikilink = "https://en.wikipedia.org/wiki/Tunisia_national_soccer_team#Current_squad";
 
     if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $code . "-" . $teamname . "<br>");
@@ -300,7 +300,7 @@
     $code     = "JPN";
     $teamname = "Japan";
     $ranking  = 24;
-    $wikilink = "https://en.wikipedia.org/wiki/https://en.wikipedia.org/wiki/Japan_national_soccer_team#Current_squad";
+    $wikilink = "https://en.wikipedia.org/wiki/Japan_national_soccer_team#Current_squad";
 
     if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $code . "-" . $teamname . "<br>");
@@ -358,7 +358,7 @@
     $code     = "MOR";
     $teamname = "Morocco";
     $ranking  = 22;
-    $wikilink = "https://en.wikipedia.org/wiki/https://en.wikipedia.org/wiki/Morocco_national_soccer_team#Current_squad";
+    $wikilink = "https://en.wikipedia.org/wiki/Morocco_national_soccer_team#Current_squad";
 
      if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $code . "-" . $teamname . "<br>");
@@ -416,7 +416,7 @@
     $code     = "SWZ";
     $teamname = "Switzerland";
     $ranking  = 16;
-    $wikilink = "https://en.wikipedia.org/wiki/https://en.wikipedia.org/wiki/Switzerland_national_soccer_team#Current_squad";
+    $wikilink = "https://en.wikipedia.org/wiki/Switzerland_national_soccer_team#Current_squad";
 
     if ( $query -> execute() === FALSE ) {
         echo ("Error: " . $code . "-" . $teamname . "<br>");

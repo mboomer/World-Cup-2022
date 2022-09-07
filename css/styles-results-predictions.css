@@ -165,6 +165,16 @@ th, td {
 .cols {
     width: 8%;
 }
+
+.points {
+    width: 4%;
+    background: floralwhite;
+}
+.bonus {
+    width: 4%;
+    background: gold;
+}
+
 .res, .pts, .bon {
     width: 4%;
     background-color: gainsboro;
@@ -183,24 +193,31 @@ th, td {
 }
 
 .results-home-flag img, .results-away-flag img {
-    width: 55%;
+    width: 82%;
     text-align: center;
 }
 
 .predictions-home-flag img, .predictions-away-flag img {
-    width: 55%;
+    width: 82%;
     text-align: center;
 }
 
-.qf-color {
-    background: lightcyan;
-}
-.sf-color {
-    background: lightblue;
-}
-.fi-color {
-    background: lightgreen;
-}
+    .ls-color {
+        background: lightpink;
+    }
+    .qf-color {
+        background: lightcyan;
+    }
+    .sf-color {
+        background: lightblue;
+    }
+    .pl-color {
+        background: lightgoldenrodyellow;
+    }
+    .fi-color {
+        background: lightgreen;
+    }
+
 
 /* ******************************************************************************************   */
 

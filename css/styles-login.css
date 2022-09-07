@@ -1,84 +1,34 @@
 #body-top {
     grid-area: body-top;
-
-    /* display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 70vh auto; */
-
 }
 
 #login-container { 
-
-    grid-area: login-container;
-
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 70vh auto;
-
-    width: 98%;
-    margin: 0 auto;
-
+    grid-area: login-container;
 }
 
 header {
-    margin-top: 5px;
     grid-area: header;
+    margin-top: 5px;
 }
 
 #header-text div {
     grid-area: header-text;
 
-    font-size: 2.5em;
     font-weight: bold;
     color: white;
     text-shadow: 2px 2px #e900ffd1;
 }
 
-/* #login-container { 
-
-    grid-area: login-container;
-
-    display: flex;
-    flex-direction: column;
-    margin: auto 0;
-    
-} */
-
 #wrapper { 
     
     grid-area: wrapper;
-
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-
-    min-width: 300px;
 
     padding: 10px;
     margin: auto auto;
 
     border: 1px solid #0E6EB8;
     border-radius: 10px;
-}
-#wrapper > * {
-    margin: 10px;
-    text-align: center;
-}
-
-#wrapper > h2 {
-    padding-top: 10px;
-}
-
-.button-group input, button { 
-    margin: 5px;
-    padding: 5px;
-}
-.input-group * { 
-    margin: 5px;
-    padding: 5px;
-    text-align: left;
-    font-size: 1em;
 }
 
 .help-block-nodisplay {
@@ -103,69 +53,354 @@ header {
     grid-area: footer;
 }
 
-/* ---------------------------------- END OF DEFAULT MEDIA RULE FOR 576 --------------------------------------------------------- */
-
-
 /* ********************************************** MEDIA RULES *******************************   */
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 576px or lower                                */
+/* ******************************************************************************************   */
+/*    Grid is 1 column - specify what is in each column on each row                             */
+/*    header, login form and footer                                                             */
+/*    content is spaced into each column as below.                                              */
+/* ******************************************************************************************   */
+@media screen and (max-width: 576px) {   
+
+    /* body {
+        background-color: lightpink;
+    } */
+
+    #body-top {
+        grid-template-areas:
+            "login-container";
+    }
+
+    #login-container {
+        grid-template-areas:
+            "header"
+            "wrapper"
+            "footer";
+    }
+
+    #login-container { 
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 70vh auto;
+        width: 98%;
+        margin: 0 auto;
+    }
+
+    #qatar-flag-l img, #qatar-flag-r img {
+        width: 55px;
+    }
+
+    #header-text div {
+        font-size: 0.8em;
+    }
+
+    #wrapper { 
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+
+        margin: auto auto;
+
+    }
+
+    #wrapper > * {
+        margin: 5px;
+        text-align: center;
+        font-size: 0.8em;
+    }
+
+    #wrapper > h2 {
+        padding-top: 5px;
+    }
+
+    .button-group input, button { 
+        margin: 5px;
+        padding: 5px;
+    }
+    .input-group * { 
+        margin: 5px;
+        padding: 5px;
+        text-align: left;
+        font-size: 0.9em;
+    }
+
+}  
 
 /* ******************************************************************************************   */
 /* apply to any device that has a screen width of 576px or higher                               */
 /* ******************************************************************************************   */
-@media screen and (min-width: 576px) {
-    /* #body-top {
+/*    Grid is 1 column - specify what is in each column on each row                             */
+/*    header, login form and footer                                                             */
+/*    content is spaced into each column as below.                                              */
+/* ******************************************************************************************   */
+@media screen and (min-width: 576px) {   
 
-        grid-template-areas:
-            "header"
-            "login-container"
-            "footer";
+    /* body {
+        background-color: lightgreen;
     } */
-
-    /* 
-    ----------------------------------------------------------------------------------
-    Grid is 1 column - specify what is in each column on each row
-    header, login form and footer
-    content is spaced into each column as below.
-    ----------------------------------------------------------------------------------
-    /* 
-    #login-container {
-        grid-template-areas:
-            "header"
-            "wrapper"
-            "footer";
-    } */
-}
-/* ******************************************************************************************   */
-/* apply to any device that has a screen width of 768px or higher                               */
-/* ******************************************************************************************   */
-@media screen and (min-width: 768px) {
-}
-/* ******************************************************************************************   */
-/* apply to any device that has a screen width of 992px or higher                               */
-/* ******************************************************************************************   */
-@media screen and (min-width: 992px) {
-}
-/* ******************************************************************************************   */
-/* apply to any device that has a screen width of 1200px or higher                              */
-/* ******************************************************************************************   */
-@media screen and (min-width: 1200px) {   
 
     #body-top {
-
         grid-template-areas:
             "login-container";
     }
-    /* 
-    ----------------------------------------------------------------------------------
-    Grid is 1 column - specify what is in each column on each row
-    header, login form and footer
-    content is spaced into each column as below.
-    ----------------------------------------------------------------------------------
-    */
+
     #login-container {
         grid-template-areas:
             "header"
             "wrapper"
             "footer";
+    }
+
+    #login-container { 
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        width: 98%;
+        margin: 0 auto;
+    }
+
+    #header-text div {
+        font-size: 0.9em;
+    }
+
+    #wrapper { 
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+
+        margin-top: 30px;
+        margin-bottom: 30px;
+
+    }
+
+    #wrapper > * {
+        margin: 5px;
+        text-align: center;
+        font-size: 0.9em;
+    }
+
+    #wrapper > h2 {
+        padding-top: 5px;
+        font-size: 1.3em;
+    }
+
+    .button-group input, button { 
+        margin: 5px;
+        padding: 5px;
+    }
+    .input-group * { 
+        margin: 5px;
+        padding: 5px;
+        text-align: left;
+        font-size: 0.9em;
+    }
+
+}  
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 768px or higher                               */
+/* ******************************************************************************************   */
+/*    Grid is 1 column - specify what is in each column on each row                             */
+/*    header, login form and footer                                                             */
+/*    content is spaced into each column as below.                                              */
+/* ******************************************************************************************   */
+@media screen and (min-width: 768px) {   
+
+    /* body {
+        background-color: lightyellow;
+    } */
+
+    #body-top {
+        grid-template-areas:
+            "login-container";
+    }
+
+    #login-container {
+        grid-template-areas:
+            "header"
+            "wrapper"
+            "footer";
+    }
+
+    #login-container { 
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 70vh auto;
+        width: 98%;
+        margin: 0 auto;
+    }
+
+    #header-text div {
+        font-size: 2.0em;
+    }
+
+    #wrapper { 
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+
+        margin: auto auto;
+
+    }
+
+    #wrapper > * {
+        margin: 5px;
+        text-align: center;
+    }
+
+    #wrapper > h2 {
+        padding-top: 10px;
+        font-size: 1.5em;
+    }
+
+    .button-group input, button { 
+        margin: 5px;
+        padding: 5px;
+    }
+    .input-group * { 
+        margin: 5px;
+        padding: 5px;
+        text-align: left;
+        font-size: 1em;
+    }
+
+}  
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 992px or higher                               */
+/* ******************************************************************************************   */
+/*    Grid is 1 column - specify what is in each column on each row                             */
+/*    header, login form and footer                                                             */
+/*    content is spaced into each column as below.                                              */
+/* ******************************************************************************************   */
+@media screen and (min-width: 992px) {   
+
+    /* body {
+        background-color: lightskyblue;
+    } */
+
+    #body-top {
+        grid-template-areas:
+            "login-container";
+    }
+
+    #login-container {
+        grid-template-areas:
+            "header"
+            "wrapper"
+            "footer";
+    }
+
+    #login-container { 
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 70vh auto;
+        width: 98%;
+        margin: 0 auto;
+    }
+
+    #header-text div {
+        font-size: 2.0em;
+    }
+
+    #wrapper { 
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+
+        margin: auto auto;
+
+    }
+
+    #wrapper > * {
+        margin: 5px;
+        text-align: center;
+    }
+
+    #wrapper > h2 {
+        padding-top: 10px;
+        font-size: 1.5em;
+    }
+
+    .button-group input, button { 
+        margin: 5px;
+        padding: 5px;
+    }
+    .input-group * { 
+        margin: 5px;
+        padding: 5px;
+        text-align: left;
+        font-size: 1em;
+    }
+
+}  
+
+/* ******************************************************************************************   */
+/*    apply to any device that has a screen width of 1200px or higher                           */
+/* ******************************************************************************************   */
+/*    Grid is 1 column - specify what is in each column on each row                             */
+/*    header, login form and footer                                                             */
+/*    content is spaced into each column as below.                                              */
+/* ******************************************************************************************   */
+@media screen and (min-width: 1200px) {   
+
+
+    /* body {
+        background-color: white;
+    } */
+
+    #body-top {
+        grid-template-areas:
+            "login-container";
+    }
+
+    #login-container {
+        grid-template-areas:
+            "header"
+            "wrapper"
+            "footer";
+    }
+
+    #login-container { 
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 70vh auto;
+        width: 98%;
+        margin: 0 auto;
+    }
+
+    #header-text div {
+        font-size: 2.5em;
+    }
+
+    #wrapper { 
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        margin: auto auto;
+    }
+
+    #wrapper > * {
+        margin: 5px;
+        text-align: center;
+    }
+
+    #wrapper > h2 {
+        padding-top: 10px;
+        font-size: 1.5em;
+    }
+
+    .button-group input, button { 
+        margin: 5px;
+        padding: 5px;
+    }
+    .input-group * { 
+        margin: 5px;
+        padding: 5px;
+        text-align: left;
+        font-size: 1em;
     }
 
 }  

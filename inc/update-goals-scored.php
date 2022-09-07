@@ -1,5 +1,11 @@
 <?php
 
+    // // if you didnt get here from update-a-fixture return to home page
+    // if ( !isset($_POST["update-top-scorer-btn"]) ) {
+    //     header("Location: ../index.php");
+    //     exit();
+    // }
+
     // Include config file
     require_once "../../../.php/inc/db.worldcup.inc.php";
 
