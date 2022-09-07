@@ -772,8 +772,12 @@
         
         <main id="container">
  
-            <header>        
-                <?php include "../include/header4.inc.php"; ?>
+            <header>
+                <?php 
+                    $headeritems = "username";
+                    $menuitems = array("Profile", "Logout");
+                    include '../include/header1.inc.php';
+                ?>
             </header>
 
             <!-- Tab links -->
@@ -1873,7 +1877,11 @@
                             foreach ($rows as $key => $row) {
                                 
                                 if ($row -> WikipediaLink > "") {
-                                    echo "<a target='_blank' href='" . $row -> WikipediaLink . "'><img src='../img/flags/" . $row -> Team . ".png' alt='" . $row -> Team . " team flag'></a>";
+                                    if ($row -> Team === "IR Iran") {
+                                        echo "<a target='_blank' href='" . $row -> WikipediaLink . "'><img src='../img/flags/" . $row -> Team . ".png' alt='" . $row -> Team . " team flag'>Islamic Rep. Iran</a>";
+                                    } else {
+                                        echo "<a target='_blank' href='" . $row -> WikipediaLink . "'><img src='../img/flags/" . $row -> Team . ".png' alt='" . $row -> Team . " team flag'>" . $row -> Team . "</a>";
+                                    }
                                 };
 
                             }
@@ -2159,6 +2167,8 @@
 
         </main>
     
+        <script type="text/javascript" src="../js/header1.js"></script>
+
         <script type="text/javascript" >
 
             /* pass the php session variable, $userid, to a javascript variable 

@@ -55,8 +55,12 @@
         
         <main id="container">
             
-            <header>        
-                <?php include "../include/header4.inc.php"; ?>
+            <header>
+                <?php 
+                    $headeritems = "username";
+                    $menuitems = array("Profile", "Logout");
+                    include '../include/header1.inc.php';
+                ?>
             </header>
                     
             <!-- Tab links -->
@@ -948,7 +952,9 @@
             </footer>
 
         </main>
-    
+
+        <script type="text/javascript" src="../js/header1.js"></script>
+
         <script type="text/javascript" >
 
             /* pass the php session variable, $userid, to a javascript variable - this can then be used in the FETCH POST */ 

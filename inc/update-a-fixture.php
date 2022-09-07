@@ -58,8 +58,12 @@
         
         <main id="container">
             
-            <header>        
-                <?php include "../include/header3.inc.php"; ?>
+            <header>
+                <?php 
+                    $headeritems = "username";
+                    $menuitems = array("Logout");        
+                    include "../include/header1.inc.php"; 
+                ?>
             </header>
 
             <!-- Tab links -->
@@ -170,7 +174,9 @@
                                                 $resultcode = $fixture -> resultcode;
                                             
                                                 // colorize the stages to identify the LS, QF, SF, PL and FI
-                                                if ($stage === "LS") {
+                                                if ($stage === "GS") {
+                                                    echo "  <tr>";
+                                                } else if ($stage === "LS") {
                                                     echo "  <tr class='ls-color'>";
                                                 } if ($stage === "QF") {
                                                     echo "  <tr class='qf-color'>";
@@ -180,9 +186,7 @@
                                                     echo "  <tr class='pl-color'>";
                                                 } else if ($stage === "FI") {
                                                     echo "  <tr class='fi-color'>";
-                                                } else {
-                                                    echo "  <tr>";
-                                                } 
+                                                }
 
                                                 // echo "<tr>";      
                                                 echo "    <td class='fixno'>" . $fixno . "</td>";      
@@ -244,7 +248,7 @@
                                     <tr>
                                         <td> <input id='goal-fixture' type='text'   placeholder='Fixture Number' min=1 max=31 value=1> </td>
                                         <td>    
-                                            <select name="goal-team" id="goal-team">
+                                            <select title= "Team" name="goal-team" id="goal-team">
 
                                                 <option value="0"></option>
 
@@ -422,6 +426,8 @@
             
         </main>
     
+        <script type="text/javascript" src="../js/header1.js"></script>
+
         <script type="text/javascript">
 
             document.getElementById("update-msg").style.display = "none";
@@ -493,7 +499,7 @@
                     fixtures.push(fixture);
 
                     // process the fixtures array and save result to fixtures table
-                    fetch('https://www.9habu.com/wc2022/php/update-fixture-scores.php', {
+                    fetch('https://www.9habu.com/wc2022/inc/update-fixture-scores.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -561,7 +567,7 @@
                     goals.push(goal);
 
                     // now process the goals array and save result to goals-scored table
-                    fetch('https://www.9habu.com/wc2022/php/update-goals-scored.php', {
+                    fetch('https://www.9habu.com/wc2022/inc/update-goals-scored.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -607,7 +613,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Updating User Points Totals...please wait";
 
-                    fetch('https://www.9habu.com/wc2022/php/update-user-points.php', {
+                    fetch('https://www.9habu.com/wc2022/inc/update-user-points.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -653,7 +659,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Updating User Points Totals...please wait";
 
-                    fetch('https://www.9habu.com/wc2022/php/static-top-ten.php', {
+                    fetch('https://www.9habu.com/wc2022/inc/static-top-ten.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -699,7 +705,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Updating To Goal Scorer...Please Wait";
 
-                    fetch('https://www.9habu.com/wc2022/php/static-top-goal-scorer.php', {
+                    fetch('https://www.9habu.com/wc2022/inc/static-top-goal-scorer.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -745,7 +751,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Updating Latest Results...Please Wait";
 
-                    fetch('https://www.9habu.com/wc2022/php/static-latest-results.php', {
+                    fetch('https://www.9habu.com/wc2022/inc/static-latest-results.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -791,7 +797,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Updating Upcoming Fixtures...Please Wait";
 
-                    fetch('https://www.9habu.com/wc2022/php/static-upcoming-fixtures.php', {
+                    fetch('https://www.9habu.com/wc2022/inc/static-upcoming-fixtures.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -837,7 +843,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Updating Competition Statistics Fixtures...Please Wait";
 
-                    fetch('https://www.9habu.com/wc2022/php/static-statistics.php', {
+                    fetch('https://www.9habu.com/wc2022/inc/static-statistics.php', {
                             
                             method: 'POST',
                             mode: "same-origin",

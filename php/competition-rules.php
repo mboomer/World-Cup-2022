@@ -14,27 +14,17 @@
 
         <link rel="stylesheet" href="../css/styles.css">
 
-        <style type="text/css">
-
-            #rules-container {
-                width: 98%;
-                margin: 0 auto;
-            }
-            #rules-container header {
-                margin-top: 5px;
-                margin-bottom: 5px;
-            }
-
-        </style>
-
     </head>
     
     <body>
         
-        <div id="rules-container">
+        <main id="rules-container">
 
-            <header>                
-                <?php include '../include/header1.inc.php';?>
+            <header>
+                <?php 
+                    $menuitems = array("Home");
+                    include '../include/header1.inc.php';
+                ?>
             </header>
             
             <div class="card" id="competition-rules">
@@ -42,11 +32,32 @@
 
                 <div id="rules">
 
-                    <div class="rules-heading">Predictions - How points are awarded</div>
-
+                    <div class="rules-heading">Submitting Your Predictions</div>
                     <div class="rules-content">
                         All predictions must be completed before the start of the first match on November 20th 2022.<br>
-                        <br>
+                        Once the competiton starts, no changes will allowed to your predictions.
+                    </div>    
+
+                    <div class="rules-heading">Home Team -v- Away Team</div>
+                    <div class="rules-content">
+                        <p>For each game the Home team will be deemed, as is traditional, to be the team listed first.</p>
+                        <p>For example, the opening game in the tournament is<br><br></p>
+                        <p><strong>Qatar -v- Ecuador</strong><br><br></p>
+                        <p>Qatar will be deemed to be the home team and Ecuador will be deemed to be the away team. </p>
+                    </div>    
+
+
+                    <div class="rules-heading">Available Points</div>
+                    <div class="rules-content">
+                        The number of points available for predicting every game correctly is 252.<br>
+                        For predicting the top goal scorer in the competition - an additional 5 points.<br>
+                        For predicting the number of goals scored by the top goal scorer - an additional 5 points.<br>
+                        So the maximum points possible is 262. 
+                    </div>    
+
+                    <div class="rules-heading">Predicting the correct score/correct result</div>
+
+                    <div class="rules-content">
                         1 Point for predicting the correct result, i.e. a home win (H), an away win (A), a draw (D)<br>
                         2 Points for predicting the correct score, e.g. 2-1, 1-2, 2-2
                     </div>    
@@ -55,28 +66,28 @@
 
                     <div class="rules-content">
                         1 Bonus Point for predicting the correct home team<br>
-                        1 Bonue Point for predicting the correct away team<br>
+                        1 Bonus Point for predicting the correct away team<br>
                     </div>
 
                     <div class="rules-heading">Quarter Finals - Bonus Points</div>
 
                     <div class="rules-content">
-                        1 Bonus Point for predicting the correct home team<br>
-                        1 Bonus Point for predicting the correct away team<br>
+                        2 Bonus Point for predicting the correct home team<br>
+                        2 Bonus Point for predicting the correct away team<br>
                     </div>
 
                     <div class="rules-heading">Semi Finals - Bonus Points</div>
 
                     <div class="rules-content">
-                        2 Bonus Points for predicting the correct home team<br>
-                        2 Bonus Points for predicting the correct away team<br>
+                        3 Bonus Points for predicting the correct home team<br>
+                        3 Bonus Points for predicting the correct away team<br>
                     </div>
 
                     <div class="rules-heading">3rd Place Playoff / Final - Bonus Points</div>
 
                     <div class="rules-content">
-                        3 Points for predicting the correct home team<br>
-                        3 Points for predicting the correct away team<br>
+                        4 Points for predicting the correct home team<br>
+                        4 Points for predicting the correct away team<br>
                     </div>
 
                     <div class="rules-heading">Tie-Breaker Situation</div>
@@ -101,8 +112,10 @@
                 <?php include '../include/footer.inc.php';?>
             </footer>
 
-        </div>        
-            
+        </main>        
+
+        <script type="text/javascript" src="../js/header1.js"></script>
+        
     </body>
 
 </html>

@@ -224,7 +224,7 @@
                                 echo "      <table>";
                                 echo "          <thead class='blueheader'>";
                                 echo "              <tr>";
-                                echo "                  <th class='tbl-header' colspan='12'>PREDICTIONS / POINTS</th>";
+                                echo "                  <th class='tbl-header' colspan='10'>PREDICTIONS / POINTS</th>";
                                 echo "              </tr>";
                                 echo "              <tr>";
                                 echo "              <tr>";

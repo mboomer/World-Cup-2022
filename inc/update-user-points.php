@@ -244,13 +244,13 @@
                                 if ($p["stage"] == "LS") {                                
                                     $bonus = $bonus + 1;
                                 } else if ($p["stage"] == "QF") {                                
-                                    $bonus = $bonus + 1;
-                                } else if ($p["stage"] == "SF") {
                                     $bonus = $bonus + 2;
-                                } else if ($p["stage"] == "PL") {                                
-                                    $bonus = $bonus + 1;
-                                } else if ($p["stage"] == "FI") {
+                                } else if ($p["stage"] == "SF") {
                                     $bonus = $bonus + 3;
+                                } else if ($p["stage"] == "PL") {                                
+                                    $bonus = $bonus + 4;
+                                } else if ($p["stage"] == "FI") {
+                                    $bonus = $bonus + 4;
                                 };
 
                             };
@@ -260,13 +260,13 @@
                                 if ($p["stage"] == "LS") {                                
                                     $bonus = $bonus + 1;
                                 } else if ($p["stage"] == "QF") {                                
-                                    $bonus = $bonus + 1;
-                                } else if ($p["stage"] == "SF") {
                                     $bonus = $bonus + 2;
-                                } else if ($p["stage"] == "PL") {                                
-                                    $bonus = $bonus + 1;
-                                } else if ($p["stage"] == "FI") {
+                                } else if ($p["stage"] == "SF") {
                                     $bonus = $bonus + 3;
+                                } else if ($p["stage"] == "PL") {                                
+                                    $bonus = $bonus + 4;
+                                } else if ($p["stage"] == "FI") {
+                                    $bonus = $bonus + 4;
                                 };
 
                             };

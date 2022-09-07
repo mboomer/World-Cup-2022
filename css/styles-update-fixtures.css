@@ -46,14 +46,9 @@ Each section has a GRID-AREA named after the section ID
 }
 
 header {
-    
-    display: grid;
     grid-area: header;
-    grid-template-columns: 1fr 1fr 10fr 1fr 1fr 1fr;
-    grid-template-rows: auto;
-    grid-gap: 10px;
-    margin-bottom: 5px;
-} 
+    display: grid;
+}
 
 #username {
     
@@ -75,14 +70,18 @@ header {
     text-align: center;
 }
 
+#qatar-flag-l { grid-area: qatar-flag-l };
+#header-text  { grid-area: header-text };
+#hb-icon      { grid-area: hb-icon };
+
 
 #tabs {
     grid-area: tabs;
     margin-top: 5px;
 }
 
-#tournment {
-    grid-area: tournment;
+#tournament {
+    grid-area: tournament;
 }
 
 #FIXTURES {
@@ -100,15 +99,14 @@ header {
     
     }
 
-#UPDATE-USER-POINTS {
-    grid-area: update-user-points;
-
-}
+#update-user-points { grid-area: update-user-points; }
+    #statistics-update { grid-area: statistics-update; }
+    #data-import       { grid-area: data-import; }
 
     #update-user-points div {
         display: flex;
         justify-content: center;
-        margin: 20px;
+        /* margin: 20px; */
     }
 
     .confirm-import {
@@ -220,10 +218,6 @@ header {
     width: 40%;
 }
 
-#stats-update-tbl, #data-import-tbl {
-    width: 50%;
-}
-
 #stats-update-tbl, td, th #data-import-tbl td, th {
     padding: 2px;
 }
@@ -258,12 +252,6 @@ header {
     border: 2px solid greenyellow;
     margin: 10px auto;
     padding: 5px;
-}
-
-/* white text blue background                                      */
-.transparent-btn-blue {
-    padding: 5px 5px;
-    margin: 5px; 
 }
 
 /* white text blue background                                      */
@@ -312,14 +300,30 @@ input[id="goal-scorer"] {
 
 
 /* ******************************************************************************************   */
-/*                       MEDIA RULES 1200px 992ox 768px 552px                                   */
+/*                       MEDIA RULES 1200px 992ox 768px 576px                                   */
+/* ******************************************************************************************   */
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 576px or higher                              */
 /* ******************************************************************************************   */
 
-/* ******************************************************************************************   */
-/* apply to any device that has a screen width of 1200px or higher                              */
-/* ******************************************************************************************   */
+@media screen and (max-width:576px) {                   
+    
+    /* body {
+        background-color: aqua;
+    } */
 
-@media screen and (min-width:1200px) {                   
+    #tournament {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 3px;
+        margin: 0 auto;
+
+        grid-template-areas:
+            "GOALS-SCORED"
+            "FIXTURES";
+
+    }
     
     main {
         width: 98%;
@@ -335,14 +339,397 @@ input[id="goal-scorer"] {
         grid-template-areas:
             "header"
             "tabs"
-            "tournment"
+            "tournament"
+            "footer";
+    }
+
+    #username {
+        display: none;
+    }
+
+    header {
+        grid-template-areas:
+            "qatar-flag-l header-text hb-icon";
+    }
+
+    header {
+        grid-area: header;
+        grid-template-columns: 1fr 11fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 3px;
+    }
+
+    .home, .away {
+        width: 18%;
+        padding-right: 5px;
+        font-size: 1em;
+    }
+
+    #results-tbl table {
+        font-size: 0.7em;
+        width: 98%;
+    }
+    
+    #update-user-points { 
+
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+        grid-template-areas: 
+            "statistics-update" 
+            "data-import";
+    }
+
+    #stats-update-tbl, #data-import-tbl {
+        width: 98%;
+    }
+
+    .results-home-flag img, .results-away-flag img {
+        width: 50%;
+    }
+
+    #goals-scored-selections table {
+        font-size: 0.5em;
+        width: 98%;
+        padding: 1px;
+    }
+
+    .transparent-btn-blue {
+        padding: 2px 2px;
+        margin: 2px; 
+        font-size: 10px;
+        line-height: 100%;
+    }
+
+    #goal-team {
+        width: 50px;
+        font-size: 1em;
+    }
+
+    input {
+        font-size: 1em;
+    }
+
+    input[id="goal-scorer"] {
+        width: 95%;
+        text-align: left;
+    }
+
+} /** end of @media screen and (min-width 576:px) */
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 576px or higher                              */
+/* ******************************************************************************************   */
+
+@media screen and (min-width:576px) {                   
+    
+    /* body {
+        background-color: aqua;
+    } */
+
+    #tournament {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 3px;
+        margin: 0 auto;
+
+        grid-template-areas:
+            "GOALS-SCORED"
+            "FIXTURES";
+
+    }
+    
+    main {
+        width: 98%;
+ 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 10vh auto auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+  
+    #container {
+        grid-template-areas:
+            "header"
+            "tabs"
+            "tournament"
+            "footer";
+    }
+
+    #username {
+        display: none;
+    }
+
+    header {
+        grid-template-areas:
+            "qatar-flag-l header-text qatar-flag-r hb-icon";
+    }
+
+    header {
+        display: grid;
+        grid-area: header;
+        grid-template-columns: 1fr 10fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 3px;
+    }
+
+    #header-text {
+        font-size: 1.1em;
+    }
+
+    .home, .away {
+        width: 18%;
+        padding-right: 5px;
+        font-size: 1.2em;
+    }
+
+    #results-tbl table {
+        font-size: 0.7em;
+        width: 98%;
+    }
+    
+    #update-user-points { 
+
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+        grid-template-areas: 
+            "statistics-update" 
+            "data-import";
+    }
+
+    #stats-update-tbl, #data-import-tbl {
+        width: 60%;
+    }
+
+    .results-home-flag img, .results-away-flag img {
+        width: 50%;
+    }
+
+    #goals-scored-selections table {
+        font-size: 0.7em;
+        width: 100%;
+        padding: 2px;
+    }
+
+    .transparent-btn-blue {
+        padding: 4px 4px;
+        margin: 4px; 
+        font-size: 12px;
+        line-height: 100%;
+    }
+
+} /** end of @media screen and (min-width 576:px) */
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 768px or higher                              */
+/* ******************************************************************************************   */
+
+@media screen and (min-width:768px) {                   
+    
+    /* body {
+        background-color: bisque;
+    } */
+
+    #tournament {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 3px;
+        margin: 0 auto;
+
+        grid-template-areas:
+            "GOALS-SCORED"
+            "FIXTURES";
+
+    }
+    
+    main {
+        width: 98%;
+ 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 10vh auto auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+  
+    #container {
+        grid-template-areas:
+            "header"
+            "tabs"
+            "tournament"
             "footer";
     }
 
     header {
         grid-template-areas:
-            "logo qatar-flag-l header-text qatar-flag-r username hb-icon";
+            "qatar-flag-l header-text qatar-flag-r username hb-icon";
     }
+
+    header {
+            grid-template-columns: 1fr 10fr 1fr 1fr 1fr;
+    } 
+
+    #username {
+        display: flex;
+    }
+
+    .home, .away {
+        width: 18%;
+        padding-right: 5px;
+        font-size: 1.2em;
+    }
+
+    #results-tbl table {
+        font-size: 0.7em;
+        width: 70%;
+    }
+    
+    #update-user-points { 
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+
+        grid-template-areas: 
+            "statistics-update data-import";
+    }
+
+    #stats-update-tbl, #data-import-tbl {
+        width: 80%;
+    }
+
+    .results-home-flag img, .results-away-flag img {
+        width: 50%;
+    }
+
+    #goals-scored-selections table {
+        font-size: 0.7em;
+        width: 100%;
+        padding: 2px;
+    }
+
+    .transparent-btn-blue {
+        padding: 4px 4px;
+        margin: 4px; 
+        font-size: 12px;
+        line-height: 100%;
+    }
+
+} /** end of @media screen and (min-width:768px) */
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 992px or higher                              */
+/* ******************************************************************************************   */
+
+@media screen and (min-width:992px) {                   
+    
+    /* body {
+        background-color: plum;
+    } */
+
+    #tournament {
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        grid-template-rows: auto;
+        grid-gap: 3px;
+        margin: 0 auto;
+
+        grid-template-areas:
+            "FIXTURES GOALS-SCORED"
+
+    }
+    
+    main {
+        width: 100%;
+ 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 10vh auto auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+  
+    #container {
+        grid-template-areas:
+            "header"
+            "tabs"
+            "tournament"
+            "footer";
+    }
+
+    header {
+        grid-template-areas:
+            "qatar-flag-l header-text qatar-flag-r username hb-icon";
+    }
+
+    header {
+        grid-template-columns: 1fr 10fr 1fr 1fr 1fr;
+    } 
+    
+    .home, .away {
+        width: 15%;
+        padding-right: 3px;
+        font-size: 1em;
+    }
+
+    #results-tbl table {
+        font-size: 0.7em;
+        width: 100%
+    }
+    
+    #update-user-points { 
+
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+        grid-template-areas: 
+            "statistics-update" 
+            "data-import";
+    }
+
+    #stats-update-tbl, #data-import-tbl {
+        width: 80%;
+    }
+
+    .results-home-flag img, .results-away-flag img {
+        width: 82%;
+    }
+
+    #goals-scored-selections table {
+        font-size: 0.7em;
+        width: 100%;
+        padding: 2px;
+    }
+
+    .transparent-btn-blue {
+        padding: 4px 4px;
+        margin: 4px; 
+        font-size: 12px;
+        line-height: 100%;
+    }
+
+    #stats-update-tbl, #data-import-tbl {
+        width: 64%;
+    }
+
+} /** end of @media screen and (min-width:992px) */
+
+/* ******************************************************************************************   */
+/* apply to any device that has a screen width of 1200px or higher                              */
+/* ******************************************************************************************   */
+
+@media screen and (min-width:1200px) {                   
+    
+    /* body {
+        background-color: gold;
+    } */
 
     #tournament {
         width: 98%;
@@ -355,6 +742,64 @@ input[id="goal-scorer"] {
         grid-template-areas:
             "FIXTURES GOALS-SCORED"
 
+    }
+
+    main {
+        width: 98%;
+ 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 10vh auto auto;
+        grid-gap: 5px;
+        margin: 0 auto;
+    }
+  
+    #container {
+        grid-template-areas:
+            "header"
+            "tabs"
+            "tournament"
+            "footer";
+    }
+
+    header {
+        grid-template-areas:
+            "qatar-flag-l header-text qatar-flag-r username hb-icon";
+    }
+
+    header {
+        grid-template-columns: 1fr 10fr 1fr 1fr 1fr;
+    } 
+    
+    .home, .away {
+        width: 20%;
+        padding-right: 5px;
+        font-size: 1.2em;
+    }
+
+    #results-tbl table {
+        font-size: 0.75em;
+    }
+
+    #goals-scored-selections table {
+        font-size: 0.75em;
+        width: 97%;
+        padding: 2px;
+    }
+
+    .transparent-btn-blue {
+        font-size: 12px;
+    }
+
+    .transparent-btn-blue {
+        padding: 5px 5px;
+        margin: 5px; 
+        font-size: 14px;
+        line-height: 100%;
+    }
+
+    #stats-update-tbl, #data-import-tbl {
+        width: 50%;
     }
 
 } /** end of @media screen and (min-width:1200px) */

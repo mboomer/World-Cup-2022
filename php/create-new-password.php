@@ -96,8 +96,11 @@
 
     <body id="body-top">
 
-        <header>        
-            <?php include "../include/header1.inc.php"; ?>
+        <header>
+            <?php 
+                $menuitems = array("Login");        
+                include "../include/header1.inc.php"; 
+            ?>
         </header>
 
         <div id="login-container">
@@ -151,6 +154,8 @@
         <footer id="footer">        
             <?php include "../include/footer.inc.php"; ?>
         </footer>
+
+        <script type="text/javascript" src="../js/header1.js"></script>
 
         <script type="text/javascript">
             

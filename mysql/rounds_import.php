@@ -1,5 +1,4 @@
 <?php
-
     // Include config file
     require_once "../../../.php/inc/db.worldcup.inc.php";
 
@@ -17,8 +16,11 @@
         exit("Error: " . $e->getMessage());
     };
 
+    // initialise the no of records imported
+    $recordcount = 0;
+
 // dislay starting debug timestamp
-echo (date('l jS \of F Y h:i:s A') . "<br><br>");
+// echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     
     // Prepare 
     $sql = "INSERT INTO Rounds (Code, Description) VALUES (:Code, :Description)";
@@ -33,61 +35,74 @@ echo (date('l jS \of F Y h:i:s A') . "<br><br>");
     $code = "GS";
     $description = "Group Stage";
     
-    if ( $query -> execute() === TRUE ) {
-        echo "New record " . $description . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $description . "<br>";
+        exit;
     }
+
+    // increment the recordcount
+    ++$recordcount;
 
     $code = "LS";
     $description = "Last Sixteen";
     
-    if ( $query -> execute() === TRUE ) {
-        echo "New record " . $description . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $description . "<br>";
+        exit;
     }
+
+    // increment the recordcount
+    ++$recordcount;
 
     $code = "QF";
     $description = "Quarter Final";
     
-    if ( $query -> execute() === TRUE ) {
-        echo "New record " . $description . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $description . "<br>";
+        exit;
     }
+
+    // increment the recordcount
+    ++$recordcount;
 
     $code = "SF";
     $description = "Semi Final";
     
-    if ( $query -> execute() === TRUE ) {
-        echo "New record " . $description . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $description . "<br>";
+        exit;
     }
+
+    // increment the recordcount
+    ++$recordcount;
 
     $code = "FI";
     $description = "Final";
     
-    if ( $query -> execute() === TRUE ) {
-        echo "New record " . $description . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $description . "<br>";
+        exit;
     }
+
+    // increment the recordcount
+    ++$recordcount;
 
     $code = "PL";
     $description = "Play Off";
     
-    if ( $query -> execute() === TRUE ) {
-        echo "New record " . $description . " created successfully" . "<br>";
-    } else {
+    if ( $query -> execute() === FALSE ) {
         echo "Failed to created record - " . $description . "<br>";
+        exit;
     }
+
+    // increment the recordcount
+    ++$recordcount;
 
     // Close the connection as soon as it's no longer needed
     $dbh = null;
 
-// display closing debug timestamp
-echo ("<br>" . date('l jS \of F Y h:i:s A') . "<br>");
+// return the closing debug timestamp and the number of records imported
+echo ( date('l jS \of F Y h:i:s A') . "<br>");
+echo "Total Rounds Imported : " . $recordcount;
 
 ?>
