@@ -124,8 +124,8 @@
 
                                 echo "      <table id='login-details-tbl>";
                                 echo "          <thead class='greenheader'>";
-                                echo "              <tr>";
-                                echo "              </tr>";
+                                // echo "              <tr>";
+                                // echo "              </tr>";
                                 echo "          </thead>";
                                 echo "          <tbody>";
                                 echo "              <tr>";
@@ -160,9 +160,9 @@
 
                                 echo "      <table id='personal-details-tbl>";
                                 echo "          <thead class='greenheader'>";
-                                echo "              <tr>";
-                                echo "                  <th></th><th></th>";
-                                echo "              </tr>";
+                                // echo "              <tr>";
+                                // echo "                  <th></th><th></th>";
+                                // echo "              </tr>";
                                 echo "          </thead>";
                                 echo "          <tbody>";
                                 echo "              <tr>";
@@ -195,9 +195,9 @@
 
                                 echo "      <table id='competition-details-tbl>";
                                 echo "          <thead class='greenheader'>";
-                                echo "              <tr>";
-                                echo "                  <th></th><th></th>";
-                                echo "              </tr>";
+                                // echo "              <tr>";
+                                // echo "                  <th></th><th></th>";
+                                // echo "              </tr>";
                                 echo "          </thead>";
                                 echo "          <tbody>";
                                 echo "              <tr>";
@@ -218,21 +218,32 @@
                             echo "</div>";
 
                             echo "<div class='card' id='team-details'>";
+
                                 echo "   <h2 class='card-title'>Team Details</h2>";
 
-                                echo "      <table id='team-details-tbl>";
+                                echo "      <table id='team-details-tbl'>";
                                 echo "          <thead class='greenheader'>";
-                                echo "              <tr>";
-                                echo "                  <th></th><th></th>";
-                                echo "              </tr>";
                                 echo "          </thead>";
                                 echo "          <tbody>";
                                 echo "              <tr>";
                                 echo "                  <td>Team Name</td>";
-                                echo "                  <td><input id='upd-team-name' type='text' value='" . htmlspecialchars($teamname)  . "' placeholder='Enter A Team Name'></td>";
+                                echo "                  <td><input id='upd-team-name' type='text' value='" . htmlspecialchars($userteam)  . "' placeholder='Enter A Team Name'></td>";
                                 echo "              </tr>";
                                 echo "          </tbody>";
                                 echo "      </table>";   
+
+                                // echo "      <table id='similar-names-tbl'>";
+                                // echo "          <thead>";
+                                // echo "          </thead>";
+                                // echo "          <tbody>";
+                                // echo "              <tr>";
+                                // echo "                  <td></td>";
+                                // echo "              </tr>";
+                                // echo "          </tbody>";
+                                // echo "      </table>";   
+
+                                echo "      <div id='similar-names-tbl'>";
+                                echo "      </div>";   
 
                             echo "</div>";
                             
@@ -264,27 +275,29 @@
 
         <script>
 
-            /*  
-                pass php session variable to JS variable
-                have to pass this varaiable here as it is not recognised if it is
-                included in the header1.js file
-            */            
-            PredictionsLink = "<?=$predictions?>";                                             
-
             /* hide any message that is displayed */
             document.getElementById("update-messages").style.display = "None";
+            document.getElementById("similar-names-tbl").style.display = "None";
 
             // ==================================================================
             // add CLICK event listener for the DOM
             // ==================================================================
             document.addEventListener('click', function (event) {
 
+                if (event.target.matches('[data-tm]')) {
+                    console.log("TEAM : " + event.target.dataset.tm);
+
+                    document.getElementById("upd-team-name").value = event.target.dataset.tm;
+
+                }
+
+
                 if (event.target.matches('#update-profile-btn')) {
 
                     document.getElementById("update-messages").style.display = "Flex";
                     document.getElementById("update-messages").innerText = "Saving Profile...please wait";
                         
-                    UpdUserName  = document.getElementById('upd-user-name').value; 
+                    UpdTeamName  = document.getElementById('upd-team-name').value; 
 
                     // The hashed password is retrieved from the user record, and is passed here into a JS variable
                     UpdUserID    = "<?=$userid?>";                                             
@@ -361,6 +374,55 @@
                 }; // end of click event for update-profile-btn 
 
             }, false);   // end of CLICK event listener
+
+            // ==================================================================
+            // add CHANGE event listener for the INPUT fields
+            // ==================================================================
+            document.addEventListener('keyup', function (event) {
+
+                // console.log("CHANGED TEAM NAME" + event.target.value);
+
+                if (event.target.matches('#upd-team-name')) {
+
+                    fetch('https://www.9habu.com/wc2022/inc/similar-team-names.php', {
+                            
+                            method: 'POST',
+                            mode: "same-origin",
+                            credentials: "same-origin",
+                            headers: {
+                                'Content-Type': 'text/html',
+                                'Accept': 'text/html'
+                                },
+                            body: (document.getElementById("upd-team-name").value),
+
+                        }).then(function (response) {
+
+                            // If the response is successful, get the JSON
+                            if (response.ok) {
+                                return response.text();
+                            };
+
+                            // Otherwise, throw an error
+                            return response.text().then(function (msg) {
+                                // console.log(response.json());
+                                throw msg;
+                            });
+
+                        }).then(function (data) {
+
+                            // console.log(data);
+                            document.getElementById("similar-names-tbl").style.display = "flex";
+                            document.getElementById("similar-names-tbl").innerHTML = data;
+
+                        }).catch(function (error) {
+                            // There was an error
+                            console.warn("Error : ", error);
+                        });
+
+                };
+
+            }, false);   // end of CHANGE event listener
+
 
         </script>
     
