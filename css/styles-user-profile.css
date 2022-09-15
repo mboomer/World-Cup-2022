@@ -84,6 +84,25 @@ section {
     text-align: center;
 }
 
+th, td {
+    border: 1px dotted black;
+}
+
+#similar-names-tbl {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#similar-names-tbl div {
+    cursor: pointer;
+    margin-top: 5px;
+    border: 1px dotted green;
+    padding: 2px 4px;
+    font-size: 0.8em;
+}
+
 /* ---------------------------------- END OF DEFAULT MEDIA RULE FOR 576 --------------------------------------------------------- */
 
 
