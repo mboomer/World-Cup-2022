@@ -35,6 +35,7 @@
                         'Accessdenied'  => 'Access Denied', 
                         'Database'      => 'SQL execution Error',
                         'Database1'     => 'Database Update Failed',
+                        'TeamExists'    => 'That team name already exists',
                         'Failure'       => 'Update Profile FAILED' 
                     );
 
@@ -93,9 +94,7 @@
             exit();
         };
 
-        // $qry = "UPDATE Users SET UserName=:UserName, UserEmail=:UserEmail, UserPass=:UserPass, UserTeam=:UserTeam, FirstName=:FirstName, LastName=:LastName', Phone=:Phone WHERE ID=:UserID";
-        // $qry = "UPDATE Users SET UserName=:UserName, UserEmail=:UserEmail, UserPass=:UserPass, UserTeam=:UserTeam, FirstName=:FirstName, LastName=:LastName', Phone=:Phone WHERE ID=:UserID";
-        $qry = "UPDATE Users SET FirstName=:FirstName, LastName=:LastName, Phone=:Phone WHERE ID=:UserID";
+        $qry = "UPDATE Users SET FirstName=:FirstName, LastName=:LastName, Phone=:Phone, UserTeam=:UserTeam WHERE ID=:UserID";
             
         // prepare the query for the database connection
         $query = $dbh -> prepare($qry);
@@ -106,19 +105,20 @@
         // $query->bindParam(':UserEmail', $useremail, PDO::PARAM_STR);
         // $query->bindParam(':UserPass',  $userpass,  PDO::PARAM_STR);
         // $query->bindParam(':UserTeam',  $userteam,  PDO::PARAM_STR);
-        $query->bindParam(':FirstName', $userfirst, PDO::PARAM_STR);
-        $query->bindParam(':LastName',  $userlast,  PDO::PARAM_STR);
-        $query->bindParam(':Phone',     $userphone, PDO::PARAM_STR);
+        $query->bindParam(':FirstName', $userfirst,  PDO::PARAM_STR);
+        $query->bindParam(':LastName',  $userlast,   PDO::PARAM_STR);
+        $query->bindParam(':Phone',     $userphone,  PDO::PARAM_STR);
+        $query->bindParam(':UserTeam',  $userteam,   PDO::PARAM_STR);
 
         // assign the values to the place holders from JSON array
         $userid    = $json_array[0]["UserID"];
         // $username  = $json_array[0]["UserName"];
         // $useremail = $json_array[0]["UserEmail"];
         // $userpass  = $json_array[0]["UserPass"];
-        // $userteam  = $json_array[0]["UserTeam"];
         $userfirst = $json_array[0]["FirstName"];
         $userlast  = $json_array[0]["LastName"];
         $userphone = $json_array[0]["Phone"];
+        $userteam  = $json_array[0]["UserTeam"];
 
         // Execute prepared SELECT statement
         if ($query -> execute() === FALSE) {    
