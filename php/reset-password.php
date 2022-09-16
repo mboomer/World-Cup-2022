@@ -143,7 +143,7 @@
         <script type="text/javascript">
             
             // set focus to meal-filter
-            document.getElementById("emailaddress").focus();
+            document.getElementById("username").focus();
 
         </script>
         
