@@ -3,8 +3,8 @@
     // Processing form data when form is submitted by a POST and using correct button
     // if ( ($_SERVER["REQUEST_METHOD"] !== "POST") || (!isset($_POST["create-account-btn"])) ) {
     if ( ($_SERVER["REQUEST_METHOD"] !== "POST") ) {
-        header("location: user-profile.php?error=accessdenied");
-        exit();
+        // header("location: user-profile.php?error=accessdenied");
+        // exit();
     }
 
     // Include DB config file
@@ -27,17 +27,20 @@
     */
     $msg_arr = array( 
                         'Success'       => 'Profile Update Successful', 
+                        'Test'          => 'Test', 
                         'Incomplete'    => 'Not all required fields are filled in', 
                         'Invaliduser'   => 'User Name contains invalid characters', 
                         'Invalidemail'  => 'User Email not in correct format', 
                         'Existingpwd'   => 'Existing password is not correct, please try again', 
+                        'Existingpwd1'  => 'Existing password has not been entered', 
                         'Passwordmatch' => 'New and Repeat Passwords Do Not Match', 
+                        'PasswordEmpty' => 'New or Repeat Password has not been entered', 
                         'Accessdenied'  => 'Access Denied', 
                         'Database'      => 'SQL execution Error',
-                        'Database1'     => 'Database Update Failed',
-                        'TeamExists'    => 'That team name already exists',
+                        'Database1'     => 'Database Update FAILED',
                         'Failure'       => 'Update Profile FAILED' 
                     );
+
 
     // Test error message
     // echo json_encode( $msg_arr[Incomplete] . " - " . $json_array[0]["UserName"] . " - " . $json_array[0]["FirstName"] . " - " . $json_array[0]["LastName"] . " - " . $json_array[0]["UserTeam"] );
@@ -66,16 +69,40 @@
         exit();
     }
 
+    // check if new password and repeat password have been entered but the existing password has not been entered
+    if ( !empty($json_array[0]["NewPwd"]) && !empty($json_array[0]["RepeatPwd"]) ) {
+
+            // if the existing password has not been entered
+            if ( empty(trim($json_array[0]["UserPass"])) ) {
+                echo json_encode( $msg_arr[Existingpwd1] );
+                exit();
+            } 
+    }
+
     // check if existing password has been entered and that it matches the existing password
     if ( !empty($json_array[0]["UserPass"]) ) {
 
             // hash the existing password 
             $existingPwdHash = password_hash( trim($json_array[0]["UserPass"]), PASSWORD_DEFAULT);
 
+            // the hashed password was retrieved from the DB and passed in to json array - check it against the password that was entered 
             if ( !password_verify($json_array[0]["UserPass"], $json_array[0]["HashedPwd"]) ) {
                 echo json_encode( $msg_arr[Existingpwd] );
                 exit();
             }
+
+            // Check if the new password and repeat password field have been entered
+            if ( empty(trim($json_array[0]["NewPwd"])) || empty(trim($json_array[0]["RepeatPwd"])) ) {
+                echo json_encode( $msg_arr[PasswordEmpty] );
+                exit();
+            } 
+
+            // Check if the new password and repeat password fields match
+            if ( trim($json_array[0]["NewPwd"]) !== trim($json_array[0]["RepeatPwd"]) ) {
+                echo json_encode( $msg_arr[PasswordMatch] );
+                exit();
+            } 
+
     }
 
     /** 
@@ -94,31 +121,40 @@
             exit();
         };
 
-        $qry = "UPDATE Users SET FirstName=:FirstName, LastName=:LastName, Phone=:Phone, UserTeam=:UserTeam WHERE ID=:UserID";
+        $qry = "UPDATE Users SET ID = :UserID, UserName = :UserName, UserEmail = :UserEmail, UserPass = :UserPass, UserTeam = :UserTeam, FirstName = :FirstName, LastName = :LastName, Phone = :Phone WHERE ID = :UserID";
             
         // prepare the query for the database connection
         $query = $dbh -> prepare($qry);
 
         // bind the parameters
         $query->bindParam(':UserID',    $userid,    PDO::PARAM_STR);
-        // $query->bindParam(':UserName',  $username,  PDO::PARAM_STR);
-        // $query->bindParam(':UserEmail', $useremail, PDO::PARAM_STR);
-        // $query->bindParam(':UserPass',  $userpass,  PDO::PARAM_STR);
-        // $query->bindParam(':UserTeam',  $userteam,  PDO::PARAM_STR);
+        $query->bindParam(':UserName',  $username,  PDO::PARAM_STR);
+        $query->bindParam(':UserEmail', $useremail, PDO::PARAM_STR);
+        $query->bindParam(':UserPass',  $userpass,  PDO::PARAM_STR);
+        $query->bindParam(':UserTeam',  $userteam,  PDO::PARAM_STR);
         $query->bindParam(':FirstName', $userfirst,  PDO::PARAM_STR);
         $query->bindParam(':LastName',  $userlast,   PDO::PARAM_STR);
         $query->bindParam(':Phone',     $userphone,  PDO::PARAM_STR);
-        $query->bindParam(':UserTeam',  $userteam,   PDO::PARAM_STR);
 
         // assign the values to the place holders from JSON array
         $userid    = $json_array[0]["UserID"];
-        // $username  = $json_array[0]["UserName"];
-        // $useremail = $json_array[0]["UserEmail"];
-        // $userpass  = $json_array[0]["UserPass"];
+        $username  = $json_array[0]["UserName"];
+        $useremail = $json_array[0]["UserEmail"];
+
+        /*  
+            if no changes made to existing password, use the existing pwd hash which is passed in json array
+            if a change has been made to the password, then hash it before saving to the DB
+        */ 
+        if ( empty($json_array[0]["UserPass"]) ) {
+            $userpass = trim($json_array[0]["HashedPwd"]);
+        } else {
+            $userpass = password_hash( trim($json_array[0]["NewPwd"]), PASSWORD_DEFAULT );
+        }
+
+        $userteam  = $json_array[0]["UserTeam"];
         $userfirst = $json_array[0]["FirstName"];
         $userlast  = $json_array[0]["LastName"];
         $userphone = $json_array[0]["Phone"];
-        $userteam  = $json_array[0]["UserTeam"];
 
         // Execute prepared SELECT statement
         if ($query -> execute() === FALSE) {    

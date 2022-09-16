@@ -284,25 +284,21 @@
             // ==================================================================
             document.addEventListener('click', function (event) {
 
+                // select one of the possible displayed Team Names
                 if (event.target.matches('[data-tm]')) {
-                    console.log("TEAM : " + event.target.dataset.tm);
-
                     document.getElementById("upd-team-name").value = event.target.dataset.tm;
-
                 }
-
 
                 if (event.target.matches('#update-profile-btn')) {
 
                     document.getElementById("update-messages").style.display = "Flex";
                     document.getElementById("update-messages").innerText = "Saving Profile...please wait";
                         
-                    UpdTeamName  = document.getElementById('upd-team-name').value; 
-
                     // The hashed password is retrieved from the user record, and is passed here into a JS variable
                     UpdUserID    = "<?=$userid?>";                                             
                     UpdHashedPwd = "<?=$userpass?>";                                             
 
+                    UpdUserName  = document.getElementById('upd-user-name').value; 
                     UpdExistPwd  = document.getElementById('upd-existing-pwd').value; 
                     UpdNewPwd    = document.getElementById('upd-new-pwd').value; 
                     UpdRepeatPwd = document.getElementById('upd-repeat-pwd').value; 
@@ -334,7 +330,7 @@
                     // add the profile object to the Profiles Array                                                                
                     profiles.push(profile);
 
-                    // console.log(profiles);
+                    console.log(profiles);
 
                     fetch('https://www.9habu.com/wc2022/inc/update-user-profile.php', {
                             
@@ -376,11 +372,9 @@
             }, false);   // end of CLICK event listener
 
             // ==================================================================
-            // add CHANGE event listener for the INPUT fields
+            // add KEYUP event listener for the Team Name Field 
             // ==================================================================
             document.addEventListener('keyup', function (event) {
-
-                // console.log("CHANGED TEAM NAME" + event.target.value);
 
                 if (event.target.matches('#upd-team-name')) {
 
@@ -421,8 +415,7 @@
 
                 };
 
-            }, false);   // end of CHANGE event listener
-
+            }, false);   // end of KEYUP event listener
 
         </script>
     
