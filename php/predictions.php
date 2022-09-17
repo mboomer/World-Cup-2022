@@ -39,11 +39,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+
+        <title>World Cup 2022 Predictor - Create Your Predictions</title>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Create your initial predictions for each game, select who you think the top goal scorer will be and how many goals you think they will score.">
 
-        <title>Predictions</title>
-        
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
 
         <link rel="stylesheet" href="../css/styles.css">

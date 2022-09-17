@@ -59,13 +59,13 @@
  <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
 
-        <title>Create New User Account</title>
-    
-         <!-- sets initial scale to 100% -->
+        <title>World Cup 2022 Predictor - Create A New User Account</title>
+
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width initial-scale=1">
-        
+        <meta name="description" content="To play the World Cup Predictor you have to create a user account, create the account with a username and your email address.">
+
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
          <link rel="stylesheet" href="../css/styles.css"> 

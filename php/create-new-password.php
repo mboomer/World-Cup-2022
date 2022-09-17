@@ -58,10 +58,11 @@
     <head>
         <meta charset="UTF-8">
 
-        <title>Create New Password</title>
+        <title>World Cup 2022 Predictor - Reset A Forgotten Password</title>
     
          <!-- sets initial scale to 100% -->
         <meta name="viewport" content="width=device-width initial-scale=1">
+        <meta name="description" content="If you forgot your password you will have received an email, with a link, when you click on the link you will be taken to this page to reset your password">        
         
         <link rel="stylesheet" href="../css/styles.css"> 
         <link rel="stylesheet" href="../css/styles-login.css"> 
