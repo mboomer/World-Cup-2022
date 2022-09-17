@@ -48,12 +48,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        
-        <title>User Login</title>
-    
-         <!-- sets initial scale to 100% -->
+
+        <title>World Cup 2022 Predictor - User Login</title>
+
+        <meta charset="UTF-8">        
         <meta name="viewport" content="width=device-width initial-scale=1">
+        <meta name="description" content="Login to the predictor with your username, update your predictions and check your points total as the competition progresses.">    
                 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 

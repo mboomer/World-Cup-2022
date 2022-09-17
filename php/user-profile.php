@@ -24,15 +24,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+
+        <title>world Cup 2022 Predictor - User Profile</title>
+        
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Update your contact details, change your password or select a team name in order to play against your friends or colleagues">
 
-        <meta http-equiv="cache-control" content="no-cache">        <!-- tells browser not to cache -->
-        <meta http-equiv="expires"       content="0">               <!-- says that the cache expires 'now' -->
-        <meta http-equiv="pragma"        content="no-cache">        <!-- says not to use cached stuff, if there is any -->
-
-        <title>User Profile</title>
-        
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
         <link rel="stylesheet" href="../css/styles.css">
@@ -124,8 +122,6 @@
 
                                 echo "      <table id='login-details-tbl>";
                                 echo "          <thead class='greenheader'>";
-                                // echo "              <tr>";
-                                // echo "              </tr>";
                                 echo "          </thead>";
                                 echo "          <tbody>";
                                 echo "              <tr>";
@@ -160,9 +156,6 @@
 
                                 echo "      <table id='personal-details-tbl>";
                                 echo "          <thead class='greenheader'>";
-                                // echo "              <tr>";
-                                // echo "                  <th></th><th></th>";
-                                // echo "              </tr>";
                                 echo "          </thead>";
                                 echo "          <tbody>";
                                 echo "              <tr>";
@@ -195,9 +188,6 @@
 
                                 echo "      <table id='competition-details-tbl>";
                                 echo "          <thead class='greenheader'>";
-                                // echo "              <tr>";
-                                // echo "                  <th></th><th></th>";
-                                // echo "              </tr>";
                                 echo "          </thead>";
                                 echo "          <tbody>";
                                 echo "              <tr>";
@@ -231,17 +221,6 @@
                                 echo "              </tr>";
                                 echo "          </tbody>";
                                 echo "      </table>";   
-
-                                // echo "      <table id='similar-names-tbl'>";
-                                // echo "          <thead>";
-                                // echo "          </thead>";
-                                // echo "          <tbody>";
-                                // echo "              <tr>";
-                                // echo "                  <td></td>";
-                                // echo "              </tr>";
-                                // echo "          </tbody>";
-                                // echo "      </table>";   
-
                                 echo "      <div id='similar-names-tbl'>";
                                 echo "      </div>";   
 

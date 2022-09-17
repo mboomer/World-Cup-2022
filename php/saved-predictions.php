@@ -38,11 +38,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+
+        <title>World Cup 2022 Predictor - Update Saved Predictions</title>
+        
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Update your predictions for each game, your top goal scorer, and how many goals you think they will score or update your user profile.">
 
-        <title>Saved Predictions</title>
-        
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
         <link rel="stylesheet" href="../css/styles.css">

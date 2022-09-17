@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title>World Cup 2022 Predictor - Competition Rules</title>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <meta http-equiv="cache-control" content="no-cache">        <!-- tells browser not to cache -->
-        <meta http-equiv="expires"       content="0">               <!-- says that the cache expires 'now' -->
-        <meta http-equiv="pragma"        content="no-cache">        <!-- says not to use cached stuff, if there is any -->
-
-        <title>World Cup 2022 Predictor - Competition Rules</title>
+        <meta name="description" content="Learn how points are allocated for each correct score and correct result for each game and how bonus points are awarded in the knockout stages">
         
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
