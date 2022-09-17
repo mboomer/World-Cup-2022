@@ -1,4 +1,5 @@
-    let menu = document.querySelector("#dropdown-content");
+    let Menu = document.querySelector("#dropdown-content");
+    let PredictionsLink = document.getElementById("predictions-href");
 
     // ==================================================================
     // add CLICK event listeners for the DOM
@@ -6,16 +7,16 @@
     document.addEventListener('click', function (event) {
 
         // event listener for the hamburger icon
-        // hide the menu if it is displayed
+        // hide the Menu if it is displayed
         if (event.target.matches('#hb-icon, #bar1, #bar2, #bar3')) {
 
-            if (menu.style.display != "block") {
-                menu.style.display = "block";
+            if (Menu.style.display != "block") {
+                Menu.style.display = "block";
             } else {
-                menu.style.display = "none";
+                Menu.style.display = "none";
             }
         } else {
-            menu.style.display = "none";
+            Menu.style.display = "none";
         }
 
         // event listener for the home link

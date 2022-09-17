@@ -34,13 +34,13 @@
  <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
 
-        <title>Reset Your Password</title>
-    
-         <!-- sets initial scale to 100% -->
+        <title>World Cup 2022 Predictor - Reset Your Password</title>
+
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width initial-scale=1">
-        
+        <meta name="description" content="Reset a forgotten password by entering your user name and email address. You will receive an email, with a link to click on, that will let you create a new password.">
+
         <script src="https://kit.fontawesome.com/130d5316ba.js" crossorigin="anonymous"></script>
 
          <link rel="stylesheet" href="../css/styles.css"> 

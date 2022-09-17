@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title>World Cup 2022 Predictor - How to complete your predictions</title>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Advice on completing your predictions for the Qatar 2022 World Cup. How to get your winners and runners-up in each group through to the knockout stages">
 
-        <meta http-equiv="cache-control" content="no-cache">        <!-- tells browser not to cache -->
-        <meta http-equiv="expires"       content="0">               <!-- says that the cache expires 'now' -->
-        <meta http-equiv="pragma"        content="no-cache">        <!-- says not to use cached stuff, if there is any -->
-
-        <title>World Cup 2022 Predictor - How to complete your predictions</title>
-        
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
         <link rel="stylesheet" href="../css/styles.css">
