@@ -13,8 +13,8 @@
     // DB credentials as constants
     define('DB_HOST', $servername);
     define('DB_NAME', $db);
-    define('DB_USER', $username);
-    define('DB_PASS', $password);
+    define('DB_USER', $DBusername);
+    define('DB_PASS', $DBpassword);
         
     //Receive the RAW data from the fetch POST
     $checkteam = trim(file_get_contents("php://input"));
@@ -84,10 +84,16 @@
             // loop through the Teams
             foreach($teams as $key => $team) {
 
+                // echo "      <tr>";      
+                // echo "          <td>" . $team -> UserTeam . "</td>";      
+                // echo "      </tr>";    
+
                 echo "  <div data-tm='" . $team -> UserTeam . "'>" . $team -> UserTeam . "</div>";      
 
             }; // end of team users foreach
                     
+            // echo "  </tbody>";  
+
         }; // end of team users else rowcount
 
     }  // end of Try

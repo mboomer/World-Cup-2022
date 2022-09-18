@@ -3,15 +3,20 @@
     // checks if session exists
     session_start();
 
-    // if ( isset($_SESSION['session']) ) {
-    //     header("location: ../weekly_plan.php");    
-    // } else {
-    //     // Initialise error messages
-    //     $error_msg   = "";
-    //     $error_name  = "";
-    //     $error_email = "";
-    // }
+    // $_SESSION["worldcup"]  = true;
+    // $_SESSION["loggedin"]  = true;
+    // $_SESSION["userid"]    = $userid;                            
+    // $_SESSION["username"]  = $username;                            
+    // $_SESSION["useremail"] = $email;
 
+    // If logged in store the session variables from session 
+    if ( isset($_SESSION['userid']) ) {
+        $userid      = $_SESSION["userid"];    
+        $username    = $_SESSION["username"]    ; 
+        $predictions = $_SESSION["predictions"];    
+    }; 
+
+    // URL the form POST is submitted to
     $post_url  = "../inc/validate-registration.php";
 
     // default to not displaying an error message block
@@ -30,6 +35,10 @@
         // Set the error message to be displayed
         if ($error_code == "accessdenied") {
             $error_msg = "Invalid Access Detected";
+        } else if ($error_code == "pwdlength") {
+            $error_msg = "Password must be between 12-20 characters in length";
+        } else if ($error_code == "usernamelength") {
+            $error_msg = "Username must be between 12-20 characters in length";
         } else if ($error_code == "incomplete") {
             $error_msg = "Please complete all fields";
         } else if ($error_code == "invaliduseremail") {
@@ -52,12 +61,16 @@
             $error_msg = "Failed to insert user : ".$error_name;
         } else if ($error_code == "success") {
             $error_msg = "New account created successfully";
+        } else if ($error_code == "pwdcriteria") {
+            $error_msg = "Password should contain at least one UPPERCASE letter<br>at least one lowercase letter<br>at least one number (0-9)<br>at least one special character !@#£$%^&*-";
         }
-    } 
+
+    }
 
 ?>
  <!DOCTYPE html>
 <html lang="en">
+
     <head>
 
         <title>World Cup 2022 Predictor - Create A New User Account</title>

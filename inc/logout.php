@@ -10,4 +10,5 @@
 
     // Redirect to login page
     header("location: ../index.php");
+
 ?>

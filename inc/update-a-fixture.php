@@ -1,26 +1,5 @@
 <?php
 
-    // Include config file
-    require_once "../../../.php/inc/db.worldcup.inc.php";
-
-    // to aviod any confusion with the login username
-    $DBusername = $username;
-
-    // DB credentials as constants
-    define('DB_HOST', $servername);
-    define('DB_NAME', $db);
-    define('DB_USER', $DBusername);
-    define('DB_PASS', $password);
-
-    // Try and establish the database connection.
-    try {
-        $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
-    }
-    catch (PDOException $e) {
-        echo("Error: " . $e->getMessage());
-        exit("Error: " . $e->getMessage());
-    };
-
     // checks if session exists
     session_start();
 
@@ -36,6 +15,24 @@
         $userid   = $_SESSION["userid"];    
         $username = $_SESSION["username"];    
     }; 
+    
+    // Include config file
+    require_once "../../../.php/inc/db.worldcup.inc.php";
+
+    // DB credentials as constants
+    define('DB_HOST', $servername);
+    define('DB_NAME', $db);
+    define('DB_USER', $DBusername);
+    define('DB_PASS', $DBpassword);
+
+    // Try and establish the database connection.
+    try {
+        $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+    }
+    catch (PDOException $e) {
+        echo("Error: " . $e->getMessage());
+        exit("Error: " . $e->getMessage());
+    };
     
 ?>
 
