@@ -1,10 +1,10 @@
 <?php
 
-    // // if you didnt get here from update-a-fixture return to home page
-    // if ( !isset($_POST["update-top-scorer-btn"]) ) {
-    //     header("Location: ../index.php");
-    //     exit();
-    // }
+    // if you didnt get here from update-a-fixture return to home page
+    if ( !isset($_POST["update-top-scorer-btn"]) ) {
+        header("Location: ../index.php");
+        exit();
+    }
 
     // Include config file
     require_once "../../../.php/inc/db.worldcup.inc.php";
@@ -12,8 +12,8 @@
     // DB credentials as constants
     define('DB_HOST', $servername);
     define('DB_NAME', $db);
-    define('DB_USER', $username);
-    define('DB_PASS', $password);
+    define('DB_USER', $DBusername);
+    define('DB_PASS', $DBpassword);
 
    //Receive the RAW data from the fetch POST
     $goals = trim(file_get_contents("php://input"));

@@ -13,8 +13,8 @@
     // DB credentials as constants
     define('DB_HOST', $servername);
     define('DB_NAME', $db);
-    define('DB_USER', $username);
-    define('DB_PASS', $password);
+    define('DB_USER', $DBusername);
+    define('DB_PASS', $DBpassword);
         
     //Receive the RAW data from the fetch POST
     $profiles = trim(file_get_contents("php://input"));

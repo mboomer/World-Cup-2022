@@ -1,5 +1,22 @@
 <?php
 
+    // checks if session exists
+    session_start();
+
+    // $_SESSION["worldcup"]  = true;
+    // $_SESSION["loggedin"]  = true;
+    // $_SESSION["userid"]    = $userid;                            
+    // $_SESSION["username"]  = $username;                            
+    // $_SESSION["useremail"] = $email;
+
+    // If logged in store the session variables from session 
+    if ( isset($_SESSION['userid']) ) {
+        $userid      = $_SESSION["userid"];    
+        $username    = $_SESSION["username"]    ; 
+        $predictions = $_SESSION["predictions"];    
+    }; 
+    
+    // get the tokens from the URL that the user clicked on in the email they received
     $selector   = $_GET['selector'];
     $validator  = $_GET['validator'];
     $user       = $_GET['usr'];
@@ -46,6 +63,8 @@
         $error_msg = "Failed to delete reset request.<br>You should still be able to login.<br>Please contact support if you experience any issues.";
     } else if ($error_code == "success") {
         $error_msg = "Your password has been reset.<br>Please return to login page to login in.";
+    } else if ($error_code == "pwdcriteria") {
+        $error_msg = "Password should contain at least one UPPERCASE letter<br>at least one lowercase letter<br>at least one number (0-9)<br>at least one special character !@#$£%^&*-";
     }
 
     // URL the form is submitted to
@@ -55,6 +74,7 @@
 
  <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8">
 

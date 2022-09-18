@@ -1,28 +1,44 @@
 <?php
 
+    // checks if session exists
+    session_start();
+
+    // these are the session variables
+    //  $_SESSION["worldcup"]       = true;
+    //  $_SESSION["loggedin"]       = true;
+    //  $_SESSION["userid"]         = $userid;                            
+    //  $_SESSION["username"]       = $username;                            
+    //  $_SESSION["useremail"]      = $email;
+    //  $_SESSION['last_activity']  = time();   //  your last activity was now, having logged in.
+
+    // has the user been inactive for more than 30 minutes (1800 secs) since last activity was recorded
+    if ( $_SESSION['last_activity'] + 1800 < time() ) { 
+        header('Location: ../inc/logout.php'); 
+    } else { 
+        $_SESSION['last_activity'] = time();                
+    }
+
+    // If logged in store the session variables from session 
+    if ( isset($_SESSION['userid']) ) {
+        $userid      = $_SESSION["userid"];    
+        $username    = $_SESSION["username"]    ; 
+        $predictions = $_SESSION["predictions"];    
+    }; 
+
     // Include config file
     require_once "../../../.php/inc/db.worldcup.inc.php";
 
     // DB credentials as constants
     define('DB_HOST', $servername);
     define('DB_NAME', $db);
-    define('DB_USER', $username);
-    define('DB_PASS', $password);
-
-    // checks if session exists
-    session_start();
-
-    // If logged in store the userid from session 
-    if ( isset($_SESSION['userid']) ) {
-        $userid      = $_SESSION["userid"];    
-        $username    = $_SESSION["username"]; 
-        $predictions = $_SESSION["predictions"];    
-    }; 
+    define('DB_USER', $DBusername);
+    define('DB_PASS', $DBpassword);
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
 
         <title>world Cup 2022 Predictor - User Profile</title>
@@ -258,10 +274,38 @@
             document.getElementById("update-messages").style.display = "None";
             document.getElementById("similar-names-tbl").style.display = "None";
 
+            /* pass the php Last activity session variable, to a javascript variable - this can then be used to check if the user has been inactive */ 
+            var LastActivity = "<?=$_SESSION['last_activity']?>"; 
+
+            // **********************************************************************************************************
+            // Session inactivity - if no activity for 30 minutes then timeout the session and return to home page 
+            // **********************************************************************************************************
+            function CheckSession(pLastActive) {
+
+                /* get the current time time stamp in seconds */
+                let TimeNow = new Date().getTime() / 1000;
+
+                // console.log("Last Activity : " + pLastActive + " Current Time " +  TimeNow);
+
+                // has the user been inactive for more than 30 minutes (1800 secs) since last activity was recorded
+                if ( TimeNow - pLastActive > 1800 ) { 
+                    alert("Session Timed Out - Please log in again")
+                    window.location.href = "../inc/logout.php"; 
+                } else { 
+                    // alert("Session Active")
+                    // console.log("Last Activity Time : " + (new Date().getTime() / 1000) );
+                    return TimeNow;                
+                }
+            }
+
             // ==================================================================
             // add CLICK event listener for the DOM
             // ==================================================================
             document.addEventListener('click', function (event) {
+
+                // check that the session is still active
+                // if it is active update LastActivity time 
+                LastActivity = CheckSession(LastActivity);
 
                 // select one of the possible displayed Team Names
                 if (event.target.matches('[data-tm]')) {

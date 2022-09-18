@@ -6,18 +6,9 @@
     // DB credentials as constants
     define('DB_HOST', $servername);
     define('DB_NAME', $db);
-    define('DB_USER', $username);
-    define('DB_PASS', $password);
+    define('DB_USER', $DBusername);
+    define('DB_PASS', $DBpassword);
         
-    // checks if session exists
-    // session_start();
-
-    // If already logged in go on to weekly-plan page
-    // if not logged in continue to sign up
-    // if ( isset($_SESSION['session']) ) {
-    //     header("location: ../weekly-plan.php");    
-    // } 
-
     // Define variables and initialize with empty values
     $login_name       = "";
     $login_email      = "";
@@ -36,17 +27,25 @@
         header("location: ../php/sign-up.php?error=accessdenied");
         exit();
     } else {
+
+        // Check password is at between 12 - 20 characters
+        if ( strlen(trim($_POST["password"])) < 12  || strlen(trim($_POST["password"])) > 20 ) {
+            header("location: ../php/sign-up.php?error=pwdlength&name=".$login_name."&email=".$login_email);
+            exit();
+        } 
+
         // Check if any fields are not completed
         if ( empty(trim($_POST["username"])) || empty(trim($_POST["email"])) || empty(trim($_POST["password"])) || empty(trim($_POST["repeat-password"])) ) {
             header("location: ../php/sign-up.php?error=incomplete&name=".$login_name."&email=".$login_email);
             exit();
         } 
 
-        // Check if both email and username are invalid
+        // Check if both email and username are valid
         if ( !filter_var($login_email, FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z0-9]*$/", $login_name) ) {
             header("location: ../php/sign-up.php?error=invaliduseremail");
             exit();
         } 
+
         // Check if email is valid
         if (!filter_var($login_email, FILTER_VALIDATE_EMAIL)) {
             header("location: ../php/sign-up.php?error=invalidemail&name=".$login_name);
@@ -59,11 +58,44 @@
             exit();
         }
         
+        // check if username is longer than 12 characters
+        if ( strlen(trim($login_name)) < 12  || strlen(trim($login_name)) > 20 ) {
+            header("location: ../php/sign-up.php?error=usernamelength&email=".$login_email);
+            exit();
+        }
+
         // check if passwords match
         if ($login_password !== $login_repeat_pwd) {
             header("location: ../php/sign-up.php?error=passwordmatch&name=".$login_name."&email=".$login_email);
             exit();
         }
+
+        /* ----------------------------------------------------------------------------------- 
+            www.coding.academy/blog/how-to-use-regular-expressions-to-check-password-strength
+        /* -----------------------------------------------------------------------------------
+            at least one uppercase letter
+            at least one lowercase letter
+            at least one number (digit)
+            at least one of the following special characters !@#$%^&*-
+            a minimum of 12 characters - max of 20
+        ------------------------------------------------------------------------------------ */
+
+        $pwd_check = "/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#£$%^&*-]).{12,20}/";
+
+        // if (preg_match("/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*-]).{12,20}/", "Asdfghjklzxcvb98!")) {
+        //     echo "A match was found.";
+        //     exit();
+        // } else {
+        //     echo "A match was not found.";
+        //     exit();
+        // }
+
+        // check if password only has valid characters
+        if (!preg_match($pwd_check, $login_password)) {
+            header("location: ../php/sign-up.php?error=pwdcriteria&email=".$login_email);
+            exit();
+        }
+
 
     } // end of POST data validation checks
 

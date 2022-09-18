@@ -1,18 +1,19 @@
 <?php
-    // Include config file
-    require_once "../../../.php/inc/db.worldcup.inc.php";
-
-    // DB credentials as constants
-    define('DB_HOST', $servername);
-    define('DB_NAME', $db);
-    define('DB_USER', $username);
-    define('DB_PASS', $password);
 
     // if you didnt get here from a update-a-fixture POST then return to home page
     if ( $_SERVER['REQUEST_METHOD'] != "POST" ) {
         header("Location: ../index.php");
         exit();
     }
+    
+    // Include config file
+    require_once "../../../.php/inc/db.worldcup.inc.php";
+
+    // DB credentials as constants
+    define('DB_HOST', $servername);
+    define('DB_NAME', $db);
+    define('DB_USER', $DBusername);
+    define('DB_PASS', $DBpassword);
 
     // Try and establish the database connection.
     try {

@@ -18,11 +18,12 @@
     // DB credentials as constants
     define('DB_HOST', $servername);
     define('DB_NAME', $db);
-    define('DB_USER', $username);
-    define('DB_PASS', $password);
+    define('DB_USER', $DBusername);
+    define('DB_PASS', $DBpassword);
 
     // extract the username from the POST data
     $postuser = $_POST["username"];
+    
     // extract the email address from the POST data
     $postemail = $_POST["emailaddress"];
 

@@ -1,20 +1,10 @@
 <?php 
 
-
-    // if you didnt get here from update-a-fixture return to home page
+    // if you didnt get here from login page return to home page
     if ( !isset($_POST["login-btn"]) ) {
         header("Location: ../index.php");
         exit();
     }
-
-    // // checks if session exists
-    // session_start();
-
-    // // If already logged in go on to weekly-plan page
-    // // if not logged in continue to sign up
-    // if ( isset($_SESSION['session']) ) {
-    //     header("location: ../weekly-plan.php");    
-    // } 
 
     // Include DB config file
     require_once "../../../.php/inc/db.worldcup.inc.php";      
@@ -22,8 +12,8 @@
     // DB credentials as constants
     define('DB_HOST', $servername);
     define('DB_NAME', $db);
-    define('DB_USER', $username);
-    define('DB_PASS', $password);
+    define('DB_USER', $DBusername);
+    define('DB_PASS', $DBpassword);
 
     // Define variables and initialize with empty values
     $login_name     = "";
@@ -112,15 +102,16 @@
                 } else {
                     // Password is correct, Start a new session
                     session_start();
+
                     // Store session variables
-                    $_SESSION["worldcup"]    = true;
-                    $_SESSION["loggedin"]    = true;
-                    $_SESSION["userid"]      = $userid;                            
-                    $_SESSION["username"]    = $username;                            
-                    $_SESSION["useremail"]   = $email;
-                    $_SESSION["predictions"] = $predictions;
-
-
+                    $_SESSION["worldcup"]      = true;
+                    $_SESSION["loggedin"]      = true;
+                    $_SESSION["userid"]        = $userid;                            
+                    $_SESSION["username"]      = $username;                            
+                    $_SESSION["useremail"]     = $email;
+                    $_SESSION["predictions"]   = $predictions;
+                    $_SESSION['last_activity'] = time();            
+                    
                     // Redirect admin user to admin page
                     if ($username == "wcadmin") {
                         header("location: update-a-fixture.php");
