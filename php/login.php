@@ -1,17 +1,5 @@
 <?php
 
-//    // checks if session exists
-//    session_start();
-//
-//    if (isset($_SESSION['mariesmeals'])) {
-//        header("location: weekly-plan.php");    
-//    } else {
-//        // Initialise error message and parameters
-//        $error_msg  = "";
-//        $error_name = "";
-//    }
-
-    
     //initialise the error code, if nodisplay, dont displat an error message
     $error_code = "nodisplay";
 

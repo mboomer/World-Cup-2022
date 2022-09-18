@@ -1,13 +1,39 @@
 <?php
 
+    // checks if session exists
+    session_start();
+
+    // these are the session variables
+    //  $_SESSION["worldcup"]       = true;
+    //  $_SESSION["loggedin"]       = true;
+    //  $_SESSION["userid"]         = $userid;                            
+    //  $_SESSION["username"]       = $username;                            
+    //  $_SESSION["useremail"]      = $email;
+    //  $_SESSION['last_activity']  = time();   //  your last activity was now, having logged in.
+
+    // has the user been inactive for more than 30 minutes (1800 secs) since last activity was recorded
+    // if still active, set last activity to current time
+    if ( $_SESSION['last_activity'] + 120 < time() ) { 
+        header('Location: ../inc/logout.php'); 
+    } else { 
+        $_SESSION['last_activity'] = time();                
+    }
+
+    // If logged in store the session variables from session 
+    if ( isset($_SESSION['userid']) ) {
+        $userid      = $_SESSION["userid"];    
+        $username    = $_SESSION["username"]    ; 
+        $predictions = $_SESSION["predictions"];    
+    }; 
+
     // Include config file
     require_once "../../../.php/inc/db.worldcup.inc.php";
 
     // DB credentials as constants
     define('DB_HOST', $servername);
     define('DB_NAME', $db);
-    define('DB_USER', $username);
-    define('DB_PASS', $password);
+    define('DB_USER', $DBusername);
+    define('DB_PASS', $DBpassword);
 
     // Try and establish the database connection.
     try {
@@ -17,22 +43,6 @@
         exit("Error: " . $e->getMessage());
     };
     
-    // checks if session exists
-    session_start();
-
-    // $_SESSION["worldcup"]  = true;
-    // $_SESSION["loggedin"]  = true;
-    // $_SESSION["userid"]    = $userid;                            
-    // $_SESSION["username"]  = $username;                            
-    // $_SESSION["useremail"] = $email;
-
-    // If logged in store the userid from session 
-    if ( isset($_SESSION['userid']) ) {
-        $userid      = $_SESSION["userid"];    
-        $username    = $_SESSION["username"]    ; 
-        $predictions = $_SESSION["predictions"];    
-    }; 
-
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +81,28 @@
             /* will be set true when the first fixture has started  */
             let TournamentStarted = false;
             
+             // **********************************************************************************************************
+            // Session inactivity - if no activity for 30 minutes then timeout the session and return to home page 
             // **********************************************************************************************************
+            function CheckSession(pLastActive) {
+
+                /* get the current time time stamp in seconds */
+                let TimeNow = new Date().getTime() / 1000;
+
+                console.log("Last Activity : " + pLastActive + " Current Time " +  TimeNow);
+
+                // has the user been inactive for more than 30 minutes (1800 secs) since last activity was recorded
+                if ( TimeNow - pLastActive > 120 ) { 
+                    alert("Session Timed Out")
+                    window.location.href = "../inc/logout.php"; 
+                } else { 
+                    // alert("Session Active")
+                    console.log("Last Activity Time : " + (new Date().getTime() / 1000) );
+                    return TimeNow;                
+                }
+            }
+
+           // **********************************************************************************************************
             // Helper function needed to buld the predictions table  
             // needed as the predictions table needs rebulit after the saved predictions are updated
             // **********************************************************************************************************
@@ -2180,6 +2211,9 @@
             /* pass the php session variable, $fixture1resultid, to a javascript variable - this can then be used to stop updating predictions */ 
             var Fixture1ResultID = "<?=$fixture1resultid?>";
 
+            /* pass the php Last activity session variable, to a javascript variable - this can then be used to check if the user has been inactive */ 
+            var LastActivity = "<?=$_SESSION['last_activity']?>"; 
+            
             // Change the display of the content tab from none to flex to display content
             // Hide the Groups EFGH, Knockout stage and the Update Predictions stage
             document.getElementById("GROUPS-EFGH").style.display = "none";
@@ -2289,6 +2323,10 @@
             // ==================================================================
             document.addEventListener('click', function (event) {
 
+                // check that the session is still active
+                // if it is active update LastActivity time 
+                LastActivity = CheckSession(LastActivity);
+                
                 if (event.target.matches('#update-btn')) {
 
                     if (!document.getElementById("confirm-chkbox").checked) {

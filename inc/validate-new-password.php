@@ -12,8 +12,8 @@
     // DB credentials as constants
     define('DB_HOST', $servername);
     define('DB_NAME', $db);
-    define('DB_USER', $username);
-    define('DB_PASS', $password);
+    define('DB_USER', $DBusername);
+    define('DB_PASS', $DBpassword);
 
     // get the data from the Form POST 
     $postSelector   = $_POST["selector"];
@@ -28,6 +28,24 @@
         exit();
     } else if ($postPassword != $postRepeatPwd) {
         header("Location: ../php/create-new-password.php?error=pwdnotmatch");
+        exit();
+    }
+
+    /* ----------------------------------------------------------------------------------- 
+        www.coding.academy/blog/how-to-use-regular-expressions-to-check-password-strength
+    /* -----------------------------------------------------------------------------------
+        at least one uppercase letter
+        at least one lowercase letter
+        at least one number (digit)
+        at least one of the following special characters !@#$%^&*-
+        a minimum of 12 characters - max of 20
+    ------------------------------------------------------------------------------------ */
+
+    $pwd_check = "/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#£$%^&*-]).{12,20}/";
+
+    // check if password only has valid characters
+    if (!preg_match($pwd_check, $postPassword)) {
+        header("location: ../php/create-new-password.php?error=pwdcriteria&email=".$login_email);
         exit();
     }
 

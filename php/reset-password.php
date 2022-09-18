@@ -1,5 +1,21 @@
 <?php
 
+    // checks if session exists
+    session_start();
+
+    // $_SESSION["worldcup"]  = true;
+    // $_SESSION["loggedin"]  = true;
+    // $_SESSION["userid"]    = $userid;                            
+    // $_SESSION["username"]  = $username;                            
+    // $_SESSION["useremail"] = $email;
+
+    // If logged in store the session variables from session 
+    if ( isset($_SESSION['userid']) ) {
+        $userid      = $_SESSION["userid"];    
+        $username    = $_SESSION["username"]    ; 
+        $predictions = $_SESSION["predictions"];    
+    }; 
+
     // Processing form data when form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
@@ -16,23 +32,13 @@
         }
     } 
 
-    // checks if session exists
-    session_start();
-
-    // if ( isset($_SESSION['session']) ) {
-    //     header("location: ../weekly_plan.php");    
-    // } else {
-    //     // Initialise error messages
-    //     $error_msg   = "";
-    //     $error_name  = "";
-    //     $error_email = "";
-    // }
-
+    // URL to POST the reset request to
     $post_url  = "../inc/reset-request.php";
 
 ?>
  <!DOCTYPE html>
 <html lang="en">
+
     <head>
 
         <title>World Cup 2022 Predictor - Reset Your Password</title>

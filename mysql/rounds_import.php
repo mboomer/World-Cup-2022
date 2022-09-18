@@ -5,8 +5,8 @@
     // DB credentials as constants
     define('DB_HOST', $servername);
     define('DB_NAME', $db);
-    define('DB_USER', $username);
-    define('DB_PASS', $password);
+    define('DB_USER', $DBusername);
+    define('DB_PASS', $DBpassword);
 
     // Try and establish the database connection.
     try {
