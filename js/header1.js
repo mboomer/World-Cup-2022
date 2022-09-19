@@ -47,7 +47,7 @@
         if (event.target.matches('#predictions-href')) {
             document.querySelector("#dropdown-content").style.display = "none";
 
-                if (PredictionsLink == 1) {
+                if (Predictions == 1) {
                     window.location.href = "saved-predictions.php";
                 } else {
                     window.location.href = "predictions.php";
