@@ -13,7 +13,7 @@
 
     // has the user been inactive for more than 30 minutes (1800 secs) since last activity was recorded
     // if still active, set last activity to current time
-    if ( $_SESSION['last_activity'] + 120 < time() ) { 
+    if ( $_SESSION['last_activity'] + 1800 < time() ) { 
         header('Location: ../inc/logout.php'); 
     } else { 
         $_SESSION['last_activity'] = time();                
@@ -92,12 +92,12 @@
                 console.log("Last Activity : " + pLastActive + " Current Time " +  TimeNow);
 
                 // has the user been inactive for more than 30 minutes (1800 secs) since last activity was recorded
-                if ( TimeNow - pLastActive > 120 ) { 
-                    alert("Session Timed Out")
+                if ( TimeNow - pLastActive > 1800 ) { 
+                    alert("Session Timed Out - Please log in again.")
                     window.location.href = "../inc/logout.php"; 
                 } else { 
                     // alert("Session Active")
-                    console.log("Last Activity Time : " + (new Date().getTime() / 1000) );
+                    // console.log("Last Activity Time : " + (new Date().getTime() / 1000) );
                     return TimeNow;                
                 }
             }
@@ -940,7 +940,6 @@
                                     echo "                  <th colspan='12'>" . $groupdesc .  "</th>";
                                     echo "              </tr>";
                                     echo "              <tr>";
-                                    echo "              <tr>";
                                     echo "                  <th>No</th><th class='hidden'><th class='hidden'></th><th colspan='2'>HOME</th><th>Rk</th><th colspan='2'>SCORE</th><th>Rk</th>";
                                     echo "                  <th class='hidden'></th> <th colspan='2'>AWAY</th>";
                                     echo "              </tr>";
@@ -1146,7 +1145,6 @@
                                     echo "              <tr>";
                                     echo "                  <th colspan='12'>" . $groupdesc .  "</th>";
                                     echo "              </tr>";
-                                    echo "              <tr>";
                                     echo "              <tr>";
                                     echo "                  <th>No</th><th class='hidden'><th class='hidden'></th><th colspan='2'>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th>";
                                     echo "                  <th class='hidden'></th> <th colspan='2'>AWAY</th>";
