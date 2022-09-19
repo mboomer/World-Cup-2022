@@ -197,7 +197,8 @@
                                     echo "          <thead class='greenheader'>";
                                     echo "              <tr>";
                                     echo "                  <th colspan='12'>" . $groupdesc .  "</th>";
-                                    echo "              </tr>";                                    echo "              <tr>";
+                                    echo "              </tr>";
+                                    echo "              <tr>";
                                     echo "                  <th>No</th><th class='hidden'><th class='hidden'></th><th colspan='2'>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th>";
                                     echo "                  <th class='hidden'></th> <th colspan='2'>AWAY</th>";
                                     echo "              </tr>";
@@ -392,7 +393,8 @@
                                     echo "          <thead class='greenheader'>";
                                     echo "              <tr>";
                                     echo "                  <th colspan='12'>" . $groupdesc .  "</th>";
-                                    echo "              </tr>";                                    echo "              <tr>";
+                                    echo "              </tr>";
+                                    echo "              <tr>";
                                     echo "                  <th>No</th><th class='hidden'><th class='hidden'></th><th colspan='2'>HOME</th> <th>Rk</th> <th colspan='2'>SCORE</th> <th>Rk</th>";
                                     echo "                  <th class='hidden'></th> <th colspan='2'>AWAY</th>";
                                     echo "              </tr>";
