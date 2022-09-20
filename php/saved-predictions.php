@@ -185,20 +185,64 @@
                 return 0;
             };
             
+            function compResult (a, b) {
+
+                console.log(currentGroupID + " - Team A : " + a.Team + " Team B : " + b.Team);
+
+                CompGroup = document.getElementById(currentGroupID);
+                    
+                // get the teams and the scores for this group
+                homeTeams  = CompGroup.querySelectorAll('.home');            
+                homeScores = CompGroup.querySelectorAll('.homescore');
+                awayScores = CompGroup.querySelectorAll('.awayscore');
+                awayTeams  = CompGroup.querySelectorAll('.away');
+
+                // find the game that matches the teams to be sorted
+                for (let f = 0; f < homeTeams.length; f++) {
+                    
+                    console.log(homeTeams[f].textContent + " -V- " + awayTeams[f].textContent);
+                    
+                    if ( (homeTeams[f].textContent === a.Team) && (awayTeams[f].textContent === b.Team) )  {
+                   
+                        // if the home team won it is sorted above the away team
+                        if (homeScores[f].value > awayScores[f].value) {return -1};
+
+                        // if the home team loses it is sorted below the away team
+                        if (homeScores[f].value < awayScores[f].value) {return 1};
+
+                        // if its a draw the teams stay in same oder
+                        return 0;
+                   
+                    }
+                };
+            };
+
             function leaguePosition (teamA, teamB) {
                 
                 // Sort by points
-                const position = compPts(teamA, teamB)
+                const Position = compPts(teamA, teamB)
                 
-                if (position !== 0) { return position; };
+                if (Position !== 0) { return Position; };
 
                 // at this point we have 2 teams with equal points - so compare goal difference                
                 const GD = compGD(teamA, teamB);
-                
-                if (GD !== 0) {return GD;};
+        
+                if (GD !== 0) { return GD; };
 
                 // at this point we will be looking at 2 teams with equal points and equal goal difference - so compare goals scored for
-                return compGF(teamA, teamB);
+                // return compGF(teamA, teamB);
+
+                const GF = compGF(teamA, teamB);
+
+                if (GF !== 0) { return GF; };
+                
+                // at this point we have 2 teams with equal points, equal goal difference, equal goals scored for
+                // so really want to compare how the two teams did against each other
+                // so how to do that ???
+
+                const RES = compResult(teamA, teamB);
+
+                    if (RES !== 0) { return RES; };
                 
             };
             
@@ -570,7 +614,8 @@
                     awayScores = SectA.querySelectorAll('.awayscore');
                     awayTeams  = SectA.querySelectorAll('.away');
                     
-                    // get the ID of the table to update
+                    // get the ID of the Group and able to update
+                    currentGroupID   = document.getElementById("GroupA").id;
                     currentTable     = document.getElementById("TableA");
                     currentTableID   = currentTable.id;
                     currentTableName = "Group A";
@@ -587,7 +632,8 @@
                     awayScores = SectB.querySelectorAll('.awayscore');
                     awayTeams  = SectB.querySelectorAll('.away');
 
-                    // get the ID of the table to update
+                    // get the ID of the Group and able to update
+                    currentGroupID   = document.getElementById("GroupB").id;
                     currentTable     = document.getElementById("TableB");
                     currentTableID   = currentTable.id;
                     currentTableName = "Group B";
@@ -604,7 +650,8 @@
                     awayScores = SectC.querySelectorAll('.awayscore');
                     awayTeams  = SectC.querySelectorAll('.away');
 
-                    // get the ID of the table to update
+                    // get the ID of the Group and able to update
+                    currentGroupID   = document.getElementById("GroupC").id;
                     currentTable     = document.getElementById("TableC");
                     currentTableID   = currentTable.id;
                     currentTableName = "Group C";        
@@ -621,7 +668,8 @@
                     awayScores = SectD.querySelectorAll('.awayscore');
                     awayTeams  = SectD.querySelectorAll('.away');
 
-                    // get the ID of the table to update
+                    // get the ID of the Group and able to update
+                    currentGroupID   = document.getElementById("GroupD").id;
                     currentTable     = document.getElementById("TableD");
                     currentTableID   = currentTable.id;
                     currentTableName = "Group D";
@@ -638,7 +686,8 @@
                     awayScores = SectE.querySelectorAll('.awayscore');
                     awayTeams  = SectE.querySelectorAll('.away');
 
-                    // get the ID of the table to update
+                    // get the ID of the Group and able to update
+                    currentGroupID   = document.getElementById("GroupE").id;
                     currentTable     = document.getElementById("TableE");
                     currentTableID   = currentTable.id;
                     currentTableName = "Group E";
@@ -655,7 +704,8 @@
                     awayScores = SectF.querySelectorAll('.awayscore');
                     awayTeams  = SectF.querySelectorAll('.away');
 
-                    // get the ID of the table to update
+                    // get the ID of the Group and able to update
+                    currentGroupID   = document.getElementById("GroupF").id;
                     currentTable     = document.getElementById("TableF");
                     currentTableID   = currentTable.id;
                     currentTableName = "Group F";
@@ -672,7 +722,8 @@
                     awayScores = SectG.querySelectorAll('.awayscore');
                     awayTeams  = SectG.querySelectorAll('.away');
 
-                    // get the ID of the table to update
+                    // get the ID of the Group and able to update
+                    currentGroupID   = document.getElementById("GroupG").id;
                     currentTable     = document.getElementById("TableG");
                     currentTableID   = currentTable.id;
                     currentTableName = "Group G";
@@ -689,7 +740,8 @@
                     awayScores = SectH.querySelectorAll('.awayscore');
                     awayTeams  = SectH.querySelectorAll('.away');
 
-                    // get the ID of the table to update
+                    // get the ID of the Group and able to update
+                    currentGroupID     = document.getElementById("GroupH").id;
                     currentTable     = document.getElementById("TableH");
                     currentTableID   = currentTable.id;
                     currentTableName = "Group H";
@@ -757,9 +809,15 @@
                     teams[away].Points   = ((teams[away].Won * 3) + (teams[away].Drawn * 1));
 
                 };
-                
+
+                // console.log("Before Sort : " + currentGroupID);
+                // console.log(teams);
+                                
                 // sort the array of Team objects by points, goal diff, goals for
                 teams.sort(leaguePosition);
+
+                // console.log("After Sort");
+                // console.log(teams);
                 
                // Create the new table based on the sorted array
                 let updatedTable = `<table>          
@@ -1048,7 +1106,7 @@
 
                                     } // end of nested else for Table        
                                     
-                                    // create an event and sispatch it to update the table
+                                    // create an event and dispatch it to update the table
                                     echo "<script>";
                                     echo "  var event = new Event('updateTables');";
                                     echo "  tbl = document.querySelector('[data-table=" . $tablename . "]');";
