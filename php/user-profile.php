@@ -403,7 +403,7 @@
                         document.getElementById("update-messages").style.display = "flex";
                         document.getElementById("update-messages").innerHTML = "You are not part of team yet.<br>Enter a new team name or select an existing Team name.";
                     } else {
-                            window.location.href = 'https://www.9habu.com/wc2022/php/team-members.php?tm=' + document.getElementById("upd-team-name").value;
+                            window.location.href = 'https://www.worldcup2022predictor.com/php/team-members.php?tm=' + document.getElementById("upd-team-name").value;
                     } // end of else team-href
 
                 } // end of click event for team-href 
