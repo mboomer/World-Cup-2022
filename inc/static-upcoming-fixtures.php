@@ -7,7 +7,7 @@
     }
     
     // Include config file
-    require_once "../../../.php/inc/db.worldcup.inc.php";
+    require_once "../../.php/inc/db.worldcup.inc.php";
 
     // DB credentials as constants
     define('DB_HOST', $servername);
@@ -61,7 +61,7 @@
             . "    ORDER BY \n"  
             . "     fixtureNo \n"  
             . "    ASC \n"
-            . "    LIMIT 2";
+            . "    LIMIT 3";
             
         // prepare the query for the database connection
         $query = $dbh -> prepare($qry);
@@ -102,15 +102,21 @@
                     .  "      <table>"
                     . "          <thead class='blueheader'>"
                     . "              <tr>"
-                    . "                  <th class='align-center' colspan='7'>Error - Error</th>"
+                    . "                  <th class='align-center' colspan='7'>Qatar World Cup 2022</th>"
                     . "              </tr>"
                     . "              <tr>"
-                    . "                  <th class='align-center' colspan='7'>Error - Error - Error</th>"
+                    . "                  <th class='align-center' colspan='7'>The tournament has ended</th>"
                     . "              </tr>"
                     . "          </thead>"
                     . "          <tbody>"
                     . "              <tr>"
-                    . "                  <td>No Upcoming Fixtures Found</td>"
+                    . "                  <td>-</td>"
+                    . "              </tr>"
+                    . "              <tr>"
+                    . "                  <td>World Cup 2026 hosted by USA, Canada &  Mexico.</td>"
+                    . "              </tr>"
+                    . "              <tr>"
+                    . "                  <td>-</td>"
                     . "              </tr>"
                     . "          </tbody>"
                     . "      </table>"   

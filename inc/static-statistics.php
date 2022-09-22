@@ -7,7 +7,7 @@
     }
 
     // Include config file
-    require_once "../../../.php/inc/db.worldcup.inc.php";
+    require_once "../../.php/inc/db.worldcup.inc.php";
 
     // DB credentials as constants
     define('DB_HOST', $servername);
@@ -23,7 +23,7 @@
         exit("Error: " . $e->getMessage());
     };
                     
-    // open fiel for writing
+    // open file for writing
     $fh = fopen("../static/competition-stats.html", "w"); 
 
     // ---------------------------------------------------------------
@@ -138,7 +138,11 @@
     // AVERAGE GOALS PER GAME
     // ---------------------------------------------------------------
 
-    $gameaverage = number_format( ($totalgoals / $gamesplayed), 2); 
+    if ($totalgoals > 0 && $gamesplayed > 0) {
+        $gameaverage = number_format( ($totalgoals / $gamesplayed), 2);
+    } else {
+        $gameaverage = 0; 
+    };
 
     $html .= "  <div id='goals-per-game'> \n"
            . "      <div class='stat-title'>Goals Per Game</div> \n"
@@ -169,7 +173,7 @@
             . "    	LIMIT  \n"
             . "    		1 \n";
 
-            // prepare the query for the database connection
+        // prepare the query for the database connection
         $query = $dbh -> prepare($qry);
 
         /** bind the parameters
@@ -199,7 +203,7 @@
 
         if ($query->rowCount() == 0) {
 
-              $html .= "      <div class='stat-value'>No Value Found</div> \n";
+              $html .= "      <div class='stat-value'>0</div> \n";
 
         } else {
 

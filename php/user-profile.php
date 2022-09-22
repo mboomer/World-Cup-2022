@@ -26,7 +26,7 @@
     }; 
 
     // Include config file
-    require_once "../../../.php/inc/db.worldcup.inc.php";
+    require_once "../../.php/inc/db.worldcup.inc.php";
 
     // DB credentials as constants
     define('DB_HOST', $servername);
@@ -61,7 +61,7 @@
             <header>
                 <?php 
                     $headeritems = "username";
-                    $menuitems = array("Predictions", "Logout");
+                    $menuitems = array("Predictions", "Team", "Logout");
                     include '../include/header1.inc.php';
                 ?>
             </header>
@@ -266,8 +266,6 @@
             
         </main>
 
-        <script type="text/javascript" src="../js/header1.js"></script>
-
         <script>
 
             /* hide any message that is displayed */
@@ -276,6 +274,11 @@
 
             /* pass the php Last activity session variable, to a javascript variable - this can then be used to check if the user has been inactive */ 
             var LastActivity = "<?=$_SESSION['last_activity']?>"; 
+
+            /* pass the php predictions session variable to a javascript variable - this can then be used to direct the link to the correct predictions page */ 
+            var Predictions = "<?=$predictions?>";
+
+            console.log("Predictions - " + Predictions);
 
             // **********************************************************************************************************
             // Session inactivity - if no activity for 30 minutes then timeout the session and return to home page 
@@ -355,7 +358,7 @@
 
                     console.log(profiles);
 
-                    fetch('https://www.9habu.com/wc2022/inc/update-user-profile.php', {
+                    fetch('https://www.worldcup2022predictor.com/inc/update-user-profile.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -392,6 +395,19 @@
 
                 }; // end of click event for update-profile-btn 
 
+                // If a Team name is entered display the users for the team and the users in the team
+                // if no team is entered display a message that no team name has been entered 
+                if (event.target.matches('#team-href')) {
+                    
+                    if (document.getElementById("upd-team-name").value === "") {
+                        document.getElementById("update-messages").style.display = "flex";
+                        document.getElementById("update-messages").innerHTML = "You are not part of team yet.<br>Enter a new team name or select an existing Team name.";
+                    } else {
+                            window.location.href = 'https://www.9habu.com/wc2022/php/team-members.php?tm=' + document.getElementById("upd-team-name").value;
+                    } // end of else team-href
+
+                } // end of click event for team-href 
+
             }, false);   // end of CLICK event listener
 
             // ==================================================================
@@ -401,7 +417,7 @@
 
                 if (event.target.matches('#upd-team-name')) {
 
-                    fetch('https://www.9habu.com/wc2022/inc/similar-team-names.php', {
+                    fetch('https://www.worldcup2022predictor.com/inc/similar-team-names.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -442,6 +458,8 @@
 
         </script>
     
+        <script type="text/javascript" src="../js/header1.js"></script>
+
     </body>
 
 </html>

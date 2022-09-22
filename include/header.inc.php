@@ -9,7 +9,7 @@
     echo "  </div>";
 
     echo "  <div id='header-text'>";
-    echo "      <h1>Qatar 2022 - Predictor</h1>"; 
+    echo "      <h1>World Cup 2022 Predictor</h1>"; 
     echo "  </div>";
 
     echo "  <div id='qatar-flag-r'>";

@@ -1,13 +1,13 @@
 <?php
 
-    // if you didnt get here from update-a-fixture return to home page
-    if ( !isset($_POST["update-top-scorer-btn"]) ) {
-        header("Location: ../index.php");
-        exit();
-    }
+    // // if you didnt get here from update-a-fixture return to home page
+    // if ( !isset($_POST["goal-upd-btn"]) ) {
+    //     header("Location: ../index.php");
+    //     exit();
+    // }
 
     // Include config file
-    require_once "../../../.php/inc/db.worldcup.inc.php";
+    require_once "../../.php/inc/db.worldcup.inc.php";
 
     // DB credentials as constants
     define('DB_HOST', $servername);
@@ -20,7 +20,6 @@
 
     // decode into an associative array
     $json_array = json_decode($goals, true);
-    
     
     try {
         // Try and establish the database connection.
@@ -81,13 +80,13 @@
                 have to return something formatted as JSON to the calling PHP file
             */
             if ($query -> execute() === FALSE) {    
-                echo json_encode( $msg_arr[Failure] . " - Index : " . $key . " Goal : " . $player . " - " . $h1minute . " - " . $h2minute);
-                // exit;            
-            } else {
-                echo json_encode( $msg_arr[Success] . " Scored By : " . $player);
+                // echo json_encode( $msg_arr[Failure] . " - Index : " . $key . " Goal : " . $player . " - " . $h1minute . " - " . $h2minute);
+                echo json_encode( "Update goal - FAILED" . " - Index : " . $key . " Goal : " . $player . " - " . $h1minute . " - " . $h2minute);
+                exit();            
             };
-
         };       // end of Fixtures ForEach loop
+
+    echo json_encode("SUCCESSFUL - Goal Scored By : " . $player);
 
     }  // end of Try
     catch (PDOException $e) {
