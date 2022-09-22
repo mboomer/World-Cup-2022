@@ -7,7 +7,7 @@
     }
 
     // Include DB config file
-    require_once "../../../.php/inc/db.worldcup.inc.php";      
+    require_once "../../.php/inc/db.worldcup.inc.php";      
 
     // DB credentials as constants
     define('DB_HOST', $servername);
@@ -21,7 +21,7 @@
 
     // Get entered values from POST
     $login_name     = trim($_POST["username"]);
-    $login_password = trim($_POST["password"]);        
+    $login_password = trim($_POST["password"]);      
 
     // Processing form data when form is submitted using correct button
     if ( ($_SERVER["REQUEST_METHOD"] !== "POST") || (!isset($_POST["login-btn"])) ) {
@@ -113,9 +113,9 @@
                     $_SESSION['last_activity'] = time();            
                     
                     // Redirect admin user to admin page
-                    if ($username == "wcadmin") {
+                    if ($username == "worldcupadmin") {
                         header("location: update-a-fixture.php");
-                        exit;
+                        exit();
                     };
 
                     // Redirect user to Predictions page

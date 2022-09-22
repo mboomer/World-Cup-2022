@@ -7,7 +7,7 @@
     }
     
     // Include config file
-    require_once "../../../.php/inc/db.worldcup.inc.php";
+    require_once "../../.php/inc/db.worldcup.inc.php";
 
     // DB credentials as constants
     define('DB_HOST', $servername);
@@ -302,13 +302,11 @@
                     if ($query -> execute() === FALSE) {    
                         echo $msg_arr[Failure] . " - Updating Points Total for User " . $userid;
                         exit;            
-                    } else {
-                         // echo $msg_arr[Success] . " - Updating Points Total for User " . $userid;
                     };
 
             }; // end of USERS foreach
 
-            echo $msg_arr[Success] . " - Updating Points Total for Users";
+            echo "Successful - Updating Points Totals for Users";
 
         }; // end of USERS else rowcount
 

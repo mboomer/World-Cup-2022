@@ -27,7 +27,7 @@
     }; 
 
     // Include config file
-    require_once "../../../.php/inc/db.worldcup.inc.php";
+    require_once "../../.php/inc/db.worldcup.inc.php";
 
     // DB credentials as constants
     define('DB_HOST', $servername);
@@ -89,7 +89,7 @@
                 /* get the current time time stamp in seconds */
                 let TimeNow = new Date().getTime() / 1000;
 
-                console.log("Last Activity : " + pLastActive + " Current Time " +  TimeNow);
+                // console.log("Last Activity : " + pLastActive + " Current Time " +  TimeNow);
 
                 // has the user been inactive for more than 30 minutes (1800 secs) since last activity was recorded
                 if ( TimeNow - pLastActive > 1800 ) { 
@@ -110,7 +110,7 @@
 
                 var userID = "<?=htmlspecialchars($userid)?>";
 
-                fetch('https://www.9habu.com/wc2022/inc/build-results-predictions.php', {
+                fetch('https://www.worldcup2022predictor.com/inc/build-results-predictions.php', {
                         
                         method: 'POST',
                         mode: "same-origin",
@@ -312,7 +312,7 @@
                         LastSixteenOK = false;
                     };
  
-                    // Last 16 Match 53
+                    // Last 16 Match 51
                     if (homeScores[4].value > awayScores[4].value) {
                         document.getElementById('winner53').innerHTML = homeTeams[4].innerHTML;
                         document.getElementById('winner53flag').innerHTML = "<img src='../img/teams/" + homeTeams[4].innerHTML.trim() + ".png' alt='" + homeTeams[4].innerHTML.trim() + " team flag'>";
@@ -327,7 +327,7 @@
                         LastSixteenOK = false;
                     };
  
-                    // Last 16 Match 54
+                    // Last 16 Match 52
                     if (homeScores[5].value > awayScores[5].value) {
                         document.getElementById('winner54').innerHTML = homeTeams[5].innerHTML;
                         document.getElementById('winner54flag').innerHTML = "<img src='../img/teams/" + homeTeams[5].innerHTML.trim() + ".png' alt='" + homeTeams[5].innerHTML.trim() + " team flag'>";
@@ -342,7 +342,7 @@
                         LastSixteenOK = false;
                     };
                     
-                    // Last 16 Match 55
+                    // Last 16 Match 53
                     if (homeScores[2].value > awayScores[2].value) {
                         document.getElementById('winner51').innerHTML = homeTeams[2].innerHTML;
                         document.getElementById('winner51flag').innerHTML = "<img src='../img/teams/" + homeTeams[2].innerHTML.trim() + ".png' alt='" + homeTeams[2].innerHTML.trim() + " team flag'>";
@@ -357,7 +357,7 @@
                         LastSixteenOK = false;
                     };
                         
-                    // Last 16 Match 56
+                    // Last 16 Match 54
                     if (homeScores[3].value > awayScores[3].value) {
                         document.getElementById('winner52').innerHTML = homeTeams[3].innerHTML;
                         document.getElementById('winner52flag').innerHTML = "<img src='../img/teams/" + homeTeams[3].innerHTML.trim() + ".png' alt='" + homeTeams[3].innerHTML.trim() + " team flag'>";
@@ -372,7 +372,7 @@
                         LastSixteenOK = false;
                     };
  
-                    // Last 16 Match 57
+                    // Last 16 Match 55
                     if (homeScores[6].value > awayScores[6].value) {
                         document.getElementById('winner55').innerHTML = homeTeams[6].innerHTML;
                         document.getElementById('winner55flag').innerHTML = "<img src='../img/teams/" + homeTeams[6].innerHTML.trim() + ".png' alt='" + homeTeams[6].innerHTML.trim() + " team flag'>";
@@ -387,18 +387,18 @@
                         LastSixteenOK = false;
                     };
  
-                    // Last 16 Match 58
+                    // Last 16 Match 56
                    if (homeScores[7].value > awayScores[7].value) {
                         document.getElementById('winner56').innerHTML = homeTeams[7].innerHTML;
                         document.getElementById('winner56flag').innerHTML = "<img src='../img/teams/" + homeTeams[7].innerHTML.trim() + ".png' alt='" + homeTeams[7].innerHTML.trim() + " team flag'>";
                         document.getElementById('winner56').previousElementSibling.innerText = homeIDs[7].innerHTML;
                         document.getElementById('winner56').previousElementSibling.previousElementSibling.innerText = homeRanks[7].innerHTML;
-                    } else if (homeScores[3].value < awayScores[7].value) {
+                    } else if (homeScores[7].value < awayScores[7].value) {
                         document.getElementById('winner56').innerHTML = awayTeams[7].innerHTML;
                         document.getElementById('winner56flag').innerHTML = "<img src='../img/teams/" + awayTeams[7].innerHTML.trim() + ".png' alt='" + awayTeams[7].innerHTML.trim() + " team flag'>";
                         document.getElementById('winner56').previousElementSibling.innerText = awayIDs[7].innerHTML;
                         document.getElementById('winner56').previousElementSibling.previousElementSibling.innerText = awayRanks[7].innerHTML;
-                    } else if (homeScores[3].value == awayScores[7].value) {
+                    } else if (homeScores[7].value == awayScores[7].value) {
                         LastSixteenOK = false;
                     };
                     
@@ -2463,7 +2463,7 @@
                         // now process the predictions array and save result to predictions table
                         // console.log(JSON.stringify(predictions));
 
-                        fetch('https://www.9habu.com/wc2022/inc/update-predictions.php', {
+                        fetch('https://www.worldcup2022predictor.com/inc/update-predictions.php', {
                                 
                                 method: 'POST',
                                 mode: "same-origin",

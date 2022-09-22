@@ -7,7 +7,7 @@
     }
     
     // Include config file
-    require_once "../../../.php/inc/db.worldcup.inc.php";
+    require_once "../../.php/inc/db.worldcup.inc.php";
 
     // DB credentials as constants
     define('DB_HOST', $servername);
@@ -85,7 +85,7 @@
             echo "Failure - No Goal Scorers Returned";
 
             $html .= "       <tr>"
-                  .  "          <td>Error</th><th>no goal scorers returned</th><th></th><th></th>"
+                  .  "          <td></th><th></th><th></th><th></th>"
                   .  "       </tr>";
 
         } else {

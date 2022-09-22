@@ -32,17 +32,14 @@
                     <div class="rules-heading">Submitting Your Predictions</div>
                     <div class="rules-content">
                         All predictions must be completed before the start of the first match on November 20th 2022.<br>
-                        Once the competiton starts, no changes will allowed to your predictions.
+                        Once the competiton starts, no changes will be allowed to your predictions.
                     </div>    
 
                     <div class="rules-heading">Home Team -v- Away Team</div>
                     <div class="rules-content">
                         <p>For each game the Home team will be deemed, as is traditional, to be the team listed first.</p>
-                        <p>For example, the opening game in the tournament is<br><br></p>
-                        <p><strong>Qatar -v- Ecuador</strong><br><br></p>
-                        <p>Qatar will be deemed to be the home team and Ecuador will be deemed to be the away team. </p>
+                        <p><img class="matches" src="../img/last-16-match-1.png"></p>
                     </div>    
-
 
                     <div class="rules-heading">Available Points</div>
                     <div class="rules-content">
@@ -58,6 +55,26 @@
                         1 Point for predicting the correct result, i.e. a home win (H), an away win (A), a draw (D)<br>
                         2 Points for predicting the correct score, e.g. 2-1, 1-2, 2-2
                     </div>    
+
+                    <div class="rules-heading">Knockout Stages - Correct Result / Score</div>
+
+                    <div class="rules-content">
+                        For each match in the knockout stages, you will still be awarded points, for predicting the correct result (H/A/D) or predicting the correct score.<br>
+                        These points are awarded, even if, as below, you do not manage to correctly predict the correct home team and the correct away team for the match.<br>
+                        These points are awarded as a way to allow everyone to maintain an interest in the later stages of the tournament even if their predictions do not match the actual outcomes.<br>
+                    </div>
+                    
+                    <div class="rules-heading">Knockout Stages - Bonus Points</div>
+
+                    <div class="rules-content">
+                        <p>For each match in the knockout stages, bonus points are awarded for predicting the correct teams. For example, 
+                        based on your predictions in the group stages, you predict Netherlands would win group A and the USA would be runners up in Group B.
+                        If both teams qualify as you predicted, then you would get bonus points (see below) for correctly predicting the correct home team (Netherlands) and the correct away team (USA).</p><br> 
+                        <p><img class="matches" src="../img/bonus-points.png"></p><br>
+                        <p>However, If the first match turned to be</p><br>  
+                        <p><img class="matches" src="../img/no-bonus-points.png"></p><br>
+                        <p>You would get no bonus points. Even though You predicted the correct teams in this match, you did not correctly predict the correct "home" team or the "correct" away team.</p> 
+                    </div>
 
                     <div class="rules-heading">Round Of 16 - Bonus Points</div>
 

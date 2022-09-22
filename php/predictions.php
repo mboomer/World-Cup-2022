@@ -27,7 +27,7 @@
     }; 
 
     // Include config file
-    require_once "../../../.php/inc/db.worldcup.inc.php";
+    require_once "../../.php/inc/db.worldcup.inc.php";
 
     // DB credentials as constants
     define('DB_HOST', $servername);
@@ -1024,7 +1024,7 @@
                 /* get the current time time stamp in seconds */
                 let TimeNow = new Date().getTime() / 1000;
 
-                console.log("Last Activity : " + pLastActive + " Current Time " +  TimeNow);
+                // console.log("Last Activity : " + pLastActive + " Current Time " +  TimeNow);
 
                 // has the user been inactive for more than 30 minutes (1800 secs) since last activity was recorded
                 if ( TimeNow - pLastActive > 1800 ) { 
@@ -1042,7 +1042,7 @@
             // Timeout function to wait 3 seconds before loading the saved-predictions page
             // **********************************************************************************************************
             function loadSavedPredictions() {
-                window.location.href = "https://www.9habu.com/wc2022/php/saved-predictions.php";
+                window.location.href = "https://www.worldcup2022predictor.com/php//saved-predictions.php";
             }
 
             // **********************************************************************************************************
@@ -1163,9 +1163,16 @@
                 return 0;
             };
             
+            function compGA (a, b) {
+
+                if (a.Against > b.Against) {return -1};
+                if (a.Against < b.Against) {return 1};
+                return 0;
+            };
+
             function compResult (a, b) {
 
-                console.log(currentGroupID + " - Team A : " + a.Team + " Team B : " + b.Team);
+                // console.log(currentGroupID + " - Team A : " + a.Team + " Team B : " + b.Team);
 
                 CompGroup = document.getElementById(currentGroupID);
                     
@@ -1178,7 +1185,7 @@
                 // find the game that matches the teams to be sorted
                 for (let f = 0; f < homeTeams.length; f++) {
                     
-                    console.log(homeTeams[f].textContent + " -V- " + awayTeams[f].textContent);
+                    // console.log(homeTeams[f].textContent + " -V- " + awayTeams[f].textContent);
                     
                     if ( (homeTeams[f].textContent === a.Team) && (awayTeams[f].textContent === b.Team) )  {
                    
@@ -1208,13 +1215,18 @@
                 if (GD !== 0) { return GD; };
 
                 // at this point we will be looking at 2 teams with equal points and equal goal difference - so compare goals scored for
-                // return compGF(teamA, teamB);
 
                 const GF = compGF(teamA, teamB);
 
                 if (GF !== 0) { return GF; };
                 
-                // at this point we have 2 teams with equal points, equal goal difference, equal goals scored for
+                // at this point we will be looking at 2 teams with equal points and equal goal difference , equal goals for so compare goals scored Against
+
+                const GA = compGA(teamA, teamB);
+
+                if (GA !== 0) { return GA; };
+                
+                // at this point we have 2 teams with equal points, equal goal difference, equal goals scored fir and equal goals against
                 // so really want to compare how the two teams did against each other
                 // so how to do that ???
 
@@ -1315,7 +1327,7 @@
 
                         console.log(predictions);
 
-                        fetch('https://www.9habu.com/wc2022/inc/save-predictions-to-db.php', {
+                        fetch('https://www.worldcup2022predictor.com/inc/save-predictions-to-db.php', {
                                 
                                 method: 'POST',
                                 mode: "same-origin",
@@ -1343,7 +1355,7 @@
 
                                 document.getElementById("confirm-predictions").innerHTML = data;
                                 setTimeout(loadSavedPredictions, 3000);
-                                // window.location.href = "https://www.9habu.com/wc2022/php/saved-predictions.php";
+                                // window.location.href = "saved-predictions.php";
 
                             }).catch(function (error) {
                                 // There was an error
@@ -1599,7 +1611,7 @@
                         LastSixteenOK = false;
                     };
  
-                    // Last 16 Match 53
+                    // Last 16 Match 51
                     if (homeScores[4].value > awayScores[4].value) {
                         document.getElementById('winnerLS5').innerHTML = homeTeams[4].innerHTML;
                         document.getElementById('winnerLS5flag').innerHTML = "<img src='../img/teams/" + homeTeams[4].innerHTML.trim() + ".png' alt='" + homeTeams[4].innerHTML.trim() + " team flag'>";
@@ -1614,7 +1626,7 @@
                         LastSixteenOK = false;
                     };
  
-                    // Last 16 Match 54
+                    // Last 16 Match 52
                     if (homeScores[5].value > awayScores[5].value) {
                         document.getElementById('winnerLS6').innerHTML = homeTeams[5].innerHTML;
                         document.getElementById('winnerLS6flag').innerHTML = "<img src='../img/teams/" + homeTeams[5].innerHTML.trim() + ".png' alt='" + homeTeams[5].innerHTML.trim() + " team flag'>";
@@ -1629,7 +1641,7 @@
                         LastSixteenOK = false;
                     };
                     
-                    // Last 16 Match 55
+                    // Last 16 Match 53
                     if (homeScores[2].value > awayScores[2].value) {
                         document.getElementById('winnerLS3').innerHTML = homeTeams[2].innerHTML;
                         document.getElementById('winnerLS3flag').innerHTML = "<img src='../img/teams/" + homeTeams[2].innerHTML.trim() + ".png' alt='" + homeTeams[2].innerHTML.trim() + " team flag'>";
@@ -1644,7 +1656,7 @@
                         LastSixteenOK = false;
                     };
                         
-                    // Last 16 Match 56
+                    // Last 16 Match 54
                     if (homeScores[3].value > awayScores[3].value) {
                         document.getElementById('winnerLS4').innerHTML = homeTeams[3].innerHTML;
                         document.getElementById('winnerLS4flag').innerHTML = "<img src='../img/teams/" + homeTeams[3].innerHTML.trim() + ".png' alt='" + homeTeams[3].innerHTML.trim() + " team flag'>";
@@ -1659,7 +1671,7 @@
                         LastSixteenOK = false;
                     };
  
-                    // Last 16 Match 57
+                    // Last 16 Match 55
                     if (homeScores[6].value > awayScores[6].value) {
                         document.getElementById('winnerLS7').innerHTML = homeTeams[6].innerHTML;
                         document.getElementById('winnerLS7flag').innerHTML = "<img src='../img/teams/" + homeTeams[6].innerHTML.trim() + ".png' alt='" + homeTeams[6].innerHTML.trim() + " team flag'>";
@@ -1674,18 +1686,18 @@
                         LastSixteenOK = false;
                     };
  
-                    // Last 16 Match 58
+                    // Last 16 Match 56
                    if (homeScores[7].value > awayScores[7].value) {
                         document.getElementById('winnerLS8').innerHTML = homeTeams[7].innerHTML;
                         document.getElementById('winnerLS8flag').innerHTML = "<img src='../img/teams/" + homeTeams[7].innerHTML.trim() + ".png' alt='" + homeTeams[7].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerLS8').previousElementSibling.innerText = homeIDs[7].innerHTML;
                         document.getElementById('winnerLS8').previousElementSibling.previousElementSibling.innerText = homeRanks[7].innerHTML;
-                    } else if (homeScores[3].value < awayScores[7].value) {
+                    } else if (homeScores[7].value < awayScores[7].value) {
                         document.getElementById('winnerLS8').innerHTML = awayTeams[7].innerHTML;
                         document.getElementById('winnerLS8flag').innerHTML = "<img src='../img/teams/" + awayTeams[7].innerHTML.trim() + ".png' alt='" + awayTeams[7].innerHTML.trim() + " team flag'>";
                         document.getElementById('winnerLS8').previousElementSibling.innerText = awayIDs[7].innerHTML;
                         document.getElementById('winnerLS8').previousElementSibling.previousElementSibling.innerText = awayRanks[7].innerHTML;
-                    } else if (homeScores[3].value == awayScores[7].value) {
+                    } else if (homeScores[7].value == awayScores[7].value) {
                         LastSixteenOK = false;
                     };
                     

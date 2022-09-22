@@ -13,7 +13,7 @@
     }    
     
     // Include config file
-    require_once "../../../.php/inc/db.worldcup.inc.php";
+    require_once "../../.php/inc/db.worldcup.inc.php";
 
     // DB credentials as constants
     define('DB_HOST', $servername);
@@ -31,7 +31,7 @@
 
     $token = random_bytes(32);
 
-    $url = "https://www.9habu.com/wc2022/php/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token) . "&usr=" . $postuser ;
+    $url = "https://www.worldcup2022predictor.com/php/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token) . "&usr=" . $postuser ;
 
     // token will expire in 60 munutes 
     $expires = date("U") + 3600;
