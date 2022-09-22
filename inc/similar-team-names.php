@@ -8,7 +8,7 @@
     }
 
     // Include DB config file
-    require_once "../../../.php/inc/db.worldcup.inc.php";      
+    require_once "../../.php/inc/db.worldcup.inc.php";      
 
     // DB credentials as constants
     define('DB_HOST', $servername);
@@ -51,7 +51,7 @@
             $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
         }
         catch (PDOException $e) {
-            header("location: sign-up.php?error=dbconnecterror&errormsg=".$e->getMessage());
+            header("location: ../php/sign-up.php?error=dbconnecterror&errormsg=".$e->getMessage());
             exit();
         };
 

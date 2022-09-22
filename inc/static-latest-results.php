@@ -7,7 +7,7 @@
     }
 
     // Include config file
-    require_once "../../../.php/inc/db.worldcup.inc.php";
+    require_once "../../.php/inc/db.worldcup.inc.php";
 
     // DB credentials as constants
     define('DB_HOST', $servername);
@@ -63,7 +63,7 @@
             . "    ORDER BY \n"  
             . "     fixtureNo \n"  
             . "    DESC \n"
-            . "    LIMIT 2";
+            . "    LIMIT 3";
 
         // prepare the query for the database connection
         $query = $dbh -> prepare($qry);
@@ -99,15 +99,21 @@
                     . "      <table>"
                     . "          <thead class='blueheader'>"
                     . "              <tr>"
-                    . "                  <th class='align-center' colspan='7'>Error - Error</th>"
+                    . "                  <th class='align-center' colspan='7'>Qatar World Cup 2022</th>"
                     . "              </tr>"
                     . "              <tr>"
-                    . "                  <th class='align-center' colspan='7'>Error - Error - Error</th>"
+                    . "                  <th class='align-center' colspan='7'>Tournament Has Not Started</th>"
                     . "              </tr>"
                     . "          </thead>"
                     . "          <tbody>"
                     . "              <tr>"
-                    . "                  <td>No Recent Fixtures Returned</td>"
+                    . "                  <td> - </td>"
+                    . "              </tr>"
+                    . "              <tr>"
+                    . "                  <td><strong>Tournament Starts 20 November 2022</strong></td>"
+                    . "              </tr>"
+                    . "              <tr>"
+                    . "                  <td> - </td>"
                     . "              </tr>"
                     . "          </tbody>"
                     . "      </table>"   

@@ -9,7 +9,7 @@
     echo "  </div>";
 
     echo "  <div id='header-text'>";
-    echo "      <h1>Qatar 2022 - Predictor</h1>"; 
+    echo "      <h1>World Cup 2022 Predictor</h1>"; 
     echo "  </div>";
 
     echo "  <div id='qatar-flag-r'>";
@@ -28,29 +28,33 @@
     echo "      <div id='bar3'>";
     echo "          <div id='dropdown-content'>";
 
-    foreach ($menuitems as $menuitems) {
+    foreach ($menuitems as $menuitem) {
     
-        if ($menuitems === "Home") {
+        if ($menuitem === "Home") {
             echo "              <a id='home-href' href='#'>Home</a>";
         }; 
         
-        if ($menuitems === "Login") {
+        if ($menuitem === "Login") {
             echo "              <a id='login-href' href='#'>Login</a>";
         }; 
         
-        if ($menuitems === "Register") {
+        if ($menuitem === "Register") {
             echo "              <a id='signup-href' href='#'>Register</a>";
         }; 
         
-        if ($menuitems === "Profile") {
+        if ($menuitem === "Profile") {
             echo "              <a id='profile-href' href='#'>User Profile</a>";
         };
         
-        if ($menuitems === "Predictions") {
-            echo "              <a id='predictions-href' href='#'>Predictions</a>";
+        if ($menuitem === "Team") {
+            echo "              <a id='team-href' href='#'>Your Team</a>";
         }; 
         
-        if ($menuitems === "Logout") {
+        if ($menuitem === "Predictions") {
+            echo "              <a id='predictions-href' href='#'>Predictions</a>";
+        }; 
+
+        if ($menuitem === "Logout") {
             echo "              <a id='logout-href' href='#'>Logout</a>";
         }; 
 

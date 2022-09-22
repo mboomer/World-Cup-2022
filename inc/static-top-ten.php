@@ -7,7 +7,7 @@
     }
 
     // Include config file
-    require_once "../../../.php/inc/db.worldcup.inc.php";
+    require_once "../../.php/inc/db.worldcup.inc.php";
 
     // DB credentials as constants
     define('DB_HOST', $servername);
@@ -79,8 +79,8 @@
             echo "Failure - No Top Ten Users Returned";
 
             $html .= "  <tr>"
-                  . "      <td>Error</td>"
-                  . "      <td>No User Returned</td>"
+                  . "      <td></td>"
+                  . "      <td></td>"
                   . "      <td></td>" 
                   . "      <td></td>" 
                   . "   </tr>";

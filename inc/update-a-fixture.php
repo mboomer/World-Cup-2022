@@ -17,7 +17,7 @@
     }; 
     
     // Include config file
-    require_once "../../../.php/inc/db.worldcup.inc.php";
+    require_once "../../.php/inc/db.worldcup.inc.php";
 
     // DB credentials as constants
     define('DB_HOST', $servername);
@@ -496,7 +496,7 @@
                     fixtures.push(fixture);
 
                     // process the fixtures array and save result to fixtures table
-                    fetch('https://www.9habu.com/wc2022/inc/update-fixture-scores.php', {
+                    fetch('https://www.worldcup2022predictor.com/inc/update-fixture-scores.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -516,7 +516,7 @@
 
                             // Otherwise, throw an error
                             return response.json().then(function (msg) {
-                                // console.log(response.json());
+                                console.log(msg);
                                 throw msg;
                             });
 
@@ -564,7 +564,7 @@
                     goals.push(goal);
 
                     // now process the goals array and save result to goals-scored table
-                    fetch('https://www.9habu.com/wc2022/inc/update-goals-scored.php', {
+                    fetch('https://www.worldcup2022predictor.com/inc/update-goals-scored.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -610,7 +610,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Updating User Points Totals...please wait";
 
-                    fetch('https://www.9habu.com/wc2022/inc/update-user-points.php', {
+                    fetch('https://www.worldcup2022predictor.com/inc/update-user-points.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -656,7 +656,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Updating User Points Totals...please wait";
 
-                    fetch('https://www.9habu.com/wc2022/inc/static-top-ten.php', {
+                    fetch('https://www.worldcup2022predictor.com/inc/static-top-ten.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -702,7 +702,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Updating To Goal Scorer...Please Wait";
 
-                    fetch('https://www.9habu.com/wc2022/inc/static-top-goal-scorer.php', {
+                    fetch('https://www.worldcup2022predictor.com/inc/static-top-goal-scorer.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -748,7 +748,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Updating Latest Results...Please Wait";
 
-                    fetch('https://www.9habu.com/wc2022/inc/static-latest-results.php', {
+                    fetch('https://www.worldcup2022predictor.com/inc/static-latest-results.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -794,7 +794,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Updating Upcoming Fixtures...Please Wait";
 
-                    fetch('https://www.9habu.com/wc2022/inc/static-upcoming-fixtures.php', {
+                    fetch('https://www.worldcup2022predictor.com/inc/static-upcoming-fixtures.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -840,7 +840,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Updating Competition Statistics Fixtures...Please Wait";
 
-                    fetch('https://www.9habu.com/wc2022/inc/static-statistics.php', {
+                    fetch('https://www.worldcup2022predictor.com/inc/static-statistics.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -910,7 +910,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Importing Fixtures...Please Wait";
 
-                    fetch('https://www.9habu.com/wc2022/mysql/fixtures_import.php', {
+                    fetch('https://www.worldcup2022predictor.com/mysql/fixtures_import.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -980,7 +980,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Importing groups...Please Wait";
 
-                    fetch('https://www.9habu.com/wc2022/mysql/groups_import.php', {
+                    fetch('https://www.worldcup2022predictor.com/mysql/groups_import.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -1050,7 +1050,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Importing results...Please Wait";
 
-                    fetch('https://www.9habu.com/wc2022/mysql/results_import.php', {
+                    fetch('https://www.worldcup2022predictor.com/mysql/results_import.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -1120,7 +1120,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Importing rounds...Please Wait";
 
-                    fetch('https://www.9habu.com/wc2022/mysql/rounds_import.php', {
+                    fetch('https://www.worldcup2022predictor.com/mysql/rounds_import.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -1190,7 +1190,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Importing teams...Please Wait";
 
-                    fetch('https://www.9habu.com/wc2022/mysql/teams_import.php', {
+                    fetch('https://www.worldcup2022predictor.com/mysql/teams_import.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
@@ -1260,7 +1260,7 @@
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Importing Venues...Please Wait";
 
-                    fetch('https://www.9habu.com/wc2022/mysql/venues_import.php', {
+                    fetch('https://www.worldcup2022predictor.com/mysql/venues_import.php', {
                             
                             method: 'POST',
                             mode: "same-origin",
