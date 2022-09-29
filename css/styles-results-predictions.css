@@ -194,12 +194,14 @@ th, td {
 
 .results-home-flag img, .results-away-flag img {
     width: 82%;
-    text-align: center;
+    display: block;
+    margin: auto auto;
 }
 
 .predictions-home-flag img, .predictions-away-flag img {
     width: 82%;
-    text-align: center;
+    display: block;
+    margin: auto auto;
 }
 
     .ls-color {

@@ -18,14 +18,14 @@
     
     <body>
         
+        <header>
+            <?php
+                $menuitems = array("Login", "Register");
+                include 'include/header.inc.php';
+            ?>
+        </header>
+
         <main id="container">
-            
-            <header>
-                <?php
-                    $menuitems = array("Login", "Register");
-                    include 'include/header.inc.php';
-                ?>
-            </header>
 
             <div class="card" id="latest-results">
                 <h2 class="card-title">Latest Results</h2>
@@ -65,11 +65,13 @@
                 </div> 
 
             </div>
-
-            <footer id="footer">
-                    <?php include 'include/footer.inc.php';?>
-            </footer>
             
+        </main>
+
+        <footer id="footer">
+                <?php include 'include/footer.inc.php';?>
+        </footer>
+
         <!-- ********************************************************************************** -->
         <!-- Cookie banner not displayed - it is displayed by JS if required on page load       -->
         <!-- ********************************************************************************** -->
@@ -82,8 +84,6 @@
             <button id="reject-cookies-btn">Reject</button>
         </div>
         <!-- ********************************************************************************** --> 
-
-        </main>
 
         <script type="text/javascript" src="js/header.js"></script>
 

@@ -228,11 +228,13 @@
          . "    (HomeScore + AwayScore) as TotalScore \n"
          . "    FROM  \n"
          . "    	Fixtures \n"
+         . "    WHERE  \n"
+         . "        HomeScore <> NULL \n"
          . "    ORDER BY \n"
          . "    	TotalScore DESC \n"
          . "    LIMIT 1 \n";
 
-            // prepare the query for the database connection
+        // prepare the query for the database connection
         $query = $dbh -> prepare($qry);
 
         /** bind the parameters
@@ -262,7 +264,7 @@
 
         if ($query->rowCount() == 0) {
 
-              $html .= "      <div class='stat-value'>No Value Found</div> \n";
+              $html .= "      <div id='is_null' class='stat-value'>0</div> \n";
 
         } else {
 

@@ -15,7 +15,7 @@
     // $_SESSION["username"]  = $username;                            
     // $_SESSION["useremail"] = $email;
 
-    /** as the userid is stored along with teh predictions there is no need to extract it from the session variables */
+    /** as the userid is stored along with the predictions there is no need to extract it from the session variables */
     // If logged in store the userid from session 
     // if ( isset($_SESSION['userid']) ) {
     //     $userid = $_SESSION["userid"];    
@@ -147,14 +147,14 @@
             have to return something formatted as JSON to the calling PHP file
         */
         if ($query -> execute() === FALSE) {    
-            echo json_encode( $msg_arr[Users] );
+            echo json_encode( "Insert predictons into database FAILED" );
             exit;            
         }; 
 
     /**
         Successful completion 
     */
-        echo json_encode( $msg_arr[Success] );
+        echo json_encode( "Insert predictons into database SUCCESSFUL" );
 
     }  // end of Try
     catch (PDOException $e) {

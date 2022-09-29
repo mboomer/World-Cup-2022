@@ -64,16 +64,16 @@
     
     <body>
         
+        <header>
+            <?php 
+                $headeritems = "username";
+                $menuitems = array("Profile", "Logout");
+                include '../include/header1.inc.php';
+            ?>
+        </header>
+
         <main id="container">
-            
-            <header>
-                <?php 
-                    $headeritems = "username";
-                    $menuitems = array("Profile", "Logout");
-                    include '../include/header1.inc.php';
-                ?>
-            </header>
-                    
+                 
             <!-- Tab links -->
             <div id="tabs" class="tab">
               <button id="groups-abcd-tab"      name="GROUPS-ABCD"      class="tablinks active">Groups A,B,C,D</button>
@@ -960,11 +960,11 @@
                 
             </section> <!-- end of Tournament -->
 
-            <footer id="footer">        
-                <?php include "../include/footer.inc.php"; ?>
-            </footer>
-
         </main>
+
+        <footer id="footer">        
+            <?php include "../include/footer.inc.php"; ?>
+        </footer>
 
         <script type="text/javascript" src="../js/header1.js"></script>
 
@@ -1042,7 +1042,7 @@
             // Timeout function to wait 3 seconds before loading the saved-predictions page
             // **********************************************************************************************************
             function loadSavedPredictions() {
-                window.location.href = "https://www.worldcup2022predictor.com/php//saved-predictions.php";
+                window.location.href = "https://www.worldcup2022predictor.com/php/saved-predictions.php";
             }
 
             // **********************************************************************************************************
@@ -1325,7 +1325,7 @@
                         // now process the predictions array and save result to predictions table
                         //console.log(JSON.stringify(predictions));
 
-                        console.log(predictions);
+                        // console.log(predictions);
 
                         fetch('https://www.worldcup2022predictor.com/inc/save-predictions-to-db.php', {
                                 
@@ -1920,6 +1920,9 @@
                     currentTableID   = currentTable.id;
                     currentTableName = "Group A";
 
+                // console.log(homeTeams);
+                // console.log(awayTeams);
+
                 } else if (event.target.matches('[data-table="TableB"]')) {
 
                     let SectB = document.querySelector('#SectionB');
@@ -2071,11 +2074,17 @@
                     };
                 };
 
+                // console.log("TEAMS ARRAY");
+                // console.log(teams);
+
                 // Update the properties for each team object for each result
                 for (let f = 0; f < homeTeams.length; f++) {
 
                     let home = teams.findIndex(t => t.Team == homeTeams[f].textContent);                    
                     let away = teams.findIndex(t => t.Team == awayTeams[f].textContent);                    
+
+                    // console.log(homeTeams[f].textContent + "-V-" + awayTeams[f].textContent);
+                    // console.log(home + "-V-" + away);
 
                     teams[home].Played++;
                     teams[away].Played++;

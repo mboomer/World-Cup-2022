@@ -12,7 +12,7 @@
     // If logged in store the session variables from session 
     if ( isset($_SESSION['userid']) ) {
         $userid      = $_SESSION["userid"];    
-        $username    = $_SESSION["username"]    ; 
+        $username    = $_SESSION["username"]; 
         $predictions = $_SESSION["predictions"];    
     }; 
 
@@ -25,6 +25,8 @@
         // Set the error message to be displayed
         if ($error_code == "failed") {
             $error_msg = "The password reset request failed.<br>Please try again.";
+        } else if ($error_code == "userempty") {
+            $error_msg = "Please enter your username";
         } else if ($error_code == "pwdempty") {
             $error_msg = "Please enter your email address";
         } else if ($error_code == "success") {
@@ -78,10 +80,8 @@
 
                 #container {
                     grid-template-areas:
-                            "header"
-                            "wrapper"
-                            "footer";
-                }
+                            "wrapper";
+            }
 
         </style>
     
@@ -108,7 +108,7 @@
                         echo "<span class='help-block-success'>" . $error_msg . "</span>";
                     } else if ($error_code == "failed") {
                         echo "<span class='help-block-failure'>" . $error_msg . "</span>";
-                    } else if ($error_code == "pwdempty") {
+                    } else if ( ($error_code == "pwdempty") || ($error_code == "userempty") ) {
                         echo "<span class='help-block-failure'>" . $error_msg . "</span>";
                     }
                 ?>
@@ -144,7 +144,7 @@
             <?php include "../include/footer.inc.php"; ?>
         </footer>
 
-        <script type="text/javascript" src="../js/header1.js"></script>;
+        <script type="text/javascript" src="../js/header1.js"></script>
 
         <script type="text/javascript">
             

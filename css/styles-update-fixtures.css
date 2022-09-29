@@ -42,7 +42,7 @@ Each section has a GRID-AREA named after the section ID
 */
 
 #container {
-    margin-top: 5px;
+    grid-area: container;
 }
 
 header {
@@ -76,8 +76,7 @@ header {
 
 
 #tabs {
-    grid-area: tabs;
-    margin-top: 5px;
+    display: none;
 }
 
 #tournament {
@@ -317,7 +316,7 @@ input[id="goal-scorer"] {
         grid-template-columns: 1fr;
         grid-template-rows: auto;
         grid-gap: 3px;
-        margin: 0 auto;
+        margin: 50px auto 0 auto;
 
         grid-template-areas:
             "GOALS-SCORED"
@@ -325,24 +324,21 @@ input[id="goal-scorer"] {
 
     }
     
+    #container {
+        grid-template-areas:
+            "tournament";
+    }
+
     main {
         width: 98%;
  
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 10vh auto auto;
+        grid-template-rows: auto;
         grid-gap: 5px;
         margin: 0 auto;
     }
   
-    #container {
-        grid-template-areas:
-            "header"
-            "tabs"
-            "tournament"
-            "footer";
-    }
-
     #username {
         display: none;
     }
@@ -433,7 +429,7 @@ input[id="goal-scorer"] {
         grid-template-columns: 1fr;
         grid-template-rows: auto;
         grid-gap: 3px;
-        margin: 0 auto;
+        margin: 80px auto 0 auto;
 
         grid-template-areas:
             "GOALS-SCORED"
@@ -453,10 +449,7 @@ input[id="goal-scorer"] {
   
     #container {
         grid-template-areas:
-            "header"
-            "tabs"
-            "tournament"
-            "footer";
+            "tournament";
     }
 
     #username {
@@ -553,17 +546,14 @@ input[id="goal-scorer"] {
  
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 10vh auto auto;
+        grid-template-rows: auto;
         grid-gap: 5px;
-        margin: 0 auto;
+        margin: 70px auto 0 auto;
     }
   
     #container {
         grid-template-areas:
-            "header"
-            "tabs"
-            "tournament"
-            "footer";
+            "tournament";
     }
 
     header {
@@ -633,6 +623,21 @@ input[id="goal-scorer"] {
         background-color: plum;
     } */
 
+    #container {
+        grid-template-areas:
+            "tournament";
+    }
+
+    main {
+        width: 100%;
+ 
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 70px auto 0 auto;
+    }
+
     #tournament {
         display: grid;
         grid-template-columns: 0.8fr 1.2fr;
@@ -641,28 +646,10 @@ input[id="goal-scorer"] {
         margin: 0 auto;
 
         grid-template-areas:
-            "FIXTURES GOALS-SCORED"
+            "FIXTURES GOALS-SCORED";
 
     }
     
-    main {
-        width: 100%;
- 
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 10vh auto auto;
-        grid-gap: 5px;
-        margin: 0 auto;
-    }
-  
-    #container {
-        grid-template-areas:
-            "header"
-            "tabs"
-            "tournament"
-            "footer";
-    }
-
     header {
         grid-template-areas:
             "qatar-flag-l header-text qatar-flag-r username hb-icon";
@@ -731,6 +718,20 @@ input[id="goal-scorer"] {
         background-color: gold;
     } */
 
+    #container {
+        grid-template-areas:
+            "tournament";
+    }
+
+    main {
+        width: 98%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-gap: 5px;
+        margin: 80px auto 0 auto;
+    }
+
     #tournament {
         width: 98%;
         display: grid;
@@ -740,27 +741,9 @@ input[id="goal-scorer"] {
         margin: 0 auto;
 
         grid-template-areas:
-            "FIXTURES GOALS-SCORED"
+            "FIXTURES GOALS-SCORED";
 
-    }
-
-    main {
-        width: 98%;
- 
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 10vh auto auto;
-        grid-gap: 5px;
-        margin: 0 auto;
-    }
-  
-    #container {
-        grid-template-areas:
-            "header"
-            "tabs"
-            "tournament"
-            "footer";
-    }
+    }  
 
     header {
         grid-template-areas:
