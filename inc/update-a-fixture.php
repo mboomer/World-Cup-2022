@@ -53,20 +53,20 @@
     
     <body>
         
+        <header>
+            <?php 
+                $headeritems = "username";
+                $menuitems = array("Logout");        
+                include "../include/header1.inc.php"; 
+            ?>
+        </header>
+
         <main id="container">
             
-            <header>
-                <?php 
-                    $headeritems = "username";
-                    $menuitems = array("Logout");        
-                    include "../include/header1.inc.php"; 
-                ?>
-            </header>
-
-            <!-- Tab links -->
+            <!-- Tab links 
             <div id="tabs" class="tab">
                 <button id="fixtures-btn" name="FIXTURES" class="tablinks">Fixtures | Goals Scored | Statistics | Data Import</button>
-            </div>
+            </div> -->
 
             <section id="tournament">
                 
@@ -192,8 +192,8 @@
                                                 echo "    <td class='results-home-flag'><img src='../img/teams/" . $hometeam . ".png' alt='" . $hometeam . " team flag'></td>";      
                                                 echo "    <td class='home'>" . $hometeam . "</td>";      
                                                 echo "    <td class='h-rank'>" . $homerank .  "</td>";      
-                                                echo "    <td><input class='homescore' name='fixtureno" . $fixno.  "' data-h-fixtureno='" . $fixno . "' value='" . $homescore . "' type='number' min='0' placeholder='0'></td>";      
-                                                echo "    <td><input class='awayscore' name='fixtureno" . $fixno.  "' data-a-fixtureno='" . $fixno . "' value='" . $awayscore . "' type='number' min='0' placeholder='0'></td>";      
+                                                echo "    <td><input class='homescore' name='fixtureno" . $fixno.  "' data-h-fixtureno='" . $fixno . "' value='" . $homescore . "' title='homescore' type='number' min='0' placeholder='0'></td>";      
+                                                echo "    <td><input class='awayscore' name='fixtureno" . $fixno.  "' data-a-fixtureno='" . $fixno . "' value='" . $awayscore . "' title='awayscore' type='number' min='0' placeholder='0'></td>";      
                                                 echo "    <td class='a-rank'>" . $awayrank . "</td>";      
                                                 echo "    <td class='awayid hidden'>" . $awayid . "</td>";      
                                                 echo "    <td class='away'>" . $awayteam . "</td>";      
@@ -305,13 +305,13 @@
                                                 ?>
                                             </select>
                                         </td>
-                                        <td> <input id='goal-scorer'  type='text'   placeholder='Goal Scorer' value=""> </td> 
-                                        <td> <input id='goal-h1min'   type='number' min=0 max=65 value=1> </td>
-                                        <td> <input id='goal-h2min'   type='number' min=0 max=65 value=0> </td>
-                                        <td> <input id='goal-et1min'  type='number' min=0 max=65 value=0> </td>
-                                        <td> <input id='goal-et2min'  type='number' min=0 max=65 value=0> </td>
-                                        <td> <input id='goal-penalty' type='number' min=0 max=1  value=0> </td>
-                                        <td> <input id='goal-own'     type='number' min=0 max=1  value=0> </td>
+                                        <td> <input id='goal-scorer'  type='text'   title='gs' placeholder='Goal Scorer' value=""> </td> 
+                                        <td> <input id='goal-h1min'   type='number' title='gh1' min=0 max=65 value=1> </td>
+                                        <td> <input id='goal-h2min'   type='number' title='gh2' min=0 max=65 value=0> </td>
+                                        <td> <input id='goal-et1min'  type='number' title='ge1' min=0 max=65 value=0> </td>
+                                        <td> <input id='goal-et2min'  type='number' title='ge2' min=0 max=65 value=0> </td>
+                                        <td> <input id='goal-penalty' type='number' title='gsp' min=0 max=1  value=0> </td>
+                                        <td> <input id='goal-own'     type='number' title='gso' min=0 max=1  value=0> </td>
                                         <td><button id='goal-upd-btn' class='goal-btn-blue'>Update</button></td>  
                                     </tr>
                                 </tbody>
@@ -416,13 +416,13 @@
                 </div>  <!-- end of GOALS SCORED -->
 
             </section> <!-- end of Tournament -->
-
-            <footer id="footer">
-                <?php include "../include/footer.inc.php"; ?>
-            </footer>
             
         </main>
     
+        <footer id="footer">
+            <?php include "../include/footer.inc.php"; ?>
+        </footer>
+
         <script type="text/javascript" src="../js/header1.js"></script>
 
         <script type="text/javascript">

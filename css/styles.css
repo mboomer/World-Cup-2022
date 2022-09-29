@@ -1,5 +1,5 @@
 /* Override browsers default CSS rules  */
-*{                                  
+* {                                  
     margin:0;
     padding:0;
     box-sizing: content-box;
@@ -48,12 +48,22 @@ body {
   ---------------------------------------------------------------------------------- 
 */
 
-#container {  
+/* #container {  
     margin-top: 5px;
-} 
+}  */
 
-#header {
+header {
     grid-area: header;
+    display: grid;
+
+    background-color: rgba(141,27,61, 0.3);
+    width: 98%;
+    margin-top: 5px;
+
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 1%;
 }
 
 #header-text {
@@ -215,7 +225,7 @@ section {
     color: white;
 }
 
-.options {
+/* .options {
     
     display:flex;
     align-items: center;
@@ -232,15 +242,34 @@ section {
     color: #3498db;
     padding: 5px;
         
-    /* // color: white;
-    // padding: 15px 25px;
-    text-decoration: none; */
-}
+    color: white;
+    padding: 15px 25px;
+    text-decoration: none; 
+} */
 
-.options-link:hover {
+/* .options-link:hover {
     color: darkgreen;
     text-decoration: underline;
+} */
+
+#disclaimer {
+    display: flex;
 }
+
+#unofficial, #contact-details, #info-sources {
+    width: 30%;
+    border: 1px solid white;
+    font-size: 0.7em;
+    font-style: italic;
+    padding: 5px;
+    margin: 5px auto;
+    text-align: center;
+}
+
+#info-sources a, #contact-details a {
+    color: skyblue;
+}
+
 
 /* ******************************************************************************************   */
 /*                                          BUTTONS                                             */
@@ -424,7 +453,8 @@ th, td {
 
 .country-flag img {
     width: 55%;
-    text-align: center;
+    display: block;
+    margin: auto auto;
 }
 
     /* 
@@ -460,8 +490,6 @@ th, td {
             outline: none;
             color: white;
             padding: 10px 10px;
-            background-color: inherit;
-            font-family: inherit;
             margin: 0;
         }
 
@@ -476,7 +504,7 @@ th, td {
             background-color: #f9f9f9;
             min-width: 160px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
+            z-index: 11;
         }
 
         #dropdown-content a {
@@ -503,6 +531,10 @@ th, td {
     width: 30%;
 }
 
+.advice-matches {
+    width: 80%;
+}
+
 /* ******************************************************************************************   */
 /*                       MEDIA RULES 1200px 992ox 768px 576px                                   */
 /* ******************************************************************************************   */
@@ -519,6 +551,18 @@ th, td {
    
 @media screen and (max-width:576px) {                   
     
+    #container {
+        grid-template-areas:
+            /* "header" */
+            "lastest-results"
+            "upcoming-fixtures"
+            "top-ten-users"
+            "golden-boot"
+            "competition-stats"
+            "competition-rules";
+            /* "footer"; */
+    }
+        
     main {
 
         /* background-color: lightskyblue; */
@@ -529,7 +573,7 @@ th, td {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto auto auto auto auto auto;
         grid-gap: 5px;
-        margin: 0 auto;
+        margin: 60px auto 0 auto;
     }
  
         #qatar-flag-r {
@@ -538,8 +582,6 @@ th, td {
 
         header {
             
-            display: grid;
-            grid-area: header;
             grid-template-columns: 0.5fr 10fr 1fr 1fr;
             grid-template-rows: auto;
             grid-gap: 2px;
@@ -573,18 +615,6 @@ th, td {
             #qatar-flag-l img, #qatar-flag-r img {
                 width: 55px;
             }
-
-        #container {
-            grid-template-areas:
-                "header"
-                "lastest-results"
-                "upcoming-fixtures"
-                "top-ten-users"
-                "golden-boot"
-                "competition-stats"
-                "competition-rules"
-                "footer";
-        }
      
     #dropdown-content {
         right: 20px;
@@ -632,9 +662,10 @@ th, td {
         font-size: 30px;                    /* makes the icons bigger and ensure the cursor is always the pointer */
     }
 
-    .matches {
-        width: 80%;
+    .matches, .advice-matches {
+        width: 98%;
     }
+
 }
 
 /* ******************************************************************************************   */
@@ -649,7 +680,19 @@ th, td {
     
 @media screen and (min-width:576px) {                   
     
-    main {
+    #container {
+        grid-template-areas:
+            /* "header" */
+            "lastest-results"
+            "upcoming-fixtures"
+            "top-ten-users"
+            "golden-boot"
+            "competition-stats"
+            "competition-rules";
+            /* "footer"; */
+    }
+ 
+     main {
 
         /* background-color: yellow; */
 
@@ -659,16 +702,14 @@ th, td {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto auto auto auto auto auto;
         grid-gap: 5px;
-        margin: 0 auto;
+        margin: 65px auto 0 auto;
     }
  
         header {
             
-            display: grid;
-            grid-area: header;
             grid-template-columns: 1fr 1fr 10fr 1fr 1fr;
             grid-template-rows: auto;
-            grid-gap: 10px;
+            grid-gap: 5px;
             
             justify-content: center;    
 
@@ -689,18 +730,6 @@ th, td {
             width: 80px;
         }
 
-    #container {
-        grid-template-areas:
-            "header"
-            "lastest-results"
-            "upcoming-fixtures"
-            "top-ten-users"
-            "golden-boot"
-            "competition-stats"
-            "competition-rules"
-            "footer";
-    }
- 
     header {
         grid-template-areas:
             "logo qatar-flag-l header-text qatar-flag-r hb-icon";
@@ -731,7 +760,10 @@ th, td {
     }
 
     #rules-container {
-        
+
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+
         grid-template-areas:
             "header"
             "competition-rules"
@@ -756,6 +788,10 @@ th, td {
         width: 80%;
     }
 
+    .advice-matches {
+        width: 98%;
+    }
+
 }
 
 /* ******************************************************************************************   */
@@ -777,16 +813,14 @@ th, td {
         width: 98%;
  
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         grid-template-rows: auto;
         grid-gap: 5px;
-        margin: 0 auto;
+        margin: 75px auto 0 auto;
     }
 
         header {
             
-            display: grid;
-            grid-area: header;
             grid-template-columns: 1fr 1fr 10fr 1fr 1fr;
             grid-template-rows: auto;
             grid-gap: 10px;
@@ -835,11 +869,11 @@ th, td {
  
     #container{
         grid-template-areas:
-            "header header"
+            /* "header header" */
             "lastest-results upcoming-fixtures"
             "top-ten-users golden-boot"
-            "competition-stats competition-rules"
-            "footer footer";
+            "competition-stats competition-rules";
+            /* "footer footer"; */
     }
  
     header {
@@ -856,6 +890,9 @@ th, td {
 
     #rules-container {
         
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+
         grid-template-areas:
             "header"
             "competition-rules"
@@ -865,6 +902,11 @@ th, td {
     .matches {
         width: 50%;
     }
+
+    .advice-matches {
+        width: 98%;
+    }
+
 }
 
 /* ******************************************************************************************   */
@@ -879,6 +921,15 @@ th, td {
 
 @media screen and (min-width:992px) {                   
     
+    #container{
+        grid-template-areas:
+            /* "header header" */
+            "lastest-results upcoming-fixtures"
+            "top-ten-users golden-boot"
+            "competition-stats competition-rules";
+            /* "footer footer"; */
+    }
+ 
     main {
 
         /* background-color: lightgreen; */
@@ -886,15 +937,13 @@ th, td {
         width: 98%;
  
         display: grid;
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
         grid-template-rows: auto;
         grid-gap: 5px;
-        margin: 0 auto;
+        margin: 80px auto 0 auto;
     }
  
         header {            
-            display: grid;
-            grid-area: header;
             grid-template-columns: 1fr 1fr 10fr 1fr 1fr;
             grid-template-rows: auto;
             grid-gap: 10px;
@@ -947,15 +996,6 @@ th, td {
         font-size: 13px;
     }
  
-    #container{
-        grid-template-areas:
-            "header header"
-            "lastest-results upcoming-fixtures"
-            "top-ten-users golden-boot"
-            "competition-stats competition-rules"
-            "footer footer";
-    }
- 
     header {
         grid-template-areas:
             "logo qatar-flag-l header-text qatar-flag-r hb-icon";
@@ -969,7 +1009,10 @@ th, td {
     }
 
     #rules-container {
-        
+
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+
         grid-template-areas:
             "header"
             "competition-rules"
@@ -979,6 +1022,10 @@ th, td {
 
     .matches {
         width: 40%;
+    }
+
+    .advice-matches {
+        width: 80%;
     }
 
 }
@@ -993,6 +1040,14 @@ th, td {
 
 @media screen and (min-width:1200px){                   
     
+    #container{
+        grid-template-areas:
+            /* "header header header" */
+            "lastest-results top-ten-users golden-boot"
+            "upcoming-fixtures competition-stats competition-rules";
+            /* "footer footer footer"; */
+    }
+ 
     main {
 
         /* background-color: lightpink; */
@@ -1003,13 +1058,11 @@ th, td {
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: auto auto auto auto;
         grid-gap: 5px;
-        margin: 0 auto;
+        margin: 85px auto 0 auto;
     }
  
         header {
             
-            display: grid;
-            grid-area: header;
             grid-template-columns: 1fr 1fr 10fr 1fr 1fr;
             grid-template-rows: auto;
             grid-gap: 10px;
@@ -1051,14 +1104,6 @@ th, td {
 
     }
 
-    #container{
-        grid-template-areas:
-            "header header header"
-            "lastest-results top-ten-users golden-boot"
-            "upcoming-fixtures competition-stats competition-rules"
-            "footer footer footer";
-    }
- 
     header {
         grid-template-areas:
             "logo qatar-flag-l header-text qatar-flag-r hb-icon";
@@ -1085,6 +1130,10 @@ th, td {
 
     .matches {
         width: 30%;
+    }
+
+    .advice-matches {
+        width: 80%;
     }
 
 }

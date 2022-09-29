@@ -114,14 +114,14 @@
 
     <body id="body-top">
 
+        <header>
+            <?php 
+                $menuitems = array("Home");
+                include '../include/header1.inc.php';
+            ?>
+        </header>
+
         <div id="login-container">
-            
-            <header>
-                <?php 
-                    $menuitems = array("Home");
-                    include '../include/header1.inc.php';
-                ?>
-            </header>
 
             <div id="wrapper" class="centered">
 
@@ -167,11 +167,11 @@
 
             </div>  <!--  end of form wrapper div -->  
 
-            <footer id="footer">        
-                <?php include "../include/footer.inc.php"; ?>
-            </footer>
-
         </div>  <!--  end of login-container div -->
+
+        <footer id="footer">        
+            <?php include "../include/footer.inc.php"; ?>
+        </footer>
 
         <script type="text/javascript" src="../js/header1.js"></script>
 

@@ -73,7 +73,10 @@
         /** 
             array to be returned to the calling PHP stage 
         */
-        $msg_arr = array( 'Success' => 'Update predictons SUCCESSFUL', 'Failure' => 'Update predictons FAILED' );
+        $msg_arr = array( 
+                            'Success' => 'Update predictons SUCCESSFUL', 
+                            'Failure' => 'Update predictons FAILED' 
+                        );
 
     /** 
         loop through the json-array created for the predictions extracted from the FETCH POST
@@ -107,7 +110,7 @@
             have to return something formatted as JSON to the calling PHP file
         */
         if ($query -> execute() === FALSE) {    
-            echo json_encode( $msg_arr[Failure] );
+            echo json_encode( "SQL Query FAILED" );
             exit;            
         } 
     }                       // end of Predictions ForEach loop
@@ -139,14 +142,14 @@
             have to return something formatted as JSON to the calling PHP file
         */
         if ($query -> execute() === FALSE) {    
-            echo json_encode( $msg_arr[Users] );
+            echo json_encode( "Update predictons FAILED" );
             exit;            
         }; 
 
     /**
         Successful completion 
     */
-        echo json_encode( $msg_arr[Success] );
+        echo json_encode( "Update predictons SUCCESSFUL" );
 
     }  // end of Try
     catch (PDOException $e) {

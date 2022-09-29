@@ -56,16 +56,16 @@
     
     <body>
         
+        <header>
+            <?php 
+                $headeritems = "username";
+                $menuitems = array("Predictions", "Team", "Logout");
+                include '../include/header1.inc.php';
+            ?>
+        </header>
+            
         <main id="container">
             
-            <header>
-                <?php 
-                    $headeritems = "username";
-                    $menuitems = array("Predictions", "Team", "Logout");
-                    include '../include/header1.inc.php';
-                ?>
-            </header>
-
             <?php
 
                     // Try and establish the database connection.
@@ -136,7 +136,7 @@
                             echo "<div class='card' id='login-details'>";
                                 echo "   <h2 class='card-title'>Login Details</h2>";
 
-                                echo "      <table id='login-details-tbl>";
+                                echo "      <table id='login-details-tbl'>";
                                 echo "          <thead class='greenheader'>";
                                 echo "          </thead>";
                                 echo "          <tbody>";
@@ -167,10 +167,10 @@
 
                             echo "</div>";
                             
-                            echo "<div class='card' id='personal-detais'>";
-                                echo "   <h2 class='card-title'>Personal Detais</h2>";
+                            echo "<div class='card' id='personal-details'>";
+                                echo "   <h2 class='card-title'>Personal Details</h2>";
 
-                                echo "      <table id='personal-details-tbl>";
+                                echo "      <table id='personal-details-tbl'>";
                                 echo "          <thead class='greenheader'>";
                                 echo "          </thead>";
                                 echo "          <tbody>";
@@ -202,7 +202,7 @@
                             echo "<div class='card' id='competition-details'>";
                             echo "   <h2 class='card-title'>Competition</h2>";
 
-                                echo "      <table id='competition-details-tbl>";
+                                echo "      <table id='competition-details-tbl'>";
                                 echo "          <thead class='greenheader'>";
                                 echo "          </thead>";
                                 echo "          <tbody>";
@@ -259,13 +259,14 @@
                     };  // end of $query->rowCount() else
 
                 ?>
-
-            <footer id="footer">        
-                <?php include "../include/footer.inc.php"; ?>
-            </footer>
             
         </main>
 
+
+        <footer id="footer">        
+            <?php include "../include/footer.inc.php"; ?>
+        </footer>
+        
         <script>
 
             /* hide any message that is displayed */
@@ -278,7 +279,7 @@
             /* pass the php predictions session variable to a javascript variable - this can then be used to direct the link to the correct predictions page */ 
             var Predictions = "<?=$predictions?>";
 
-            console.log("Predictions - " + Predictions);
+            // console.log("Predictions - " + Predictions);
 
             // **********************************************************************************************************
             // Session inactivity - if no activity for 30 minutes then timeout the session and return to home page 
@@ -356,7 +357,7 @@
                     // add the profile object to the Profiles Array                                                                
                     profiles.push(profile);
 
-                    console.log(profiles);
+                    // console.log(profiles);
 
                     fetch('https://www.worldcup2022predictor.com/inc/update-user-profile.php', {
                             

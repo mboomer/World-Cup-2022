@@ -29,41 +29,71 @@
 
                 <div id="rules">
 
-                    <div class="rules-heading">Group Stage</div>
+                    <div class="rules-heading">FIFA Rankings</div>
                     <div class="rules-content">
-                        Enter the score for each game in each group.<br>
-                        You can specify either a home win, an away win or a draw.<br>
-                        As you enter each result, the positions of the team in the group league table will adjust to show you how the result affects the league positions.<br>
-                        The winner and runner-up in each group will qualify for the last 16 stage.<br>
+                        To help with decisions between teams that you are unfamilar with, each match displays the teams FIFA world ranking.<br><br>
+                        <p><img class="advice-matches" src="../img/advice1.png" alt="Shows the FIFA Team Ranking and the Winner and Runner Up in the league table"></p>
+                        As you enter each score, the positions of the team in the associated group league table, will adjust automatically to show you how the result affects the league positions.<br>
+                        The winner and runner-up in each from each group will qualify for the last 16 stage.<br><br>
+                        Adjust the scores in each game to ensure that the teams you believe will progress as group winner and group runner up are in the desired positions.<br>
+                        Once you complete all games in groups A,B,C,D,E use the navigation bar to display the games for Groups E, F, G and H.
+                    </div>    
+
+                    <div class="rules-heading">Group Tie Breakers</div>
+                    <div class="rules-content">
+                        If, after entering your predicted scores, two teams are tied on points, the following is used to decide their position in the table.<br>
+                        <ol>
+                            <li>Points</li>
+                            <li>Goal Difference</li>
+                            <li>Goals Score For</li>
+                            <li>Goals Scored Against</li>
+                            <li>If still tied the final decision is made based on how the two tied teams faired against each other</li>
+                        </ol>
+                        <strong>Note : </strong>This is not identical to how the actual competition tie breakers are decided. The official competition applies fair play, red cards etc. 
+                        However, for the purpose of this website I believe the above rules are adequate.<br>
+                        If after applying all the above, the teams you want to progress are still not in the desired positions, you can adjust your scores to get the desired outcome.                     
+                    </div>    
+
+                    <div class="rules-heading">Group Stages</div>
+                    <div class="rules-content">
+                        Enter the score for each game in each group. The score you enter will determine whether the result will be a home win (H), an away win (A) or a draw (D).<br><br>
+                        As you enter each score, the positions of the team in the associated group league table, will adjust automatically to show you how the result affects the league positions.
+                        The winner and runner-up in each from each group will qualify for the last 16 stage.<br><br>
                         Adjust your scores to ensure that the teams you want as group winner and group runner up are in the desired positions.<br>
                         Once you complete all games in groups A,B,C,D,E use the navigation bar to display the games for Groups E, F, G and H.
+                    </div>    
+
+                    <div class="rules-heading">KNOCKOUT STAGES - NO DRAWS - EXTRA TIME - PENALTIES</div>
+                    <div class="rules-content">
+                        In the knockout stages you must enter, either, a home win (H) or an away win (A). If you leave a game marked as a draw (D) in any of the knockout stages, 
+                        you will NOT be allowed to save or update your predictions when try to do so. A message will be displayed to advise you to go back and check your predictions.<br><br>
+                        If a game is decided after extra time it is the final score after extra time that will count.<br>
+                        If a game is decided after extra time and penalties, it is the final score after penalties that will count.<br> 
+                        So if you believe that a game may go to extra time and penalties you should predict the final score after extra time or penalties have concluded. 
                     </div>    
 
                     <div class="rules-heading">Last 16 Stage</div>
                     <div class="rules-content">
                         The winner and runner up from each group will be filled in automatically for you in the correct position in the Last 16 stage.<br>
-                        If you want to change the teams that go through to the Last 16 Stage, you should go back to the group stage and adjust your scores again to make sure your desired teams are in the positions in the league table<br> 
-                        Enter the score for each game.<br>
-                        In the knockout stages you must enter either a home win or an away win, you cannot enter a draw.<br>
-                        If a game goes to extra time or penalties, it is the final score after extra/penaliies that will count.
+                        If you want to change the teams that go through to the Last 16 Stage, you should go back to the group stage and adjust your scores 
+                        again to make sure your predicted group winner and group runner up are in the desired positions in the group league tables.<br> 
                     </div>    
-
 
                     <div class="rules-heading">Quarter Finals</div>
                     <div class="rules-content">
                         Enter the score for each game.<br>
-                        The winner from each of the last 16 games will be filled in automatically for you in the correct position in the Quarter Final stage as you enter your scores.<br>
-                        You must enter either a home win or an away win, you cannot enter a draw.<br>
-                        If a game goes to extra time or penalties, it is the final score after extra/penaliies that will count.<br>  
+                        The winner from each of the Last 16 games will be filled in automatically for you in the correct position in the Quarter Final stage as you enter your scores.<br>
+                        If you want to change the teams that go through to the Quarter Final Stage, adjust your scores in the Last 16 games to make sure your prefered winners
+                        go through to the Quarter Finals.<br> 
                     </div>    
 
                     <div class="rules-heading">Semi Finals</div>
 
                     <div class="rules-content">
                         Enter the score for each game.<br>
-                        The winner from each of the Quarter Finals will be filled in automatically for you in the correct position in the Semi Final stage.<br>
-                        You must enter either a home win or an away win, you cannot enter a draw.<br>
-                        If a game goes to extra time or penalties, it is the final score after extra/penaliies that will count.<br>  
+                        The winner from each of the Quarter Finals will be filled in automatically for you in the correct position in the Semi Final Stage.<br>
+                        If you want to change the teams that go through to the Semi Final Stage, adjust your scores in the Quarter Final games to make sure your prefered winners
+                        go through to the Semi Finals.<br> 
                     </div>    
 
                     <div class="rules-heading">Final / 3rd Place Play-Off</div>
@@ -72,17 +102,14 @@
                         Enter the score for each game.<br>
                         The <strong>winner</strong> from each of the Semi Finals will be filled in automatically for you in the correct position in the Final game.<br>
                         The <strong>loser</strong> from each of the Semi Finals will be filled in automatically for you in the the correct position in the 3rd Place Play-Off game.<br>
-                        You must enter either a home win or an away win, you cannot enter a draw.<br>
-                        If a game goes to extra time or penalties, it is the final score after extra/penaliies that will count.<br>  
                     </div>
 
                     <div class="rules-heading">Top Scorer / Goals Scored</div>
 
                     <div class="rules-content">
                         Once you are happy with the scores in each of stages use the navigation bar to select the Top Goal Scorer.<br>
-                        Enter the name of the player who you think will be the top scorer in the competition.<br>
-                        Enter the number of goals that you think the player you selected will score.<br>
-                        To help with your selections you can click on the country flags to see the players in each squad and the number of goals each player has scored for their country.<br>
+                        Enter the name of the player who you think will be the top scorer in the competition and enter the number of goals that you think the player you selected will score.<br>
+                        To help with your selections there is a Wikipedia page for each country, you can click on the country flags to see the players in each squad and the number of goals each player has scored for their country.<br>
                         It is likely, but not a certainity, that the top scorer will be a player from a team that progresses to the later stages of the competition.<br> 
                     </div>
 
@@ -97,7 +124,8 @@
                     <div class="rules-heading">Results / Predictions</div>
 
                     <div class="rules-content">
-                        As the tournament progresses you can view how closely your predictions match the actual results by logging in and selecting Results/Predictions from the navigation bar.<br>
+                        As the tournament progresses you can view how closely your predictions match the actual results by logging in and selecting "Results/Predictions" from the navigation bar.<br><br>
+                        <p><img class="advice-matches" src="../img/advice2.png" alt="he results of each game as it is played and table on the right showing prediction for each game"></p>
                         The table on the left, will show the results of each game as it is played, the table on the right will show how accurate your prediction for each game was.<br>
                         The table on the right will also show the points that you earned for predicting the correct result and correct score.<br>
                         The table will also show any bonus points earned for predicting the correct teams in the correct position in the knockout stages.<br>

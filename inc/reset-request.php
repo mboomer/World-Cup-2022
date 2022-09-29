@@ -2,13 +2,19 @@
 
     // if you dont get here from password reset form, then return to login 
     if (empty($_POST["reset-request-submit"])) {
-        header("Location: login.php");
+        header("Location: ../php/login.php");
         exit();
     }
 
     // if there is no password entered, return to reset-password with merror message 
+    if ( empty($_POST["username"]) ) {
+        header("Location: ../php/reset-password.php?reset=userempty");
+        exit();
+    }    
+    
+    // if there is no password entered, return to reset-password with merror message 
     if ( empty($_POST["emailaddress"]) ) {
-        header("Location: reset-password.php?reset=pwdempty");
+        header("Location: ../php/reset-password.php?reset=pwdempty");
         exit();
     }    
     

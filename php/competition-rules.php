@@ -44,25 +44,18 @@
                     <div class="rules-heading">Available Points</div>
                     <div class="rules-content">
                         The number of points available for predicting every game correctly is 252.<br>
-                        For predicting the top goal scorer in the competition - an additional 5 points.<br>
-                        For predicting the number of goals scored by the top goal scorer - an additional 5 points.<br>
-                        So the maximum points possible is 262. 
                     </div>    
 
-                    <div class="rules-heading">Predicting the correct score/correct result</div>
+                    <div class="rules-heading">Predicting the correct result / correct score</div>
 
                     <div class="rules-content">
-                        1 Point for predicting the correct result, i.e. a home win (H), an away win (A), a draw (D)<br>
-                        2 Points for predicting the correct score, e.g. 2-1, 1-2, 2-2
+                        For each match you will be awarded points, for predicting the correct result (H/A/D) or predicting the correct score.<br><br>
+                        1 Point for predicting the correct result, i.e. a home win (H), an away win (A), a draw (D).<br>
+                        2 Points for predicting the correct score, e.g. 2-1, 1-2, 2-2.<br><br>
+                        In the knockout stages, you will still be awarded points, for predicting the correct result (H/A/D) or predicting the correct score, 
+                        even if, you do not manage to correctly predict the correct home team and the correct away team for the match.
+                        These points are awarded as a way to allow everyone to maintain an interest in the later stages of the tournament even if their predictions do not exactly match the actual outcomes.<br>
                     </div>    
-
-                    <div class="rules-heading">Knockout Stages - Correct Result / Score</div>
-
-                    <div class="rules-content">
-                        For each match in the knockout stages, you will still be awarded points, for predicting the correct result (H/A/D) or predicting the correct score.<br>
-                        These points are awarded, even if, as below, you do not manage to correctly predict the correct home team and the correct away team for the match.<br>
-                        These points are awarded as a way to allow everyone to maintain an interest in the later stages of the tournament even if their predictions do not match the actual outcomes.<br>
-                    </div>
                     
                     <div class="rules-heading">Knockout Stages - Bonus Points</div>
 
@@ -73,7 +66,7 @@
                         <p><img class="matches" src="../img/bonus-points.png"></p><br>
                         <p>However, If the first match turned to be</p><br>  
                         <p><img class="matches" src="../img/no-bonus-points.png"></p><br>
-                        <p>You would get no bonus points. Even though You predicted the correct teams in this match, you did not correctly predict the correct "home" team or the "correct" away team.</p> 
+                        <p>You would get no bonus points. Even though you predicted the correct teams in this match, you did not correctly predict the correct "home" team or the "correct" away team.</p> 
                     </div>
 
                     <div class="rules-heading">Round Of 16 - Bonus Points</div>
@@ -81,6 +74,7 @@
                     <div class="rules-content">
                         1 Bonus Point for predicting the correct home team<br>
                         1 Bonus Point for predicting the correct away team<br>
+                        So maximum points available for each game in the Last 16 is 5. 
                     </div>
 
                     <div class="rules-heading">Quarter Finals - Bonus Points</div>
@@ -88,6 +82,7 @@
                     <div class="rules-content">
                         2 Bonus Point for predicting the correct home team<br>
                         2 Bonus Point for predicting the correct away team<br>
+                        So maximum points available for each game in the Quarter Finals is 7. 
                     </div>
 
                     <div class="rules-heading">Semi Finals - Bonus Points</div>
@@ -95,6 +90,7 @@
                     <div class="rules-content">
                         3 Bonus Points for predicting the correct home team<br>
                         3 Bonus Points for predicting the correct away team<br>
+                        So maximum points available for each game in the Semi Finals is 9. 
                     </div>
 
                     <div class="rules-heading">3rd Place Playoff / Final - Bonus Points</div>
@@ -102,6 +98,7 @@
                     <div class="rules-content">
                         4 Points for predicting the correct home team<br>
                         4 Points for predicting the correct away team<br>
+                        So maximum points available for each game in the Finals is 11. 
                     </div>
 
                     <div class="rules-heading">Tie-Breaker Situation</div>
@@ -109,15 +106,20 @@
                     <div class="rules-content">
                         If two or more players end up with the same number of points, the following will be used to decide the winner…each will be applied in turn until a winner is selected.<br>
                         <ol>
-                            <li>The player who has predicted the top goal scorer in the competition and also predicted the correct number of goals</li>
-                            <li>The player who has predicted the top goal scorer in the competition and is closest to the correct number of goals scored</li>
-                            <li>The player with the goal scorer who has scored the most goals.</li>
-                            <li>The player who has predicted the most totally correct results, i.e. correct result, correct score, correct home team and correct away team.</li>
-                            <li>If there is still a draw after this it should be decided by the toss of a coin.</li>
+                            <li>The player who has correctly predicted the top goal scorer in the competition.</li>
+                            <li>The player who has correctly predicted the number of goals that the top goal scorer would score.</li>
+                            <li>The player whose prediction for the number of goals that top goal scorer would score, is closest to number of goals the top goal scorer actually scores.</li>
+                            <li>The player who has predicted the most totally correct results, i.e. in each game has predicted the correct result, correct score, correct home team and correct away team.</li>
+                            <li>If players are still tied, the winner will be the player who has been awarded the most points for the Final game of the competition.</li>
+                            <li>If there is still a draw after this the winner will be decided by the toss of a coin.</li>
                         </ol> 
                     </div>
 
+                    <div class="rules-heading">Settling Disputes</div>
 
+                    <div class="rules-content">
+                        In all disputes I will have the final say.
+                    </div>
                 </div> 
 
             </div>

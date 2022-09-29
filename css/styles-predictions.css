@@ -88,6 +88,11 @@ Each section has a GRID-AREA named after the section ID
     grid-area: tabs;
     width: 98%;
     margin: 5px auto;
+    margin-top: 5px;
+    position: fixed;
+    z-index: 9;
+    top: 80px;
+    left: 1%;
 }
 
 #tournament { grid-area: tournament; }
@@ -136,7 +141,7 @@ Each section has a GRID-AREA named after the section ID
         background-color: white;
     }
 
-#KNOCKOUT-STAGE { grid-area: KNOCKOUT-STAGE; }    
+#KNOCKOUT-STAGE { grid-area: KNOCKOUT-STAGE; display: grid; width: 100%}    
         #Last16       {grid-area: Last16;}
         #QuarterFinal {grid-area: QuarterFinal;}
         #SemiFinal    {grid-area: SemiFinal;}
@@ -234,7 +239,10 @@ Each section has a GRID-AREA named after the section ID
         }
 
         #update-predictions {
+            margin: 50px auto 50px auto;
             padding: 10px;
+            border: 1px solid black;
+            box-shadow: 5px 5px 5px lightblue;
         }
 
         #confirm-save {
@@ -379,7 +387,8 @@ table {
 
 .home-flag img, .away-flag img {
     width: 82%;
-    text-align: center;
+    display: block;
+    margin: auto auto;
 }
 
 .points {
@@ -487,15 +496,19 @@ input {
   
     #tournament {
         width: 98%;
-        margin: 0 auto;        
+        margin: 52px auto 0 auto;        
     }
 
     #container {
         grid-template-areas:
-            "header"
+            /* "header" */
             "tabs"
-            "tournament"
-            "footer";
+            "tournament";
+            /* "footer"; */
+    }
+
+    #tabs {
+        top: 50px;
     }
 
     .tab {
@@ -641,7 +654,6 @@ input {
         #TableA, #TableB, #TableC, #TableD, #TableE, #TableF, #TableG, #TableH  { width: 100%; }    
 
     #KNOCKOUT-STAGE {
-        display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: auto;
         grid-gap: 3px;
@@ -796,7 +808,7 @@ input {
     
     #tournament {
         width: 98%;
-        margin: 0 auto;        
+        margin: 52px auto 0 auto;        
     }
 
     main {
@@ -806,10 +818,14 @@ input {
   
     #container {
         grid-template-areas:
-            "header"
+            /* "header" */
             "tabs"
-            "tournament"
-            "footer";
+            "tournament";
+            /* "footer"; */
+    }
+
+    #tabs {
+        top: 56px;
     }
 
     .tab {
@@ -955,7 +971,6 @@ input {
         #TableA, #TableB, #TableC, #TableD, #TableE, #TableF, #TableG, #TableH  { width: 100%; }    
 
     #KNOCKOUT-STAGE {
-        display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: auto;
         grid-gap: 3px;
@@ -1106,23 +1121,27 @@ input {
 /* ******************************************************************************************   */
 
 @media screen and (min-width:768px) {                   
-    
+
+    #tournament {
+        width: 98%;
+        margin: 34px auto 0 auto;
+    }
+
     main {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto auto;
     }
-  
-    #tournament {
-        width: 80%;
-        margin: 0 auto;        
-    }
     
     #container {
         grid-template-areas:
-            "header"
+            /* "header" */
             "tabs"
-            "tournament"
-            "footer";
+            "tournament";
+            /* "footer"; */
+    }
+
+    #tabs {
+        top: 70px;
     }
 
     .tab {
@@ -1268,7 +1287,6 @@ input {
         #TableA, #TableB, #TableC, #TableD, #TableE, #TableF, #TableG, #TableH  { width: 100%; }    
 
     #KNOCKOUT-STAGE {
-        display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: auto;
         grid-gap: 3px;
@@ -1425,22 +1443,26 @@ input {
 
 @media screen and (min-width:992px) {                   
 
+    #tournament {
+        width: 98%;
+        margin: 36px auto 0 auto;
+    }
+
     main {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto auto;
     }
-  
-    #tournament {
-        width: 98%;
-        margin: 0 auto;        
-    }
 
     #container {
         grid-template-areas:
-            "header"
+            /* "header" */
             "tabs"
             "tournament"
-            "footer";
+            /* "footer"; */
+    }
+
+    #tabs {
+        top: 70px;
     }
 
     .tab {
@@ -1547,7 +1569,6 @@ input {
         }
 
     #KNOCKOUT-STAGE {
-        display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: auto;
         grid-gap: 3px;
@@ -1723,22 +1744,27 @@ input {
 
 @media screen and (min-width:1200px) {                   
     
+    #tournament {
+        width: 98%;
+        margin: 42px auto 0 auto;
+    }
+    
     main {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto auto;
     }
-  
-    #tournament {
-        width: 98%;
-        margin: 0 auto;        
-    }
 
     #container {
         grid-template-areas:
-            "header"
+            /* "header" */
             "tabs"
             "tournament"
-            "footer";
+            /* "footer"; */
+    }
+
+    #tabs {
+        width: 98%;
+        top: 80px;
     }
 
     .tab {
@@ -1798,7 +1824,7 @@ input {
 
     #GROUPS-ABCD, #GROUPS-EFGH {
 
-        width: 98%;
+        width: 100%;
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: auto;
@@ -1838,10 +1864,9 @@ input {
         }
 
     #KNOCKOUT-STAGE {
-        display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: auto;
-        grid-gap: 3px;
+        grid-gap: 5px;
         margin: 0 auto;
 
         grid-template-areas:
