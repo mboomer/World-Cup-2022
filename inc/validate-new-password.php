@@ -24,10 +24,10 @@
 
     // check that we have valid passwords
     if ( empty($postPassword) || empty($postRepeatPwd) ) {
-        header("Location: ../php/create-new-password.php?error=pwdempty");
+        header("Location: ../php/create-new-password.php?error=pwdempty&usr=" . $postUsername);
         exit();
     } else if ($postPassword != $postRepeatPwd) {
-        header("Location: ../php/create-new-password.php?error=pwdnotmatch");
+        header("Location: ../php/create-new-password.php?error=pwdnotmatch&usr=" . $postUsername);
         exit();
     }
 
@@ -45,7 +45,7 @@
 
     // check if password only has valid characters
     if (!preg_match($pwd_check, $postPassword)) {
-        header("location: ../php/create-new-password.php?error=pwdcriteria&email=".$login_email);
+        header("location: ../php/create-new-password.php?error=pwdcriteria&usr=" . $postUsername . "&email=".$login_email);
         exit();
     }
 
@@ -81,7 +81,7 @@
 
     if ($query->rowCount() == 0) {
         // A valid reset request has not been found - please make a reset request from the login page." . $selector . " - " . $postSelector . " - " . $currentdate;
-        header("Location: ../php/create-new-password.php?error=invalid");
+        header("Location: ../php/create-new-password.php?error=invalid&usr=" . $postUsername);
         exit;
     } else {
 
@@ -96,7 +96,7 @@
 
             if ($currentdate > $DBexpires) {
                 // Password reset request has expired. Please re-submit a new reset request" . $DBexpires . " - " . $currentdate;
-                header("Location: ../php/create-new-password.php?error=expired");
+                header("Location: ../php/create-new-password.php?error=expired&usr=" . $postUsername);
                 exit;
             }
 
@@ -106,7 +106,7 @@
 
             if ($tokencheck === false) {
                 // Invalid data received. Please re-submit a new password reset request";
-                header("Location: ../php/create-new-password.php?error=invalid");
+                header("Location: ../php/create-new-password.php?error=invalid&usr=" . $postUsername);
                 exit();
             } 
 
@@ -141,7 +141,7 @@
                                     
     if ($query->rowCount() == 0) {
         // echo "No Update to the your password was possible - please make a new reset request";
-        header("Location: ../php/create-new-password.php?error=userpwfail");
+        header("Location: ../php/create-new-password.php?error=userpwfail&usr=" . $postUsername);
         exit;
     };
 
@@ -167,10 +167,10 @@
                                     
     if ($query->rowCount() == 0) {
         // No Deletion was made from Password Rest Table";
-        header("Location: ../php/create-new-password.php?error=deletefail");
+        header("Location: ../php/create-new-password.php?error=deletefail&usr=" . $postUsername);
         exit;
     };
 
-    header("Location: ../php/create-new-password.php?error=success");
+    header("Location: ../php/create-new-password.php?error=success&usr=" . $postUsername);
 
 ?>

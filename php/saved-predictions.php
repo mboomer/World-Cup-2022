@@ -9,7 +9,7 @@
     //  $_SESSION["userid"]         = $userid;                            
     //  $_SESSION["username"]       = $username;                            
     //  $_SESSION["useremail"]      = $email;
-    //  $_SESSION['last_activity']  = time();   //  your last activity was now, having logged in.
+    //  $_SESSION['last_activity']  = time();   //  your last activity was now, having logged in.fconsole.log
 
     // has the user been inactive for more than 30 minutes (1800 secs) since last activity was recorded
     // if still active, set last activity to current time
@@ -187,7 +187,7 @@
             
             function compResult (a, b) {
 
-                console.log(currentGroupID + " - Team A : " + a.Team + " Team B : " + b.Team);
+                // console.log(currentGroupID + " - Team A : " + a.Team + " Team B : " + b.Team);
 
                 CompGroup = document.getElementById(currentGroupID);
                     
@@ -200,7 +200,7 @@
                 // find the game that matches the teams to be sorted
                 for (let f = 0; f < homeTeams.length; f++) {
                     
-                    console.log(homeTeams[f].textContent + " -V- " + awayTeams[f].textContent);
+                    // console.log(homeTeams[f].textContent + " -V- " + awayTeams[f].textContent);
                     
                     if ( (homeTeams[f].textContent === a.Team) && (awayTeams[f].textContent === b.Team) )  {
                    
@@ -741,7 +741,7 @@
                     awayTeams  = SectH.querySelectorAll('.away');
 
                     // get the ID of the Group and able to update
-                    currentGroupID     = document.getElementById("GroupH").id;
+                    currentGroupID   = document.getElementById("GroupH").id;
                     currentTable     = document.getElementById("TableH");
                     currentTableID   = currentTable.id;
                     currentTableName = "Group H";
@@ -861,16 +861,16 @@
     
     <body>
         
+        <header>
+            <?php 
+                $headeritems = "username";
+                $menuitems = array("Profile", "Logout");
+                include '../include/header1.inc.php';
+            ?>
+        </header>
+            
         <main id="container">
  
-            <header>
-                <?php 
-                    $headeritems = "username";
-                    $menuitems = array("Profile", "Logout");
-                    include '../include/header1.inc.php';
-                ?>
-            </header>
-
             <!-- Tab links -->
             <div id="tabs" class="tab">
               <button id="groups-abcd-tab"          name="GROUPS-ABCD"          class="tablinks active">Groups A,B,C,D</button>
@@ -2250,12 +2250,12 @@
 
             </section> <!-- end of Tournament -->
 
-            <footer id="footer">        
-                <?php include "../include/footer.inc.php"; ?>
-            </footer>
-
         </main>
     
+        <footer id="footer">        
+            <?php include "../include/footer.inc.php"; ?>
+        </footer>
+        
         <script type="text/javascript" src="../js/header1.js"></script>
 
         <script type="text/javascript" >

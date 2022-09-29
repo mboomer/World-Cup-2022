@@ -95,7 +95,7 @@
                 $team      = $goal -> country;
                 $player    = $goal -> scorer;
                 $scored    = $goal -> scored;
-                $penalties = $goal -> pemalties;
+                $penalties = $goal -> penalties;
 
                 $html .= "  <tr>"
                       . "      <td class='team-flag'><img src='img/flags/" . $team . ".png' alt='" . $team . " team flag'></td>"

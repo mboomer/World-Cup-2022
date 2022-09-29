@@ -73,16 +73,16 @@
     
     <body>
         
+        <header>
+            <?php 
+                $headeritems = "username";
+                $menuitems = array("Profile", "Logout");
+                include '../include/header1.inc.php';
+            ?>
+        </header>
+
         <main id="container">
             
-            <header>
-                <?php 
-                    $headeritems = "username";
-                    $menuitems = array("Profile", "Logout");
-                    include '../include/header1.inc.php';
-                ?>
-            </header>
-
             <?php
                     // All teams in order of total points scored by all team members
                     $qry = "SELECT UserTeam, COUNT(UserName) AS Members, SUM(Points) As TotalPts, ROUND(AVG(Points)) AS AveragePts FROM Users WHERE UserTeam <> '' GROUP BY UserTeam ORDER BY AveragePts DESC;";
@@ -204,12 +204,12 @@
                         echo "</div>";
 
                 ?>
-
-            <footer id="footer">        
-                <?php include "../include/footer.inc.php"; ?>
-            </footer>
             
         </main>
+
+        <footer id="footer">        
+            <?php include "../include/footer.inc.php"; ?>
+        </footer>
 
         <script type="text/javascript" src="../js/header1.js"></script>
 
