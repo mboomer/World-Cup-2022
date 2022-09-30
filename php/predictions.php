@@ -1323,7 +1323,7 @@
                         }; // end of FOR loop
                     
                         // now process the predictions array and save result to predictions table
-                        //console.log(JSON.stringify(predictions));
+                        // console.log(JSON.stringify(predictions));
 
                         // console.log(predictions);
 

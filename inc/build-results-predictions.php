@@ -21,7 +21,7 @@
     $userid = trim(file_get_contents("php://input"));
 
     // use this when testing
-    // $userid = 2;
+    $userid = 1;
 
     // // If logged in store the userid from session 
     // if ( isset($_SESSION['userid']) ) {
@@ -188,7 +188,6 @@
         . "     ON \n"
         . "  	    pred.ResultID = res.ID \n"
         . "WHERE  \n"
-        // . "     pred.UserID = " . $userid . "\n"
         . "     pred.UserID = :UserID \n"
         . "  ORDER BY \n"
         . "  	  pred.FixtureID \n";
@@ -232,8 +231,14 @@
             $predicts = array();
             $predict  = array();
 
+            // counter to count if prediction has correct score, result, hometeam and away team
+            $correct = 0;
+
             // loop through the predictions
             foreach($predictions as $key => $prediction) {
+
+                // flag to indicate if prediction has correct score, result, hometeam and away team
+                $isCorrect = false;
 
                 $userid     = $prediction -> userid;
                 $username   = $prediction -> username;
@@ -264,23 +269,37 @@
 
                 array_push($predicts, $predict);
 
-                $pts    = 0; 
-                $bonus  = 0;
+                $pts   = 0; 
+                $bonus = 0;
 
-                $r   = $results[$fixno-1];
-                $p   = $predict;
-
+                $r = $results[$fixno-1];
+                $p = $predict;
+                
                 if ($r["resultcode"] == $p["resultcode"]) {
+ 
+                    // result is correct
+                    $isCorrect = true;
 
                     $pts = $pts + 1;
                     
                     if ( ($r["homescore"] == $p["homescore"]) && ($r["awayscore"] == $p["awayscore"])) {
+                        // score is correct
+                        $isCorrect = true;
                         $pts = $pts + 2;
+                    } else {
+                        $isCorrect = false;
                     };
+                } else {
+                        $isCorrect = false;
                 };
 
                 if ( ($r["hometeamid"] == $p["hometeamid"]) ) {
 
+                    if ($p["stage"] != "GS") {                                
+                        // home team is correct
+                        $isCorrect = true;
+                    };                                
+
                     if ($p["stage"] == "LS") {                                
                         $bonus = $bonus + 1;
                     } else if ($p["stage"] == "QF") {                                
@@ -293,10 +312,18 @@
                         $bonus = $bonus + 4;
                     };
 
+                } else {
+                    // home team is not correct
+                    $isCorrect = false;
                 };
 
                 if ( ($r["awayteamid"] == $p["awayteamid"]) ) {
 
+                    if ($p["stage"] != "GS") {                                
+                        // away team is correct
+                        $isCorrect = true;
+                    };                                
+                         
                     if ($p["stage"] == "LS") {                                
                         $bonus = $bonus + 1;
                     } else if ($p["stage"] == "QF") {                                
@@ -309,9 +336,17 @@
                         $bonus = $bonus + 4;
                     };
 
+                } else {
+                    // away team is not correct
+                    $isCorrect = false;
                 };
 
                 $TotalPoints = $TotalPoints + ($pts + $bonus);
+                
+                // if still true then increment counter
+                if ($isCorrect === true) {
+                    $correct = $correct + 1;
+                };
 
                 // colorize the stages to identify the LS, QF, SF, PL and FI
                 if ($stage === "LS") {
@@ -366,7 +401,7 @@
                 . "      <table>"
                 . "          <thead class='blueheader'>"
                 . "              <tr>"
-                . "                  <th class='tbl-header' colspan='9'>" . "PREDICTIONS / POINTS</th><th colspan='3'>Points : " . $TotalPoints . "</th>"
+                . "                  <th class='tbl-header' colspan='9'>PREDICTIONS / POINTS</th><th colspan='3'>Points : " . $TotalPoints . "</th>"
                 . "              </tr>"
                 . "              <tr>"
                 . "              <tr>"
