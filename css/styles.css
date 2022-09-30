@@ -404,14 +404,22 @@ th, td {
     width: 10%;
     text-align: center;
 }
+
+.correct {
+    width: 5%;
+    text-align: center;
+    font-size: 14em;
+    color: greenyellow;
+}
+
 .team-flag {
     width: 6%
 }
 
 .team-flag img {
     width: 55%;
-    text-align: center;
-    vertical-align: sub;
+    display: block;
+    margin: auto auto;
 }
 
 .hidden {
@@ -422,6 +430,10 @@ th, td {
     width: 40%;
     padding-right: 5px;
     text-align: right;
+}
+
+#user-tbl .align-left {
+    width: 30%;
 }
 
 .align-left {
