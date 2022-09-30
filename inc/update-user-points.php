@@ -206,6 +206,9 @@
                         $predicts = array();
                         $predict  = array();
 
+                        // counter to count if prediction has correct score, result, hometeam and away team
+                        $correct = 0;
+
                         // initialise the points total for each user
                         $TotalPoints = 0;
 
@@ -215,6 +218,9 @@
 
                         foreach($predictions as $key => $prediction) {
                         
+                            // flag to indicate if prediction has correct score, result, hometeam and away team
+                            $isCorrect = false;
+
                             $predict = array(
                                         "fixtureno"     => $prediction -> fixtureno,
                                         "hometeamid"    => $prediction -> homeid,
@@ -232,15 +238,30 @@
 
                             if ($r["resultcode"] == $p["resultcode"]) {
 
+                                // result is correct
+                                $isCorrect = true;
+
                                 $pts = $pts + 1;
-                                
+
                                 if ( ($r["homescore"] == $p["homescore"]) && ($r["awayscore"] == $p["awayscore"])) {
+                                    // score is correct
+                                    $isCorrect = true;
                                     $pts = $pts + 2;
+
+                                } else {
+                                    $isCorrect = false;
                                 };
+                            } else {
+                                $isCorrect = false;
                             };
 
                             if ( ($r["hometeamid"] == $p["hometeamid"]) ) {
 
+                                if ($p["stage"] != "GS") {                                
+                                    // home team is correct
+                                    $isCorrect = true;
+                                };   
+
                                 if ($p["stage"] == "LS") {                                
                                     $bonus = $bonus + 1;
                                 } else if ($p["stage"] == "QF") {                                
@@ -253,10 +274,18 @@
                                     $bonus = $bonus + 4;
                                 };
 
+                            } else {
+                                // home team is not correct
+                                $isCorrect = false;
                             };
 
                             if ( ($r["awayteamid"] == $p["awayteamid"]) ) {
 
+                                if ($p["stage"] != "GS") {                                
+                                    // home team is correct
+                                    $isCorrect = true;
+                                };   
+
                                 if ($p["stage"] == "LS") {                                
                                     $bonus = $bonus + 1;
                                 } else if ($p["stage"] == "QF") {                                
@@ -269,31 +298,36 @@
                                     $bonus = $bonus + 4;
                                 };
 
+                            } else {
+                                // home team is not correct
+                                $isCorrect = false;
                             };
+
+                        // if still true then increment counter
+                        if ($isCorrect === true) {
+                            $correct = $correct + 1;
+                        };
 
                         }; // end of predictions foreach
                         
                         $TotalPoints = $TotalPoints + ($pts + $bonus);
 
-                        // echo "-----------------------------------------------------" . "<br>";
-                        // echo "User : " . $userid . "-" . $username . " Points : " . $pts . ", " . $bonus . ", Total: " . $TotalPoints . "<br>";
-                        // echo "-----------------------------------------------------" . "<br>";
-
-                    }; // end of PREDICTIONS else rowcount
+                    }; // end of PREDICTIONS else rowcount 
 
                     /**
                         save the points total to the USER record
                     */
 
                     //prepare the update sql statement
-                    $sql = "UPDATE Users SET Points = :Points WHERE ID = :ID";
+                    $sql = "UPDATE Users SET Points = :Points, Correct = :Correct WHERE ID = :ID";
 
                     // prepare the query for the database connection
                     $query = $dbh -> prepare($sql);
 
                     // bind the parameters
-                    $query->bindParam(':ID',     $userid,      PDO::PARAM_INT);
-                    $query->bindParam(':Points', $TotalPoints, PDO::PARAM_INT);
+                    $query->bindParam(':ID',      $userid,      PDO::PARAM_INT);
+                    $query->bindParam(':Points',  $TotalPoints, PDO::PARAM_INT);
+                    $query->bindParam(':Correct', $correct,     PDO::PARAM_INT);
 
                     /** 
                         execute the query and check if it fails to insert prediction

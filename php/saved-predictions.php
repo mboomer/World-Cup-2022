@@ -1018,11 +1018,11 @@
                                             $awayteam  = $row -> awayteam;
                                             $awayid    = $row -> awayid;
                                             $grpdesc   = $row -> groupdesc;
-                                            $rndcode   = $row -> roundcode;
+                                            $stage     = $row -> stage;
 
                                                 echo "  <tr>";
                                                 echo "      <td class='fixno'>" . $fixno . "</td>";
-                                                echo "      <td class='stage hidden'>" . $rndcode . "</td>";                       
+                                                echo "      <td class='stage hidden'>GS</td>";                       
                                                 echo "      <td class='homeid hidden'>" . $homeid . "</td>";        
                                                 echo "      <td class='home-flag'><img src='../img/teams/" . $hometeam . ".png' alt='" . $hometeam . " team flag'></td>";      
                                                 echo "      <td class='home'>" . $hometeam . "</td>";
@@ -1224,11 +1224,11 @@
                                             $awayteam  = $row -> awayteam;
                                             $awayid    = $row -> awayid;
                                             $grpdesc   = $row -> groupdesc;
-                                            $rndcode   = $row -> roundcode;
+                                            $stage     = $row -> stage;
 
                                             echo "  <tr>";
                                             echo "      <td class='fixno'>" . $fixno . "</td>";
-                                            echo "      <td class='stage hidden'>" . $rndcode . "</td>";                      // hidden cell for code of the tournament stage 
+                                            echo "      <td class='stage hidden'>GS</td>";                      // hidden cell for code of the tournament stage 
                                             echo "      <td class='homeid hidden'>" . $homeid . "</td>";        // hidden cell for ID of home team
                                             echo "      <td class='home-flag'><img src='../img/teams/" . $hometeam . ".png' alt='" . $hometeam . " team flag'></td>";      
                                             echo "      <td class='home'>" . $hometeam . "</td>";

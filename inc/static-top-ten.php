@@ -28,7 +28,8 @@
             . "    UserName, \n"
             . "    TopScorer, \n"
             . "    GoalsScored, \n"
-            . "    Points \n"
+            . "    Points, \n"
+            . "    Correct \n"
             . "FROM \n"
             . "    Users \n"
             . "WHERE \n"
@@ -68,7 +69,7 @@
               . "      <table>"
               . "          <thead class='blueheader'>"
               . "              <tr>"
-              . "                  <th class='align-left'>User Name</th><th class='cols'>Points</th><th class='align-left'>Predicted Top Scorer</th><th class='cols'>Goals</th>"
+              . "                  <th class='align-left'>User Name</th><th class='cols'>Points</th><th class='correct'>&#10004;</th><th class='align-left'>Predicted Top Scorer</th><th class='cols'>Goals</th>"
               . "              </tr>"
               . "          </thead>"
               . "          <tbody>";
@@ -91,12 +92,14 @@
 
                     $username  = $user -> UserName;
                     $points    = $user -> Points;
+                    $correct   = $user -> Correct;
                     $topscorer = $user -> TopScorer;
                     $goals     = $user -> GoalsScored;
 
                     $html .= "  <tr>"
                           . "      <td class='align-left'>" . htmlspecialchars($username) . "</td>"
                           . "      <td class='cols'>" . htmlspecialchars($points) . "</td>"
+                          . "      <td class='cols'>" . htmlspecialchars($correct) . "</td>"
                           . "      <td class='align-left'>" . htmlspecialchars($topscorer) . "</td>" 
                           . "      <td class='cols'>" . htmlspecialchars($goals) . "</td>" 
                           . "  </tr>";
