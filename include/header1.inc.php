@@ -34,6 +34,14 @@
             echo "              <a id='home-href' href='#'>Home</a>";
         }; 
         
+        if ($menuitem === "Rules") {
+            echo "              <a id='rules-href' href='#'>Competition Rules</a>";
+        }; 
+        
+        if ($menuitem === "Advice") {
+            echo "              <a id='advice-href' href='#'>Advice</a>";
+        }; 
+        
         if ($menuitem === "Login") {
             echo "              <a id='login-href' href='#'>Login</a>";
         }; 

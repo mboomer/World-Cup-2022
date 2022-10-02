@@ -357,7 +357,7 @@
                     // add the profile object to the Profiles Array                                                                
                     profiles.push(profile);
 
-                    // console.log(profiles);
+                    console.log(profiles);
 
                     fetch('https://www.worldcup2022predictor.com/inc/update-user-profile.php', {
                             
@@ -379,12 +379,11 @@
 
                             // Otherwise, throw an error
                             return response.json().then(function (msg) {
-                                // console.log(response.json());
                                 throw msg;
                             });
 
                         }).then(function (data) {
-
+                            
                             document.getElementById("update-messages").innerHTML = data;
 
                         }).catch(function (error) {
