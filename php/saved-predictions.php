@@ -2463,6 +2463,15 @@
                         // now process the predictions array and save result to predictions table
                         // console.log(JSON.stringify(predictions));
 
+                        // ---------------------------------------------------------------------------------------------
+                        // don't allow save to be made if tournament has started
+                        // this will stop anyone who tries to modify the page using dev tools to display hidden elements
+                        // ---------------------------------------------------------------------------------------------
+                        if (TournamentStarted) {
+                            document.getElementById("confirm-predictions").innerHTML = "Sneaky";
+                            return;
+                        }
+                        
                         fetch('https://www.worldcup2022predictor.com/inc/update-predictions.php', {
                                 
                                 method: 'POST',

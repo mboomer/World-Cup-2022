@@ -19,7 +19,7 @@
 
             <header>
                 <?php 
-                    $menuitems = array("Home");
+                    $menuitems = array("Home", "Advice", "Login", "Register");
                     include '../include/header1.inc.php';
                 ?>
             </header>

@@ -19,7 +19,7 @@
 
             <header>
                 <?php 
-                    $menuitems = array("Home");
+                    $menuitems = array("Home", "Rules", "Login", "Register");
                     include '../include/header1.inc.php';
                 ?>
             </header>
@@ -32,20 +32,20 @@
                     <div class="rules-heading">FIFA Rankings</div>
                     <div class="rules-content">
                         To help with decisions between teams that you are unfamilar with, each match displays the teams FIFA world ranking.<br><br>
-                        <p><img class="advice-matches" src="../img/advice1.png" alt="Shows the FIFA Team Ranking and the Winner and Runner Up in the league table"></p>
+                        <p><img class="advice-matches" src="../img/advice1.png" alt="Shows the FIFA Team Ranking and the Winner and runner-up in the league table"></p>
                         As you enter each score, the positions of the team in the associated group league table, will adjust automatically to show you how the result affects the league positions.<br>
                         The winner and runner-up in each from each group will qualify for the last 16 stage.<br><br>
-                        Adjust the scores in each game to ensure that the teams you believe will progress as group winner and group runner up are in the desired positions.<br>
+                        Adjust the scores in each game to ensure that the teams, you believe will progress as group winner and group runner-up, are in the desired positions.<br>
                         Once you complete all games in groups A,B,C,D,E use the navigation bar to display the games for Groups E, F, G and H.
                     </div>    
 
                     <div class="rules-heading">Group Tie Breakers</div>
                     <div class="rules-content">
-                        If, after entering your predicted scores, two teams are tied on points, the following is used to decide their position in the table.<br>
+                        If, after entering your predicted scores, two teams are tied on points, the following will be used to decide their position in the table.<br>
                         <ol>
                             <li>Points</li>
                             <li>Goal Difference</li>
-                            <li>Goals Score For</li>
+                            <li>Goals Scored For</li>
                             <li>Goals Scored Against</li>
                             <li>If still tied the final decision is made based on how the two tied teams faired against each other</li>
                         </ol>
@@ -58,8 +58,8 @@
                     <div class="rules-content">
                         Enter the score for each game in each group. The score you enter will determine whether the result will be a home win (H), an away win (A) or a draw (D).<br><br>
                         As you enter each score, the positions of the team in the associated group league table, will adjust automatically to show you how the result affects the league positions.
-                        The winner and runner-up in each from each group will qualify for the last 16 stage.<br><br>
-                        Adjust your scores to ensure that the teams you want as group winner and group runner up are in the desired positions.<br>
+                        The winner and runner-up from each group will qualify for the last 16 stage.<br><br>
+                        Adjust your scores to ensure that the teams you want as group winner and group runner-up are in the desired positions.<br>
                         Once you complete all games in groups A,B,C,D,E use the navigation bar to display the games for Groups E, F, G and H.
                     </div>    
 
@@ -67,16 +67,18 @@
                     <div class="rules-content">
                         In the knockout stages you must enter, either, a home win (H) or an away win (A). If you leave a game marked as a draw (D) in any of the knockout stages, 
                         you will NOT be allowed to save or update your predictions when try to do so. A message will be displayed to advise you to go back and check your predictions.<br><br>
-                        If a game is decided after extra time it is the final score after extra time that will count.<br>
-                        If a game is decided after extra time and penalties, it is the final score after penalties that will count.<br> 
-                        So if you believe that a game may go to extra time and penalties you should predict the final score after extra time or penalties have concluded. 
+                        If a game is decided after extra time, it is the final score after extra time, that will count.<br>
+                        For example, a game finishes 0-0 after 90 minutes, and after extra time finishes 1-2. The final score for the game will be 1-2 and an away win (A).<br><br>
+                        If a game is decided after extra time and penalties, it is the final score after penalties that will count.<br>
+                        For example, a game finishes 0-0 after 90 minutes, after extra time the score is 1-1 and goes to penalties.
+                        The home team scores 4 penalties and the away team scores 3 penalites. The final score for the game will be 5-4 and a home win (H).<br><br>
                     </div>    
 
                     <div class="rules-heading">Last 16 Stage</div>
                     <div class="rules-content">
-                        The winner and runner up from each group will be filled in automatically for you in the correct position in the Last 16 stage.<br>
+                        The winner and runner-up from each group will be filled in automatically for you in the correct position in the Last 16 stage.<br>
                         If you want to change the teams that go through to the Last 16 Stage, you should go back to the group stage and adjust your scores 
-                        again to make sure your predicted group winner and group runner up are in the desired positions in the group league tables.<br> 
+                        again to make sure your predicted group winner and group runner-up are in the desired positions in the group league tables.<br> 
                     </div>    
 
                     <div class="rules-heading">Quarter Finals</div>
