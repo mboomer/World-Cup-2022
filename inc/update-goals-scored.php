@@ -1,10 +1,10 @@
 <?php
 
-    // // if you didnt get here from update-a-fixture return to home page
-    // if ( !isset($_POST["goal-upd-btn"]) ) {
-    //     header("Location: ../index.php");
-    //     exit();
-    // }
+    // If you didnt get from a POST, return to home page
+    if ( $_SERVER['REQUEST_METHOD'] != "POST" ) {
+        header("Location: ../index.php");
+        exit();
+    }
 
     // Include config file
     require_once "../../.php/inc/db.worldcup.inc.php";

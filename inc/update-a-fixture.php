@@ -243,7 +243,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td> <input id='goal-fixture' type='text'   placeholder='Fixture Number' min=1 max=31 value=1> </td>
+                                        <td> <input id='fixture-id' type='number' min=1 max=64 value=1> </td>
                                         <td>    
                                             <select title= "Team" name="goal-team" id="goal-team">
 
@@ -318,6 +318,153 @@
                             </table>      
 
                         </div> <!-- end of GOALS SCORED SELECTIONS div -->
+
+                        <div id='grp-winners-runnersup'>
+
+                            <table>
+                                <thead class='greenheader'>
+                                    <tr>                  
+                                        <th class="tbl-header" colspan="10">UPDATE KNOCKOUT STAGES - HOME TEAM AND AWAY TEAM</th>              
+                                    </tr>              
+                                    <tr>                  
+                                        <th class="cols">Fixture No.</th>
+                                        <th class="country">Home Team</th>
+                                        <th class="country">Away Team</th>
+                                        <th class="cols">Update Fixture</th> 
+                                    </tr>          
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td> <input id='knockout-id' type='number' min=49 max=64 value=49> </td>
+                                        <td>    
+                                            <select title= "Home Team" name="home-team" id="home-team-id">
+
+                                                <option value="0"></option>
+
+                                                <?php
+
+                                                // Try and establish the database connection.
+                                                try {
+                                                    $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+                                                }
+                                                catch (PDOException $e) {
+                                                    echo("Error: " . $e->getMessage());
+                                                    exit("Error: " . $e->getMessage());
+                                                };
+
+                                                $sql =    "SELECT \n" 
+                                                        . "  	ID, \n"
+                                                        . "  	Team, \n"
+                                                        . "  	Ranking \n"
+                                                        . "FROM  \n"
+                                                        . "  	Teams tm \n"
+                                                        . "WHERE  \n"
+                                                        . "  	Ranking != 0 \n"
+                                                        . "ORDER BY \n"
+                                                        . "  	Ranking \n";
+
+                                                        $query = $dbh -> prepare($sql);
+
+                                                        /**
+                                                            no need to bind params as we are retrieving all results
+                                                            $query -> bindParam(':city', $city, PDO::PARAM_STR);
+                                                            $city = "New York";
+                                                        */
+
+                                                        // execute the sql query
+                                                        $query -> execute();
+
+                                                        // get all rows
+                                                        $results = $query -> fetchAll(PDO::FETCH_OBJ);
+
+                                                        if ($query->rowCount() == 0) {
+                                                            echo "NO TEAMS RETURNED";
+                                                            exit;
+                                                        } else {
+
+                                                            // loop through the fixtures
+                                                            foreach($results as $key => $result) {
+
+                                                                $teamid = $result -> ID;
+                                                                $team   = $result -> Team;
+
+                                                                echo "<option value=" . $teamid . ">" . $team . "</option>";
+
+                                                            }; // end of results foreach
+                                                                                                    
+                                                        }; // end of results else rowcount
+
+                                                ?>
+                                            </select> <!-- end of HOME TEAM ID -->
+                                        </td>
+                                        <td>    
+                                            <select title= "Away Team" name="away-team" id="away-team-id">
+
+                                                <option value="0"></option>
+
+                                                <?php
+
+                                                // Try and establish the database connection.
+                                                try {
+                                                    $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+                                                }
+                                                catch (PDOException $e) {
+                                                    echo("Error: " . $e->getMessage());
+                                                    exit("Error: " . $e->getMessage());
+                                                };
+
+                                                $sql =    "SELECT \n" 
+                                                        . "  	ID, \n"
+                                                        . "  	Team, \n"
+                                                        . "  	Ranking \n"
+                                                        . "FROM  \n"
+                                                        . "  	Teams tm \n"
+                                                        . "WHERE  \n"
+                                                        . "  	Ranking != 0 \n"
+                                                        . "ORDER BY \n"
+                                                        . "  	Ranking \n";
+
+                                                        $query = $dbh -> prepare($sql);
+
+                                                        /**
+                                                            no need to bind params as we are retrieving all results
+                                                            $query -> bindParam(':city', $city, PDO::PARAM_STR);
+                                                            $city = "New York";
+                                                        */
+
+                                                        // execute the sql query
+                                                        $query -> execute();
+
+                                                        // get all rows
+                                                        $results = $query -> fetchAll(PDO::FETCH_OBJ);
+
+                                                        if ($query->rowCount() == 0) {
+                                                            echo "NO TEAMS RETURNED";
+                                                            exit;
+                                                        } else {
+
+                                                            // loop through the fixtures
+                                                            foreach($results as $key => $result) {
+
+                                                                $teamid = $result -> ID;
+                                                                $team   = $result -> Team;
+
+                                                                echo "<option value=" . $teamid . ">" . $team . "</option>";
+
+                                                            }; // end of results foreach
+                                                                                                    
+                                                        }; // end of results else rowcount
+
+                                                ?>
+                                            </select>
+                                        </td>
+
+                                        <td><button id='fixture-upd-btn' class='goal-btn-blue'>Update Fixture</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>      
+
+                        </div> <!-- end of GROUP WINNERS / RUNNERS UP div -->
 
                         <div id="update-msg"></div> <!-- end of database update message -->      
 
@@ -603,6 +750,72 @@
                     return;
 
                 };
+
+                // event listeners for the Knockout stage update button
+                if (event.target.matches('#fixture-upd-btn')) {
+
+                    document.getElementById("update-msg").style.display = "block";
+                    document.getElementById("update-msg").innerHTML = "Updating Knockout Stage Home/Away Team...please wait";
+
+                    // initialise the object to hold the fixture
+                    let fixtures = [];
+                    let fixture  = {};
+            
+                    /** push the fixture to the first element in the array */
+
+                    fixture = { 
+                            FixtureID  : document.getElementById('knockout-id').value,
+                            HomeTeamID : document.getElementById('home-team-id').value,
+                            AwayTeamID : document.getElementById('away-team-id').value
+                           };
+
+                    // add the goal scorer and time goal was scored to the goals array                                                                
+                    fixtures.push(fixture);
+
+                    console.log("Update Fixtures CLicked");
+                    console.log(fixture);
+
+                    // now process the fixtures array and update fixtures table
+                    fetch('https://www.worldcup2022predictor.com/inc/update-knockout-fixture.php', {
+                            
+                            method: 'POST',
+                            mode: "same-origin",
+                            credentials: "same-origin",
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                                },
+                            body: JSON.stringify(fixtures),
+
+                        }).then(function (response) {
+
+                            // If the response is successful, get the JSON
+                            if (response.ok) {
+                                return response.json();
+                            };
+
+                            // Otherwise, throw an error
+                            return response.json().then(function (msg) {
+                                // console.log(response.json());
+                                throw msg;
+                            });
+
+                        }).then(function (data) {
+
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = data;
+
+                        }).catch(function (error) {
+                            // There was an error
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = error;
+                            console.warn("Error : ", error);
+                        });
+
+                    return;
+
+                }; // end of updating HOME TEAM / AWAY TEAM for Knockout stage
+
 
                 // event listeners for the update user points button
                 if (event.target.matches('#update-user-points-btn')) {

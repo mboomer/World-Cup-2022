@@ -35,7 +35,7 @@
             . "WHERE \n"
             . "    Predictions = 1 \n"
             . "ORDER BY \n"
-            . "    Points DESC \n"
+            . "    Points DESC, Correct DESC \n"
             . "LIMIT 10 \n";
 
         // prepare the query for the database connection

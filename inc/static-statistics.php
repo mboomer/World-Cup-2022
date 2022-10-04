@@ -229,7 +229,7 @@
          . "    FROM  \n"
          . "    	Fixtures \n"
          . "    WHERE  \n"
-         . "        HomeScore <> NULL \n"
+         . "        HomeScore != 'NULL' \n"
          . "    ORDER BY \n"
          . "    	TotalScore DESC \n"
          . "    LIMIT 1 \n";

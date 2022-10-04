@@ -25,6 +25,18 @@
             window.location.href="../";
         }
 
+        // event listener for the competition rules link
+        if (event.target.matches('#rules-href')) {
+            document.querySelector("#dropdown-content").style.display = "none";
+            window.location.href="competition-rules.php";
+        }
+
+        // event listener for the advice on how to enter predictions link
+        if (event.target.matches('#advice-href')) {
+            document.querySelector("#dropdown-content").style.display = "none";
+            window.location.href="advice.php";
+        }
+
         // event listener for the login link
         if (event.target.matches('#login-href')) {
             document.querySelector("#dropdown-content").style.display = "none";

@@ -21,12 +21,12 @@
     $userid = trim(file_get_contents("php://input"));
 
     // use this when testing
-    $userid = 1;
+    // $userid = 1;
 
-    // // If logged in store the userid from session 
-    // if ( isset($_SESSION['userid']) ) {
-    //     $userid = $_SESSION["userid"];    
-    // }; 
+    // If logged in store the userid from session 
+    if ( isset($_SESSION['userid']) ) {
+        $userid = $_SESSION["userid"];    
+    }; 
 
     // Try and establish the database connection.
     try {

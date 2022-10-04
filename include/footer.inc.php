@@ -11,9 +11,10 @@
                         If you spot any issues you can <a href="mailto:mark.boomer@worldcup2022predictor.com">send me an email</a> and I will endeavour to correct any errors. 
                     </div>
                     <div id="info-sources">
-                        Information regarding the tournament have been sourced primarily from the following sources.<br>
-                        <a href="../include/2022fwc_qatar_match_schedule.pdf">FIFA World Cup Qatar 2022 Match Schedule</a><br>
-                        <a href="https://en.wikipedia.org/wiki/2022_FIFA_World_Cup">Wikipedia - 2022 FIFA World Cup</a><br>
+                        Information for the tournament was sourced from the following resources.<br>
+                        <a target="_blank" href="../include/2022fwc_qatar_match_schedule.pdf">FIFA World Cup Qatar 2022 Match Schedule</a><br>
+                        <a target="_blank" href="https://en.wikipedia.org/wiki/2022_FIFA_World_Cup">Wikipedia - 2022 FIFA World Cup</a><br>
+                        <a target="_blank" href="https://www.fifa.com/fifa-world-ranking/men?dateId=id13750">FIFA World Cup Rankings</a><br>
                     </div>
                 </div>
                 <p></p>
