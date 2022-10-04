@@ -196,6 +196,7 @@
     $message .= "   </body>";
     $message .= "</html>";
 
+    // send the email
     mail($to, $subject, $message , $headers);
 
     header("Location: ../php/reset-password.php?reset=success");
