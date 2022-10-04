@@ -8,10 +8,6 @@ Each section has a GRID-AREA named after the section ID
     grid-area: container;
 }
 
-/* header {
-    margin-bottom: 5px;    
-}  */
-
 #username {
     grid-area: username;
 
@@ -85,7 +81,7 @@ th, td {
     */
     #container{
         grid-template-areas:
-            "team-details team-members-details";
+            "team-members-details team-details";
     }
 
     main {
@@ -120,7 +116,7 @@ th, td {
 
     #container{
         grid-template-areas:
-            "team-details team-members-details";
+            "team-members-details team-details";
     }
     
     main {
@@ -168,7 +164,7 @@ th, td {
 
     #container{
         grid-template-areas:
-            "team-details team-members-details";
+            "team-members-details team-details";
     }
 
     main{
@@ -211,8 +207,8 @@ th, td {
 
     #container{
         grid-template-areas:
-            "team-details"
-            "team-members-details";
+            "team-members-details"
+            "team-details";
     }
  
     main{
@@ -268,8 +264,8 @@ th, td {
 
     #container{
         grid-template-areas:
-            "team-details"
-            "team-members-details";
+            "team-members-details"
+            "team-details";
     }
  
     main{

@@ -2358,9 +2358,9 @@
                     } else if (AllowPredictionsUpdate === false) {
                         document.getElementById(tabname).style.display = "block";
                         document.getElementById("confirm-predictions").style.display = "block";
-                        document.getElementById("confirm-predictions").innerHTML  = "Please review your predictions in the Knockout stages.<br>";
+                        document.getElementById("confirm-predictions").innerHTML  = "Please review your predictions in the Knockout and Finals stages.<br>";
                         document.getElementById("confirm-predictions").innerHTML += "One or more of the games are predicted to be a draw.<br>";
-                        document.getElementById("confirm-predictions").innerHTML += "Every game in the knockout stages must be set as either a home win or an away win.";
+                        document.getElementById("confirm-predictions").innerHTML += "Every game in the knockout and Finals stages must be set as either a home win (H) or an away win (A).";
                         document.getElementById("confirm-btn").style.display = "none";
                         document.getElementById("confirm-save").style.display = "none";
                     } else {

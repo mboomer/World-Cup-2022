@@ -112,7 +112,7 @@
                 have to return something formatted as JSON to the calling PHP file
             */
             if ($query -> execute() === FALSE) {    
-                echo json_encode( $msg_arr[Failure] );
+                echo json_encode( $msg_arr['Failure'] );
                 exit;            
             }; 
         };                       // end of Prediction ForEach loop
@@ -147,14 +147,14 @@
             have to return something formatted as JSON to the calling PHP file
         */
         if ($query -> execute() === FALSE) {    
-            echo json_encode( "Insert predictons into database FAILED" );
+            echo json_encode( $msg_arr['Users'] );
             exit;            
         }; 
 
     /**
         Successful completion 
     */
-        echo json_encode( "Insert predictons into database SUCCESSFUL" );
+        echo json_encode( $msg_arr['Success'] );
 
     }  // end of Try
     catch (PDOException $e) {

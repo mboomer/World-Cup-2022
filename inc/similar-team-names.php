@@ -23,23 +23,6 @@
     // $json_array = json_decode($profiles, true);
 
     /** 
-        array of messages to be returned to the calling PHP page 
-    */
-    $msg_arr = array( 
-                        'Success'       => 'Profile Update Successful', 
-                        'Incomplete'    => 'Not all required fields are filled in', 
-                        'Invaliduser'   => 'User Name contains invalid characters', 
-                        'Invalidemail'  => 'User Email not in correct format', 
-                        'Existingpwd'   => 'Existing password is not correct, please try again', 
-                        'Passwordmatch' => 'New and Repeat Passwords Do Not Match', 
-                        'Accessdenied'  => 'Access Denied', 
-                        'Database'      => 'SQL execution Error',
-                        'Database1'     => 'Database Update Failed',
-                        'TeamExists'    => 'That team name already exists',
-                        'Failure'       => 'Update Profile FAILED' 
-                    );
-
-    /** 
         PDO Database connection
         Check if username already exists
         If username doesnt exist, insert as new user in database

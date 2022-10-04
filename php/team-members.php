@@ -84,8 +84,72 @@
         <main id="container">
             
             <?php
+                    // Team members in order of points scored by each team member
+                    $qry = "SELECT * FROM Users WHERE UserTeam = :UserTeam ORDER BY Points DESC, Correct DESC;";
+
+                    // prepare the query for the database connection
+                    $query = $dbh -> prepare($qry);
+
+                    /** bind the parameters */
+                    $query->bindParam(':UserTeam', $userteam, PDO::PARAM_STR);
+
+                    /** assign the values to the place holders */ 
+                    $userteam = $GET_teamname;
+
+                    // execute the sql query
+                    $query -> execute();
+                                        
+                    // get all rows, should only be one row returned
+                    $results = $query -> fetchAll(PDO::FETCH_OBJ);
+
+                    if ($query->rowCount() === 0) {
+                        echo "<div>NO TEAM MEMBERS RETURNED</div>";
+                        exit;
+                    } else {
+                            // Create the Team Members table header
+                            echo "<div class='card' id='team-members-details'>";
+                            echo "   <h2 class='card-title'>" . $GET_teamname . " - Team Members</h2>";
+                            echo "      <table id='team-members-tbl'>";
+                            echo "          <thead class='greenheader'>";
+                            echo "              <tr>";
+                            echo "                  <th>User Name</th><th>Full Name</th><th>Points</th><th class='correct'>&#10004;</th><th>Top Scorer</th><th>Goals Scored</th>";
+                            echo "              </tr>";
+                            echo "          </thead>";
+                            echo "          <tbody>";
+
+                            // loop through the results for the Teams returned
+                            foreach($results as $key => $result) {
+
+                                $username    = $result -> UserName;
+                                $userfname   = $result -> FirstName;
+                                $userlname   = $result -> LastName;
+                                $points      = $result -> Points;
+                                $correct     = $result -> Correct;
+                                $topscorer   = $result -> TopScorer;
+                                $goalsscored = $result -> GoalsScored;
+
+                                echo "              <tr>";
+                                echo "                  <td class='left'>"   . htmlspecialchars($username) . "</td>";
+                                echo "                  <td class='left'>"   . htmlspecialchars($userfname) . " " . htmlspecialchars($userlname) . "</td>";
+                                echo "                  <td class='center'>" . htmlspecialchars($points) . "</td>";
+                                echo "                  <td class='center'>" . htmlspecialchars($correct) . "</td>";
+                                echo "                  <td class='left'>"   . htmlspecialchars($topscorer) . "</td>";
+                                echo "                  <td class='center'>" . htmlspecialchars($goalsscored) . "</td>";
+                                echo "              </tr>";
+
+                            }; // end of results foreach 
+
+                        };  // end of $query->rowCount() else
+
+                        echo "          </tbody>";
+                        echo "      </table>";   
+                        echo "</div>";
+
                     // All teams in order of total points scored by all team members
-                    $qry = "SELECT UserTeam, COUNT(UserName) AS Members, SUM(Points) As TotalPts, ROUND(AVG(Points)) AS AveragePts FROM Users WHERE UserTeam <> '' GROUP BY UserTeam ORDER BY AveragePts DESC;";
+                    $qry = "SELECT UserTeam, COUNT(UserName) AS Members, SUM(Points) As TotalPts, SUM(Correct) \n
+                            As TotalCorrect, ROUND(AVG(Points)) AS AveragePts FROM Users WHERE UserTeam <> '' \n
+                            GROUP BY UserTeam \n
+                            ORDER BY AveragePts DESC, TotalCorrect DESC;";
 
                     // prepare the query for the database connection
                     $query = $dbh -> prepare($qry);
@@ -112,7 +176,7 @@
                         echo "      <table id='teams-tbl'>";
                         echo "          <thead class='blueheader'>";
                         echo "              <tr>";
-                        echo "                  <th>Team Name</th><th>Members</th><th>Total Pts</th><th>Average Pts</th>";
+                        echo "                  <th>Team Name</th><th>Members</th><th>Total Pts</th><th class='correct'>&#10004;</th><th>Average Pts</th>";
                         echo "              </tr>";
                         echo "          </thead>";
                         echo "          <tbody>";
@@ -120,15 +184,17 @@
                         // loop through the results for the Teams returned
                         foreach($results as $key => $result) {
 
-                            $userteam  = $result -> UserTeam;
-                            $members   = $result -> Members;
-                            $avgpoints = $result -> AveragePts;
-                            $totpoints = $result -> TotalPts;
+                            $userteam   = $result -> UserTeam;
+                            $members    = $result -> Members;
+                            $avgpoints  = $result -> AveragePts;
+                            $totpoints  = $result -> TotalPts;
+                            $totcorrect = $result -> TotalCorrect;
 
                             echo "              <tr>";
                             echo "                  <td class='left'>"   . $userteam . "</td>";
                             echo "                  <td class='center'>" . $members . "</td>";
                             echo "                  <td class='center'>" . $totpoints . "</td>";
+                            echo "                  <td class='center'>" . $totcorrect . "</td>";
                             echo "                  <td class='center'>" . $avgpoints . "</td>";
                             echo "              </tr>";
 
@@ -140,69 +206,6 @@
                     echo "      </table>";                   
                     echo "</div> <!-- end of teams-details -->";
                             
-                    // Team members in order of points scored by each team member
-                    $qry = "SELECT * FROM Users WHERE UserTeam = :UserTeam ORDER BY Points DESC;";
-
-                    // prepare the query for the database connection
-                    $query = $dbh -> prepare($qry);
-
-                    /** bind the parameters */
-                    $query->bindParam(':UserTeam', $userteam, PDO::PARAM_STR);
-
-                    /** assign the values to the place holders */ 
-                    $userteam = $GET_teamname;
-
-                    // execute the sql query
-                    $query -> execute();
-                                        
-                    // get all rows, should only be one row returned
-                    $results = $query -> fetchAll(PDO::FETCH_OBJ);
-
-                    if ($query->rowCount() === 0) {
-                        echo "<div>NO TEAM MEMBERS RETURNED</div>";
-                        exit;
-                    } else {
-                            // Create the Team Members table header
-                            echo "<div class='card' id='team-members-details'>";
-                            echo "   <h2 class='card-title'>" . $GET_teamname . " - Team Members</h2>";
-                            echo "      <table id='team-members-tbl'>";
-                            echo "          <thead class='greenheader'>";
-                            // echo "              <tr>";
-                            // echo "                  <th colspan='6'>" . htmlspecialchars($post_teamname) . " - Team Members</th>";
-                            // echo "              </tr>";
-                            echo "              <tr>";
-                            echo "                  <th>User Name</th><th>Full Name</th><th>Points</th><th></th><th>Top Scorer</th><th>Goals Scored</th>";
-                            echo "              </tr>";
-                            echo "          </thead>";
-                            echo "          <tbody>";
-
-                            // loop through the results for the Teams returned
-                            foreach($results as $key => $result) {
-
-                                $username    = $result -> UserName;
-                                $userfname   = $result -> FirstName;
-                                $userlname   = $result -> LastName;
-                                $points      = $result -> Points;
-                                $topscorer   = $result -> TopScorer;
-                                $goalsscored = $result -> GoalsScored;
-
-                                echo "              <tr>";
-                                echo "                  <td class='left'>"   .  htmlspecialchars($username) . "</td>";
-                                echo "                  <td class='left'>"   .  htmlspecialchars($userfname) . " " . htmlspecialchars($userlname) . "</td>";
-                                echo "                  <td class='center'>" .  htmlspecialchars($points) . "</td>";
-                                echo "                  <td class='center'>&nbsp&nbsp&nbsp&nbsp</td>";
-                                echo "                  <td class='left'>" .  htmlspecialchars($topscorer) . "</td>";
-                                echo "                  <td class='center'>" .  htmlspecialchars($goalsscored) . "</td>";
-                                echo "              </tr>";
-
-                            }; // end of results foreach 
-
-                        };  // end of $query->rowCount() else
-
-                        echo "          </tbody>";
-                        echo "      </table>";   
-                        echo "</div>";
-
                 ?>
             
         </main>

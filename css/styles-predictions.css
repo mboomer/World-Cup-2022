@@ -409,24 +409,28 @@ table {
     padding: 2px;
 }
 
-.results-home-flag, .results-away-flag {
+/* .results-home-flag, .results-away-flag {
     width: 85%;
     display: flex;
     justify-content: center;
-}
+} */
 
-.predictions-home-flag, .predictions-away-flag {
+/* .predictions-home-flag, .predictions-away-flag {
     width: 85%;
     display: flex;
     justify-content: center;
-}
+} */
 
 .results-home-flag img, .results-away-flag img {
-    width: 82%;
+    width: 80%;
+    display: block;
+    margin: auto auto;
 }
 
 .predictions-home-flag img, .predictions-away-flag img {
-    width: 82%;
+    width: 74%;
+    display: block;
+    margin: auto auto;
 }
 
 #playerheader {
@@ -496,7 +500,7 @@ input {
   
     #tournament {
         width: 98%;
-        margin: 52px auto 0 auto;        
+        margin: 70px auto 0 auto;        
     }
 
     #container {
@@ -753,7 +757,7 @@ input {
             }
 
             #confirm-predictions {
-                margin-top: 10px;
+                margin-top: 0px;
                 box-shadow: 5px 5px 5px lightblue;
                 border: 1px solid green;
             }
@@ -797,6 +801,16 @@ input {
             width: 20%;
         }
 
+        #results-home-flag th,td, #results-away-flag th,td {
+            width: 6%;
+        }
+
+        .results-home-flag img, .results-away-flag img {
+            width: 80%;
+            display: block;
+            margin: auto auto;
+        }
+
 } 
 /** end of @media screen and (max-width:576px) */
 
@@ -808,7 +822,7 @@ input {
     
     #tournament {
         width: 98%;
-        margin: 52px auto 0 auto;        
+        margin: 70px auto 0 auto;        
     }
 
     main {
@@ -1069,7 +1083,7 @@ input {
             }
 
             #confirm-predictions {
-                margin-top: 10px;
+                margin-top: 0px;
                 box-shadow: 5px 5px 5px lightblue;
                 border: 1px solid green;
             }
@@ -1124,7 +1138,7 @@ input {
 
     #tournament {
         width: 98%;
-        margin: 34px auto 0 auto;
+        margin: 40px auto 0 auto;
     }
 
     main {
@@ -1389,7 +1403,7 @@ input {
             }
 
             #confirm-predictions {
-                margin-top: 10px;
+                margin-top: 0px;
                 box-shadow: 5px 5px 5px lightblue;
                 border: 1px solid green;
             }
@@ -1675,7 +1689,7 @@ input {
             }
 
             #confirm-predictions {
-                margin-top: 10px;
+                margin-top: 0px;
                 box-shadow: 5px 5px 5px lightblue;
                 border: 1px solid green;
             }
@@ -1718,11 +1732,11 @@ input {
             width: 24%;
         }
 
-        #predictions-home-flag img,  #predictions-away-flag img {
+        /* #predictions-home-flag img,  #predictions-away-flag img {
             width: 79%;
-        }        
+        }         */
 
-        .results-home-flag img, .results-away-flag img {
+        /* .results-home-flag img, .results-away-flag img {
             width: 78%;
         }
 
@@ -1731,7 +1745,7 @@ input {
             justify-content: center;
             align-items: center;
             width: 100%;
-        }
+        } */
 
 } 
 /** end of @media screen and (min-width:992px) */
@@ -1977,7 +1991,7 @@ input {
             }
 
             #confirm-predictions {
-                margin-top: 10px;
+                margin-top: 0px;
                 box-shadow: 5px 5px 5px lightblue;
                 border: 1px solid green;
             }

@@ -391,6 +391,13 @@ input[id="goal-scorer"] {
         padding: 1px;
     }
 
+    #grp-winners-runnersup table {
+        font-size: 0.5em;
+        width: 98%;
+        margin-top: 5px;
+        padding: 1px;
+    }
+
     .transparent-btn-blue {
         padding: 2px 2px;
         margin: 2px; 
@@ -509,6 +516,13 @@ input[id="goal-scorer"] {
         padding: 2px;
     }
 
+    #grp-winners-runnersup table {
+        font-size: 0.5em;
+        width: 98%;
+        margin-top: 5px;
+        padding: 1px;
+    }
+
     .transparent-btn-blue {
         padding: 4px 4px;
         margin: 4px; 
@@ -600,9 +614,17 @@ input[id="goal-scorer"] {
 
     #goals-scored-selections table {
         font-size: 0.7em;
-        width: 100%;
+        width: 98%;
         padding: 2px;
     }
+
+    #grp-winners-runnersup table {
+        font-size: 0.7em;
+        width: 98%;
+        margin-top: 5px;
+        padding: 1px;
+    }
+
 
     .transparent-btn-blue {
         padding: 4px 4px;
@@ -691,8 +713,15 @@ input[id="goal-scorer"] {
 
     #goals-scored-selections table {
         font-size: 0.7em;
-        width: 100%;
+        width: 98%;
         padding: 2px;
+    }
+
+    #grp-winners-runnersup table {
+        font-size: 0.7em;
+        width: 100%;
+        margin-top: 5px;
+        padding: 1px;
     }
 
     .transparent-btn-blue {
@@ -766,8 +795,15 @@ input[id="goal-scorer"] {
 
     #goals-scored-selections table {
         font-size: 0.75em;
-        width: 97%;
+        width: 98%;
         padding: 2px;
+    }
+
+    #grp-winners-runnersup table {
+        font-size: 0.8em;
+        width: 98%;
+        margin-top: 5px;
+        padding: 1px;
     }
 
     .transparent-btn-blue {

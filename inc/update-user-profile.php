@@ -3,8 +3,8 @@
     // Processing form data when form is submitted by a POST and using correct button
     // if ( ($_SERVER["REQUEST_METHOD"] !== "POST") || (!isset($_POST["create-account-btn"])) ) {
     if ( ($_SERVER["REQUEST_METHOD"] !== "POST") ) {
-        // header("location: user-profile.php?error=accessdenied");
-        // exit();
+        header("location: ../php/user-profile.php?error=accessdenied");
+        exit();
     }
 
     // Include DB config file

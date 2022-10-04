@@ -38,7 +38,7 @@
         } else if ($error_code == "pwdlength") {
             $error_msg = "Password must be between 12-20 characters in length";
         } else if ($error_code == "usernamelength") {
-            $error_msg = "Username must be between 12-20 characters in length";
+            $error_msg = "Username must be between 8-20 characters in length";
         } else if ($error_code == "incomplete") {
             $error_msg = "Please complete all fields";
         } else if ($error_code == "invaliduseremail") {
@@ -91,23 +91,21 @@
             /* ******************************************************************************************   */
             /* apply to any device that has a screen width of 576px or higher                               */
             /* ******************************************************************************************   */
-            @media screen and (min-width: 576px) {
-            }
+            /* @media screen and (min-width: 576px) { }                                                     */
             /* ******************************************************************************************   */
             /* apply to any device that has a screen width of 768px or higher                               */
             /* ******************************************************************************************   */
-            @media screen and (min-width: 768px) {
-            }
+            /* @media screen and (min-width: 768px) { }                                                     */
             /* ******************************************************************************************   */
             /* apply to any device that has a screen width of 992px or higher                               */
             /* ******************************************************************************************   */
-            @media screen and (min-width: 992px) {
-            }
+            /* @media screen and (min-width: 992px) { }                                                     */
             /* ******************************************************************************************   */
             /* apply to any device that has a screen width of 1200px or higher                              */
             /* ******************************************************************************************   */
-            @media screen and (min-width: 1200px) {
-            }
+            /* @media screen and (min-width: 1200px) { }                                                    */
+            /* ******************************************************************************************   */
+
         </style>
     
     </head>
