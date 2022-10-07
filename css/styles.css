@@ -60,6 +60,7 @@ header {
     background-color: rgba(141,27,61, 0.3);
     width: 98%;
     margin-top: 5px;
+    border: 1px solid black;
 
     position: fixed;
     z-index: 10;
@@ -132,7 +133,7 @@ header img {
         .stat-value {
             text-align: center;
             color: rgb(141,27,61);
-            font-size: 2em;
+            font-size: 1em;
             border: 1px dotted black;
         }
 
@@ -169,6 +170,7 @@ header img {
     font-size: 1.25em;
     padding: 5px;
     margin-bottom: 10px;
+    border: 1px solid navy;
     text-align: center;
 }
 
