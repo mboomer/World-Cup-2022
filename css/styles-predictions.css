@@ -89,6 +89,7 @@ Each section has a GRID-AREA named after the section ID
     width: 98%;
     margin: 5px auto;
     margin-top: 5px;
+    border: 1px solid black;
     position: fixed;
     z-index: 9;
     top: 80px;

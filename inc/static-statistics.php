@@ -52,7 +52,7 @@
 
     // initialise the HTML string
     $html  = "  <div id='games-played'> \n"
-           . "      <div class='stat-title'>Games Played So Far</div> \n";
+           . "      <div class='stat-title'>Games Played</div> \n";
 
     if ($query->rowCount() == 0) {
 
@@ -110,7 +110,7 @@
         $rows = $query -> fetchAll(PDO::FETCH_OBJ);
 
         $html .= "  <div id='total-goals'> \n"
-               . "      <div class='stat-title'>Total Goals</div> \n";
+               . "      <div class='stat-title'>Goals Scored</div> \n";
 
         if ($query->rowCount() == 0) {
 
@@ -199,7 +199,7 @@
         $rows = $query -> fetchAll(PDO::FETCH_OBJ);
 
         $html .= "  <div id='top-team'> \n"
-               . "      <div class='stat-title'>Most Goals By Team</div> \n";
+               . "      <div class='stat-title'>Most Goals - Team</div> \n";
 
         if ($query->rowCount() == 0) {
 
@@ -260,7 +260,7 @@
         $rows = $query -> fetchAll(PDO::FETCH_OBJ);
 
         $html .= "  <div id='top-game'> \n"
-               . "      <div class='stat-title'>Most Goals In A Game</div> \n";
+               . "      <div class='stat-title'>Most Goals - Game</div> \n";
 
         if ($query->rowCount() == 0) {
 
@@ -337,7 +337,494 @@
         $html .= "  </div> \n";
 
     // ---------------------------------------------------------------
-    // PENALTIES SO FAR
+    // PENALTIES AWARDED SO FAR
+    // ---------------------------------------------------------------
+
+    // ---------------------------------------------------------------
+    // PENALTIES SAVED SO FAR
+    // ---------------------------------------------------------------
+    $qry = "  SELECT \n" 
+            . "    	SUM(PenaltysSaved) as Saved \n"
+            . "  FROM  \n"
+            . "    	TeamStats";
+
+        // prepare the query for the database connection
+        $query = $dbh -> prepare($qry);
+
+        /** bind the parameters
+        * no parameters used in this query
+        * $query->bindParam(':FixtureNo', $fixtureno, PDO::PARAM_INT);
+        */
+
+        /** 
+        * assign the values to the place holders - 
+        * no placeholders used in the sql statement
+        * $fixtureno = $fixture['FixtureNo'];
+        */
+
+        /** 
+        * execute the query and check if it fails 
+        * have to return something formatted as JSON to the calling PHP file
+        */
+
+        // execute the sql query
+        $query -> execute();
+                                        
+        // get all rows
+        $rows = $query -> fetchAll(PDO::FETCH_OBJ);
+
+        $html .= "  <div id='penalties-saved'> \n"
+               . "      <div class='stat-title'>Penalties Saved</div> \n";
+
+        if ($query->rowCount() == 0) {
+
+              $html .= "      <div class='stat-value'>0</div> \n";
+
+        } else {
+
+        foreach($rows as $key => $row) {
+        
+            $html .= "      <div class='stat-value'>" . $row -> Saved . "</div> \n";
+
+        }; // end of foreach 
+
+        };  // end of $query->rowCount() else    
+
+        $html .= "  </div> \n";
+
+    // ---------------------------------------------------------------
+    // PENALTIES SAVED SO FAR
+    // ---------------------------------------------------------------
+
+    // ---------------------------------------------------------------
+    // OWN GOALS SCORED SO FAR
+    // ---------------------------------------------------------------
+    $qry = "  SELECT \n" 
+            . "    	COUNT(ID) as OwnGoals \n"
+            . "  FROM  \n"
+            . "    	GoalsScored \n"
+            . "  WHERE \n"
+            . "    	OwnGoal = 1 \n";
+
+        // prepare the query for the database connection
+        $query = $dbh -> prepare($qry);
+
+        /** bind the parameters
+        * no parameters used in this query
+        * $query->bindParam(':FixtureNo', $fixtureno, PDO::PARAM_INT);
+        */
+
+        /** 
+        * assign the values to the place holders - 
+        * no placeholders used in the sql statement
+        * $fixtureno = $fixture['FixtureNo'];
+        */
+
+        /** 
+        * execute the query and check if it fails 
+        * have to return something formatted as JSON to the calling PHP file
+        */
+
+        // execute the sql query
+        $query -> execute();
+                                        
+        // get all rows
+        $rows = $query -> fetchAll(PDO::FETCH_OBJ);
+
+        $html .= "  <div id='owngoals'> \n"
+               . "      <div class='stat-title'>Own Goals</div> \n";
+
+        if ($query->rowCount() == 0) {
+
+              $html .= "      <div class='stat-value'>0</div> \n";
+
+        } else {
+
+        foreach($rows as $key => $row) {
+        
+            $html .= "      <div class='stat-value'>" . $row -> OwnGoals . "</div> \n";
+
+        }; // end of foreach 
+
+        };  // end of $query->rowCount() else    
+
+        $html .= "  </div> \n";
+
+    // ---------------------------------------------------------------
+    // OWN GOALS SCORED SO FAR
+    // ---------------------------------------------------------------
+
+    // ---------------------------------------------------------------
+    // RED CARDS SO FAR
+    // ---------------------------------------------------------------
+    $qry = "  SELECT \n" 
+            . "    	SUM(RedCards) as RedCards \n"
+            . "  FROM  \n"
+            . "    	TeamStats";
+
+        // prepare the query for the database connection
+        $query = $dbh -> prepare($qry);
+
+        /** bind the parameters
+        * no parameters used in this query
+        * $query->bindParam(':FixtureNo', $fixtureno, PDO::PARAM_INT);
+        */
+
+        /** 
+        * assign the values to the place holders - 
+        * no placeholders used in the sql statement
+        * $fixtureno = $fixture['FixtureNo'];
+        */
+
+        /** 
+        * execute the query and check if it fails 
+        * have to return something formatted as JSON to the calling PHP file
+        */
+
+        // execute the sql query
+        $query -> execute();
+                                        
+        // get all rows
+        $rows = $query -> fetchAll(PDO::FETCH_OBJ);
+
+        $html .= "  <div id='red-cards'> \n"
+               . "      <div class='stat-title'>Red Cards</div> \n";
+
+        if ($query->rowCount() == 0) {
+
+              $html .= "      <div class='stat-value'>0</div> \n";
+
+        } else {
+
+        foreach($rows as $key => $row) {
+        
+            $html .= "      <div class='stat-value'>" . $row -> RedCards . "</div> \n";
+
+        }; // end of foreach 
+
+        };  // end of $query->rowCount() else    
+
+        $html .= "  </div> \n";
+
+    // ---------------------------------------------------------------
+    // RED CARDS SO FAR
+    // ---------------------------------------------------------------
+
+    // ---------------------------------------------------------------
+    // YELLOW CARDS SO FAR
+    // ---------------------------------------------------------------
+    $qry = "  SELECT \n" 
+            . "    	SUM(YellowCards) as YellowCards \n"
+            . "  FROM  \n"
+            . "    	TeamStats";
+
+        // prepare the query for the database connection
+        $query = $dbh -> prepare($qry);
+
+        /** bind the parameters
+        * no parameters used in this query
+        * $query->bindParam(':FixtureNo', $fixtureno, PDO::PARAM_INT);
+        */
+
+        /** 
+        * assign the values to the place holders - 
+        * no placeholders used in the sql statement
+        * $fixtureno = $fixture['FixtureNo'];
+        */
+
+        /** 
+        * execute the query and check if it fails 
+        * have to return something formatted as JSON to the calling PHP file
+        */
+
+        // execute the sql query
+        $query -> execute();
+                                        
+        // get all rows
+        $rows = $query -> fetchAll(PDO::FETCH_OBJ);
+
+        $html .= "  <div id='yellow-cards'> \n"
+               . "      <div class='stat-title'>Yellow Cards</div> \n";
+
+        if ($query->rowCount() == 0) {
+
+              $html .= "      <div class='stat-value'>0</div> \n";
+
+        } else {
+
+        foreach($rows as $key => $row) {
+        
+            $html .= "      <div class='stat-value'>" . $row -> YellowCards . "</div> \n";
+
+        }; // end of foreach 
+
+        };  // end of $query->rowCount() else    
+
+        $html .= "  </div> \n";
+
+    // ---------------------------------------------------------------
+    // YELLOW CARDS SO FAR
+    // ---------------------------------------------------------------
+
+    // ---------------------------------------------------------------
+    // TEAM WITH MOST CARDS SO FAR
+    // ---------------------------------------------------------------
+
+    $qry = "  SELECT \n" 
+            . " TM.Team AS TeamName, \n"
+            . " SUM(RedCards + YellowCards) AS TotalCards \n"
+            . "FROM \n" 
+            . "	TeamStats TS \n"
+            . "INNER JOIN \n"
+            . "	Teams TM \n"
+            . "ON \n"
+            . "	TS.TeamID = TM.ID \n"
+            . "GROUP BY \n"
+            . "	TS.TeamID \n"
+            . "ORDER BY \n"
+            . "	TotalCards \n"
+            . "DESC \n"
+            . "LIMIT 1";
+
+        // prepare the query for the database connection
+        $query = $dbh -> prepare($qry);
+
+        /** bind the parameters
+        * no parameters used in this query
+        * $query->bindParam(':FixtureNo', $fixtureno, PDO::PARAM_INT);
+        */
+
+        /** 
+        * assign the values to the place holders - 
+        * no placeholders used in the sql statement
+        * $fixtureno = $fixture['FixtureNo'];
+        */
+
+        /** 
+        * execute the query and check if it fails 
+        * have to return something formatted as JSON to the calling PHP file
+        */
+
+        // execute the sql query
+        $query -> execute();
+                                        
+        // get all rows
+        $rows = $query -> fetchAll(PDO::FETCH_OBJ);
+
+        $html .= "  <div id='most-cards'> \n"
+               . "      <div class='stat-title'>Most Cards - Team</div> \n";
+
+        if ($query->rowCount() == 0) {
+
+              $html .= "      <div class='stat-value'>0</div> \n";
+
+        } else {
+
+        foreach($rows as $key => $row) {
+
+            if ($row -> TotalCards == 0) {
+                $html .= "      <div class='stat-value'>&nbsp;</div> \n";
+            } else {
+                $html .= "      <div class='stat-value'>" . $row -> TeamName . "</div> \n";
+            };
+
+        }; // end of foreach 
+
+        };  // end of $query->rowCount() else    
+
+        $html .= "  </div> \n";
+
+    // ---------------------------------------------------------------
+    // TEAM WITH MOST CARDS SO FAR
+    // ---------------------------------------------------------------
+
+    // ---------------------------------------------------------------
+    // AVERAGE CORNERS PER GAME SO FAR
+    // ---------------------------------------------------------------
+
+    $qry = "  SELECT \n" 
+            . " SUM(CornersBy + CornersAg) AS Corners \n"
+            . "FROM \n" 
+            . "	TeamStats \n";
+
+        // prepare the query for the database connection
+        $query = $dbh -> prepare($qry);
+
+        /** bind the parameters
+        * no parameters used in this query
+        * $query->bindParam(':FixtureNo', $fixtureno, PDO::PARAM_INT);
+        */
+
+        /** 
+        * assign the values to the place holders - 
+        * no placeholders used in the sql statement
+        * $fixtureno = $fixture['FixtureNo'];
+        */
+
+        /** 
+        * execute the query and check if it fails 
+        * have to return something formatted as JSON to the calling PHP file
+        */
+
+        // execute the sql query
+        $query -> execute();
+                                        
+        // get all rows
+        $rows = $query -> fetchAll(PDO::FETCH_OBJ);
+
+        $html .= "  <div id='average-corners'> \n"
+               . "      <div class='stat-title'>Corners per game</div> \n";
+
+        if ($query->rowCount() == 0) {
+
+              $html .= "      <div class='stat-value'>0</div> \n";
+
+        } else {
+
+        foreach($rows as $key => $row) {
+        
+        if ($gamesplayed > 0) {
+            $corneraverage = number_format( ($gamesplayed / $row -> Corners), 2);
+        } else {
+            $corneraverage = 0; 
+        };
+
+            $html .= "      <div class='stat-value'>" . $corneraverage . "</div> \n";
+
+        }; // end of foreach 
+
+        };  // end of $query->rowCount() else    
+
+        $html .= "  </div> \n";
+
+    // ---------------------------------------------------------------
+    // AVERAGE CORNERS PER GAME SO FAR
+    // ---------------------------------------------------------------
+
+    // ---------------------------------------------------------------
+    // AVERAGE THROWINS PER GAME SO FAR
+    // ---------------------------------------------------------------
+
+    $qry = "  SELECT \n" 
+            . " SUM(ThrowinsBy + ThrowinsAg) AS Throwins \n"
+            . "FROM \n" 
+            . "	TeamStats \n";
+
+        // prepare the query for the database connection
+        $query = $dbh -> prepare($qry);
+
+        /** bind the parameters
+        * no parameters used in this query
+        * $query->bindParam(':FixtureNo', $fixtureno, PDO::PARAM_INT);
+        */
+
+        /** 
+        * assign the values to the place holders - 
+        * no placeholders used in the sql statement
+        * $fixtureno = $fixture['FixtureNo'];
+        */
+
+        /** 
+        * execute the query and check if it fails 
+        * have to return something formatted as JSON to the calling PHP file
+        */
+
+        // execute the sql query
+        $query -> execute();
+                                        
+        // get all rows
+        $rows = $query -> fetchAll(PDO::FETCH_OBJ);
+
+        $html .= "  <div id='average-throwins'> \n"
+               . "      <div class='stat-title'>Throw-Ins per game</div> \n";
+
+        if ($query->rowCount() == 0) {
+
+              $html .= "      <div class='stat-value'>0</div> \n";
+
+        } else {
+
+        foreach($rows as $key => $row) {
+        
+        if ($gamesplayed > 0) {
+            $throwinaverage = number_format( ($gamesplayed / $row -> Throwins), 2);
+        } else {
+            $throwinaverage = 0; 
+        };
+
+            $html .= "      <div class='stat-value'>" . $throwinaverage . "</div> \n";
+
+        }; // end of foreach 
+
+        };  // end of $query->rowCount() else    
+
+        $html .= "  </div> \n";
+
+    // ---------------------------------------------------------------
+    // AVERAGE THROWINS PER GAME SO FAR
+    // ---------------------------------------------------------------
+
+    // ---------------------------------------------------------------
+    // AVERAGE FOULS PER GAME SO FAR
+    // ---------------------------------------------------------------
+
+    $qry = "  SELECT \n" 
+            . " SUM(FoulsBy + FoulsAg) AS Fouls \n"
+            . "FROM \n" 
+            . "	TeamStats \n";
+
+        // prepare the query for the database connection
+        $query = $dbh -> prepare($qry);
+
+        /** bind the parameters
+        * no parameters used in this query
+        * $query->bindParam(':FixtureNo', $fixtureno, PDO::PARAM_INT);
+        */
+
+        /** 
+        * assign the values to the place holders - 
+        * no placeholders used in the sql statement
+        * $fixtureno = $fixture['FixtureNo'];
+        */
+
+        /** 
+        * execute the query and check if it fails 
+        * have to return something formatted as JSON to the calling PHP file
+        */
+
+        // execute the sql query
+        $query -> execute();
+                                        
+        // get all rows
+        $rows = $query -> fetchAll(PDO::FETCH_OBJ);
+
+        $html .= "  <div id='average-fouls'> \n"
+               . "      <div class='stat-title'>Fouls per game</div> \n";
+
+        if ($query->rowCount() == 0) {
+
+              $html .= "      <div class='stat-value'>0</div> \n";
+
+        } else {
+
+        foreach($rows as $key => $row) {
+        
+        if ($gamesplayed > 0) {
+            $foulsaverage = number_format( ($gamesplayed / $row -> Fouls), 2);
+        } else {
+            $foulsaverage = 0; 
+        };
+
+            $html .= "      <div class='stat-value'>" . $foulsaverage . "</div> \n";
+
+        }; // end of foreach 
+
+        };  // end of $query->rowCount() else    
+
+        $html .= "  </div> \n";
+
+    // ---------------------------------------------------------------
+    // AVERAGE FOULS PER GAME SO FAR
     // ---------------------------------------------------------------
 
     // return Success message
