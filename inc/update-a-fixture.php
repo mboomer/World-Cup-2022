@@ -198,8 +198,10 @@
                                                 echo "    <td class='awayid hidden'>" . $awayid . "</td>";      
                                                 echo "    <td class='away'>" . $awayteam . "</td>";      
                                                 echo "    <td class='results-away-flag'><img src='../img/teams/" . $awayteam . ".png' alt='" . $awayteam . " team flag'></td>";      
-                                                echo "    <td><button class='transparent-btn-blue' ";
-                                                echo "    id='fixtureno" . $fixno . "' data-fx='" . $fixno . "' data-hs='" . $homescore . "' data-as='" . $awayscore . "'> Update </button></td>";  
+                                                echo "    <td>";
+                                                echo "       <button class='transparent-btn-blue' id='fixtureno" . $fixno . "' data-fx='" . $fixno . "' data-hid='" . $homeid . "' data-hs='" . $homescore . "'";
+                                                echo "       ' data-aid='" . $awayid . "' data-as='" . $awayscore . "'>Update</button>";
+                                                echo "    </td>";
                                                 echo "</tr>";    
 
                                             }; // end of fixtures foreach
@@ -243,7 +245,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td> <input id='fixture-id' type='number' min=1 max=64 value=1> </td>
+                                        <td> <input id='goal-fixture' type='number' min=1 max=64 value=1> </td>
                                         <td>    
                                             <select title= "Team" name="goal-team" id="goal-team">
 
@@ -319,10 +321,186 @@
 
                         </div> <!-- end of GOALS SCORED SELECTIONS div -->
 
-                        <div id='grp-winners-runnersup'>
+                        <div id='update-team-stats'>
 
                             <table>
                                 <thead class='greenheader'>
+                                    <tr>                  
+                                        <th class="tbl-header" colspan="12">TEAM STATISTICS</th>              
+                                    </tr>              
+                                    <tr>                  
+                                        <th class="country">Team</th>
+                                        <th class="cols">Red Card</th> 
+                                        <th class="cols">Yellow Card</th> 
+                                        <th class="cols">Foul By</th> 
+                                        <th class="cols">Foul Ag</th> 
+                                        <th class="cols">Corner By</th> 
+                                        <th class="cols">Corner Ag</th> 
+                                        <th class="cols">Throwin By</th> 
+                                        <th class="cols">Throwin Ag</th> 
+                                        <th class="cols">Pen Saved</th> 
+                                        <th class="cols">Pen Missed</th> 
+                                        <th class="cols">Update</th> 
+                                    </tr>          
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>    
+                                            <select title= "Home Team ID" name="home-stats-id" id="home-stats-id">
+
+                                                <option value="0"></option>
+
+                                                <?php
+
+                                                // Try and establish the database connection.
+                                                try {
+                                                    $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+                                                }
+                                                catch (PDOException $e) {
+                                                    echo("Error: " . $e->getMessage());
+                                                    exit("Error: " . $e->getMessage());
+                                                };
+
+                                                $sql =    "SELECT \n" 
+                                                        . "  	ID, \n"
+                                                        . "  	Team, \n"
+                                                        . "  	Ranking \n"
+                                                        . "FROM  \n"
+                                                        . "  	Teams tm \n"
+                                                        . "WHERE  \n"
+                                                        . "  	Ranking != 0 \n"
+                                                        . "ORDER BY \n"
+                                                        . "  	Ranking \n";
+
+                                                        $query = $dbh -> prepare($sql);
+
+                                                        /**
+                                                            no need to bind params as we are retrieving all results
+                                                            $query -> bindParam(':city', $city, PDO::PARAM_STR);
+                                                            $city = "New York";
+                                                        */
+
+                                                        // execute the sql query
+                                                        $query -> execute();
+
+                                                        // get all rows
+                                                        $results = $query -> fetchAll(PDO::FETCH_OBJ);
+
+                                                        if ($query->rowCount() == 0) {
+                                                            echo "NO TEAMS RETURNED";
+                                                            exit;
+                                                        } else {
+
+                                                            // loop through the fixtures
+                                                            foreach($results as $key => $result) {
+
+                                                                $teamid = $result -> ID;
+                                                                $team   = $result -> Team;
+
+                                                                echo "<option value=" . $teamid . ">" . $team . "</option>";
+
+                                                            }; // end of results foreach
+                                                                                                    
+                                                        }; // end of results else rowcount
+
+                                                ?>
+                                            </select>
+                                        </td>
+                                        <td> <input id='home-red-card'    type='number' title='hrc' min=0 max=20 value=0> </td>
+                                        <td> <input id='home-yellow-card' type='number' title='hyc' min=0 max=20 value=0> </td>
+                                        <td> <input id='home-foul-by'     type='number' title='hfb' min=0 max=50 value=0> </td>
+                                        <td> <input id='home-foul-ag'     type='number' title='hfa' min=0 max=50 value=0> </td>
+                                        <td> <input id='home-corner-by'   type='number' title='hcb' min=0 max=50 value=0> </td>
+                                        <td> <input id='home-corner-ag'   type='number' title='hca' min=0 max=50 value=0> </td>
+                                        <td> <input id='home-throwin-by'  type='number' title='htb' min=0 max=50 value=0> </td>
+                                        <td> <input id='home-throwin-ag'  type='number' title='hta' min=0 max=50 value=0> </td>
+                                        <td> <input id='home-pen-saved'   type='number' title='hps' min=0 max=20 value=0> </td>
+                                        <td> <input id='home-pen-missed'  type='number' title='hpm' min=0 max=20 value=0> </td>
+                                        <td><button id='home-upd-btn' class='goal-btn-blue'>Update</button></td>  
+                                    </tr>
+                                    <tr>
+                                        <td>    
+                                            <select title= "Away Team ID" name="away-stats-id" id="away-stats-id">
+
+                                                <option value="0"></option>
+
+                                                <?php
+
+                                                // Try and establish the database connection.
+                                                try {
+                                                    $dbh = new PDO("mysql:host=" . DB_HOST . "; dbname=" . DB_NAME, DB_USER, DB_PASS, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'"));
+                                                }
+                                                catch (PDOException $e) {
+                                                    echo("Error: " . $e->getMessage());
+                                                    exit("Error: " . $e->getMessage());
+                                                };
+
+                                                $sql =    "SELECT \n" 
+                                                        . "  	ID, \n"
+                                                        . "  	Team, \n"
+                                                        . "  	Ranking \n"
+                                                        . "FROM  \n"
+                                                        . "  	Teams tm \n"
+                                                        . "WHERE  \n"
+                                                        . "  	Ranking != 0 \n"
+                                                        . "ORDER BY \n"
+                                                        . "  	Ranking \n";
+
+                                                        $query = $dbh -> prepare($sql);
+
+                                                        /**
+                                                            no need to bind params as we are retrieving all results
+                                                            $query -> bindParam(':city', $city, PDO::PARAM_STR);
+                                                            $city = "New York";
+                                                        */
+
+                                                        // execute the sql query
+                                                        $query -> execute();
+
+                                                        // get all rows
+                                                        $results = $query -> fetchAll(PDO::FETCH_OBJ);
+
+                                                        if ($query->rowCount() == 0) {
+                                                            echo "NO TEAMS RETURNED";
+                                                            exit;
+                                                        } else {
+
+                                                            // loop through the fixtures
+                                                            foreach($results as $key => $result) {
+
+                                                                $teamid = $result -> ID;
+                                                                $team   = $result -> Team;
+
+                                                                echo "<option value=" . $teamid . ">" . $team . "</option>";
+
+                                                            }; // end of results foreach
+                                                                                                    
+                                                        }; // end of results else rowcount
+
+                                                ?>
+                                            </select>
+                                        </td>
+                                        <td> <input id='away-red-card'    type='number' title='arc' min=0 max=20 value=0> </td>
+                                        <td> <input id='away-yellow-card' type='number' title='ayc' min=0 max=20 value=0> </td>
+                                        <td> <input id='away-foul-by'     type='number' title='afb' min=0 max=50 value=0> </td>
+                                        <td> <input id='away-foul-ag'     type='number' title='afa' min=0 max=50 value=0> </td>
+                                        <td> <input id='away-corner-by'   type='number' title='acb' min=0 max=50 value=0> </td>
+                                        <td> <input id='away-corner-ag'   type='number' title='aca' min=0 max=50 value=0> </td>
+                                        <td> <input id='away-throwin-by'  type='number' title='atb' min=0 max=50 value=0> </td>
+                                        <td> <input id='away-throwin-ag'  type='number' title='ata' min=0 max=50 value=0> </td>
+                                        <td> <input id='away-pen-saved'   type='number' title='aps' min=0 max=20 value=0> </td>
+                                        <td> <input id='away-pen-missed'  type='number' title='apm' min=0 max=20 value=0> </td>
+                                        <td><button id='away-upd-btn' class='goal-btn-blue'>Update</button></td>  
+                                    </tr>
+                                </tbody>
+                            </table>      
+
+                        </div> <!-- end of UPDATE TEAM STATS div -->
+
+                        <div id='grp-winners-runnersup'>
+
+                            <table>
+                                <thead class='blueheader'>
                                     <tr>                  
                                         <th class="tbl-header" colspan="10">UPDATE KNOCKOUT STAGES - HOME TEAM AND AWAY TEAM</th>              
                                     </tr>              
@@ -602,6 +780,8 @@
                 // event listeners for the fixture update buttons
                 if (event.target.matches('.transparent-btn-blue')) {
 
+                    console.log("Fixture id " + event.target.id);
+
                     document.getElementById("update-msg").style.display = "block";
                     document.getElementById("update-msg").innerHTML = "Updating Scores...please wait";
 
@@ -609,10 +789,15 @@
 
                     fxnum  = fixtureid.dataset.fx 
                     hscore = fixtureid.dataset.hs 
+                    hid    = fixtureid.dataset.hid 
                     ascore = fixtureid.dataset.as 
+                    aid    = fixtureid.dataset.aid 
 
                     // update the fixture id for the goal scored table
                     document.getElementById("goal-fixture").value = fxnum;
+
+                    document.getElementById("home-stats-id").value = hid;
+                    document.getElementById("away-stats-id").value = aid;
 
                     // initialise the object and array to hold the fixture details
                     let fixtures = [];
@@ -641,6 +826,8 @@
 
                     // add the fixture scores and result to the fixtures Array                                                                
                     fixtures.push(fixture);
+
+                    console.log(fixtures);
 
                     // process the fixtures array and save result to fixtures table
                     fetch('https://www.worldcup2022predictor.com/inc/update-fixture-scores.php', {
@@ -696,6 +883,7 @@
                     /** push the goal to the first element in the array */
 
                     goal = { 
+                            // FixtureID : document.getElementById('goal-fixture').value,
                             FixtureID : document.getElementById('goal-fixture').value,
                             TeamID    : document.getElementById('goal-team').value,
                             Player    : document.getElementById('goal-scorer').value, 
@@ -816,6 +1004,104 @@
 
                 }; // end of updating HOME TEAM / AWAY TEAM for Knockout stage
 
+
+                // event listeners for Team stats update button
+                if (event.target.matches('#home-upd-btn') || event.target.matches('#away-upd-btn')) {
+
+                    document.getElementById("update-msg").style.display = "block";
+                    document.getElementById("update-msg").innerHTML = "Updating Team Stats...please wait";
+
+                    // initialise the object to hold the fixture
+                    let teams = [];
+                    let team  = {};
+            
+                    /** push the team to the first element in the array */
+
+                   if (event.target.matches('#home-upd-btn')) {
+
+                        team = { 
+                                TeamID        : document.getElementById('home-stats-id').value,
+                                RedCard       : document.getElementById('home-red-card').value,
+                                YellowCard    : document.getElementById('home-yellow-card').value,
+                                FoulBy        : document.getElementById('home-foul-by').value,
+                                FoulAg        : document.getElementById('home-foul-ag').value,
+                                CornerBy      : document.getElementById('home-corner-by').value,
+                                CornerAg      : document.getElementById('home-corner-ag').value,
+                                ThrowinBy     : document.getElementById('home-throwin-by').value,
+                                ThrowinAg     : document.getElementById('home-throwin-ag').value,
+                                PenaltySaved  : document.getElementById('home-pen-saved').value,
+                                PenaltyMissed : document.getElementById('home-pen-missed').value
+                            };
+
+                   } else {
+
+                        team = { 
+                                TeamID        : document.getElementById('away-stats-id').value,
+                                RedCard       : document.getElementById('away-red-card').value,
+                                YellowCard    : document.getElementById('away-yellow-card').value,
+                                FoulBy        : document.getElementById('away-foul-by').value,
+                                FoulAg        : document.getElementById('away-foul-ag').value,
+                                CornerBy      : document.getElementById('away-corner-by').value,
+                                CornerAg      : document.getElementById('away-corner-ag').value,
+                                ThrowinBy     : document.getElementById('away-throwin-by').value,
+                                ThrowinAg     : document.getElementById('away-throwin-ag').value,
+                                PenaltySaved  : document.getElementById('away-pen-saved').value,
+                                PenaltyMissed : document.getElementById('away-pen-missed').value
+                            };
+
+                   };
+
+                    // add the team stats to the teams array                                                                
+                    teams.push(team);
+
+                   if (event.target.matches('#home-upd-btn')) {
+                        console.log("Update HOME Team Stats clicked");
+                   } else {
+                        console.log("Update AWAY Team Stats clicked");
+                   }
+
+                    console.log(teams);
+
+                    // now process the fixtures array and update fixtures table
+                    fetch('https://www.worldcup2022predictor.com/inc/update-team-stats.php', {
+                            
+                            method: 'POST',
+                            mode: "same-origin",
+                            credentials: "same-origin",
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                                },
+                            body: JSON.stringify(teams),
+
+                        }).then(function (response) {
+
+                            // If the response is successful, get the JSON
+                            if (response.ok) {
+                                return response.json();
+                            };
+
+                            // Otherwise, throw an error
+                            return response.json().then(function (msg) {
+                                // console.log(response.json());
+                                throw msg;
+                            });
+
+                        }).then(function (data) {
+
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = data;
+
+                        }).catch(function (error) {
+                            // There was an error
+                            document.getElementById("update-msg").style.display = "block";
+                            document.getElementById("update-msg").innerHTML = error;
+                            console.warn("Error : ", error);
+                        });
+
+                    return;
+
+                }; // end of updating TEAM STATS
 
                 // event listeners for the update user points button
                 if (event.target.matches('#update-user-points-btn')) {
