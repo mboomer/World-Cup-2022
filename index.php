@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        
+
         <title>Qatar World Cup 2022 Predictor</title>
 
         <meta charset="utf-8">
-        <meta http-equiv="cache-control" content="no-cache, must-revalidate" />
+
+        <meta http-equiv="cache-control" content="max-age=0" />
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="expires" content="0" />
+        <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+        <meta http-equiv="pragma" content="no-cache" />
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="A fun game, earn points by predicting the correct score and result of each game in the 2022 World Cup in Qatar from the group stages through to the Final. You can play individually or as part of a team">
-
         
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
@@ -16,8 +21,8 @@
 
     </head>
     
-    <body>
-        
+    <body id="docBody">
+
         <header>
             <?php
                 $menuitems = array("Login", "Register");
@@ -62,6 +67,7 @@
                     Predictions must be completed before the start of the first match on November 20th 2022.
                     <button id='display-all-rules-btn' name='display-all-rules-btn' class='transparent-btn-blue'>Full Competition Rules</button>
                     <button id='display-advice-btn' name='display-advice-btn' class='transparent-btn-blue'>How to complete predictions</button>
+                    <button id='display-json-btn' name='display-json-btn' class='transparent-btn-blue'>JSON data</button>
                 </div> 
 
             </div>
@@ -88,6 +94,9 @@
         <script type="text/javascript" src="js/header.js"></script>
 
         <script type="text/javascript">
+
+            // force reload of page
+            // document.location.reload();
 
             // =================================================================================================================
             // if localStorage cookieBannerDisplayed=False, then display the cookie banner                                      //
@@ -127,6 +136,13 @@
                 if (event.target.matches('#display-advice-btn')) {
 
                     window.location.href="php/advice.php";
+
+                }
+
+                // event listener for the JSON DATA button
+                if (event.target.matches('#display-json-btn')) {
+
+                    window.location.href="php/json-data.php";
 
                 }
 
