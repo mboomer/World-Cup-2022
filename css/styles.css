@@ -83,6 +83,14 @@ header {
     margin-bottom: 5px;
 }
 
+#json-container header {
+
+    grid-area: display-json-data;
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 #qatar-flag-l {
     display: flex;
     grid-area: qatar-flag-l;
@@ -107,6 +115,14 @@ header img {
     text-align: center;
     display: none;              
     /* hide this until a new logo is created */
+}
+
+#display-json-data { 
+    grid-area: display-json-data; 
+    margin-top: 50px;
+    font-size: 0.8em;
+    border: 1px solid black;
+    padding: 5px;
 }
 
 #latest-results    { grid-area: lastest-results; }
@@ -664,6 +680,15 @@ th, td {
 
     }
 
+    #json-container {
+        
+        grid-template-areas:
+            "header"
+            "display-json-data"
+            "footer"; 
+
+    }
+
     #footer p {
         font-size: 10px;
         margin-bottom: 5px;
@@ -782,6 +807,18 @@ th, td {
         grid-template-areas:
             "header"
             "competition-rules"
+            "footer"; 
+
+    }
+
+    #json-container {
+
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+        grid-template-areas:
+            "header"
+            "display-json-data"
             "footer"; 
 
     }
@@ -914,6 +951,19 @@ th, td {
             "footer"; 
 
     }
+
+    #json-container {
+        
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+        grid-template-areas:
+            "header"
+            "display-json-data"
+            "footer"; 
+
+    }
+
     .matches {
         width: 50%;
     }
@@ -1035,6 +1085,18 @@ th, td {
 
     }
 
+    #json-container {
+
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+        grid-template-areas:
+            "header"
+            "display-json-data"
+            "footer"; 
+
+    }
+
     .matches {
         width: 40%;
     }
@@ -1119,6 +1181,13 @@ th, td {
 
     }
 
+    #json-container {
+
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+
+    }
+
     header {
         grid-template-areas:
             "logo qatar-flag-l header-text qatar-flag-r hb-icon";
@@ -1139,6 +1208,15 @@ th, td {
         grid-template-areas:
             "header"
             "competition-rules"
+            "footer"; 
+
+    }
+
+    #json-container {
+        
+        grid-template-areas:
+            "header"
+            "display-json-data"
             "footer"; 
 
     }
