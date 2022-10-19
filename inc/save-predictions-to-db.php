@@ -121,7 +121,7 @@
         * Update the User record to record the fact that predictions have been saved to the predictions table
         */
         //prepare the update sql statement
-        $sql = "UPDATE Users SET Predictions = :Predictions, TopScorer = :TopScorer, GoalsScored = :GoalsScored WHERE ID = :ID";
+        $sql = "UPDATE Users SET Predictions = :Predictions, TopScorer = :TopScorer, GoalsScored = :GoalsScored, LastUpdated = :LastUpdated WHERE ID = :ID";
 
         // prepare the query for the database connection
         $query = $dbh -> prepare($sql);
@@ -131,6 +131,7 @@
         $query->bindParam(':Predictions', $predictions, PDO::PARAM_INT);
         $query->bindParam(':TopScorer',   $topscorer,   PDO::PARAM_STR);
         $query->bindParam(':GoalsScored', $goalsscored, PDO::PARAM_INT);
+        $query->bindParam(':LastUpdated', $lastupdated, PDO::PARAM_STR);
 
         // assign the values to the place holders
         // $userid is already assigned a value from previous execution
@@ -141,6 +142,9 @@
         // $topgoalscorer and goalsscored are already assigned a value from the first element in the array
         // $topgoalscorer = $homescore;
         // $goalsscored   = $hometeamid;
+
+        // this will likely be 1 hour out as not using DST
+        $lastupdated = gmdate("Y-m-d H:i:s");
 
         /** 
             execute the query and check if it fails to insert prediction

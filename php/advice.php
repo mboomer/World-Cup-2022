@@ -66,12 +66,12 @@
                     <div class="rules-heading">KNOCKOUT STAGES - NO DRAWS - EXTRA TIME - PENALTIES</div>
                     <div class="rules-content">
                         In the knockout stages you must enter, either, a home win (H) or an away win (A). If you leave a game marked as a draw (D) in any of the knockout stages, 
-                        you will NOT be allowed to save or update your predictions when try to do so. A message will be displayed to advise you to go back and check your predictions.<br><br>
+                        you will NOT be allowed to save or update your predictions when you try to do so. A message will be displayed to advise you to go back and check your predictions.<br><br>
                         If a game is decided after extra time, it is the final score after extra time, that will count.<br>
                         For example, a game finishes 0-0 after 90 minutes, and after extra time finishes 1-2. The final score for the game will be 1-2 and an away win (A).<br><br>
                         If a game is decided after extra time and penalties, it is the final score after penalties that will count.<br>
                         For example, a game finishes 0-0 after 90 minutes, after extra time the score is 1-1 and goes to penalties.
-                        The home team scores 4 penalties and the away team scores 3 penalites. The final score for the game will be 5-4 and a home win (H).<br><br>
+                        The home team scores 4 penalties and the away team scores 3 penalites. The final result for the game will be 5-4 and a home win (H).<br><br>
                     </div>    
 
                     <div class="rules-heading">Last 16 Stage</div>
