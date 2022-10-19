@@ -2284,6 +2284,7 @@
             // **********************************************************************************************************
             function clearConfirmationMessage() {
                 document.getElementById("confirm-predictions").style.display = "none";
+                document.getElementById("confirm-chkbox").checked = false;
             }
             
             // **********************************************************************************************************

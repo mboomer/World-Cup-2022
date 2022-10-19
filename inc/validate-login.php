@@ -110,8 +110,38 @@
                     $_SESSION["username"]      = $username;                            
                     $_SESSION["useremail"]     = $email;
                     $_SESSION["predictions"]   = $predictions;
-                    $_SESSION['last_activity'] = time();            
-                    
+                    $_SESSION['last_activity'] = time();                                
+
+                        /* *************************** */
+                        /* Update the Last Login Field */
+                        /* *************************** */
+
+                        //prepare the update sql statement
+                        $sql = "UPDATE Users SET LastLogin = :LastLogin WHERE ID = :ID";
+
+                        // prepare the query for the database connection
+                        $query = $dbh -> prepare($sql);
+
+                        // bind the parameters
+                        $query->bindParam(':ID',        $userid,    PDO::PARAM_INT);
+                        $query->bindParam(':LastLogin', $lastlogin, PDO::PARAM_STR);
+
+                        // assign the values to the place holders
+                        // $userid is already assigned a value from previous execution
+                        
+                        // this will likely be 1 hour out as now using DST
+                        $lastlogin = gmdate("Y-m-d H:i:s");
+
+                        /* execute the query and check if it fails to update the login date / time 
+                        have to return something formatted as JSON to the calling PHP file */
+                        if ($query -> execute() === FALSE) {    
+                            // echo json_encode( $msg_arr['Failure'] );
+                            // echo 'Failure to update last login date';
+                            exit;            
+                        }; 
+
+                        /* *************************** */
+
                     // Redirect admin user to admin page
                     if ($username == "worldcupadmin") {
                         header("location: update-a-fixture.php");

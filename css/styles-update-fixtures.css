@@ -387,13 +387,13 @@ input[id="goal-scorer"] {
     }
 
     #goals-scored-selections table {
-        font-size: 0.5em;
+        font-size: 0.65em;
         width: 98%;
         padding: 1px;
     }
 
     #grp-winners-runnersup table {
-        font-size: 0.5em;
+        font-size: 0.65em;
         width: 98%;
         margin-top: 5px;
         padding: 1px;
@@ -437,7 +437,7 @@ input[id="goal-scorer"] {
         grid-template-columns: 1fr;
         grid-template-rows: auto;
         grid-gap: 3px;
-        margin: 80px auto 0 auto;
+        margin: 50px auto 0 auto;
 
         grid-template-areas:
             "GOALS-SCORED"
@@ -450,11 +450,11 @@ input[id="goal-scorer"] {
  
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 10vh auto auto;
+        grid-template-rows: auto;
         grid-gap: 5px;
         margin: 0 auto;
     }
-  
+      
     #container {
         grid-template-areas:
             "tournament";
@@ -518,7 +518,7 @@ input[id="goal-scorer"] {
     }
 
     #grp-winners-runnersup table {
-        font-size: 0.5em;
+        font-size: 0.7em;
         width: 98%;
         margin-top: 5px;
         padding: 1px;
@@ -531,6 +531,15 @@ input[id="goal-scorer"] {
         font-size: 10px;
 
         /* line-height: 100%; */
+    }
+
+    input {
+        font-size: 1em;
+    }
+
+    input[id="goal-scorer"] {
+        width: 95%;
+        text-align: left;
     }
 
 } /** end of @media screen and (min-width 576:px) */
@@ -616,13 +625,13 @@ input[id="goal-scorer"] {
     }
 
     #goals-scored-selections table {
-        font-size: 0.7em;
+        font-size: 0.75em;
         width: 98%;
         padding: 2px;
     }
 
     #grp-winners-runnersup table {
-        font-size: 0.7em;
+        font-size: 0.75em;
         width: 98%;
         margin-top: 5px;
         padding: 1px;
@@ -636,6 +645,15 @@ input[id="goal-scorer"] {
         font-size: 10px;
 
         /* line-height: 100%; */
+    }
+
+    input {
+        font-size: 1em;
+    }
+
+    input[id="goal-scorer"] {
+        width: 95%;
+        text-align: left;
     }
 
 } /** end of @media screen and (min-width:768px) */
@@ -717,13 +735,13 @@ input[id="goal-scorer"] {
     }
 
     #goals-scored-selections table {
-        font-size: 0.7em;
+        font-size: 0.75em;
         width: 98%;
         padding: 2px;
     }
 
     #grp-winners-runnersup table {
-        font-size: 0.7em;
+        font-size: 0.75em;
         width: 100%;
         margin-top: 5px;
         padding: 1px;
@@ -738,6 +756,15 @@ input[id="goal-scorer"] {
 
     #stats-update-tbl, #data-import-tbl {
         width: 64%;
+    }
+
+    input {
+        font-size: 1em;
+    }
+
+    input[id="goal-scorer"] {
+        width: 95%;
+        text-align: left;
     }
 
 } /** end of @media screen and (min-width:992px) */
@@ -799,7 +826,7 @@ input[id="goal-scorer"] {
     }
 
     #goals-scored-selections table {
-        font-size: 0.75em;
+        font-size: 0.8em;
         width: 98%;
         padding: 2px;
     }
@@ -828,5 +855,14 @@ input[id="goal-scorer"] {
         width: 50%;
     }
 
+    input {
+        font-size: 1em;
+    }
+
+    input[id="goal-scorer"] {
+        width: 95%;
+        text-align: left;
+    }
+    
 } /** end of @media screen and (min-width:1200px) */
 
