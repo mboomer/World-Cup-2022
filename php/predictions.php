@@ -79,9 +79,10 @@
               <button id="groups-abcd-tab"      name="GROUPS-ABCD"      class="tablinks active">Groups A,B,C,D</button>
               <button id="groups-efgh-tab"      name="GROUPS-EFGH"      class="tablinks ">Groups E,F,G,H</button>
               <button id="knockout-stage-tab"   name="KNOCKOUT-STAGE"   class="tablinks ">Knockout Stage</button>
-              <button id="finals-stage-tab"     name="FINALS-STAGE"   class="tablinks ">Finals Stage</button>
+              <button id="finals-stage-tab"     name="FINALS-STAGE"     class="tablinks ">Finals Stage</button>
               <button id="top-scorer-tab"       name="TOP-SCORER"       class="tablinks ">Top Goal Scorer</button>
               <button id="save-predictions-tab" name="SAVE-PREDICTIONS" class="tablinks ">Save Predictions</button>
+              <button id="auto-fill-tab"        name="AUTO-FILL"        class="tablinks ">Auto-Fill Groups</button>
             </div>
 
             <section id="tournament">
@@ -1037,13 +1038,59 @@
                 }
             }
 
-
             // **********************************************************************************************************
             // Timeout function to wait 3 seconds before loading the saved-predictions page
             // **********************************************************************************************************
             function loadSavedPredictions() {
                 window.location.href = "https://www.worldcup2022predictor.com/php/saved-predictions.php";
-            }
+            };
+
+            // **********************************************************************************************************
+            // Auto Fill Predictions - generate random values between 0-3 for the group stages 
+            // **********************************************************************************************************
+            function AutoFillPredictions() {
+
+                // get the home scores and away scores 
+                AutoHomeScores = document.querySelectorAll('.homescore');
+                AutoAwayScores = document.querySelectorAll('.awayscore');
+
+                // randomise the home scores 0-3
+                for (let f = 0; f < AutoHomeScores.length; f++) {
+                    
+                    GroupTable = AutoHomeScores[f].dataset.table;
+                    KOStage    = AutoHomeScores[f].dataset.stage;
+
+                    if (GroupTable != null) {
+                        element = document.querySelector("[data-table='" + GroupTable + "']");
+
+                        AutoHomeScores[f].value = Math.floor(Math.random() * 4);
+                        element.dispatchEvent(new Event('change', { 'bubbles': true }));
+
+                        // AutoAwayScores[f].value = Math.floor(Math.random() * 4);
+                        // element.dispatchEvent(new Event('change', { 'bubbles': true }));
+
+                    };
+                };
+
+                // randomise the away scores 0-3
+                for (let f = 0; f < AutoHomeScores.length; f++) {
+                    
+                    GroupTable = AutoHomeScores[f].dataset.table;
+                    KOStage    = AutoHomeScores[f].dataset.stage;
+
+                    if (GroupTable != null) {
+                        element = document.querySelector("[data-table='" + GroupTable + "']");
+
+                        // AutoHomeScores[f].value = Math.floor(Math.random() * 4);
+                        // element.dispatchEvent(new Event('change', { 'bubbles': true }));
+
+                        AutoAwayScores[f].value = Math.floor(Math.random() * 4);
+                        element.dispatchEvent(new Event('change', { 'bubbles': true }));
+
+                    };
+                };
+
+            };
 
             // **********************************************************************************************************
             // Display the content of the selected tab and highlight the tab
@@ -1067,6 +1114,13 @@
                     tablinks[i].className = tablinks[i].className.replace(" active", "");
                 }
                 
+                // Auto-fill the scores in group stages with random values from 0-3
+                // then display the GROUPS-ABCD tab
+                if (tabname == "AUTO-FILL") {
+                    AutoFillPredictions();
+                    tabname = "GROUPS-ABCD";
+                };
+
                 // Show the selected tab content and add an "active" class to the button that selected the tab
                 if (tabname == "GROUPS-ABCD") {
                     document.getElementById(tabname).style.display = "grid";
@@ -1387,9 +1441,14 @@
                 if (event.target.matches('.tablinks')) {
 
                     displayStage(event, event.target.name);
-                    event.target.className += " active";
 
-                }
+                    // highlight the GROUPS-ABCD tab after auto-filling the group scores
+                    if (event.target.name == "AUTO-FILL") {
+                       document.getElementById("groups-abcd-tab").className += " active";     
+                    } else {                   
+                        event.target.className += " active";
+                    };
+                };
 
                 // event listeners for the tab links
                 if (event.target.matches('#knockout-stage-tab')) {
@@ -1556,6 +1615,8 @@
             // add CHANGE event listener for the INPUT fields
             // ==================================================================
             document.addEventListener('change', function (event) {
+
+                // console.log("Change Event Triggered");
 
                 if (event.target.matches('#confirm-chkbox')) {
                     // dont complete this change event
