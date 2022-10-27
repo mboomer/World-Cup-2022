@@ -76,13 +76,13 @@
                  
             <!-- Tab links -->
             <div id="tabs" class="tab">
-              <button id="groups-abcd-tab"      name="GROUPS-ABCD"      class="tablinks active">Groups A,B,C,D</button>
-              <button id="groups-efgh-tab"      name="GROUPS-EFGH"      class="tablinks ">Groups E,F,G,H</button>
-              <button id="knockout-stage-tab"   name="KNOCKOUT-STAGE"   class="tablinks ">Knockout Stage</button>
-              <button id="finals-stage-tab"     name="FINALS-STAGE"     class="tablinks ">Finals Stage</button>
-              <button id="top-scorer-tab"       name="TOP-SCORER"       class="tablinks ">Top Goal Scorer</button>
-              <button id="save-predictions-tab" name="SAVE-PREDICTIONS" class="tablinks ">Save Predictions</button>
-              <button id="auto-fill-tab"        name="AUTO-FILL"        class="tablinks ">Auto-Fill Groups</button>
+              <button id="groups-abcd-tab"      name="GROUPS-ABCD"          class="tablinks active">Groups A,B,C,D</button>
+              <button id="groups-efgh-tab"      name="GROUPS-EFGH"          class="tablinks ">Groups E,F,G,H</button>
+              <button id="knockout-stage-tab"   name="KNOCKOUT-STAGE"       class="tablinks ">Knockout Stage</button>
+              <button id="finals-stage-tab"     name="FINALS-STAGE"         class="tablinks ">Finals Stage</button>
+              <button id="top-scorer-tab"       name="TOP-SCORER"           class="tablinks ">Top Goal Scorer</button>
+              <button id="save-predictions-tab" name="SAVE-PREDICTIONS"     class="tablinks ">Save Predictions</button>
+              <button id="auto-fill-tab"        name="AUTOFILL-PREDICTIONS" class="tablinks ">Auto-Fill Predictions</button>
             </div>
 
             <section id="tournament">
@@ -959,6 +959,31 @@
 
                 </div>  <!-- end of SAVE PREDICTIONS -->
                 
+                <div id="AUTOFILL-PREDICTIONS" class="tabcontent">
+
+                    <section id='autofill-predictions'>
+
+                        <div id='confirm-autofill'>
+                            <input type='checkbox' id='autofill-chkbox' name='autofill-chkbox'>
+                            <label for="autofill-chkbox">Check to confirm that you want to auto-fill the group stage predictions</label>
+                        </div>
+
+                        <div id='chkbox-autofill-error'>
+                            Click the Checkbox to confirm that you want <br> to auto-fill your predictions for the group stages.
+                        </div>
+
+                        <div id='autofill-btn'>
+                            <button type='button' id='autofill-predictions-btn' class='predictions-btn'>Auto-Fill Predictions</button>
+                        </div>
+
+                        <div id='confirm-autofill-predictions'>
+                            <p>Nothing auto filled yet</p>
+                        </div>
+                        
+                    </section> <!-- end of AUTO-FILL PREDICTIONS section -->
+
+                </div>  <!-- end of AUTO-FILL PREDICTIONS -->
+
             </section> <!-- end of Tournament -->
 
         </main>
@@ -985,8 +1010,9 @@
             document.getElementById("GROUPS-EFGH").style.display = "none";
             document.getElementById("KNOCKOUT-STAGE").style.display = "none";
             document.getElementById("FINALS-STAGE").style.display = "none";
-            document.getElementById("SAVE-PREDICTIONS").style.display = "none";
             document.getElementById("TOP-SCORER").style.display = "none";
+            document.getElementById("SAVE-PREDICTIONS").style.display = "none";
+            document.getElementById("AUTOFILL-PREDICTIONS").style.display = "none";
 
             // ==================================================================
             // define currentTable outside of the CHANGE event listener 
@@ -1066,9 +1092,6 @@
                         AutoHomeScores[f].value = Math.floor(Math.random() * 4);
                         element.dispatchEvent(new Event('change', { 'bubbles': true }));
 
-                        // AutoAwayScores[f].value = Math.floor(Math.random() * 4);
-                        // element.dispatchEvent(new Event('change', { 'bubbles': true }));
-
                     };
                 };
 
@@ -1081,16 +1104,384 @@
                     if (GroupTable != null) {
                         element = document.querySelector("[data-table='" + GroupTable + "']");
 
-                        // AutoHomeScores[f].value = Math.floor(Math.random() * 4);
-                        // element.dispatchEvent(new Event('change', { 'bubbles': true }));
-
                         AutoAwayScores[f].value = Math.floor(Math.random() * 4);
                         element.dispatchEvent(new Event('change', { 'bubbles': true }));
 
                     };
                 };
 
-            };
+            }; // end of autofillpredictioons function
+
+            // **********************************************************************************************************
+            // Randomize the home and away scores - pass the RankDiff and Result and index of the nodelist
+            // formula used for generating random numbers between min and max values
+            // AutoHomeScores[f].value = Math.floor(Math.random() * (max - min + 1) + min);
+            // **********************************************************************************************************
+            function RandomizeScores(Node, RankDiff, MatchResult, f) {
+
+                // console.log(Node);
+
+                if (RankDiff >= 50) {
+
+                    if (MatchResult == "H") {
+                        AutoHomeScores[f].value = Math.floor( Math.random() * (6-3+1) + 3);     // min=3 max=6
+                        AutoAwayScores[f].value = 0;
+                    } else  {
+                        AutoHomeScores[f].value = 0;
+                        AutoAwayScores[f].value = Math.floor(Math.random() * (6-3+1) + 3);      // min=3 max=6
+                    };
+
+                } else if (RankDiff >= 40 && RankDiff < 50) {
+
+                    if (MatchResult == "H") {
+                        AutoHomeScores[f].value = Math.floor( Math.random() * (4-2+1) + 2);     // min=2 max=4
+                        AutoAwayScores[f].value = 0;
+                    } else  {
+                        AutoHomeScores[f].value = 0;
+                        AutoAwayScores[f].value = Math.floor(Math.random() * (4-2+1) + 2);
+                    };
+
+                } else if (RankDiff >= 30 && RankDiff < 40) {
+                        
+                        if (MatchResult == "H") {
+                            AutoHomeScores[f].value = Math.floor(Math.random() * (4-2+1) + 2);  // min=2 max=4
+                            AutoAwayScores[f].value = Math.floor(Math.random() * (1-0+1) + 0);  // min=0 max=1
+                        } else  {
+                            AutoHomeScores[f].value = Math.floor(Math.random() * (1-0+1) + 0);  // min=0 max=1
+                            AutoAwayScores[f].value = Math.floor(Math.random() * (4-2+1) + 2);   // min=2 max=4
+                        };
+                
+                } else if (RankDiff >= 20 && RankDiff < 30) {
+                        
+                        if (MatchResult == "H") {
+                            AutoHomeScores[f].value = Math.floor(Math.random() * (3-1+1) + 1);  // min=1 max=3
+                            AutoAwayScores[f].value = Math.floor(Math.random() * (1-0+1) + 0); // min=0 max=1
+                        } else  {
+                            AutoHomeScores[f].value = Math.floor(Math.random() * (1-0+1) + 0);  // min=0 max=1
+                            AutoAwayScores[f].value = Math.floor(Math.random() * (3-1+1) + 1);   // min=1 max=3
+                        };
+
+                } else if (RankDiff >= 10 && RankDiff < 20) {
+                        
+                        if (MatchResult == "H") {
+                            AutoHomeScores[f].value = Math.floor(Math.random() * (3-2+1) + 2);  // min=2 max=3
+                            AutoAwayScores[f].value = Math.floor(Math.random() * (2-1+1) + 1);  // min=1 max =2
+                        } else  {
+                            AutoHomeScores[f].value = Math.floor(Math.random() * (2-1+1) + 1);  // min=1 max=2
+                            AutoAwayScores[f].value = Math.floor(Math.random() * (3-2+1) + 2);  // min=2 max=3
+                        };
+
+                } else if (RankDiff >= 0 && RankDiff < 10) {
+                        
+                        if (MatchResult == "H") {
+                            AutoHomeScores[f].value = Math.floor(Math.random() * (3-2+1) + 2);  // min=2 max=3
+                            AutoAwayScores[f].value = Math.floor(Math.random() * (2-1+1) + 1);   // min=1 max=2
+                        } else  {
+                            AutoHomeScores[f].value = Math.floor(Math.random() * (2-1+1) + 1);  // min=1 max=2
+                            AutoAwayScores[f].value = Math.floor(Math.random() * (3-2+1) + 2);   // min=2 max=3
+                        };
+                };
+
+                if (AutoHomeScores[f].value == AutoAwayScores[f].value) {
+                    AutoAwayScores[f].value = parseInt(AutoHomeScores[f].value) + 1;
+                };
+
+                Node.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+
+            }; // end of RandomizeScores function
+
+            // **********************************************************************************************************
+            // Auto Fill Predictions For Group Stages - generate random values based on Team Rankings 
+            // AutoHomeScores[f].value = Math.floor(Math.random() * (max - min + 1) + min);
+            // **********************************************************************************************************
+            function AutoFillGroupsStage() {
+
+                // get the home scores and away scores 
+                AutoHomeScores = document.querySelectorAll('.homescore[data-table]');
+                AutoAwayScores = document.querySelectorAll('.awayscore[data-table]');
+
+                // get the home team rankings and away team rankings 
+                AutoHomeRanks = document.querySelectorAll('.h-rank');
+                AutoAwayRanks = document.querySelectorAll('.a-rank');
+
+                // loop through the matches, 
+                for (let f = 0; f < AutoHomeScores.length; f++) {
+
+                    // get group table that the game belongs to
+                    DataTable = AutoHomeScores[f].dataset.table;
+
+                    // convert rankings from text to interger values
+                    HomeRanking = parseInt(AutoHomeRanks[f].innerText);
+                    AwayRanking = parseInt(AutoAwayRanks[f].innerText);
+
+                    // Calculate the difference between the rankings
+                    RankDiff = Math.abs(HomeRanking - AwayRanking);
+
+                    // decide on the likely result based on ranking
+                    if ( HomeRanking < AwayRanking ) { MatchResult = "H"; } else { MatchResult = "A"; };
+                    
+                    // console.log("Home Rank = " + HomeRanking + " Away Rank = " + AwayRanking + " Rank Diff = " + RankDiff + " Result = " + MatchResult + " Table = " + DataTable);
+
+                    // This will only apply to the group stages
+                    if (DataTable != null) {
+
+                        // get the Group Table
+                        GroupTable = document.querySelector("[data-table='" + DataTable + "']");
+
+                        if (RankDiff >= 50) {
+
+                            if (MatchResult == "H") {
+                                AutoHomeScores[f].value = Math.floor( Math.random() * (6-3+1) + 3);     // min=3 max=6
+                                GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                AutoAwayScores[f].value = 0;
+                                GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                            } else  {
+                                AutoHomeScores[f].value = 0;
+                                GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                AutoAwayScores[f].value = Math.floor(Math.random() * (6-3+1) + 3);      // min=3 max=6
+                                GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                            };
+
+                        } else if (RankDiff >= 40 && RankDiff < 50) {
+
+                            if (MatchResult == "H") {
+                                AutoHomeScores[f].value = Math.floor( Math.random() * (4-2+1) + 2);     // min=2 max=4
+                                GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                AutoAwayScores[f].value = 0;
+                                GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                            } else  {
+                                AutoHomeScores[f].value = 0;
+                                GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                AutoAwayScores[f].value = Math.floor(Math.random() * (4-2+1) + 2);
+                                GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                            };
+
+                        } else if (RankDiff >= 30 && RankDiff < 40) {
+                                
+                                if (MatchResult == "H") {
+                                    AutoHomeScores[f].value = Math.floor(Math.random() * (4-2+1) + 2);  // min=2 max=4
+                                    GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                    AutoAwayScores[f].value = Math.floor(Math.random() * (1-0+1) + 0);  // min=0 max=1
+                                    GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                } else  {
+                                    AutoHomeScores[f].value = Math.floor(Math.random() * (1-0+1) + 0);  // min=0 max=1
+                                    GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                    AutoAwayScores[f].value = Math.floor(Math.random() * (4-2+1) + 2);   // min=2 max=4
+                                    GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                };
+                        
+                        } else if (RankDiff >= 20 && RankDiff < 30) {
+                                
+                                if (MatchResult == "H") {
+                                    AutoHomeScores[f].value = Math.floor(Math.random() * (3-1+1) + 1);  // min=1 max=3
+                                    GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                    AutoAwayScores[f].value = Math.floor(Math.random() * (1-0+1) + 0); // min=0 max=1
+                                    GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                } else  {
+                                    AutoHomeScores[f].value = Math.floor(Math.random() * (1-0+1) + 0);  // min=0 max=1
+                                    GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                             
+                                    AutoAwayScores[f].value = Math.floor(Math.random() * (3-1+1) + 1);   // min=1 max=3
+                                    GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                             
+                                };
+
+                        } else if (RankDiff >= 10 && RankDiff < 20) {
+                                
+                                if (MatchResult == "H") {
+                                    AutoHomeScores[f].value = Math.floor(Math.random() * (3-2+1) + 2);  // min=2 max=3
+                                    GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                    AutoAwayScores[f].value = Math.floor(Math.random() * (2-1+1) + 1);  // min=1 max =2
+                                    GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                } else  {
+                                    AutoHomeScores[f].value = Math.floor(Math.random() * (2-1+1) + 1);  // min=1 max=2
+                                    GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                    AutoAwayScores[f].value = Math.floor(Math.random() * (3-2+1) + 2);  // min=2 max=3
+                                    GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                };
+
+                        } else if (RankDiff >= 0 && RankDiff < 10) {
+                                
+                                if (MatchResult == "H") {
+                                    AutoHomeScores[f].value = Math.floor(Math.random() * (3-2+1) + 2);  // min=2 max=3
+                                    GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                    AutoAwayScores[f].value = Math.floor(Math.random() * (2-1+1) + 1);   // min=1 max=2
+                                    GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                } else  {
+                                    AutoHomeScores[f].value = Math.floor(Math.random() * (2-1+1) + 1);  // min=1 max=2
+                                    GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                    AutoAwayScores[f].value = Math.floor(Math.random() * (3-2+1) + 2);   // min=2 max=3
+                                    GroupTable.dispatchEvent(new Event('change', { 'bubbles': true }));                            
+                                };
+                        };
+
+                    };  // end of IF GROUPTABLE
+                
+                }; // end of For loop
+
+            }; // end of function definition
+
+            // **********************************************************************************************************
+            // Auto Fill Predictions For Last16, QF and SF - generate random values based on Team Rankings 
+            // **********************************************************************************************************
+            function AutoFillKnockOutStages() {
+
+                Last16 = document.getElementById('Last16');
+
+                // get the home scores and away scores 
+                AutoHomeScores = Last16.querySelectorAll('.homescore[data-stage="LS"]');
+                AutoAwayScores = Last16.querySelectorAll('.awayscore[data-stage="LS"]');
+
+                // get the home team rankings and away team rankings 
+                AutoHomeRanks = Last16.querySelectorAll('.h-rank');
+                AutoAwayRanks = Last16.querySelectorAll('.a-rank');
+
+                // loop through the matches, 
+                for (let f = 0; f < AutoHomeScores.length; f++) {
+
+                    // convert rankings from text to interger values
+                    HomeRanking = parseInt(AutoHomeRanks[f].innerText);
+                    AwayRanking = parseInt(AutoAwayRanks[f].innerText);
+
+                    // Calculate the difference between the rankings
+                    RankDiff = Math.abs(HomeRanking - AwayRanking);
+
+                    // decide on the likely result based on ranking
+                    if ( HomeRanking < AwayRanking ) { MatchResult = "H"; } else { MatchResult = "A"; };
+                    
+                    // console.log("Home Rank = " + HomeRanking + " Away Rank = " + AwayRanking + " Rank Diff = " + RankDiff + " Result = " + MatchResult);
+
+                    // randomize the home and away scores
+                    RandomizeScores(AutoHomeScores[f], RankDiff, MatchResult, f);
+
+                }; // end of LAST16 For loop
+
+                QF = document.getElementById('QuarterFinal');
+
+                // get the home scores and away scores 
+                AutoHomeScores = QF.querySelectorAll('.homescore[data-stage="QF"]');
+                AutoAwayScores = QF.querySelectorAll('.awayscore[data-stage="QF"]');
+
+                // get the home team rankings and away team rankings 
+                AutoHomeRanks = QF.querySelectorAll('.h-rank');
+                AutoAwayRanks = QF.querySelectorAll('.a-rank');
+
+                // loop through the matches, 
+                for (let f = 0; f < AutoHomeScores.length; f++) {
+
+                    // convert rankings from text to interger values
+                    HomeRanking = parseInt(AutoHomeRanks[f].innerText);
+                    AwayRanking = parseInt(AutoAwayRanks[f].innerText);
+
+                    // Calculate the difference between the rankings
+                    RankDiff = Math.abs(HomeRanking - AwayRanking);
+
+                    // decide on the likely result based on ranking
+                    if ( HomeRanking < AwayRanking ) { MatchResult = "H"; } else { MatchResult = "A"; };
+                    
+                    // console.log("Home Rank = " + HomeRanking + " Away Rank = " + AwayRanking + " Rank Diff = " + RankDiff + " Result = " + MatchResult);
+
+                    // randomize the home and away scores
+                    RandomizeScores(AutoHomeScores[f], RankDiff, MatchResult, f);
+
+                }; // end of QF For loop
+
+                SF = document.getElementById('SemiFinal');
+
+                // get the home scores and away scores 
+                AutoHomeScores = SF.querySelectorAll('.homescore[data-stage="SF"]');
+                AutoAwayScores = SF.querySelectorAll('.awayscore[data-stage="SF"]');
+
+                // get the home team rankings and away team rankings 
+                AutoHomeRanks = SF.querySelectorAll('.h-rank');
+                AutoAwayRanks = SF.querySelectorAll('.a-rank');
+
+                // loop through the matches, 
+                for (let f = 0; f < AutoHomeScores.length; f++) {
+
+                    // convert rankings from text to interger values
+                    HomeRanking = parseInt(AutoHomeRanks[f].innerText);
+                    AwayRanking = parseInt(AutoAwayRanks[f].innerText);
+
+                    // Calculate the difference between the rankings
+                    RankDiff = Math.abs(HomeRanking - AwayRanking);
+
+                    // decide on the likely result based on ranking
+                    if ( HomeRanking < AwayRanking ) { MatchResult = "H"; } else { MatchResult = "A"; };
+                    
+                    // console.log("Home Rank = " + HomeRanking + " Away Rank = " + AwayRanking + " Rank Diff = " + RankDiff + " Result = " + MatchResult);
+
+                    // randomize the home and away scores
+                    RandomizeScores(AutoHomeScores[f], RankDiff, MatchResult, f);
+
+                }; // end of SF For loop
+
+            }; // end of AUTOFILL KNOCKOUT function definition
+
+            // **********************************************************************************************************
+            // Auto Fill Predictions For 3rd Place-Off and the Final - generate random values based on Team Rankings 
+            // **********************************************************************************************************
+            function AutoFillFinalStages() {
+
+                PlayOff = document.getElementById('Playoff');
+
+                // get the home scores and away scores 
+                AutoHomeScores = PlayOff.querySelectorAll('.homescore[data-stage="PL"]');
+                AutoAwayScores = PlayOff.querySelectorAll('.awayscore[data-stage="PL"]');
+
+                // get the home team rankings and away team rankings 
+                AutoHomeRanks = PlayOff.querySelectorAll('.h-rank');
+                AutoAwayRanks = PlayOff.querySelectorAll('.a-rank');
+
+                // loop through the matches, 
+                for (let f = 0; f < AutoHomeScores.length; f++) {
+
+                    // convert rankings from text to interger values
+                    HomeRanking = parseInt(AutoHomeRanks[f].innerText);
+                    AwayRanking = parseInt(AutoAwayRanks[f].innerText);
+
+                    // Calculate the difference between the rankings
+                    RankDiff = Math.abs(HomeRanking - AwayRanking);
+
+                    // decide on the likely result based on ranking
+                    if ( HomeRanking < AwayRanking ) { MatchResult = "H"; } else { MatchResult = "A"; };
+                    
+                    // console.log("Home Rank = " + HomeRanking + " Away Rank = " + AwayRanking + " Rank Diff = " + RankDiff + " Result = " + MatchResult);
+
+                    // randomize the home and away scores
+                    RandomizeScores(AutoHomeScores[f], RankDiff, MatchResult, f);
+
+                }; // end of PLAYOFF For loop
+
+                Final = document.getElementById('Final');
+
+                // get the home scores and away scores 
+                AutoHomeScores = Final.querySelectorAll('.homescore[data-stage="FL"]');
+                AutoAwayScores = Final.querySelectorAll('.awayscore[data-stage="FL"]');
+
+                // get the home team rankings and away team rankings 
+                AutoHomeRanks = Final.querySelectorAll('.h-rank');
+                AutoAwayRanks = Final.querySelectorAll('.a-rank');
+
+                // loop through the matches, 
+                for (let f = 0; f < AutoHomeScores.length; f++) {
+
+                    // convert rankings from text to interger values
+                    HomeRanking = parseInt(AutoHomeRanks[f].innerText);
+                    AwayRanking = parseInt(AutoAwayRanks[f].innerText);
+
+                    // Calculate the difference between the rankings
+                    RankDiff = Math.abs(HomeRanking - AwayRanking);
+
+                    // decide on the likely result based on ranking
+                    if ( HomeRanking < AwayRanking ) { MatchResult = "H"; } else { MatchResult = "A"; };
+                    
+                    // console.log("Home Rank = " + HomeRanking + " Away Rank = " + AwayRanking + " Rank Diff = " + RankDiff + " Result = " + MatchResult);
+
+                    // randomize the home and away scores
+                    RandomizeScores(AutoHomeScores[f], RankDiff, MatchResult, f);
+
+                }; // end of FINAL For loop
+
+            }; // end of AUTOFILL FINALS function definition
 
             // **********************************************************************************************************
             // Display the content of the selected tab and highlight the tab
@@ -1105,36 +1496,25 @@
             
                 for (i = 0; i < tabcontent.length; i++) {
                     tabcontent[i].style.display = "none";
-                }
+                };
 
                 // Get all elements with class="tablinks" and remove the class "active"
                 tablinks = document.getElementsByClassName("tablinks");
                                 
                 for (i = 0; i < tablinks.length; i++) {
                     tablinks[i].className = tablinks[i].className.replace(" active", "");
-                }
-                
-                // Auto-fill the scores in group stages with random values from 0-3
-                // then display the GROUPS-ABCD tab
-                if (tabname == "AUTO-FILL") {
-                    AutoFillPredictions();
-                    tabname = "GROUPS-ABCD";
                 };
 
                 // Show the selected tab content and add an "active" class to the button that selected the tab
                 if (tabname == "GROUPS-ABCD") {
                     document.getElementById(tabname).style.display = "grid";
-                }
-                else if (tabname == "GROUPS-EFGH") {
+                } else if (tabname == "GROUPS-EFGH") {
                     document.getElementById(tabname).style.display = "grid";
-                } 
-                else if (tabname == "KNOCKOUT-STAGE") {
+                } else if (tabname == "KNOCKOUT-STAGE") {
                     document.getElementById(tabname).style.display = "grid";
-                } 
-                else if (tabname == "FINALS-STAGE") {
+                } else if (tabname == "FINALS-STAGE") {
                     document.getElementById(tabname).style.display = "grid";
-                } 
-                else if (tabname == "SAVE-PREDICTIONS") {
+                } else if (tabname == "SAVE-PREDICTIONS") {
 
                     /** 
                      * if the AllowPredictionsUpdate flag is FALSE then one or more scores in the knockout stages are set as a draw
@@ -1181,11 +1561,14 @@
                         document.getElementById("confirm-save").style.display = "block";
                     }
 
+                } else if (tabname == "AUTOFILL-PREDICTIONS") {
+                    document.getElementById(tabname).style.display = "block";
+                    document.getElementById("confirm-autofill-predictions").innerHTML  = "";
                 } else {
                     document.getElementById(tabname).style.display = "block";
-                }; // end of SAVE-PREDICTIONS
+                }; // end of IF tabname
 
-            };
+            }; // end of displayStage function
 
             // **********************************************************************************************************
             // https://atomizedobjects.com/blog/javascript/how-to-sort-an-array-of-objects-by-property-value-in-javascript/
@@ -1432,22 +1815,23 @@
                 }; // end of click event for SAVE-PREDICTIONS button 
                 
                 if (event.target.matches('#confirm-chkbox')) {
-                    // hide any error messgae thats displayed
+                    // hide any error message thats displayed
                     document.getElementById("chkbox-error").style.display = "none";
                     return;                
-                }
+                };
+
+                if (event.target.matches('#autofill-chkbox')) {
+                    // hide any error message thats displayed
+                    document.getElementById("chkbox-autofill-error").style.display = "none";
+                    return;                
+                };
 
                 // event listeners for the tab links
                 if (event.target.matches('.tablinks')) {
 
                     displayStage(event, event.target.name);
+                    event.target.className += " active";
 
-                    // highlight the GROUPS-ABCD tab after auto-filling the group scores
-                    if (event.target.name == "AUTO-FILL") {
-                       document.getElementById("groups-abcd-tab").className += " active";     
-                    } else {                   
-                        event.target.className += " active";
-                    };
                 };
 
                 // event listeners for the tab links
@@ -1609,6 +1993,44 @@
 
                 }
 
+                // event listener for the auto fill predictions button
+                if (event.target.matches('#autofill-predictions-btn')) {
+
+                    if (!document.getElementById("autofill-chkbox").checked) {
+                        document.getElementById("chkbox-autofill-error").style.display = "block";
+                    } else {
+                        // autofull the Groups with random scores based on rank
+                        AutoFillGroupsStage();
+
+                        // click on the knockout stage button
+                        KOStage = document.getElementById("knockout-stage-tab");
+                        KOStage.dispatchEvent(new Event('click', { 'bubbles': true }));
+
+                        // update Last16 with group winners and runners up
+                        // update QF with winners of the last16 matches
+                        // update SF with winners on QF matches
+                        AutoFillKnockOutStages();
+
+                        // click on the finals stage button
+                        FinalStage = document.getElementById("finals-stage-tab");
+                        FinalStage.dispatchEvent(new Event('click', { 'bubbles': true }));
+
+                        // update 3rd place playoff with LOSERS of the SF matches
+                        // update final with WINNERS of the SF matches
+                        AutoFillFinalStages();
+
+                        // click on the Auto Fill stage button
+                        AFStage = document.getElementById("auto-fill-tab");
+                        AFStage.dispatchEvent(new Event('click', { 'bubbles': true }));
+
+                        // display message to review the predictions
+                        document.getElementById("autofill-chkbox").checked = false;
+                        document.getElementById("confirm-autofill-predictions").innerText = "Please select the 'Groups A,B,C,D' Tab to start reviewing your predictions.";
+
+                    };
+
+                }; // end of click event for AUTOFILL-PREDICTIONS button 
+                
             }, false);   // end of CLICK event listener
 
             // ==================================================================
@@ -1619,6 +2041,11 @@
                 // console.log("Change Event Triggered");
 
                 if (event.target.matches('#confirm-chkbox')) {
+                    // dont complete this change event
+                    return;                
+                };
+
+                if (event.target.matches('#autofill-chkbox')) {
                     // dont complete this change event
                     return;                
                 };

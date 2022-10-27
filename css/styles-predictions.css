@@ -195,7 +195,10 @@ Each section has a GRID-AREA named after the section ID
 
         #save-predictions {
             padding: 10px;
-        }
+            margin-top: 0px;
+            box-shadow: 5px 5px 5px lightblue;
+            border: 1px solid green; 
+           }
 
         #confirm-save {
 
@@ -259,7 +262,7 @@ Each section has a GRID-AREA named after the section ID
             justify-content: center;
 
         }    
-        #update-btn, #save-btn {
+        #update-btn, #save-btn, #autofill-predictions-btn {
 
             grid-area: update-btn;            
 
@@ -275,14 +278,64 @@ Each section has a GRID-AREA named after the section ID
             cursor: pointer; 
         }
 
-        #update-btn:hover, #save-btn:hover {
+        #update-btn:hover, #save-btn:hover, #autofill-predictions-btn:hover {
             box-shadow: 5px 5px 5px lightblue;
             color: #000; 
         }
 
-        #update-btn:active, #save-btn:active {
+        #update-btn:active, #save-btn:active, #autofill-predictions-btn:active {
             border-color: black;           
         }
+
+#AUTOFILL-PREDICTIONS {
+    
+    grid-area: AUTOFILL-PREDICTIONS;
+    justify-content: center;
+
+    background-color: white;
+    width: 50%;
+    padding: 10px;
+    margin: 0 auto;            
+    
+}
+        #chkbox-autofill-error {
+            display: none;
+            font-style: italic;
+            text-align: center;
+            padding: 10px;
+            color: red;
+        }
+
+        #autofill-predictions {
+            padding: 10px;
+            margin-top: 0px;
+            box-shadow: 5px 5px 5px lightblue;
+            border: 1px solid green;
+        }
+
+        #autofill-predictions {
+            padding: 10px;
+        }
+
+        #confirm-autofill {
+
+            grid-area: confirm-autofill;            
+            padding: 10px;
+            text-align: center;
+        }    
+
+        #autofill-btn {
+
+            display: flex;
+            justify-content: center;
+
+        }    
+
+        #confirm-autofill-predictions {
+            text-align: center;
+            padding:15px;
+        }
+
 
 #RESULTS-PREDICTIONS {grid-area: RESULTS-PREDICTIONS;}
     #results-predictions {grid-area: results-predictions;}
@@ -751,11 +804,14 @@ input {
 
         input[type="checkbox"] {
                 width: 5%;
-            }
+        }
 
         #save-predictions {
-                padding: 10px;
-            }
+            padding: 10px;
+            margin-top: 0px;
+            box-shadow: 5px 5px 5px lightblue;
+            border: 1px solid green;
+        }
 
             #confirm-predictions {
                 margin-top: 0px;
@@ -1080,8 +1136,11 @@ input {
             }
 
         #save-predictions {
-                padding: 10px;
-            }
+            padding: 10px;
+            margin-top: 0px;
+            box-shadow: 5px 5px 5px lightblue;
+            border: 1px solid green;
+        }
 
             #confirm-predictions {
                 margin-top: 0px;
@@ -1400,8 +1459,11 @@ input {
             }
 
         #save-predictions {
-                padding: 10px;
-            }
+            padding: 10px;
+            margin-top: 0px;
+            box-shadow: 5px 5px 5px lightblue;
+            border: 1px solid green;
+        }
 
             #confirm-predictions {
                 margin-top: 0px;
@@ -1686,8 +1748,11 @@ input {
             }
 
         #save-predictions {
-                padding: 10px;
-            }
+            padding: 10px;
+            margin-top: 0px;
+            box-shadow: 5px 5px 5px lightblue;
+            border: 1px solid green;
+        }
 
             #confirm-predictions {
                 margin-top: 0px;
@@ -1988,8 +2053,11 @@ input {
             }
 
         #save-predictions {
-                padding: 10px;
-            }
+            padding: 10px;
+            margin-top: 0px;
+            box-shadow: 5px 5px 5px lightblue;
+            border: 1px solid green; 
+        }
 
             #confirm-predictions {
                 margin-top: 0px;
