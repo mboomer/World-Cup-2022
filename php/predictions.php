@@ -1182,8 +1182,14 @@
                         };
                 };
 
+                // Cant have a draw in the knockout stages, so make sure result is either a Home win or an Away win
                 if (AutoHomeScores[f].value == AutoAwayScores[f].value) {
-                    AutoAwayScores[f].value = parseInt(AutoHomeScores[f].value) + 1;
+
+                    if (MatchResult == "H") {
+                        AutoHomeScores[f].value = parseInt(AutoHomeScores[f].value) + 1;
+                    } else {
+                        AutoAwayScores[f].value = parseInt(AutoAwayScores[f].value) + 1;
+                    };
                 };
 
                 Node.dispatchEvent(new Event('change', { 'bubbles': true }));                            
@@ -2023,9 +2029,14 @@
                         AFStage = document.getElementById("auto-fill-tab");
                         AFStage.dispatchEvent(new Event('click', { 'bubbles': true }));
 
+                        // not needed if displaying the groups stage after randomizing
                         // display message to review the predictions
-                        document.getElementById("autofill-chkbox").checked = false;
-                        document.getElementById("confirm-autofill-predictions").innerText = "Please select the 'Groups A,B,C,D' Tab to start reviewing your predictions.";
+                        // document.getElementById("autofill-chkbox").checked = false;
+                        // document.getElementById("confirm-autofill-predictions").innerText = "Please select the 'Groups A,B,C,D' Tab to start reviewing your predictions.";
+
+                        // click on the Group ABCD button
+                        GroupABCDTab = document.getElementById("groups-abcd-tab");
+                        GroupABCDTab.dispatchEvent(new Event('click', { 'bubbles': true }));
 
                     };
 
