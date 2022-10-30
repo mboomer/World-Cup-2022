@@ -74,15 +74,14 @@
     
     </head>
 
+    <body id="body-top">
+        
         <header>
             <?php 
                 $menuitems = array("Home", "Register");
                 include '../include/header1.inc.php';
             ?>
         </header>
-
-    <body id="body-top">
-        
 
         <div id="login-container">
 
