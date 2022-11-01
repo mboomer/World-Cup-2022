@@ -280,6 +280,10 @@
                     // result is correct
                     $isCorrect = true;
 
+                    // display a green tick to indicate actual result and predicted result MATCH  
+                    $resultchar = "&#10004;";
+                    $resclass = "res res-match";
+
                     $pts = $pts + 1;
                     
                     if ( ($r["homescore"] == $p["homescore"]) && ($r["awayscore"] == $p["awayscore"])) {
@@ -290,7 +294,17 @@
                         $isCorrect = false;
                     };
                 } else {
-                        $isCorrect = false;
+                        $isCorrect = false; 
+
+                        if ($r["resultcode"] == "NP") {
+                            $resultchar = $p["resultcode"];
+                            $resclass = "res";
+                        } else {
+                            // display X to indicate actual result and predicted result DONT match  
+                            $resultchar = "&cross;";
+                            $resclass = "res res-nomatch";
+                        };
+
                 };
 
                 if ( ($r["hometeamid"] == $p["hometeamid"]) ) {
@@ -391,7 +405,7 @@
                         . "      <td class='awayid hidden'>" . $awayid . "</td>"
                         . "      <td class='away'>" . $awayteam . "</td>"
                         . "      <td class='predictions-away-flag'><img src='../img/teams/" . $awayteam . ".png' alt='" . $awayteam . " team flag'></td>"      
-                        . "      <td class='res'>" . $resultcode . "</td>"
+                        . "      <td class='" . $resclass . "'>" . $resultchar . "</td>"
                         . "      " . $ptsclass . $pts . "</td>"
                         . "      " . $bonusclass . $bonus . "</td>"
                         . "  </tr>";

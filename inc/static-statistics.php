@@ -643,7 +643,7 @@
     // ---------------------------------------------------------------
 
     $qry = "  SELECT \n" 
-            . " SUM(CornersBy + CornersAg) AS Corners \n"
+            . " SUM(CornersBy) AS Corners \n"
             . "FROM \n" 
             . "	TeamStats \n";
 
@@ -683,11 +683,11 @@
 
         foreach($rows as $key => $row) {
         
-        if ($gamesplayed > 0) {
-            $corneraverage = number_format( ($gamesplayed / $row -> Corners), 2);
-        } else {
-            $corneraverage = 0; 
-        };
+            if ($gamesplayed > 0) {
+                $corneraverage = number_format( ($row -> Corners / $gamesplayed), 2);
+            } else {
+                $corneraverage = 0; 
+            };
 
             $html .= "      <div class='stat-value'>" . $corneraverage . "</div> \n";
 
@@ -706,7 +706,7 @@
     // ---------------------------------------------------------------
 
     $qry = "  SELECT \n" 
-            . " SUM(ThrowinsBy + ThrowinsAg) AS Throwins \n"
+            . " SUM(ThrowinsBy) AS Throwins \n"
             . "FROM \n" 
             . "	TeamStats \n";
 
@@ -746,11 +746,11 @@
 
         foreach($rows as $key => $row) {
         
-        if ($gamesplayed > 0) {
-            $throwinaverage = number_format( ($gamesplayed / $row -> Throwins), 2);
-        } else {
-            $throwinaverage = 0; 
-        };
+            if ($gamesplayed > 0) {
+                $throwinaverage = number_format( ($row -> Throwins / $gamesplayed), 2);
+            } else {
+                $throwinaverage = 0; 
+            };
 
             $html .= "      <div class='stat-value'>" . $throwinaverage . "</div> \n";
 
@@ -769,7 +769,7 @@
     // ---------------------------------------------------------------
 
     $qry = "  SELECT \n" 
-            . " SUM(FoulsBy + FoulsAg) AS Fouls \n"
+            . " SUM(FoulsBy) AS Fouls \n"
             . "FROM \n" 
             . "	TeamStats \n";
 
@@ -809,11 +809,11 @@
 
         foreach($rows as $key => $row) {
         
-        if ($gamesplayed > 0) {
-            $foulsaverage = number_format( ($gamesplayed / $row -> Fouls), 2);
-        } else {
-            $foulsaverage = 0; 
-        };
+            if ($gamesplayed > 0) {
+                $foulsaverage = number_format( ($row -> Fouls / $gamesplayed), 2);
+            } else {
+                $foulsaverage = 0; 
+            };
 
             $html .= "      <div class='stat-value'>" . $foulsaverage . "</div> \n";
 

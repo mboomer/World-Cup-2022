@@ -463,6 +463,16 @@ table {
     padding: 2px;
 }
 
+.res-match {
+    font-weight: bold;
+    color: #49e749;
+}
+
+.res-nomatch {
+    font-weight: bold;
+    color: red;
+}
+
 /* .results-home-flag, .results-away-flag {
     width: 85%;
     display: flex;
