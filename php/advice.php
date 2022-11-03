@@ -29,6 +29,24 @@
 
                 <div id="rules">
 
+                    <div class="rules-heading">Auto-Fill Predictions</div>
+                    <div class="rules-content">
+                        If you do not want to fill in the results for each match yourself you can use the option "Auto-Fill Predictions" to fill in your predictions.
+                        Using a combination of the FIFA Ranking and the difference between the ranking of the teams in each match, the algorithm will assign a random score for every match. 
+                        The algorithm will complete the predictions in the following order;<br>
+                        
+                        <ol>
+                            <li>Group Stages</li>
+                            <li>Round of Last 16</li>
+                            <li>Quarter Finals</li>
+                            <li>Semi Finals</li>
+                            <li>3rd Place Play-off & Final</li>
+                        </ol> 
+                          
+                        <strong>NOTE : </strong>After using this option you <strong>should</strong> review the predictions starting with the Group Stages.<br><br> 
+                        Make any adjustments to the predictions, i.e. score and result, that you require and these changes will then be <strong>correctly</strong> reflected in the knockout and finals stages.<br><br>
+                    </div>    
+
                     <div class="rules-heading">FIFA Rankings</div>
                     <div class="rules-content">
                         To help with decisions between teams that you are unfamilar with, each match displays the teams FIFA world ranking.<br><br>
@@ -127,11 +145,12 @@
 
                     <div class="rules-content">
                         As the tournament progresses you can view how closely your predictions match the actual results by logging in and selecting "Results/Predictions" from the navigation bar.<br><br>
-                        <p><img class="advice-matches" src="../img/advice2.png" alt="he results of each game as it is played and table on the right showing prediction for each game"></p>
-                        The table on the left, will show the results of each game as it is played, the table on the right will show how accurate your prediction for each game was.<br>
-                        The table on the right will also show the points that you earned for predicting the correct result and correct score.<br>
-                        The table will also show any bonus points earned for predicting the correct teams in the correct position in the knockout stages.<br>
-                        You will only be awarded bonus points if you have predicted the correct home team for each game and the correct away team for each game.<br>
+                        <p><img class="advice-matches" src="../img/advice2.png" alt="The results of each game as it is played and table on the right showing prediction for each game"></p><br>
+                        If you have predicted the correct result, one green tick is displayed in the result column.<br> 
+                        If you have predicted both the correct result and the correct score then 2 green ticks will be displayed in the Result column.<br>
+                        If you haven't predicted the correct result then a red X will be displayed.<br><br>
+                        <p><img src="../img/scores-result.png" alt="Green ticks displayed when prediction is correct, red X displayed if prediction is incorrect"></p>
+
                     </div>
 
                 </div> 
