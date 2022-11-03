@@ -170,9 +170,18 @@ th, td {
     width: 4%;
     background: floralwhite;
 }
+
 .bonus {
     width: 4%;
     background: gold;
+}
+
+.res-match {
+    color: greenyellow;
+}
+
+.res-nomatch {
+    color: red;
 }
 
 .res, .pts, .bon {

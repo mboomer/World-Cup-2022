@@ -5,7 +5,7 @@
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Advice on completing your predictions for the Qatar 2022 World Cup. How to get your winners and runners-up in each group through to the knockout stages">
+        <meta name="description" content="Access tournament data in JSON format, for teams, fixtures, results, groups, rounds, goals scored, team statistics and venues.">
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
@@ -39,7 +39,7 @@
             </div>
 
             <div id="display-json-data">
-                <h3>Your JSON data will be displayed here</h3>
+                <h3>Select a dataset from the above options...your JSON data will be displayed here.</h3>
             </div>
 
             <footer id="footer">
