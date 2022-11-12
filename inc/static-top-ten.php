@@ -65,7 +65,9 @@
 
         $fh = fopen("../static/top-ten-users.html", "w"); 
         
-        $html = "  <div id='user-tbl'>"
+        // include the number of users to the card title
+        $html = "<h2 class='card-title'>Top Ten Users (" . $query->rowCount() . ") </h2>"
+              . "  <div id='user-tbl'>"
               . "      <table>"
               . "          <thead class='blueheader'>"
               . "              <tr>"
