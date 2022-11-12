@@ -38,7 +38,7 @@
             </div>
             
             <div class="card" id="top-ten-users">
-                <h2 class="card-title">Top Ten Users</h2>
+                <!-- <h2 class="card-title">Top Ten Users</h2> -->
                 <?php include 'static/top-ten-users.html';?>
             </div>
 
