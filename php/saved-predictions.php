@@ -1402,7 +1402,7 @@
                                         $last16id = 1;
 
                                         $winners   = array("", "winnerA",   "winnerB",   "winnerC",   "winnerD",   "winnerE",   "winnerF",   "winnerG",   "winnerH"); 
-                                        $runnersup = array("", "runnerupB", "runnerupA", "runnerupD", "runnerupC", "runnerupE", "runnerupF", "runnerupG", "runnerupH"); 
+                                        $runnersup = array("", "runnerupB", "runnerupA", "runnerupD", "runnerupC", "runnerupF", "runnerupE", "runnerupH", "runnerupG"); 
                                         
                                         // loop through the rows
                                         foreach ($rows as $key => $row) {
