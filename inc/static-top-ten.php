@@ -23,6 +23,24 @@
         exit("Error: " . $e->getMessage());
     };
 
+    // get the total number of registered users, including those who havent made any predictions 
+    $qry = "SELECT COUNT(*) as TotalUsers FROM Users";
+
+    // prepare the query for the database connection
+    $query = $dbh -> prepare($qry);
+
+    // execute the sql query
+    $query -> execute();
+                                    
+    // get all rows
+    $users = $query -> fetchAll(PDO::FETCH_OBJ);
+
+    foreach($users as $key => $user) {
+
+        $totalusers = $user -> TotalUsers;
+
+    }; // end of users foreach 
+
     // only process users who have saved predictions 
     $qry = "  SELECT \n" 
             . "    UserName, \n"
@@ -66,7 +84,7 @@
         $fh = fopen("../static/top-ten-users.html", "w"); 
         
         // include the number of users to the card title
-        $html = "<h2 class='card-title'>Top Ten Users (" . $query->rowCount() . ") </h2>"
+        $html = "<h2 class='card-title'>Top Ten Users (" . $totalusers . ") </h2>"
               . "  <div id='user-tbl'>"
               . "      <table>"
               . "          <thead class='blueheader'>"
