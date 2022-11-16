@@ -29,6 +29,26 @@
 
                 <div id="rules">
 
+                    <div class="rules-heading">Create An Account To Get Started</div>
+                    <div class="rules-content">
+                        From the Home Page, click on the "hamburger" icon top right, this is the icon with 3 horizontal black lines. Select "Register" to create an account.<br><br>
+
+                        <p><img style="width:50%" class="advice-matches" src="../img/login-register.png" alt="Image showing which icon to click on to login or resister a new account"></p>
+
+                        To register a new account, enter the following information;<br>
+                        
+                        <ol>
+                            <li>Username - must be at least 8 characters long and include only letters and/or numbers</li>
+                            <li>Email Address</li>
+                            <li>Password - should be at least 12 characters - must include a capital letter, a number, and a special character, e.g !£$%</li>
+                            <li>Password - repeat the password</li>
+                            <li>Click "Create Account"</li>
+                        </ol> 
+
+                        Once the account has been created you can login and start entering your predictions.
+                        
+                    </div>    
+
                     <div class="rules-heading">Auto-Fill Predictions</div>
                     <div class="rules-content">
                         If you do not want to fill in the results for each match yourself you can use the option "Auto-Fill Predictions" to fill in your predictions.
