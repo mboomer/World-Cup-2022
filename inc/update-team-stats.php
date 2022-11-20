@@ -47,14 +47,14 @@
         // Increment current values with values for the current match
         $sql = "UPDATE TeamStats 
                 SET 
-                    RedCards       = RedCards + :RedCards , 
+                    RedCards       = RedCards + :RedCards, 
                     YellowCards    = YellowCards + :YellowCards, 
                     FoulsBy        = FoulsBy + :FoulsBy, 
                     FoulsAg        = FoulsAg + :FoulsAg, 
                     CornersBy      = CornersBy + :CornersBy, 
                     CornersAg      = CornersAg + :CornersAg, 
-                    ThrowInsBy     = ThrowInsBy + :ThrowInsBy, 
-                    ThrowInsAg     = ThrowInsAg + :ThrowInsAg, 
+                    OffsidesBy     = OffsidesBy + :OffsidesBy, 
+                    OffsidesAg     = OffsidesAg + :OffsidesAg, 
                     PenaltysSaved  = PenaltysSaved + :PenaltysSaved,
                     PenaltysMissed = PenaltysMissed + :PenaltysMissed 
                 WHERE 
@@ -71,8 +71,8 @@
         $query->bindParam(':FoulsAg',        $foulsag,        PDO::PARAM_INT);
         $query->bindParam(':CornersBy',      $cornersby,      PDO::PARAM_INT);
         $query->bindParam(':CornersAg',      $cornersag,      PDO::PARAM_INT);
-        $query->bindParam(':ThrowInsBy',     $throwinsby,     PDO::PARAM_INT);
-        $query->bindParam(':ThrowInsAg',     $throwinsag,     PDO::PARAM_INT);
+        $query->bindParam(':OffsidesBy',     $offsidesby,     PDO::PARAM_INT);
+        $query->bindParam(':OffsidesAg',     $offsidesag,     PDO::PARAM_INT);
         $query->bindParam(':PenaltysSaved',  $penaltyssaved,  PDO::PARAM_INT); 
         $query->bindParam(':PenaltysMissed', $penaltysmissed, PDO::PARAM_INT);
 
@@ -89,8 +89,8 @@
             $foulsag        = $team['FoulAg'];
             $cornersby      = $team['CornerBy'];
             $cornersag      = $team['CornerAg'];
-            $throwinsby     = $team['ThrowinBy'];
-            $throwinsag     = $team['ThrowinAg'];
+            $offsidesby     = $team['OffsideBy'];
+            $offsidesag     = $team['OffsideAg'];
             $penaltyssaved  = $team['PenaltySaved'];
             $penaltysmissed = $team['PenaltyMissed'];
 

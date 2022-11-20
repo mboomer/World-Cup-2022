@@ -321,6 +321,8 @@
 
                         </div> <!-- end of GOALS SCORED SELECTIONS div -->
 
+                        <br>
+
                         <div id='update-team-stats'>
 
                             <table>
@@ -333,11 +335,11 @@
                                         <th class="cols">Red Card</th> 
                                         <th class="cols">Yellow Card</th> 
                                         <th class="cols">Foul By</th> 
-                                        <th class="cols">Foul Ag</th> 
+                                        <!-- <th class="cols">Foul Ag</th> --> 
                                         <th class="cols">Corner By</th> 
-                                        <th class="cols">Corner Ag</th> 
-                                        <th class="cols">Throwin By</th> 
-                                        <th class="cols">Throwin Ag</th> 
+                                        <!-- <th class="cols">Corner Ag</th> -->
+                                        <th class="cols">Offsides By</th> 
+                                        <!-- <th class="cols">Offisdes Ag</th> --> 
                                         <th class="cols">Pen Saved</th> 
                                         <th class="cols">Pen Missed</th> 
                                         <th class="cols">Update</th> 
@@ -409,11 +411,11 @@
                                         <td> <input id='home-red-card'    type='number' title='hrc' min=0 max=20 value=0> </td>
                                         <td> <input id='home-yellow-card' type='number' title='hyc' min=0 max=20 value=0> </td>
                                         <td> <input id='home-foul-by'     type='number' title='hfb' min=0 max=50 value=0> </td>
-                                        <td> <input id='home-foul-ag'     type='number' title='hfa' min=0 max=50 value=0> </td>
+                                        <!-- <td> <input id='home-foul-ag'     type='number' title='hfa' min=0 max=50 value=0> </td> -->
                                         <td> <input id='home-corner-by'   type='number' title='hcb' min=0 max=50 value=0> </td>
-                                        <td> <input id='home-corner-ag'   type='number' title='hca' min=0 max=50 value=0> </td>
-                                        <td> <input id='home-throwin-by'  type='number' title='htb' min=0 max=50 value=0> </td>
-                                        <td> <input id='home-throwin-ag'  type='number' title='hta' min=0 max=50 value=0> </td>
+                                        <!-- <td> <input id='home-corner-ag'   type='number' title='hca' min=0 max=50 value=0> </td> -->
+                                        <td> <input id='home-offside-by'  type='number' title='hob' min=0 max=50 value=0> </td>
+                                        <!-- <td> <input id='home-offside-ag'  type='number' title='hoa' min=0 max=50 value=0> </td> -->
                                         <td> <input id='home-pen-saved'   type='number' title='hps' min=0 max=20 value=0> </td>
                                         <td> <input id='home-pen-missed'  type='number' title='hpm' min=0 max=20 value=0> </td>
                                         <td><button id='home-upd-btn' class='goal-btn-blue'>Update</button></td>  
@@ -483,11 +485,11 @@
                                         <td> <input id='away-red-card'    type='number' title='arc' min=0 max=20 value=0> </td>
                                         <td> <input id='away-yellow-card' type='number' title='ayc' min=0 max=20 value=0> </td>
                                         <td> <input id='away-foul-by'     type='number' title='afb' min=0 max=50 value=0> </td>
-                                        <td> <input id='away-foul-ag'     type='number' title='afa' min=0 max=50 value=0> </td>
+                                        <!-- <td> <input id='away-foul-ag'     type='number' title='afa' min=0 max=50 value=0> </td> -->
                                         <td> <input id='away-corner-by'   type='number' title='acb' min=0 max=50 value=0> </td>
-                                        <td> <input id='away-corner-ag'   type='number' title='aca' min=0 max=50 value=0> </td>
-                                        <td> <input id='away-throwin-by'  type='number' title='atb' min=0 max=50 value=0> </td>
-                                        <td> <input id='away-throwin-ag'  type='number' title='ata' min=0 max=50 value=0> </td>
+                                        <!-- <td> <input id='away-corner-ag'   type='number' title='aca' min=0 max=50 value=0> </td> -->
+                                        <td> <input id='away-offside-by'  type='number' title='aob' min=0 max=50 value=0> </td>
+                                        <!-- <td> <input id='away-offside-ag'  type='number' title='aoa' min=0 max=50 value=0> </td> -->
                                         <td> <input id='away-pen-saved'   type='number' title='aps' min=0 max=20 value=0> </td>
                                         <td> <input id='away-pen-missed'  type='number' title='apm' min=0 max=20 value=0> </td>
                                         <td><button id='away-upd-btn' class='goal-btn-blue'>Update</button></td>  
@@ -497,6 +499,8 @@
 
                         </div> <!-- end of UPDATE TEAM STATS div -->
 
+                        <br>
+                        
                         <div id='grp-winners-runnersup'>
 
                             <table>
@@ -648,6 +652,8 @@
 
                     </section> <!-- end of GOALS SCORED section -->
 
+                    <br>
+                        
                     <section id="update-user-points">
 
                         <div id='statistics-update'>
@@ -1024,11 +1030,13 @@
                                 RedCard       : document.getElementById('home-red-card').value,
                                 YellowCard    : document.getElementById('home-yellow-card').value,
                                 FoulBy        : document.getElementById('home-foul-by').value,
-                                FoulAg        : document.getElementById('home-foul-ag').value,
+                                FoulAg        : document.getElementById('away-foul-by').value,              // use the fouls by other team
                                 CornerBy      : document.getElementById('home-corner-by').value,
-                                CornerAg      : document.getElementById('home-corner-ag').value,
-                                ThrowinBy     : document.getElementById('home-throwin-by').value,
-                                ThrowinAg     : document.getElementById('home-throwin-ag').value,
+                                CornerAg      : document.getElementById('away-corner-by').value,            // use the corners by other team
+                                // ThrowinBy     : document.getElementById('home-throwin-by').value,
+                                // ThrowinAg     : document.getElementById('away-throwin-by').value,           // use the throwins by other team
+                                OffsideBy     : document.getElementById('home-offside-by').value,
+                                OffsideAg     : document.getElementById('away-offside-by').value,           // use the throwins by other team
                                 PenaltySaved  : document.getElementById('home-pen-saved').value,
                                 PenaltyMissed : document.getElementById('home-pen-missed').value
                             };
@@ -1040,11 +1048,13 @@
                                 RedCard       : document.getElementById('away-red-card').value,
                                 YellowCard    : document.getElementById('away-yellow-card').value,
                                 FoulBy        : document.getElementById('away-foul-by').value,
-                                FoulAg        : document.getElementById('away-foul-ag').value,
+                                FoulAg        : document.getElementById('home-foul-by').value,              // use the fouls by other team
                                 CornerBy      : document.getElementById('away-corner-by').value,
-                                CornerAg      : document.getElementById('away-corner-ag').value,
-                                ThrowinBy     : document.getElementById('away-throwin-by').value,
-                                ThrowinAg     : document.getElementById('away-throwin-ag').value,
+                                CornerAg      : document.getElementById('home-corner-by').value,            // use the corners by other team
+                                // ThrowinBy     : document.getElementById('away-throwin-by').value,
+                                // ThrowinAg     : document.getElementById('home-throwin-by').value,           // use the throwins by other team
+                                OffsideBy     : document.getElementById('away-offside-by').value,
+                                OffsideAg     : document.getElementById('home-offside-by').value,           // use the throwins by other team
                                 PenaltySaved  : document.getElementById('away-pen-saved').value,
                                 PenaltyMissed : document.getElementById('away-pen-missed').value
                             };
@@ -1060,7 +1070,7 @@
                         console.log("Update AWAY Team Stats clicked");
                    }
 
-                    console.log(teams);
+                    // console.log(teams);
 
                     // now process the fixtures array and update fixtures table
                     fetch('https://www.worldcup2022predictor.com/inc/update-team-stats.php', {
