@@ -702,11 +702,11 @@
     // ---------------------------------------------------------------
 
     // ---------------------------------------------------------------
-    // AVERAGE THROWINS PER GAME SO FAR
+    // AVERAGE OFFSIDES PER GAME SO FAR
     // ---------------------------------------------------------------
 
     $qry = "  SELECT \n" 
-            . " SUM(ThrowinsBy) AS Throwins \n"
+            . " SUM(OffsidesBy) AS Offsides \n"
             . "FROM \n" 
             . "	TeamStats \n";
 
@@ -735,8 +735,8 @@
         // get all rows
         $rows = $query -> fetchAll(PDO::FETCH_OBJ);
 
-        $html .= "  <div id='average-throwins'> \n"
-               . "      <div class='stat-title'>Throw-Ins per game</div> \n";
+        $html .= "  <div id='average-offsides'> \n"
+               . "      <div class='stat-title'>Offsides per game</div> \n";
 
         if ($query->rowCount() == 0) {
 
@@ -747,12 +747,12 @@
         foreach($rows as $key => $row) {
         
             if ($gamesplayed > 0) {
-                $throwinaverage = number_format( ($row -> Throwins / $gamesplayed), 2);
+                $offsideaverage = number_format( ($row -> Offsides / $gamesplayed), 2);
             } else {
-                $throwinaverage = 0; 
+                $offsideaverage = 0; 
             };
 
-            $html .= "      <div class='stat-value'>" . $throwinaverage . "</div> \n";
+            $html .= "      <div class='stat-value'>" . $offsideaverage . "</div> \n";
 
         }; // end of foreach 
 
@@ -761,7 +761,7 @@
         $html .= "  </div> \n";
 
     // ---------------------------------------------------------------
-    // AVERAGE THROWINS PER GAME SO FAR
+    // AVERAGE OFFSIDES PER GAME SO FAR
     // ---------------------------------------------------------------
 
     // ---------------------------------------------------------------
