@@ -57,9 +57,9 @@
             . "    ON \n"
             . "    	fx.AwayTeamID = awt.ID \n"
             . "    WHERE \n"
-            . "     resultid = 6 \n"
+            . "     resultid = 6 AND resultid = 6 AND DatePlayed = DATE_FORMAT(NOW()+ INTERVAL 1 DAY, '%Y/%m/%d' ) \n"
             . "    ORDER BY \n"  
-            . "     fixtureNo \n"  
+            . "     TimePlayed \n"  
             . "    ASC \n"
             . "    LIMIT 3";
             
