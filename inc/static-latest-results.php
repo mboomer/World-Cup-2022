@@ -59,10 +59,9 @@
             . "    ON \n"
             . "    	fx.AwayTeamID = awt.ID \n"
             . "    WHERE \n"
-            . "     resultid <> 6 \n"
+            . "     resultid <> 6 AND DatePlayed = DATE_FORMAT(NOW(), '%Y/%m/%d' ) \n"
             . "    ORDER BY \n"  
-            . "     fixtureNo \n"  
-            . "    DESC \n"
+            . "      TimePlayed DESC \n"
             . "    LIMIT 3";
 
         // prepare the query for the database connection
