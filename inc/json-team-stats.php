@@ -34,8 +34,8 @@
             . "    	FoulsAg, \n"
             . "    	CornersBy, \n"
             . "    	CornersAg, \n"
-            . "    	ThrowinsBy, \n"
-            . "    	ThrowInsAg, \n"
+            . "    	OffsidesBy, \n"
+            . "    	OffsidesAg, \n"
             . "    	PenaltysSaved, \n"
             . "    	PenaltysMissed \n"
             . "    FROM  \n"
@@ -82,8 +82,8 @@
                 $jsondata .= ' "Fouls Against":"' . $result -> FoulsAg . '", ';
                 $jsondata .= ' "Corners For":"' . $result -> CornersBy  . '", ';
                 $jsondata .= ' "Corners Against":"' . $result -> CornersAg . '", ';
-                $jsondata .= ' "Throwins For":"' . $result -> ThrowinsBy  . '", ';
-                $jsondata .= ' "Throwins Against":"' . $result -> ThrowInsAg . '", ';
+                $jsondata .= ' "Offsides For":"' . $result -> OffsidesBy  . '", ';
+                $jsondata .= ' "Offsides Against":"' . $result -> OffsidesAg . '", ';
                 $jsondata .= ' "Penalties Saved":"' . $result -> PenaltysSaved  . '", ';
                 $jsondata .= ' "Penalties Missed":"' . $result -> PenaltysMissed . '"';
 
