@@ -23,7 +23,52 @@
         exit("Error: " . $e->getMessage());
     };
 
-    $qry = "  SELECT \n" 
+    // $qry = "  SELECT \n" 
+    //         . "     FixtureNo		as fixtureno, \n"
+    //         . "    	DatePlayed		as dateplayed, \n"
+    //         . "    	TimePlayed		as timeplayed, \n"
+    //         . "    	HomeScore		as homescore, \n"
+    //         . "    	AwayScore		as awayscore, \n"
+    //         . "    	ResultID		as resultid, \n"
+    //         . "    	grp.Description as groupdesc, \n"
+    //         . "    	rnd.Description as rounddesc,  \n"
+    //         . "    	vnu.City		as city, \n"
+    //         . "    	vnu.Stadium		as stadium, \n"
+    //         . "    	hmt.Team 		as hometeam, \n"
+    //         . "    	awt.Team 		as awayteam \n"
+    //         . "    FROM  \n"
+    //         . "    	Fixtures fx \n"
+    //         . "    INNER JOIN \n"
+    //         . "    	GroupStage grp \n"
+    //         . "    ON \n"
+    //         . "    	fx.GroupID = grp.ID \n"
+    //         . "    INNER JOIN \n"
+    //         . "    	Rounds rnd \n"
+    //         . "    ON \n"
+    //         . "    	fx.RoundID = rnd.ID \n"
+    //         . "    INNER JOIN \n"
+    //         . "    	Venues vnu \n"
+    //         . "    ON \n"
+    //         . "    	fx.VenueID = vnu.ID \n"
+    //         . "    INNER JOIN \n"
+    //         . "    	Teams hmt \n"
+    //         . "    ON \n"
+    //         . "    	fx.HomeTeamID = hmt.ID \n"
+    //         . "    INNER JOIN \n"
+    //         . "    	Teams awt \n"
+    //         . "    ON \n"
+    //         . "    	fx.AwayTeamID = awt.ID \n"
+    //         . "    WHERE \n"
+    //         . "     resultid <> 6 AND DatePlayed = DATE_FORMAT(NOW(), '%Y/%m/%d' ) \n"
+    //         . "    ORDER BY \n"  
+    //         . "      TimePlayed DESC \n"
+    //         . "    LIMIT 3";
+
+    $qry =   "SELECT \n"  
+	        . "  * \n"
+            . "FROM \n" 
+	        . "( \n"
+            . "  SELECT \n" 
             . "     FixtureNo		as fixtureno, \n"
             . "    	DatePlayed		as dateplayed, \n"
             . "    	TimePlayed		as timeplayed, \n"
@@ -59,11 +104,15 @@
             . "    ON \n"
             . "    	fx.AwayTeamID = awt.ID \n"
             . "    WHERE \n"
-            . "     resultid <> 6 AND DatePlayed = DATE_FORMAT(NOW(), '%Y/%m/%d' ) \n"
+            . "     resultid <> 6 \n"
             . "    ORDER BY \n"  
-            . "      TimePlayed DESC \n"
-            . "    LIMIT 3";
-
+            . "      FixtureNo DESC \n"
+            . "    LIMIT 4"
+            . ") FixturesByTimePlayed \n" 
+            . "ORDER BY \n" 
+	        . "  TimePlayed DESC \n"
+            . "LIMIT 3";
+            
         // prepare the query for the database connection
         $query = $dbh -> prepare($qry);
 
